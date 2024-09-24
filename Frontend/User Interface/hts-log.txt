@@ -1,0 +1,36 @@
+HTTrack3.49-2+htsswf+htsjava launched on Fri, 06 Sep 2024 15:03:37 at https://tunatheme.com/tf/html/fiama-preview/fiama/index.html +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar
+(winhttrack -qwC2%Ps2u1%s%uN0%I0p3DaK0H0%kf2A25000%f#f -F "Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)" -%F "<!-- Mirrored from %s%s by HTTrack Website Copier/3.x [XR&CO'2014], %s -->" -%l "en, *" https://tunatheme.com/tf/html/fiama-preview/fiama/index.html -O1 "C:\Users\Orange\Desktop\word\test13" +*.png +*.gif +*.jpg +*.jpeg +*.css +*.js -ad.doubleclick.net/* -mime:application/foobar )
+
+Information, Warnings and Errors reported for this mirror:
+note:	the hts-log.txt file, and hts-cache folder, may contain sensitive information,
+	such as username/password authentication for websites mirrored in this project
+	do not share these files/folders if you want these information to remain private
+
+15:05:14	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/service.html (from https://tunatheme.com/tf/html/fiama-preview/fiama/index.html)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-bg_inset-hard_100_fcfdfd_1x100.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-bg_glass_85_dfeffc_1x400.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-bg_glass_75_d0e5f5_1x400.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-bg_inset-hard_100_f5f8f9_1x100.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-bg_glass_95_fef1ec_1x400.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-icons_469bdd_256x240.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-icons_d8e7f3_256x240.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-icons_6da8d5_256x240.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-icons_217bc0_256x240.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-icons_f9bd01_256x240.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-icons_2e83ff_256x240.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/css/images/ui-icons_cd0a0a_256x240.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/plugins.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/effect/1.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/style.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/effect/2.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/style.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/effect/3.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/style.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/effect/4.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/style.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/effect/5.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/style.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/effect/6.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/style.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/slider/2.jpg (from https://tunatheme.com/tf/html/fiama-preview/fiama/css/style.css)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/login-register.html (from https://tunatheme.com/tf/html/fiama-preview/fiama/account.html)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/slider/41.jpg (from https://tunatheme.com/tf/html/fiama-preview/fiama/index-4.html)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/img/product/no-image.png (from https://tunatheme.com/tf/html/fiama-preview/fiama/portfolio.html)
+15:05:16	Error: 	"Not Found" (404) at link https://tunatheme.com/tf/html/fiama-preview/fiama/appointment.html (from https://tunatheme.com/tf/html/fiama-preview/fiama/locations.html)
+
+HTTrack Website Copier/3.49-2 mirror complete in 1 minutes 39 seconds : 166 links scanned, 140 files written (13057029 bytes overall) [8909936 bytes received at 89999 bytes/sec], 7380626 bytes transferred using HTTP compression in 86 files, ratio 26%, 15.0 requests per connection
+(25 errors, 0 warnings, 0 messages)
