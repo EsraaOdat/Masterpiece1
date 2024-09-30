@@ -33,9 +33,19 @@ public partial class Product
 
     public virtual ICollection<ProductDiscount> ProductDiscounts { get; set; } = new List<ProductDiscount>();
 
+    public virtual ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
+
     public virtual Store? Store { get; set; }
 
     public virtual SubCategory? Subcategory { get; set; }
 
+    public virtual ICollection<Variant> Variants { get; set; } = new List<Variant>();
+
     public virtual ICollection<Wishlist> Wishlists { get; set; } = new List<Wishlist>();
+
+    public virtual ICollection<Color> Colors { get; set; } = new List<Color>();
+
+    public virtual ICollection<Size> Sizes { get; set; } = new List<Size>();
+
+    public virtual ICollection<Tag> Tags { get; set; } = new List<Tag>();
 }

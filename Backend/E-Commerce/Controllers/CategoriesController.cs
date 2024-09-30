@@ -2,6 +2,7 @@
 using E_Commerce.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Commerce.Controllers
 {
@@ -21,22 +22,38 @@ namespace E_Commerce.Controllers
         public IActionResult GetAllCategories()
         {
             var categories = _db.Categories
+                .Include(c => c.SubCategories) // Include subcategories in the query
                 .Select(category => new
                 {
                     categoryId = category.CategoryId,
                     name = category.Name,
                     image = category.Image, // Ensure this property exists in your model
-                    description = category.Description, // Ensure this property exists
-                    subCategories = _db.SubCategories
-                        .Where(sub => sub.CategoryId == category.CategoryId)
+                    description = category.Description, // Ensure this property exists in your model
+                    subCategories = category.SubCategories // Directly access the related subcategories
                         .Select(sub => new
                         {
-                            sub.CategoryId,
-                            sub.SubcategoryName
+                            subCategoryId = sub.SubcategoryId,
+                            subcategoryName = sub.SubcategoryName
                         }).ToList()
                 }).ToList();
 
             return Ok(categories);
+        }
+
+
+
+
+
+
+
+
+
+        [HttpGet]
+        [Route("Categories")]
+        public IActionResult Categories()
+        {
+            var data = _db.Categories.ToList();
+            return Ok(data);
         }
 
         //--------------------------------------------------------------------------------------------------------------------
@@ -124,7 +141,7 @@ namespace E_Commerce.Controllers
         /*        --------------------------------------------------------------------------------------
 */
 
-        [HttpPost]
+        /*[HttpPost]
         [Route("AddCategory")]
         public IActionResult AddCategory([FromForm] categoryRequestDTO categoryDto)
         {
@@ -154,7 +171,7 @@ namespace E_Commerce.Controllers
             _db.SaveChanges();
 
             return Ok(new { message = "Category added successfully", dataResponse });
-        }
+        }*/
         /*        ----------------------------------------------------------------------------------------------------
 */
 
@@ -173,5 +190,265 @@ namespace E_Commerce.Controllers
              _db.SaveChanges();
              return Ok(new { message = "Category deleted", category = data });
          }*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        [HttpPost]
+        [Route("AddCategory")]
+        public IActionResult AddCategory([FromForm] categoryRequestDTO categoryDto)
+        {
+            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Categories");
+            if (!Directory.Exists(uploadedFolder))
+            {
+                Directory.CreateDirectory(uploadedFolder);
+            }
+
+            var fileImage = Path.Combine(uploadedFolder, categoryDto.Image.FileName);
+            using (var stream = new FileStream(fileImage, FileMode.Create))
+            {
+                categoryDto.Image.CopyTo(stream);
+            }
+
+            // إنشاء الـ Category
+            var category = new Category
+            {
+                Image = categoryDto.Image.FileName,
+                Name = categoryDto.Name,
+                Description = categoryDto.Description,
+                CreatedAt = DateOnly.FromDateTime(DateTime.Now)
+            };
+
+            // إضافة الفئة (Category) إلى قاعدة البيانات أولاً
+            _db.Categories.Add(category);
+            _db.SaveChanges();
+
+            // إذا كانت هناك Subcategories
+            if (categoryDto.Subcategories != null && categoryDto.Subcategories.Count > 0)
+            {
+                foreach (var subcategoryName in categoryDto.Subcategories)
+                {
+                    // إنشاء SubCategory وربطها بالـ Category
+                    var subcategory = new SubCategory
+                    {
+                        SubcategoryName = subcategoryName,
+                        CategoryId = category.CategoryId // ربط الـ SubCategory بالـ Category
+                    };
+
+                    // إضافة الـ SubCategory إلى قاعدة البيانات
+                    _db.SubCategories.Add(subcategory);
+                }
+
+                // حفظ التغييرات النهائية
+                _db.SaveChanges();
+            }
+
+            return Ok(new { message = "Category and subcategories added successfully", category });
+        }
+
+
+
+
+
+
+
+
+
+        [HttpPut]
+        [Route("UpdateCategory/{id}")]
+        public IActionResult UpdateCategory(int id, [FromForm] categoryRequestDTO categoryDto)
+        {
+            // Retrieve the existing category from the database
+            var category = _db.Categories.FirstOrDefault(c => c.CategoryId == id);
+            if (category == null)
+            {
+                return NotFound(new { message = "Category not found" });
+            }
+
+            // Update the category's properties
+            category.Name = categoryDto.Name;
+            category.Description = categoryDto.Description;
+
+            // Check if there's a new image and update it
+            if (categoryDto.Image != null)
+            {
+                var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Categories");
+                if (!Directory.Exists(uploadedFolder))
+                {
+                    Directory.CreateDirectory(uploadedFolder);
+                }
+
+                var fileImage = Path.Combine(uploadedFolder, categoryDto.Image.FileName);
+                using (var stream = new FileStream(fileImage, FileMode.Create))
+                {
+                    categoryDto.Image.CopyTo(stream);
+                }
+
+                category.Image = categoryDto.Image.FileName; // Update the image
+            }
+
+            // Save the updated category
+            _db.Categories.Update(category);
+            _db.SaveChanges();
+
+            // Manage subcategories (add, update, or remove)
+
+            // Get existing subcategories for the category
+            var existingSubcategories = _db.SubCategories.Where(sc => sc.CategoryId == category.CategoryId).ToList();
+
+            // If new subcategories are provided, update or add them
+            if (categoryDto.Subcategories != null && categoryDto.Subcategories.Count > 0)
+            {
+                // Remove subcategories that are not in the updated list
+                var subcategoriesToRemove = existingSubcategories
+                    .Where(sc => !categoryDto.Subcategories.Contains(sc.SubcategoryName))
+                    .ToList();
+
+                foreach (var subcategoryToRemove in subcategoriesToRemove)
+                {
+                    _db.SubCategories.Remove(subcategoryToRemove);
+                }
+
+                // Add or update subcategories
+                foreach (var subcategoryName in categoryDto.Subcategories)
+                {
+                    var existingSubcategory = existingSubcategories
+                        .FirstOrDefault(sc => sc.SubcategoryName == subcategoryName);
+
+                    if (existingSubcategory == null)
+                    {
+                        // If the subcategory doesn't exist, add it
+                        var newSubcategory = new SubCategory
+                        {
+                            SubcategoryName = subcategoryName,
+                            CategoryId = category.CategoryId
+                        };
+                        _db.SubCategories.Add(newSubcategory);
+                    }
+                }
+
+                // Save changes for subcategories
+                _db.SaveChanges();
+            }
+
+            return Ok(new { message = "Category and subcategories updated successfully", category });
+        }
+
+
+
+
+
+
+        /*
+
+
+                [HttpPost]
+                [Route("EditCategory")]
+                public IActionResult EditCategory([FromForm] CategoryEditRequestDTO categoryDto)
+                {
+
+                    // Find the category by ID
+                    var category = _db.Categories
+                        .Include(c => c.SubCategories)
+                        .FirstOrDefault(c => c.CategoryId == categoryDto.CategoryId);
+
+                    if (category == null)
+                    {
+                        return NotFound(new { message = "Category not found." });
+                    }
+
+                    // Update category details
+                    category.Name = categoryDto.Name;
+                    category.Description = categoryDto.Description;
+
+                    // Handle image update if provided
+                    if (categoryDto.Image != null)
+                    {
+                        var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Categories");
+                        if (!Directory.Exists(uploadedFolder))
+                        {
+                            Directory.CreateDirectory(uploadedFolder);
+                        }
+                        var fileImage = Path.Combine(uploadedFolder, categoryDto.Image.FileName);
+                        using (var stream = new FileStream(fileImage, FileMode.Create))
+                        {
+                            categoryDto.Image.CopyTo(stream);
+                        }
+                        category.Image = categoryDto.Image.FileName;
+                    }
+
+                    // Handle subcategories
+                    if (categoryDto.Subcategories != null)
+                    {
+                        // Clear existing subcategories and add new ones
+                        _db.SubCategories.RemoveRange(category.SubCategories);
+
+                        foreach (var subDto in categoryDto.Subcategories)
+                        {
+                            var subcategory = new SubCategory
+                            {
+                                SubcategoryName = subDto.SubcategoryName,
+                                CategoryId = category.CategoryId // Link subcategory to the category
+                            };
+                            category.SubCategories.Add(subcategory);
+                        }
+                    }
+
+                    _db.SaveChanges();
+
+                    return Ok(new { message = "Category and subcategories updated successfully", category });
+                }
+
+
+
+
+        */
+
+
+        [HttpGet]
+        [Route("GetCategoryById/{categoryId}")]
+        public IActionResult GetCategoryById(int categoryId)
+        {
+            var category = _db.Categories
+                .Include(c => c.SubCategories)
+                .FirstOrDefault(c => c.CategoryId == categoryId);
+
+            if (category == null)
+            {
+                return NotFound(new { message = "Category not found." });
+            }
+
+            var result = new
+            {
+                categoryId = category.CategoryId,
+                name = category.Name,
+                description = category.Description,
+                image = category.Image,
+                subCategories = category.SubCategories.Select(sub => new
+                {
+                    subCategoryId = sub.SubcategoryId,
+                    subcategoryName = sub.SubcategoryName
+                }).ToList()
+            };
+
+            return Ok(result);
+        }
+
+
+
     }
 }

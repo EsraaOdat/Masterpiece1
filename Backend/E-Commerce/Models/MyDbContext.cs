@@ -23,6 +23,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<Color> Colors { get; set; }
+
     public virtual DbSet<Comment> Comments { get; set; }
 
     public virtual DbSet<Comment1> Comments1 { get; set; }
@@ -41,9 +43,13 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<ProductDiscount> ProductDiscounts { get; set; }
 
+    public virtual DbSet<ProductImage> ProductImages { get; set; }
+
     public virtual DbSet<Shipment> Shipments { get; set; }
 
     public virtual DbSet<ShippingAddress> ShippingAddresses { get; set; }
+
+    public virtual DbSet<Size> Sizes { get; set; }
 
     public virtual DbSet<Store> Stores { get; set; }
 
@@ -51,9 +57,13 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<SubCategory> SubCategories { get; set; }
 
+    public virtual DbSet<Tag> Tags { get; set; }
+
     public virtual DbSet<User> Users { get; set; }
 
     public virtual DbSet<UserRole> UserRoles { get; set; }
+
+    public virtual DbSet<Variant> Variants { get; set; }
 
     public virtual DbSet<Wishlist> Wishlists { get; set; }
 
@@ -134,6 +144,14 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.Name)
                 .HasMaxLength(255)
                 .HasColumnName("name");
+        });
+
+        modelBuilder.Entity<Color>(entity =>
+        {
+            entity.HasKey(e => e.ColorId).HasName("PK__Colors__8DA7676DDFD74954");
+
+            entity.Property(e => e.ColorId).HasColumnName("ColorID");
+            entity.Property(e => e.ColorName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Comment>(entity =>
@@ -319,6 +337,63 @@ public partial class MyDbContext : DbContext
                 .HasForeignKey(d => d.SubcategoryId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Products__subcat__46E78A0C");
+
+            entity.HasMany(d => d.Colors).WithMany(p => p.Products)
+                .UsingEntity<Dictionary<string, object>>(
+                    "ProductColor",
+                    r => r.HasOne<Color>().WithMany()
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__ProductCo__Color__59C55456"),
+                    l => l.HasOne<Product>().WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__ProductCo__Produ__58D1301D"),
+                    j =>
+                    {
+                        j.HasKey("ProductId", "ColorId").HasName("PK__ProductC__7CD6B09BCA4BAEDB");
+                        j.ToTable("ProductColors");
+                        j.IndexerProperty<int>("ProductId").HasColumnName("ProductID");
+                        j.IndexerProperty<int>("ColorId").HasColumnName("ColorID");
+                    });
+
+            entity.HasMany(d => d.Sizes).WithMany(p => p.Products)
+                .UsingEntity<Dictionary<string, object>>(
+                    "ProductSize",
+                    r => r.HasOne<Size>().WithMany()
+                        .HasForeignKey("SizeId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__ProductSi__SizeI__5D95E53A"),
+                    l => l.HasOne<Product>().WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__ProductSi__Produ__5CA1C101"),
+                    j =>
+                    {
+                        j.HasKey("ProductId", "SizeId").HasName("PK__ProductS__0C3716784DC52FD6");
+                        j.ToTable("ProductSize");
+                        j.IndexerProperty<int>("ProductId").HasColumnName("ProductID");
+                        j.IndexerProperty<int>("SizeId").HasColumnName("SizeID");
+                    });
+
+            entity.HasMany(d => d.Tags).WithMany(p => p.Products)
+                .UsingEntity<Dictionary<string, object>>(
+                    "ProductTag",
+                    r => r.HasOne<Tag>().WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__ProductTa__TagID__6166761E"),
+                    l => l.HasOne<Product>().WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.ClientSetNull)
+                        .HasConstraintName("FK__ProductTa__Produ__607251E5"),
+                    j =>
+                    {
+                        j.HasKey("ProductId", "TagId").HasName("PK__ProductT__625B0949883273CC");
+                        j.ToTable("ProductTags");
+                        j.IndexerProperty<int>("ProductId").HasColumnName("ProductID");
+                        j.IndexerProperty<int>("TagId").HasColumnName("TagID");
+                    });
         });
 
         modelBuilder.Entity<ProductDiscount>(entity =>
@@ -337,6 +412,20 @@ public partial class MyDbContext : DbContext
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__ProductDi__produ__656C112C");
+        });
+
+        modelBuilder.Entity<ProductImage>(entity =>
+        {
+            entity.HasKey(e => e.ImageId).HasName("PK__ProductI__7516F4ECDD930B87");
+
+            entity.Property(e => e.ImageId).HasColumnName("ImageID");
+            entity.Property(e => e.ImagePath).HasMaxLength(255);
+            entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.ProductImages)
+                .HasForeignKey(d => d.ProductId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__ProductIm__Produ__46B27FE2");
         });
 
         modelBuilder.Entity<Shipment>(entity =>
@@ -389,6 +478,14 @@ public partial class MyDbContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__ShippingA__user___6D0D32F4");
+        });
+
+        modelBuilder.Entity<Size>(entity =>
+        {
+            entity.HasKey(e => e.SizeId).HasName("PK__Sizes__83BD095A0320E282");
+
+            entity.Property(e => e.SizeId).HasColumnName("SizeID");
+            entity.Property(e => e.SizeName).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Store>(entity =>
@@ -489,6 +586,16 @@ public partial class MyDbContext : DbContext
                 .HasConstraintName("FK__SubCatego__categ__4222D4EF");
         });
 
+        modelBuilder.Entity<Tag>(entity =>
+        {
+            entity.HasKey(e => e.TagId).HasName("PK__Tags__4296A2B6B0283F73");
+
+            entity.Property(e => e.TagId).HasColumnName("tag_id");
+            entity.Property(e => e.TagName)
+                .HasMaxLength(100)
+                .HasColumnName("tag_name");
+        });
+
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("PK__Users__B9BE370FB3129C30");
@@ -529,6 +636,40 @@ public partial class MyDbContext : DbContext
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserRole_User");
+        });
+
+        modelBuilder.Entity<Variant>(entity =>
+        {
+            entity.HasKey(e => e.VariantId).HasName("PK__Variant__EACC68B789A4927D");
+
+            entity.ToTable("Variant");
+
+            entity.Property(e => e.VariantId).HasColumnName("variant_id");
+            entity.Property(e => e.ColorId).HasColumnName("color_id");
+            entity.Property(e => e.Image)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("image");
+            entity.Property(e => e.ProductId).HasColumnName("product_id");
+            entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.SizeId).HasColumnName("size_id");
+            entity.Property(e => e.TagId).HasColumnName("tag_id");
+
+            entity.HasOne(d => d.Color).WithMany(p => p.Variants)
+                .HasForeignKey(d => d.ColorId)
+                .HasConstraintName("FK__Variant__color_i__662B2B3B");
+
+            entity.HasOne(d => d.Product).WithMany(p => p.Variants)
+                .HasForeignKey(d => d.ProductId)
+                .HasConstraintName("FK__Variant__product__65370702");
+
+            entity.HasOne(d => d.Size).WithMany(p => p.Variants)
+                .HasForeignKey(d => d.SizeId)
+                .HasConstraintName("FK__Variant__size_id__671F4F74");
+
+            entity.HasOne(d => d.Tag).WithMany(p => p.Variants)
+                .HasForeignKey(d => d.TagId)
+                .HasConstraintName("FK__Variant__tag_id__681373AD");
         });
 
         modelBuilder.Entity<Wishlist>(entity =>

@@ -1075,7 +1075,7 @@ async function getData() {
                     <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
                       <div class="ltn__product-item text-center">
                         <div class="product-img">
-                          <a href="product-details.html"><img style="height: 350px; object-fit: cover"
+                          <a href="product-details.html"  onclick="setProductId(${product.productId})"><img style="height: 350px; object-fit: cover"
                          src="../../../../../../../Backend/E-Commerce/Product/${product.image}"   alt="${product.name}"></a>
                           <div class="product-badge">
                             <ul>
@@ -1108,7 +1108,7 @@ async function getData() {
                         </div>
                         <div class="product-info">
                           <h2 class="product-title">
-                            <a href="product-details.html">${product.name}</a>
+                            <a href="product-details.html"  onclick="setProductId(${product.productId})">${product.name}</a>
                           </h2>
                           <div class="product-price">
                             <span>$${product.price.toFixed(2)}</span>
@@ -1125,7 +1125,7 @@ async function getData() {
                     <div class="col-lg-12">
                       <div class="ltn__product-item">
                         <div class="product-img">
-                          <a href="product-details.html"><img
+                          <a href="product-details.html"  onclick="setProductId(${product.productId})"><img
                               src="../../../../../../../Backend/E-Commerce/Product/${product.image}"
                                     alt="${product.name}"></a>
                           <div class="product-badge">
@@ -1136,7 +1136,7 @@ async function getData() {
                         </div>
                         <div class="product-info">
                           <h2 class="product-title">
-                            <a href="product-details.html">${product.name}</a>
+                            <a href="product-details.html"  onclick="setProductId(${product.productId})">${product.name}</a>
                           </h2>
                           <div class="product-price">
                             <span>$${product.price.toFixed(2)}</span>
@@ -1245,6 +1245,13 @@ async function getData() {
         console.error("Error fetching store information:", error);
     }
 }
+
+function setProductId(productId) {
+    console.log("Setting product ID:", productId); // Log the ID being set
+    localStorage.setItem("SelectedProductId", productId);
+    window.location.href = 'product-details.html'; // Redirect after storing productId
+}
+
 
 // Call the function to fetch and display products
 getData(); // Ensure this function is defined somewhere in your code

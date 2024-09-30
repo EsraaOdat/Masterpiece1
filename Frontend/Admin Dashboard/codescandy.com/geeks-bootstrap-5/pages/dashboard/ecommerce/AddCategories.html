@@ -883,65 +883,66 @@
                                 <!-- card body -->
                                 <div class="card-body p-lg-6">
                                     <!-- form -->
-                                    <form class="row gx-3 needs-validation" novalidate  id="updateCategoryForm" >
-                                        <!-- form group -->
+                                    <form class="row gx-3 needs-validation" novalidate id="updateCategoryForm">
+                                        <!-- Category Name -->
                                         <div class="mb-3 col-12">
-                                            <label class="form-label">
-                                                Name
-                                                <span class="text-danger">*</span>
-                                            </label>
-                                            <input type="text" id="categoryName" class="form-control" placeholder="Enter project title"
-                                                required />
-                                            <div class="invalid-feedback">Please enter first title.</div>
+                                            <label class="form-label">Name <span class="text-danger">*</span></label>
+                                            <input type="text" id="categoryName" class="form-control"
+                                                placeholder="Enter category name" required />
+                                            <div class="invalid-feedback">Please enter category name.</div>
                                         </div>
-                                        <!-- form group -->
+
+                                        <!-- Category Description -->
                                         <div class="mb-3 col-12">
                                             <label class="form-label">Description</label>
-                                            <textarea class="form-control" placeholder="Enter brief about project..." id="CategoryDescription"
-                                                rows="3" required></textarea>
-                                            <div class="invalid-feedback">Please enter messages.</div>
+                                            <textarea class="form-control" placeholder="Enter category description..."
+                                                id="CategoryDescription" rows="3" required></textarea>
+                                            <div class="invalid-feedback">Please enter category description.</div>
                                         </div>
 
-
+                                        <!-- Category Image -->
                                         <div class="col-md-3 col-12 mb-4">
                                             <div>
-                                                <!-- logo -->
-                                                <!-- logo -->
-                                                <h5 class="mb-3">Project Logo</h5>
+                                                <h5 class="mb-3">Category Image</h5>
                                                 <div class="icon-shape icon-xxl border rounded position-relative">
                                                     <span class="position-absolute"><i
                                                             class="bi bi-image fs-3"></i></span>
                                                     <input id="categoryImage" class="form-control border-0 opacity-0"
                                                         type="file" onchange="displayFileName()" />
-                                                        
                                                 </div>
-
                                             </div>
-
+                                            <p id="fileName" class="mt-2"></p>
                                         </div>
-                                        <p id="fileName" class="mt-2"></p>
+
+                                        <!-- Subcategories -->
+                                        <div class="mb-3 col-12">
+                                            <label class="form-label">Subcategories</label>
+                                            <div id="subcategoriesContainer">
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control subcategory-input"
+                                                        placeholder="Enter subcategory name" />
+                                                    <button class="btn btn-outline-secondary remove-subcategory"
+                                                        type="button">Remove</button>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-secondary mb-3" type="button" id="addSubcategory">Add Subcategory</button>
+                                        </div>
+
+                                        <!-- Submit and Close Buttons -->
+                                        <div class="col-12">
+                                            <button class="btn btn-primary" type="submit">Submit</button>
+                                            <button type="button" class="btn btn-outline-primary ms-2"
+                                                data-bs-dismiss="offcanvas" aria-label="Close">Close</button>
+                                        </div>
+                                    </form>
 
                                 </div>
-                                
-                                <div class="col-md-8"></div>
-                                <!-- button -->
-                               <!-- button -->
-                      <div class="col-12">
-                        &nbsp; &nbsp;  &nbsp;&nbsp;  &nbsp;
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                        <button type="button" class="btn btn-outline-primary ms-2" data-bs-dismiss="offcanvas" aria-label="Close">Close</button>
-                        <br>
-                        <br>
-                        <br>
-                      </div>
-                    </form>
-                  </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
+            </section>
+        </main>
     </div>
 
     <!-- Scripts -->
@@ -963,21 +964,35 @@
     <script src="../../../assets/js/vendors/choice.js"></script>
 </body>
 <script>
+    // Display selected image filename
     function displayFileName() {
-      var input = document.getElementById('fileInput');
-      var fileName = input.files[0].name;
-      document.getElementById('fileName').textContent = fileName;
+        var input = document.getElementById('categoryImage');
+        var fileName = input.files[0].name;
+        document.getElementById('fileName').textContent = fileName;
     }
 
+    // Add new subcategory input field dynamically
+    document.getElementById('addSubcategory').addEventListener('click', function() {
+        var subcategoryInput = `
+            <div class="input-group mb-3">
+                <input type="text" class="form-control subcategory-input" placeholder="Enter subcategory name" />
+                <button class="btn btn-outline-secondary remove-subcategory" type="button">Remove</button>
+            </div>`;
+        document.getElementById('subcategoriesContainer').insertAdjacentHTML('beforeend', subcategoryInput);
+    });
 
+    // Remove a subcategory input field
+    document.getElementById('subcategoriesContainer').addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-subcategory')) {
+            e.target.parentElement.remove();
+        }
+    });
 
-
-
-
+    // Submit form and send data to the server
     document.getElementById('updateCategoryForm').addEventListener('submit', ADDCategory);
-    
+
     async function ADDCategory(event) {
-        event.preventDefault(); // Prevent form from submitting the default way
+        event.preventDefault(); // Prevent default form submission
 
         const url = `https://localhost:7000/api/Categories/AddCategory`;
 
@@ -990,14 +1005,21 @@
             formData.append("image", imageFile);
         }
 
+        // Gather subcategories and append each separately to formData
+        document.querySelectorAll('.subcategory-input').forEach((input, index) => {
+            if (input.value.trim() !== '') {
+                formData.append(`Subcategories[${index}]`, input.value.trim());
+            }
+        });
+
         try {
             const response = await fetch(url, {
-                method: 'POST', // Change to 'POST' if that's what the server expects
+                method: 'POST',
                 body: formData
             });
 
             if (response.ok) {
-                alert('category added successfully!');
+                alert('Category and subcategories added successfully!');
             } else {
                 const errorData = await response.json();
                 console.error('Error:', errorData);
@@ -1008,12 +1030,6 @@
             alert('Failed to connect to the server.');
         }
     }
-
-    
-    
-        
-    
-  </script>
-  
+</script>
 
 </html>

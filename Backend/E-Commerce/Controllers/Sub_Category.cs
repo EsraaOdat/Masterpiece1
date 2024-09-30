@@ -32,7 +32,7 @@ namespace E_Commerce.Controllers
         {
             var subCategory = new SubCategory // Assuming you have a SubCategory model
             {
-                CategoryId = subCategoryDto.CategoryId,
+                SubcategoryId = subCategoryDto.SubCategoryId,
                 SubcategoryName = subCategoryDto.SubcategoryName
             };
 
@@ -41,6 +41,29 @@ namespace E_Commerce.Controllers
 
             return Ok(new { message = "Subcategory added successfully", subCategory });
         }
+
+
+
+
+        [HttpDelete]
+        [Route("DeleteSubCategory/{subCategoryId}")]
+        public IActionResult DeleteSubCategory(int subCategoryId)
+        {
+            // Find the subcategory by ID
+            var subcategory = _db.SubCategories.FirstOrDefault(sub => sub.SubcategoryId == subCategoryId);
+
+            if (subcategory == null)
+            {
+                return NotFound(new { message = "Subcategory not found." });
+            }
+
+            // Remove the subcategory
+            _db.SubCategories.Remove(subcategory);
+            _db.SaveChanges();
+
+            return Ok(new { message = "Subcategory deleted successfully." });
+        }
+
 
     }
 }

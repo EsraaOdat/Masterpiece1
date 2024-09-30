@@ -478,52 +478,53 @@
                                         </div>
                                     </div>
                                     <div class="ltn__shop-details-large-img">
-                                        <div class="single-large-img">
-                                            <a href="https://i.etsystatic.com/15103393/r/il/31467a/4767716000/il_794xN.4767716000_7oed.jpg" data-rel="lightcase:myCollection">
-                                                <img src="https://i.etsystatic.com/15103393/r/il/31467a/4767716000/il_794xN.4767716000_7oed.jpg" alt="Image">
-                                            </a>
+                                        <div class="single-large-img" id="minImage">
+                                           
                                         </div>
+
+                                        <span>
                                         <div class="single-large-img">
-                                            <a href="https://i.etsystatic.com/15103393/r/il/a8fcd0/4815980931/il_794xN.4815980931_gnkf.jpg" data-rel="lightcase:myCollection">
+                                            <a href="https://i.etsystatic.com/15103393/r/il/a8fcd0/4815980931/il_794xN.4815980931_gnkf.jpg" >
                                                 <img src="https://i.etsystatic.com/15103393/r/il/a8fcd0/4815980931/il_794xN.4815980931_gnkf.jpg" alt="Image">
                                             </a>
                                         </div>
                                         <div class="single-large-img">
-                                            <a href="https://i.etsystatic.com/15103393/r/il/9e7237/4767715992/il_794xN.4767715992_il3c.jpg" data-rel="lightcase:myCollection">
+                                            <a href="https://i.etsystatic.com/15103393/r/il/9e7237/4767715992/il_794xN.4767715992_il3c.jpg" >
                                                 <img src="https://i.etsystatic.com/15103393/r/il/9e7237/4767715992/il_794xN.4767715992_il3c.jpg" alt="Image">
                                             </a>
                                         </div>
                                         <div class="single-large-img">
-                                            <a href="https://i.etsystatic.com/15103393/r/il/1c2251/4815980901/il_794xN.4815980901_5bnm.jpg" data-rel="lightcase:myCollection">
+                                            <a href="https://i.etsystatic.com/15103393/r/il/1c2251/4815980901/il_794xN.4815980901_5bnm.jpg">
                                                 <img src="https://i.etsystatic.com/15103393/r/il/1c2251/4815980901/il_794xN.4815980901_5bnm.jpg" alt="Image">
                                             </a>
                                         </div>
                                         <div class="single-large-img">
-                                            <a href="https://i.etsystatic.com/15103393/r/il/86a6e6/4767715986/il_794xN.4767715986_mfvq.jpg" data-rel="lightcase:myCollection">
+                                            <a href="https://i.etsystatic.com/15103393/r/il/86a6e6/4767715986/il_794xN.4767715986_mfvq.jpg" >
                                                 <img src="https://i.etsystatic.com/15103393/r/il/86a6e6/4767715986/il_794xN.4767715986_mfvq.jpg" alt="Image">
                                             </a>
                                         </div>
                                         <div class="single-large-img">
-                                            <a href="https://i.etsystatic.com/15103393/r/il/05d2d4/5771138538/il_794xN.5771138538_ic8v.jpg" data-rel="lightcase:myCollection">
+                                            <a href="https://i.etsystatic.com/15103393/r/il/05d2d4/5771138538/il_794xN.5771138538_ic8v.jpg" >
                                                 <img src="https://i.etsystatic.com/15103393/r/il/05d2d4/5771138538/il_794xN.5771138538_ic8v.jpg" alt="Image">
                                             </a>
                                         </div>
                                         <div class="single-large-img">
-                                            <a href="https://i.etsystatic.com/15103393/r/il/d3ad2b/5928015998/il_794xN.5928015998_bndk.jpg" data-rel="lightcase:myCollection">
+                                            <a href="https://i.etsystatic.com/15103393/r/il/d3ad2b/5928015998/il_794xN.5928015998_bndk.jpg" >
                                                 <img src="https://i.etsystatic.com/15103393/r/il/d3ad2b/5928015998/il_794xN.5928015998_bndk.jpg" alt="Image">
                                             </a>
                                         </div>
+                                    </span>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="modal-product-info shop-details-info pl-0">
-                                    <h3>Pandasw Jewelry Collection</h3>
+                                    <h3 id="productName"></h3>
                                     <div class="product-price-ratting mb-20">
                                         <ul>
                                             <li>
                                                 <div class="product-price">
-                                                    <span>$49.00</span>
+                                                    <span id="price"></span>
                                                     <del>$65.00</del>
                                                 </div>
                                             </li>
@@ -544,11 +545,12 @@
 
                                             </li>
                                         </ul>
-                                      <a href="StorePage.html"> <h5>Store Name</h5></a>
+                                      <a href="StorePage.html" id="storeNameElement"> <h5>Store Name</h5></a>
 
                                     </div>
                                     <div class="modal-product-brief">
-                                        <p>The image showcases a selection of elegant jewelry, including gold and pearl earrings, small studs, and necklaces with delicate designs, all displayed on branded "Pandasw" cards in black and white.</p>
+                                        <p id="productDescription"></p>
+
                                     </div>
                                     <div class="modal-product-meta ltn__product-details-menu-1 mb-20">
                                         <ul>
@@ -1682,6 +1684,142 @@
     <!-- Main JS -->
     <script src="js/main.js"></script>
   
+
+
+    <script>
+        async function getData() {
+
+            const productId = localStorage.getItem("SelectedProductId");
+
+            const url = `https://localhost:7000/api/Products/Product/${productId}`;
+        
+            try {
+                const response = await fetch(url);
+                console.log("Response from product API:", response);
+        
+                // Check if the response is OK (status code 200-299)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+        
+                let data = await response.json();
+                console.log("Product data:", data); // Log the product data
+        
+                // Ensure you use the correct element IDs
+                let MIN_Image = document.getElementById("minImage"); 
+                let MIN_Image2 = document.getElementById("minImage2"); 
+                let Product_Name = document.getElementById("productName"); 
+                let description = document.getElementById("productDescription"); 
+        
+                // Check if data exists
+                if (data) {
+                    // Set the description
+                    description.innerHTML = `${data.description}`;
+        
+                    // Update product name
+                    Product_Name.innerHTML = `${data.name}`;
+                    // Set the price
+                    document.getElementById("price").innerHTML = `$${data.price}`;
+        
+                    // Set main images
+                    MIN_Image.innerHTML = `
+                        <a href="../../../../../../../Backend/E-Commerce/Product/${data.image}">
+                            <img src="../../../../../../../Backend/E-Commerce/Product/${data.image}" alt="${data.name}">
+                        </a>
+                    `;
+        
+                 
+                }
+
+
+                await getStoreName(data.storeId, storeNameElement);
+
+               
+
+
+            } catch (error) {
+                console.error("Error fetching product information:", error);
+            }
+        }
+        
+
+
+
+        async function getStoreName(storeId, storeNameElement) {
+    const url = `https://localhost:7000/api/Stores/${storeId}`; // Corrected URL
+
+    try {
+        const response = await fetch(url);
+        console.log("Response from store API:", response);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        let storeData = await response.json();
+        console.log("Store data:", storeData); // Log the store data
+
+        // Set the store name in the desired element
+        storeNameElement.innerHTML = storeData.storeName;
+
+    } catch (error) {
+        console.error("Error fetching store information:", error);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+        async function getImages() {
+            const productId = localStorage.getItem("SelectedProductId");
+
+            const url = `https://localhost:7000/api/ProductImages/ProductImages/${productId}`; // Corrected URL
+        
+            try {
+                const response = await fetch(url);
+                console.log("Response from images API:", response);
+        
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+        
+                let data = await response.json();
+                console.log("Images data:", data); // Log the images data
+        
+                let cards2 = document.getElementById("MoreImages2");
+        
+             
+        
+                data.forEach((image) => {
+                    // Populate the first set of images
+                   
+        
+                    // Populate the second set of images
+                    cards2.innerHTML += `
+                        <div class="single-small-img">
+                            <img src="https://i.etsystatic.com/15103393/r/il/a8fcd0/4815980931/il_794xN.4815980931_gnkf.jpg" alt="Image">
+                        </div>
+                    `;
+                });
+            } catch (error) {
+                console.error("Error fetching images:", error);
+            }
+        }
+        
+        // Call the function to fetch and display images
+     
+    getData();
+
+
+        </script>
+        
 </body>
 
 <!-- Mirrored from tunatheme.com/tf/html/fiama-preview/fiama/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 12:05:06 GMT -->

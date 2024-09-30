@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- form for updating category -->
+<form class="row gx-3 needs-validation" novalidate id="updateCategoryForm">
+    <!-- Category Name -->
+    <div class="mb-3 col-12">
+        <label class="form-label">Name <span class="text-danger">*</span></label>
+        <input type="text" id="categoryName" class="form-control"
+            placeholder="Enter category name" required />
+        <div class="invalid-feedback">Please enter category name.</div>
+    </div>
+
+    <!-- Category Description -->
+    <div class="mb-3 col-12">
+        <label class="form-label">Description</label>
+        <textarea class="form-control" placeholder="Enter category description..."
+            id="CategoryDescription" rows="3" required></textarea>
+        <div class="invalid-feedback">Please enter category description.</div>
+    </div>
+
+    <!-- Category Image -->
+    <div class="col-md-3 col-12 mb-4">
+        <div>
+            <h5 class="mb-3">Category Image</h5>
+            <div class="icon-shape icon-xxl border rounded position-relative">
+                <span class="position-absolute"><i
+                        class="bi bi-image fs-3"></i></span>
+                <input id="categoryImage" class="form-control border-0 opacity-0"
+                    type="file" onchange="displayFileName()" />
+            </div>
+        </div>
+        <p id="fileName" class="mt-2"></p>
+    </div>
+
+    <!-- Subcategories -->
+    <div class="mb-3 col-12">
+        <label class="form-label">Subcategories</label>
+        <div id="subcategoriesContainer">
+            <!-- Subcategory input fields will be added dynamically here -->
+        </div>
+        <button class="btn btn-secondary mb-3" type="button" id="addSubcategory">Add Subcategory</button>
+    </div>
+
+    <!-- Submit and Close Buttons -->
+    <div class="col-12">
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <button type="button" class="btn btn-outline-primary ms-2"
+            data-bs-dismiss="offcanvas" aria-label="Close">Close</button>
+    </div>
+</form>
+
+<script>
+    const categoryId = 24; // ID الخاص بالفئة المراد تعديلها
+
+    // Fetch category details from the API
+    async function loadCategoryData() {
+        const url = `https://localhost:7000/api/Categories/${categoryId}`;
+
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                populateFormWithData(data);
+            } else {
+                alert('Failed to fetch category data.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to connect to the server.');
+        }
+    }
+
+    // Fill the form with category data
+    function populateFormWithData(data) {
+        document.getElementById('categoryName').value = data.name;
+        document.getElementById('CategoryDescription').value = data.description;
+        document.getElementById('fileName').textContent = data.image;
+
+        // Load subcategories
+        const subcategoriesContainer = document.getElementById('subcategoriesContainer');
+        subcategoriesContainer.innerHTML = ''; // Clear previous subcategories if any
+        data.subcategories.forEach((subcategory, index) => {
+            const subcategoryInput = `
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control subcategory-input" value="${subcategory}" placeholder="Enter subcategory name" />
+                    <button class="btn btn-outline-secondary remove-subcategory" type="button">Remove</button>
+                </div>`;
+            subcategoriesContainer.insertAdjacentHTML('beforeend', subcategoryInput);
+        });
+    }
+
+    // Display selected image filename
+    function displayFileName() {
+        var input = document.getElementById('categoryImage');
+        var fileName = input.files[0].name;
+        document.getElementById('fileName').textContent = fileName;
+    }
+
+    // Add new subcategory input field dynamically
+    document.getElementById('addSubcategory').addEventListener('click', function () {
+        var subcategoryInput = `
+            <div class="input-group mb-3">
+                <input type="text" class="form-control subcategory-input" placeholder="Enter subcategory name" />
+                <button class="btn btn-outline-secondary remove-subcategory" type="button">Remove</button>
+            </div>`;
+        document.getElementById('subcategoriesContainer').insertAdjacentHTML('beforeend', subcategoryInput);
+    });
+
+    // Remove a subcategory input field
+    document.getElementById('subcategoriesContainer').addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-subcategory')) {
+            e.target.parentElement.remove();
+        }
+    });
+
+    // Submit form and send updated data to the server (PUT request)
+    document.getElementById('updateCategoryForm').addEventListener('submit', updateCategory);
+
+    async function updateCategory(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        const url = `https://localhost:7000/api/Categories/UpdateCategory/${categoryId}`;
+
+        const formData = new FormData();
+        formData.append("name", document.getElementById('categoryName').value);
+        formData.append("description", document.getElementById('CategoryDescription').value);
+
+        const imageFile = document.getElementById('categoryImage').files[0];
+        if (imageFile) {
+            formData.append("image", imageFile);
+        }
+
+        // Gather subcategories and append each separately to formData
+        document.querySelectorAll('.subcategory-input').forEach((input, index) => {
+            if (input.value.trim() !== '') {
+                formData.append(`Subcategories[${index}]`, input.value.trim());
+            }
+        });
+
+        try {
+            const response = await fetch(url, {
+                method: 'PUT',
+                body: formData
+            });
+
+            if (response.ok) {
+                alert('Category and subcategories updated successfully!');
+            } else {
+                const errorData = await response.json();
+                console.error('Error:', errorData);
+                alert('Failed to update category.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Failed to connect to the server.');
+        }
+    }
+
+    // Load category data on page load
+    loadCategoryData();
+</script>
+
+</body>
+</html>

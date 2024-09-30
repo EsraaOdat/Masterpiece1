@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "+bzdjImuDIzK+8sNoa19f8FcjGLfBFhXFOVDFvlxk3k=",
+  "Hash": "Je6eL/gewIwC9p7XpehZjSpLfMhe57s+eog5rHsq3E4=",
   "Source": "E-Commerce",
   "BasePath": "_content/E-Commerce",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "E-Commerce\\wwwroot",
+      "Source": "E-Commerce",
+      "ContentRoot": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\wwwroot\\",
+      "BasePath": "_content/E-Commerce",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }

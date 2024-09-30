@@ -1,0 +1,14 @@
+2024-10-01 00:42:10.474 +03:00 [INF] User profile is available. Using 'C:\Users\Orange\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-10-01 00:42:10.900 +03:00 [INF] Now listening on: https://localhost:7000
+2024-10-01 00:42:10.901 +03:00 [INF] Now listening on: http://localhost:5256
+2024-10-01 00:42:11.033 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-10-01 00:42:11.037 +03:00 [INF] Hosting environment: Development
+2024-10-01 00:42:11.039 +03:00 [INF] Content root path: C:\Users\Orange\Downloads\Masterpiece1\Backend\E-Commerce
+2024-10-01 00:42:11.805 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/swagger/index.html - null null
+2024-10-01 00:42:12.101 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/swagger/index.html - 200 null text/html;charset=utf-8 301.3674ms
+2024-10-01 00:42:12.113 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/_framework/aspnetcore-browser-refresh.js - null null
+2024-10-01 00:42:12.125 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/_framework/aspnetcore-browser-refresh.js - 200 13756 application/javascript; charset=utf-8 11.3282ms
+2024-10-01 00:42:12.128 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/_vs/browserLink - null null
+2024-10-01 00:42:12.183 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 55.5357ms
+2024-10-01 00:42:12.222 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/swagger/v1/swagger.json - null null
+2024-10-01 00:42:12.374 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 152.245ms

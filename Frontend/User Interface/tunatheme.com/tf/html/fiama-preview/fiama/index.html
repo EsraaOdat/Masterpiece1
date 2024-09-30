@@ -1647,6 +1647,89 @@
 
 
         getData();
+
+
+
+
+
+        function navbarLogedORnot() {
+    var navbarLogedORnot = document.getElementById("navbarLogedORnot");
+
+    if (userID == null) {
+        navbarLogedORnot.innerHTML = `
+        <ul>
+            <li>
+                <a href="#" onclick="user()"><i class="icon-user"></i></a>
+                <ul>
+                    <li><a href="../bassam/login.html">Sign in</a></li>
+                    <li><a href="../bassam/register.html">Register</a></li>
+                </ul>
+            </li>
+        </ul>
+        `;
+    } else {
+        navbarLogedORnot.innerHTML = `
+        <ul>
+            <li>
+                <a href="#" onclick="user()"><i class="icon-user"></i></a>
+                <ul>
+                    <li><a href="#" onclick="user()">My Account</a></li>
+                    <li><a href="#" onclick="logoutUser()">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+        `;
+    }
+
+    
+function navbarLogedORnot() {
+    var navbarLogedORnot = document.getElementById("navbarLogedORnot");
+
+    if (userID == null) {
+        navbarLogedORnot.innerHTML = `
+        <ul>
+            <li>
+                <a href="#" onclick="user()"><i class="icon-user"></i></a>
+                <ul>
+                    <li><a href="../bassam/login.html">Sign in</a></li>
+                    <li><a href="../bassam/register.html">Register</a></li>
+                </ul>
+            </li>
+        </ul>
+        `;
+    } else {
+        navbarLogedORnot.innerHTML = `
+        <ul>
+            <li>
+                <a href="#" onclick="user()"><i class="icon-user"></i></a>
+                <ul>
+                    <li><a href="#" onclick="user()">My Account</a></li>
+                    <li><a href="#" onclick="logoutUser()">Log Out</a></li>
+                </ul>
+            </li>
+        </ul>
+        `;
+    }
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
 </body>
 

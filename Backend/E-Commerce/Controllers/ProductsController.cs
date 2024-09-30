@@ -1,9 +1,11 @@
 ﻿using E_Commerce.dto;
-using E_Commerce.DTO;
 using E_Commerce.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PayPal.Api;
+
 
 namespace E_Commerce.Controllers
 {
@@ -21,11 +23,15 @@ namespace E_Commerce.Controllers
 
         // Get all products for admin dashboard
         [HttpGet("AllProducts")]
-        public IActionResult GetAllProducts()  
+        public IActionResult GetAllProducts()
         {
-            var data = _db.Products.ToList();
+            var data = _db.Products.OrderByDescending(p => p.ProductId)
+                          .ToList();
             return Ok(data);
         }
+
+
+
 
         //لازم برضو البرودكت يلي محلات فيهم active
 
@@ -35,97 +41,120 @@ namespace E_Commerce.Controllers
             var data = _db.Products
                 .Where(p => _db.Stores
                     .Any(s => s.StoreId == p.StoreId && s.Status == "active"))
-                .ToList();
-
+                .OrderByDescending(p => p.ProductId)
+                          .ToList();
             return Ok(data);
         }
 
 
         // Get all products for admin dashboard
-        /*   [HttpGet("Products")]
-           public IActionResult GetProducts()
-           {
-               var products = _db.Products.Where(x => x.CategoryId == categoryId).ToList();
-               return Ok(products);
-           }
+        /*  [HttpGet("Products")]
+          public IActionResult GetProducts()
+          {
+              var products = _db.Products.Where(x => x.CategoryId == categoryId).ToList();
+              return Ok(products);
+          }
+
+  */
+        /*
+                [HttpPost("CreateProduct")]
+                public async Task<IActionResult> CreateProduct([FromBody] ProductRequestDTO productDto)
+                {
+                    if (productDto == null)
+                    {
+                        return BadRequest("Product data is required.");
+                    }
+
+                    // Create a new product instance
+                    var newProduct = new Product
+                    {
+                        Name = productDto.Name,
+                        Description = productDto.Description,
+                        Price = productDto.Price,
+                        Quantity = productDto.Quantity,
+                        CreatedAt = DateTime.UtcNow
+                    };
+
+                    // Add the new product to the database
+                    _db.Products.Add(newProduct);
+                    await _db.SaveChangesAsync();
+
+                    // Add product images
+                    foreach (var image in productDto.ProductImages)
+                    {
+                        var productImage = new ProductImage
+                        {
+                            ProductId = newProduct.ProductId,
+                            ImagePath = image
+                        };
+                        _db.ProductImages.Add(productImage);
+                    }
+
+                    // Add colors
+                    foreach (var colorId in productDto.ColorIds)
+                    {
+                        var productColor = new ProductColor
+                        {
+                            ProductId = newProduct.ProductId,
+                            ColorId = colorId
+                        };
+                        _db.ProductColors.Add(productColor);
+                    }
+
+                    // Add sizes
+                    foreach (var sizeId in productDto.SizeIds)
+                    {
+                        var productSize = new ProductSize
+                        {
+                            ProductId = newProduct.ProductId,
+                            SizeId = sizeId
+                        };
+                        _db.ProductSizes.Add(productSize);
+                    }
+
+                    // Add tags
+                    foreach (var tagId in productDto.TagIds)
+                    {
+                        var productTag = new ProductTag
+                        {
+                            ProductId = newProduct.ProductId,
+                            TagId = tagId
+                        };
+                        _db.ProductTags.Add(productTag);
+                    }
+
+                    // Save all changes in one go
+                    await _db.SaveChangesAsync();
+
+                    return CreatedAtAction(nameof(CreateProduct), new { id = newProduct.ProductId }, newProduct);
+                }
 
 
-   */
-        [HttpPost("AddProduct")]
-        public IActionResult AddProduct([FromForm] ProductDto productDto)
-        {
-            if (productDto == null)
-            {
-                return BadRequest("Product data is required.");
-            }
-
-
-            // Ensure the "Product" directory exists
-            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
-            if (!Directory.Exists(uploadedFolder))
-            {
-                Directory.CreateDirectory(uploadedFolder);
-            }
-
-            // Save the uploaded image file
-            var fileImage = Path.Combine(uploadedFolder, productDto.Image.FileName);
-            using (var stream = new FileStream(fileImage, FileMode.Create))
-            {
-                productDto.Image.CopyTo(stream);
-            }
-
-
-
-            // Optionally validate the required fields here
-            if (string.IsNullOrWhiteSpace(productDto.Name) ||
-                productDto.Price <= 0 ||
-                productDto.StoreId <= 0 ||
-                productDto.SubcategoryId <= 0 ||
-                productDto.Quantity < 0)
-            {
-                return BadRequest("Invalid product data.");
-            }
-
-            var newProduct = new Product
-            {
-                Name = productDto.Name,
-                Description = productDto.Description,
-                Price = productDto.Price,
-                StoreId = productDto.StoreId,
-                SubcategoryId = productDto.SubcategoryId,
-                Quantity = productDto.Quantity,
-                Image = productDto.Image.FileName,
-                CreatedAt = DateTime.UtcNow // Set creation date
-            };
-
-            _db.Products.Add(newProduct);
-            _db.SaveChanges();
-
-            return Ok(newProduct);
-        }
 
 
 
 
-        // Get Last5 INDEX products
+
+        */
+
+
+
+        // Get Last8 INDEX products
         [HttpGet("GetLast8Products")]
         public IActionResult GetLast8Products()
         {
 
-            var data = _db.Products.OrderBy(p => p.Name).ToList();
-            var lastFiveProducts = data.TakeLast(8).ToList();
+            var lastEightProducts = _db.Products
+          .Where(p => _db.Stores.Any(s => s.StoreId == p.StoreId && s.Status == "active"))
+          .OrderByDescending(p => p.CreatedAt) // Order by creation date (or ID, depending on your logic)
+          .Take(8) // Take the last 8 products
+          .ToList();
 
-            return Ok(lastFiveProducts);
+            return Ok(lastEightProducts);
+
 
         }
 
-
-
-
-
-
-
-       
         // Get products by category ID
         [HttpGet("ProductsByCategoryId/{SubcategoryId}")]
         public IActionResult GetProductsByCategoryId(int SubcategoryId)
@@ -147,26 +176,13 @@ namespace E_Commerce.Controllers
             return Ok(data);
         }
 
-        // Get product by ID with a name filter
-        [HttpGet("ProductByName/{id:int:max(10)}")]
-        public IActionResult GetProductByIdAndName(int id, [FromQuery] string name)
-        {
-            var data = _db.Products.FirstOrDefault(c => c.ProductId == id && c.Name == name);
-            if (data == null)
-            {
-                return NotFound();
-            }
-            return Ok(data);
-        }
 
-
-
-
-        /*        ----------------------------------------------------------------------------------------------------
-        *//*        ----------------------------------------------------------------------------------------------------
-        */
         /*
-                [HttpPost]
+                        ----------------------------------------------------------------------------------------------------
+                        ----------------------------------------------------------------------------------------------------
+
+                *//*
+                        [HttpPost]
                 [Route("AddProduct")]
                 public IActionResult CreateProduct([FromForm] ProductRequestDTO productDto)
                 {
@@ -202,67 +218,67 @@ namespace E_Commerce.Controllers
                     return Ok(new { message = "Product added successfully", product });
                 }
 
-        */
 
-        /*        ----------------------------------------------------------------------------------------------------
-*//*        ----------------------------------------------------------------------------------------------------
-*/
+
+                        ----------------------------------------------------------------------------------------------------
+                ----------------------------------------------------------------------------------------------------
+        */
 
 
         /* [HttpPut("UpdateProduct/{id}")]
-         public IActionResult UpdateProduct(int id, [FromForm] ProductRequestDTO Product)
-         {
-             // Find the existing product by ID
-             var existingProduct = _db.Products.FirstOrDefault(p => p.ProductId == id);
-             if (existingProduct == null)
-             {
-                 return NotFound(new { message = "Product not found" });
-             }
+        public IActionResult UpdateProduct(int id, [FromForm] ProductRequestDTO Product)
+        {
+            // Find the existing product by ID
+            var existingProduct = _db.Products.FirstOrDefault(p => p.ProductId == id);
+            if (existingProduct == null)
+            {
+                return NotFound(new { message = "Product not found" });
+            }
 
-             // Validate the incoming model
-             if (!ModelState.IsValid)
-             {
-                 return BadRequest(ModelState);
-             }
+            // Validate the incoming model
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-             // Ensure the "Product" directory exists
-             var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
-             if (!Directory.Exists(uploadedFolder))
-             {
-                 Directory.CreateDirectory(uploadedFolder);
-             }
+            // Ensure the "Product" directory exists
+            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
+            if (!Directory.Exists(uploadedFolder))
+            {
+                Directory.CreateDirectory(uploadedFolder);
+            }
 
-             // Save the uploaded image file if provided
-             if (Product.Image != null)
-             {
-                 var fileImage = Path.Combine(uploadedFolder, Product.Image.FileName);
-                 using (var stream = new FileStream(fileImage, FileMode.Create))
-                 {
-                     Product.Image.CopyTo(stream);
-                 }
+            // Save the uploaded image file if provided
+            if (Product.Image != null)
+            {
+                var fileImage = Path.Combine(uploadedFolder, Product.Image.FileName);
+                using (var stream = new FileStream(fileImage, FileMode.Create))
+                {
+                    Product.Image.CopyTo(stream);
+                }
 
-                 // Update the image path
-                 existingProduct.Image = Product.Image.FileName;
-             }
+                // Update the image path
+                existingProduct.Image = Product.Image.FileName;
+            }
 
-             // Update the existing product's properties with the new values
-             existingProduct.ProductName = Product.ProductName;
-             existingProduct.Description = Product.Description;
-             existingProduct.Price = Product.Price;
+            // Update the existing product's properties with the new values
+            existingProduct.Name = Product.ProductName;
+            existingProduct.Description = Product.Description;
+            existingProduct.Price = Product.Price;
 
-             // Save changes to the database
-             _db.Products.Update(existingProduct);
-             _db.SaveChanges();
+            // Save changes to the database
+            _db.Products.Update(existingProduct);
+            _db.SaveChanges();
 
-             // Return a success response with the updated product
-             return Ok(new { message = "Product updated successfully", product = existingProduct });
-         }
- */
+            // Return a success response with the updated product
+            return Ok(new { message = "Product updated successfully", product = existingProduct });
+        }*/
 
-        /*        ----------------------------------------------------------------------------------------------------
-*/        /*        ----------------------------------------------------------------------------------------------------
-*/
+        /*
+                        ----------------------------------------------------------------------------------------------------
+                        ----------------------------------------------------------------------------------------------------
 
+        */
 
 
         [HttpGet("ProductsByStore/{storeId}")]
@@ -275,13 +291,191 @@ namespace E_Commerce.Controllers
             {
                 return NotFound(new { message = "Store not found or inactive" });
             }
-
-            // Fetch products by storeId
+            // Fetch products by storeId and order by ProductId descending
             var products = _db.Products
                               .Where(p => p.StoreId == storeId)
+                              .OrderByDescending(p => p.ProductId)
                               .ToList();
 
             return Ok(products);
+
+        }
+
+
+
+
+
+        /*
+                // POST: api/products
+                [HttpPost]
+                public async Task<ActionResult> PostProduct([FromForm] AddProductDto productDto)
+                {
+                    // 1. Save the main product image
+                    var productImagePath = await SaveImage(productDto.ProductImage, "products");
+
+                    // 2. Create the product entity
+                    var product = new E_Commerce.Models.Product
+                    {
+                        Name = productDto.Name,
+                        Description = productDto.Description,
+                        Price = productDto.Price,
+                        Quantity = productDto.Quantity,
+                        Image = productImagePath, // Save the main product image path
+                        CreatedAt = DateTime.Now
+                    };
+
+                    // Save the product to the database
+                    _db.Products.Add(product);
+                    await _db.SaveChangesAsync();
+
+                    // 3. Handle colors and their images
+                    foreach (var colorDto in productDto.Colors)
+                    {
+                        // Save the color image
+                        var colorImagePath = await SaveImage(colorDto.ColorImage, "colors");
+
+                        // Create and save the color-product relationship with its image
+                        var productColorImage = new E_Commerce.Models.ProductImage
+                        {
+                            ProductId = product.ProductId,
+                            ColorId = colorDto.ColorID,
+                            ImagePath = colorImagePath
+                        };
+
+                        _db.ProductColorImages.Add(ProductImage);
+                    }
+
+                    // Save changes to the database for the colors
+                    await _db.SaveChangesAsync();
+
+                    // 4. Handle sizes
+                    foreach (var sizeId in productDto.Sizes)
+                    {
+                        var productColorSize = new E_Commerce.Models.ProductColorSize
+                        {
+                            ProductId = product.ProductId,
+                            SizeId = sizeId,
+                            Stock = productDto.Quantity // You can customize the stock logic here
+                        };
+
+                        _db.ProductColorSizes.Add(productColorSize);
+                    }
+
+                    // Save changes to the database for the sizes
+                    await _db.SaveChangesAsync();
+
+                    return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
+                }
+
+                // Helper method to save the images to the file system
+                private async Task<string> SaveImage(IFormFile imageFile, string folder)
+                {
+                    if (imageFile == null || imageFile.Length == 0)
+                        return null;
+
+                    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folder);
+                    Directory.CreateDirectory(uploadPath);
+
+                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(imageFile.FileName)}";
+                    var filePath = Path.Combine(uploadPath, fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+
+                    return $"/{folder}/{fileName}";
+                }
+
+                // For demonstration purposes, a simple GetProduct method
+                [HttpGet("{id}")]
+                public async Task<ActionResult<E_Commerce.Models.Product>> GetProduct(int id)
+                {
+                    var product = await _db.Products
+                        .Include(p => p.ProductColorImages)
+                        .Include(p => p.ProductColorSizes)
+                        .FirstOrDefaultAsync(p => p.ProductId == id);
+
+                    if (product == null)
+                    {
+                        return NotFound();
+                    }
+
+                    return Ok(product);
+                }
+        */
+
+
+
+
+
+
+
+
+
+
+
+
+        [HttpPost]
+        [Route("CreateProductWithImages")]
+        public async Task<IActionResult> CreateProductWithImages([FromForm] ProductRequestDTO productDto)
+        {
+            if (productDto == null)
+            {
+                return BadRequest("Invalid product data.");
+            }
+
+            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "ProductImages");
+            if (!Directory.Exists(uploadedFolder))
+            {
+                Directory.CreateDirectory(uploadedFolder);
+            }
+
+            var mainImagePath = Path.Combine(uploadedFolder, productDto.Image.FileName);
+            using (var stream = new FileStream(mainImagePath, FileMode.Create))
+            {
+                await productDto.Image.CopyToAsync(stream);
+            }
+
+            var newProduct = new Product
+            {
+                Name = productDto.Name,
+                Description = productDto.Description,
+                Price = productDto.Price,
+                Quantity = productDto.Quantity,
+                CreatedAt = DateTime.UtcNow,
+                StoreId = productDto.StoreId,
+                SubcategoryId = productDto.SubcategoryId,
+                Image = productDto.Image.FileName  
+            };
+
+            _db.Products.Add(newProduct);
+            await _db.SaveChangesAsync();  
+
+            foreach (var image in productDto.AdditionalImages)
+            {
+                var additionalImagePath = Path.Combine(uploadedFolder, image.FileName);
+
+                using (var stream = new FileStream(additionalImagePath, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                var productImage = new ProductImage
+                {
+                    ProductId = newProduct.ProductId,
+                    ImagePath = image.FileName
+                };
+
+                _db.ProductImages.Add(productImage);
+            }
+
+
+          
+
+            await _db.SaveChangesAsync();  // Save all changes to the database
+
+            return Ok(new { message = "Product and images added successfully." });
         }
 
 
@@ -291,7 +485,10 @@ namespace E_Commerce.Controllers
 
 
 
+
+
         // Delete a product by ID
+
         [HttpDelete("Delete/{id}")]
         public IActionResult Delete(int id)
         {
