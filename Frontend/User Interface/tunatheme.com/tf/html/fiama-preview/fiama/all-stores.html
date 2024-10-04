@@ -242,7 +242,7 @@
                                             <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                                 <span class="mini-cart-icon">
                                                     <i class="icon-handbag"></i>
-                                                    <sup>2</sup>
+                                                    <sup id="totalQuantity">0</sup>
                                                 </span>
                                                 <h6><span>Your Cart</span> <span
                                                         class="ltn__secondary-color">$89.25</span></h6>
@@ -277,78 +277,33 @@
         </header>
         <!-- HEADER AREA END -->
 
-
-        <!-- Utilize Cart Menu Start -->
-        <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
-            <div class="ltn__utilize-menu-inner ltn__scrollbar">
-                <div class="ltn__utilize-menu-head">
-                    <span class="ltn__utilize-menu-title">Cart</span>
-                    <button class="ltn__utilize-close">×</button>
-                </div>
-                <div class="mini-cart-product-area ltn__scrollbar">
-                    <div class="mini-cart-item clearfix">
-                        <div class="mini-cart-img">
-                            <a href="#"><img
-                                    src="https://i.pinimg.com/736x/f5/5a/21/f55a21f850f93a50b0f000471beb8c29.jpg"
-                                    alt="Image"></a>
-                            <span class="mini-cart-item-delete"><i class="icon-trash"></i></span>
-                        </div>
-                        <div class="mini-cart-info">
-                            <h6><a href="#">Premium Joyful</a></h6>
-                            <span class="mini-cart-quantity">1 x $65.00</span>
-                        </div>
-                    </div>
-                    <div class="mini-cart-item clearfix">
-                        <div class="mini-cart-img">
-                            <a href="#"><img
-                                    src="https://i.pinimg.com/736x/f5/5a/21/f55a21f850f93a50b0f000471beb8c29.jpg"
-                                    alt="Image"></a>
-                            <span class="mini-cart-item-delete"><i class="icon-trash"></i></span>
-                        </div>
-                        <div class="mini-cart-info">
-                            <h6><a href="#">The White Rose</a></h6>
-                            <span class="mini-cart-quantity">1 x $85.00</span>
-                        </div>
-                    </div>
-                    <div class="mini-cart-item clearfix">
-                        <div class="mini-cart-img">
-                            <a href="#"><img
-                                    src="https://i.pinimg.com/736x/f5/5a/21/f55a21f850f93a50b0f000471beb8c29.jpg"
-                                    alt="Image"></a>
-                            <span class="mini-cart-item-delete"><i class="icon-trash"></i></span>
-                        </div>
-                        <div class="mini-cart-info">
-                            <h6><a href="#">Red Rose Bouquet</a></h6>
-                            <span class="mini-cart-quantity">1 x $92.00</span>
-                        </div>
-                    </div>
-                    <div class="mini-cart-item clearfix">
-                        <div class="mini-cart-img">
-                            <a href="#"><img
-                                    src="https://i.pinimg.com/736x/f5/5a/21/f55a21f850f93a50b0f000471beb8c29.jpg"
-                                    alt="Image"></a>
-                            <span class="mini-cart-item-delete"><i class="icon-trash"></i></span>
-                        </div>
-                        <div class="mini-cart-info">
-                            <h6><a href="#">Pink Flower Tree</a></h6>
-                            <span class="mini-cart-quantity">1 x $68.00</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="mini-cart-footer">
-                    <div class="mini-cart-sub-total">
-                        <h5>Subtotal: <span>$310.00</span></h5>
-                    </div>
-                    <div class="btn-wrapper">
-                        <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                        <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                    </div>
-                    <p>Free Shipping on All Orders Over $100!</p>
-                </div>
-
-            </div>
+ <!-- Utilize Cart Menu Start -->
+ <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
+    <div class="ltn__utilize-menu-inner ltn__scrollbar">
+        <div class="ltn__utilize-menu-head">
+            <span class="ltn__utilize-menu-title">Cart</span>
+            <button class="ltn__utilize-close">×</button>
         </div>
-        <!-- Utilize Cart Menu End -->
+        <div class="mini-cart-product-area ltn__scrollbar" id="CartMinu">
+            
+            
+           
+        
+        </div>
+        <div class="mini-cart-footer">
+            <div class="mini-cart-sub-total">
+                <h5>Subtotal: <span id="Subtotal"></span></h5>
+            </div>
+            <div class="btn-wrapper">
+                <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+            </div>
+            <p>Free Shipping on All Orders Over $100!</p>
+        </div>
+
+    </div>
+</div>
+<!-- Utilize Cart Menu End -->
 
 
         <!-- Utilize Mobile Menu Start -->
@@ -458,13 +413,13 @@
                                 </li>
                                 <li>
                                     <div class="short-by text-center">
-                                        <select class="nice-select">
-                                            <option>Default sorting</option>
-                                            <option>Sort by popularity</option>
-                                            <option>Sort by new arrivals</option>
-                                            <option>Sort by price: low to high</option>
-                                            <option>Sort by price: high to low</option>
-                                        </select>
+                                        <!-- Search Widget -->
+                             <div class="widget ltn__search-widget">
+                                <form action="#">
+                                    <input type="text" name="search" placeholder="Search your keyword...">
+                                    <button type="submit"><i class="icon-magnifier"></i></button>
+                                </form>
+                            </div>
                                     </div>
                                     <div class="ltn__grid-list-tab-menu ">
                                         <div class="nav">

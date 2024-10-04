@@ -236,9 +236,9 @@
                                         <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                             <span class="mini-cart-icon">
                                                 <i class="icon-handbag"></i>
-                                                <sup>2</sup>
+                                                <sup id="totalQuantity">0</sup>
                                             </span>
-                                            <h6><span>Your Cart</span> <span class="ltn__secondary-color">$89.25</span>
+                                            <h6><span>Your Cart</span> <span id="Subtotal2" class="ltn__secondary-color">$0</span>
                                             </h6>
                                         </a>
                                     </div>
@@ -272,6 +272,33 @@
     <!-- HEADER AREA END -->
 
     <div class="body-wrapper">
+   <!-- Utilize Cart Menu Start -->
+ <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
+    <div class="ltn__utilize-menu-inner ltn__scrollbar">
+        <div class="ltn__utilize-menu-head">
+            <span class="ltn__utilize-menu-title">Cart</span>
+            <button class="ltn__utilize-close">×</button>
+        </div>
+        <div class="mini-cart-product-area ltn__scrollbar" id="CartMinu">
+            
+            
+           
+        
+        </div>
+        <div class="mini-cart-footer">
+            <div class="mini-cart-sub-total">
+                <h5>Subtotal: <span id="Subtotal"></span></h5>
+            </div>
+            <div class="btn-wrapper">
+                <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+            </div>
+            <p>Free Shipping on All Orders Over $100!</p>
+        </div>
+
+    </div>
+</div>
+<!-- Utilize Cart Menu End -->
 
 
         <!-- Utilize Mobile Menu Start -->
@@ -634,6 +661,8 @@
     <!-- Main JS -->
     <script src="js/main.js"></script>
     
+  
+<script SRC="js/cart.js"></script>
   
 </body>
 

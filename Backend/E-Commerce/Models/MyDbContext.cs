@@ -97,6 +97,15 @@ public partial class MyDbContext : DbContext
             entity.ToTable("Cart");
 
             entity.Property(e => e.CartId).HasColumnName("cart_id");
+            entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("created_at");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValue("open")
+                .HasColumnName("status");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.User).WithMany(p => p.Carts)
@@ -643,6 +652,8 @@ public partial class MyDbContext : DbContext
             entity.HasKey(e => e.VariantId).HasName("PK__Variant__EACC68B789A4927D");
 
             entity.ToTable("Variant");
+
+            entity.HasIndex(e => new { e.ProductId, e.ColorId, e.SizeId, e.TagId }, "UQ_Variant").IsUnique();
 
             entity.Property(e => e.VariantId).HasColumnName("variant_id");
             entity.Property(e => e.ColorId).HasColumnName("color_id");

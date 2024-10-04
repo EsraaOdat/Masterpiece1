@@ -25,10 +25,22 @@ namespace E_Commerce.Controllers
         [HttpGet("AllProducts")]
         public IActionResult GetAllProducts()
         {
-            var data = _db.Products.OrderByDescending(p => p.ProductId)
+            var data = _db.Products
+                          .Include(p => p.CartItems)
+                          .Include(p => p.Comments)
+                          .Include(p => p.Comment1s)
+                          .Include(p => p.ProductDiscounts)
+                          .Include(p => p.ProductImages)
+                          .Include(p => p.Variants)
+                          .Include(p => p.Colors)
+                          .Include(p => p.Sizes)
+                          .Include(p => p.Tags)
+                          .OrderByDescending(p => p.ProductId)
                           .ToList();
+
             return Ok(data);
         }
+
 
 
 
@@ -163,18 +175,35 @@ namespace E_Commerce.Controllers
             return Ok(products);
         }
 
-
         // Get a single product by ID
         [HttpGet("Product/{id}")]
         public IActionResult GetProductById(int id)
         {
-            var data = _db.Products.FirstOrDefault(p => p.ProductId == id);
+            var data = _db.Products
+                          .Include(p => p.CartItems)
+                          .Include(p => p.Comment1s)
+                          .Include(p => p.Comments)
+                          .Include(p => p.OrderItems)
+                          .Include(p => p.ProductDiscounts)
+                          .Include(p => p.ProductImages)
+                          .Include(p => p.Variants).ThenInclude(s => s.Tag)
+                          .Include(p => p.Store)
+                          .Include(p => p.Wishlists)
+                          .Include(p => p.Colors)
+                          .Include(p => p.Sizes)
+                          .Include(p => p.Tags)
+                          .Include(p => p.Subcategory).ThenInclude(s => s.Category)
+                          .FirstOrDefault(p => p.ProductId == id);
             if (data == null)
             {
                 return NotFound();
             }
+
             return Ok(data);
         }
+
+
+
 
 
         /*
@@ -416,6 +445,90 @@ namespace E_Commerce.Controllers
 
 
 
+
+
+
+
+
+       /* // POST: api/sort
+        [HttpPost]
+        public IActionResult SortWords([FromForm] int[] words)
+        {
+            if (words == null || words.Length == 0)
+            {
+                return BadRequest("Please provide a valid array of words.");
+            }
+
+            // Sort the array by word length
+            //  Array.Sort(words, (w1, w2) => w1.Length.CompareTo(w2.Length));
+            int i, j, tep;
+            for (i = 0; i < words.Length; i++)
+            {
+                for (j = i + 1; j < words.Length; j++)
+                {
+                    if (words[i] > words[j])
+                    {
+                        tep = words[j];
+                        words[j] = words[i];
+                        words[i] = tep;
+
+
+
+                    }
+
+                }
+
+
+
+
+            }
+
+
+                // Return the sorted array
+                return Ok(words);
+            
+        }*/
+
+        // POST: api/count
+        [HttpPost]
+        public IActionResult CountNumbers([FromBody] int[] numbers)
+        {
+            // Check if the input is valid
+            if (numbers == null || numbers.Length == 0)
+            {
+                return BadRequest("Please provide a valid array of numbers.");
+            }
+
+            // Count the occurrences of each number using LINQ
+            var countResult = numbers.GroupBy(n => n)
+                                      .ToDictionary(g => g.Key, g => g.Count());
+
+            // Return the count result
+            return Ok(countResult);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpPost]
         [Route("CreateProductWithImages")]
         public async Task<IActionResult> CreateProductWithImages([FromForm] ProductRequestDTO productDto)
@@ -425,7 +538,7 @@ namespace E_Commerce.Controllers
                 return BadRequest("Invalid product data.");
             }
 
-            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "ProductImages");
+            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
             if (!Directory.Exists(uploadedFolder))
             {
                 Directory.CreateDirectory(uploadedFolder);

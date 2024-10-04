@@ -1,107 +1,91 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using E_Commerce.Dto_Esraa;
+using E_Commerce.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using E_Commerce.Models;
 
-namespace E_Commerce.Controllers
+namespace E_Commerce.Controllers.Esraa
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CoponsController : ControllerBase
+    public class CouponsController : ControllerBase
     {
-        private readonly MyDbContext _context;
+        private readonly MyDbContext _db;
 
-        public CoponsController(MyDbContext context)
+        public CouponsController(MyDbContext db)
         {
-            _context = context;
+            _db = db;
         }
 
-        // GET: api/Copons
+        // GET: api/Coupons
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Copon>>> GetCopons()
+        public IActionResult GetAllCoupons()
         {
-            return await _context.Copons.ToListAsync();
+            var coupons = _db.Copons.ToList();
+            return Ok(coupons);
         }
 
-        // GET: api/Copons/5
+        // GET: api/Coupons/{id}
         [HttpGet("{id}")]
-        public async Task<ActionResult<Copon>> GetCopon(int id)
+        public IActionResult GetCouponById(int id)
         {
-            var copon = await _context.Copons.FindAsync(id);
+            var coupon = _db.Copons.FirstOrDefault(c => c.CoponId == id);
+            if (coupon == null)
+                return NotFound(new { message = "Coupon not found" });
 
-            if (copon == null)
-            {
-                return NotFound();
-            }
-
-            return copon;
+            return Ok(coupon);
         }
 
-        // PUT: api/Copons/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCopon(int id, Copon copon)
+        // POST: api/Coupons/Add
+        [HttpPost("Add")]
+        public IActionResult AddCoupon([FromForm] AddCouponDTO couponDto)
         {
-            if (id != copon.CoponId)
-            {
-                return BadRequest();
-            }
 
-            _context.Entry(copon).State = EntityState.Modified;
 
-            try
+            var newCoupon = new Copon
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CoponExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                Name = couponDto.Name,
+                Amount = couponDto.Amount,
+                Date = couponDto.Date,
+                Status = couponDto.Status,
 
-            return NoContent();
+            };
+
+            _db.Copons.Add(newCoupon);
+            _db.SaveChanges();
+
+            return Ok(new { message = "Coupon added successfully", coupon = newCoupon });
         }
 
-        // POST: api/Copons
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Copon>> PostCopon(Copon copon)
+        // PUT: api/Coupons/Update/{id}
+        [HttpPut("Update/{id}")]
+        public IActionResult UpdateCoupon(int id, [FromBody] UpdateCouponDTO couponDto)
         {
-            _context.Copons.Add(copon);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCopon", new { id = copon.CoponId }, copon);
+
+            var existingCoupon = _db.Copons.FirstOrDefault(c => c.CoponId == id);
+            if (existingCoupon == null)
+                return NotFound(new { message = "Coupon not found" });
+
+            existingCoupon.Status = couponDto.Status;
+
+            _db.Copons.Update(existingCoupon);
+            _db.SaveChanges();
+
+            return Ok(new { message = "Coupon updated successfully", coupon = existingCoupon });
         }
 
-        // DELETE: api/Copons/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCopon(int id)
+        // DELETE: api/Coupons/Delete/{id}
+        [HttpDelete("Delete/{id}")]
+        public IActionResult DeleteCoupon(int id)
         {
-            var copon = await _context.Copons.FindAsync(id);
-            if (copon == null)
-            {
-                return NotFound();
-            }
+            var coupon = _db.Copons.FirstOrDefault(c => c.CoponId == id);
+            if (coupon == null)
+                return NotFound(new { message = "Coupon not found" });
 
-            _context.Copons.Remove(copon);
-            await _context.SaveChangesAsync();
+            _db.Copons.Remove(coupon);
+            _db.SaveChanges();
 
-            return NoContent();
-        }
-
-        private bool CoponExists(int id)
-        {
-            return _context.Copons.Any(e => e.CoponId == id);
+            return Ok(new { message = "Coupon deleted successfully" });
         }
     }
 }
