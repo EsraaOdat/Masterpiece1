@@ -33,8 +33,8 @@ namespace E_Commerce.Controllers
         public async Task<ActionResult<Cart>> GetCart(int id)
         {
             var cart = await _context.Carts
-                                     .Include(c => c.CartItems) 
-                                     .FirstOrDefaultAsync(c => c.CartId == id); 
+                                     .Include(c => c.CartItems)
+                                     .FirstOrDefaultAsync(c => c.CartId == id);
 
             if (cart == null)
             {
@@ -85,10 +85,10 @@ namespace E_Commerce.Controllers
             var Cart = new Cart
             {
                 UserId = newCart.UserId,
-                Status=newCart.Status
+                Status = newCart.Status
             };
 
-            
+
             _context.Carts.Add(Cart);
             _context.SaveChanges();
 

@@ -11,15 +11,19 @@ public partial class Order
 
     public int? StoreId { get; set; }
 
-    public decimal? TotalAmount { get; set; }
-
-    public DateTime? OrderDate { get; set; }
+    public decimal? Amount { get; set; }
 
     public string? Status { get; set; }
 
     public int? PaymentMethodId { get; set; }
 
     public string? TransactionId { get; set; }
+
+    public DateOnly? Date { get; set; }
+
+    public int? CoponId { get; set; }
+
+    public virtual Copon? Copon { get; set; }
 
     public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 

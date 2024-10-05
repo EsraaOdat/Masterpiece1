@@ -251,21 +251,23 @@ public partial class MyDbContext : DbContext
             entity.HasKey(e => e.OrderId).HasName("PK__Orders__4659622952437E49");
 
             entity.Property(e => e.OrderId).HasColumnName("order_id");
-            entity.Property(e => e.OrderDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnName("order_date");
+            entity.Property(e => e.Amount)
+                .HasColumnType("decimal(10, 2)")
+                .HasColumnName("amount");
+            entity.Property(e => e.CoponId).HasColumnName("copon_id");
             entity.Property(e => e.PaymentMethodId).HasColumnName("payment_method_id");
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
                 .HasColumnName("status");
             entity.Property(e => e.StoreId).HasColumnName("store_id");
-            entity.Property(e => e.TotalAmount)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("total_amount");
             entity.Property(e => e.TransactionId)
                 .HasMaxLength(255)
                 .HasColumnName("transaction_id");
             entity.Property(e => e.UserId).HasColumnName("user_id");
+
+            entity.HasOne(d => d.Copon).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.CoponId)
+                .HasConstraintName("FK_Orders_Coupons");
 
             entity.HasOne(d => d.PaymentMethod).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.PaymentMethodId)
@@ -287,11 +289,8 @@ public partial class MyDbContext : DbContext
         {
             entity.HasKey(e => e.OrderItemId).HasName("PK__OrderIte__3764B6BC34A859D6");
 
-            entity.Property(e => e.OrderItemId).HasColumnName("order_item_id");
+            entity.Property(e => e.OrderItemId).HasColumnName("Order_Item_id");
             entity.Property(e => e.OrderId).HasColumnName("order_id");
-            entity.Property(e => e.Price)
-                .HasColumnType("decimal(10, 2)")
-                .HasColumnName("price");
             entity.Property(e => e.ProductId).HasColumnName("product_id");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
 

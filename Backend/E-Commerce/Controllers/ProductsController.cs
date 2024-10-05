@@ -450,60 +450,58 @@ namespace E_Commerce.Controllers
 
 
 
-       /* // POST: api/sort
-        [HttpPost]
-        public IActionResult SortWords([FromForm] int[] words)
-        {
-            if (words == null || words.Length == 0)
-            {
-                return BadRequest("Please provide a valid array of words.");
-            }
+        /* // POST: api/sort
+         [HttpPost]
+         public IActionResult SortWords([FromForm] int[] words)
+         {
+             if (words == null || words.Length == 0)
+             {
+                 return BadRequest("Please provide a valid array of words.");
+             }
 
-            // Sort the array by word length
-            //  Array.Sort(words, (w1, w2) => w1.Length.CompareTo(w2.Length));
-            int i, j, tep;
-            for (i = 0; i < words.Length; i++)
-            {
-                for (j = i + 1; j < words.Length; j++)
-                {
-                    if (words[i] > words[j])
-                    {
-                        tep = words[j];
-                        words[j] = words[i];
-                        words[i] = tep;
-
-
-
-                    }
-
-                }
+             // Sort the array by word length
+             //  Array.Sort(words, (w1, w2) => w1.Length.CompareTo(w2.Length));
+             int i, j, tep;
+             for (i = 0; i < words.Length; i++)
+             {
+                 for (j = i + 1; j < words.Length; j++)
+                 {
+                     if (words[i] > words[j])
+                     {
+                         tep = words[j];
+                         words[j] = words[i];
+                         words[i] = tep;
 
 
 
+                     }
 
-            }
+                 }
 
 
-                // Return the sorted array
-                return Ok(words);
-            
-        }*/
 
-        // POST: api/count
+
+             }
+
+
+                 // Return the sorted array
+                 return Ok(words);
+
+         }*/
+
+
+
         [HttpPost]
         public IActionResult CountNumbers([FromBody] int[] numbers)
         {
-            // Check if the input is valid
             if (numbers == null || numbers.Length == 0)
             {
                 return BadRequest("Please provide a valid array of numbers.");
             }
 
-            // Count the occurrences of each number using LINQ
             var countResult = numbers.GroupBy(n => n)
                                       .ToDictionary(g => g.Key, g => g.Count());
 
-            // Return the count result
             return Ok(countResult);
         }
 
@@ -559,11 +557,11 @@ namespace E_Commerce.Controllers
                 CreatedAt = DateTime.UtcNow,
                 StoreId = productDto.StoreId,
                 SubcategoryId = productDto.SubcategoryId,
-                Image = productDto.Image.FileName  
+                Image = productDto.Image.FileName
             };
 
             _db.Products.Add(newProduct);
-            await _db.SaveChangesAsync();  
+            await _db.SaveChangesAsync();
 
             foreach (var image in productDto.AdditionalImages)
             {
@@ -584,7 +582,7 @@ namespace E_Commerce.Controllers
             }
 
 
-          
+
 
             await _db.SaveChangesAsync();  // Save all changes to the database
 

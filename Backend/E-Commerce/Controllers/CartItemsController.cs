@@ -39,7 +39,8 @@ namespace E_Commerce.Controllers
                 {
                     Name = x.Product.Name,
                     Price = x.Product.Price,
-                    Image = x.Product.Image
+                    Image = x.Product.Image,
+                    StoreId=x.Product.StoreId
                 }
             });
 
@@ -93,14 +94,22 @@ namespace E_Commerce.Controllers
         [Route("AddItem")]
         public IActionResult AddCartItem([FromBody] AddCartItemsDto newItem)
         {
+            // Retrieve the product based on the provided ProductId
+            var product = _db.Products.SingleOrDefault(p => p.ProductId == newItem.ProductId);
 
+            // Check if the product exists
+            if (product == null)
+            {
+                return NotFound(new { Message = "Product not found." });
+            }
 
             // Create a new cart item
             var cartItem = new CartItem
             {
                 CartId = newItem.CartId,
                 ProductId = newItem.ProductId,
-                Quantity = newItem.Quantity
+                Quantity = newItem.Quantity,
+                StoreId = product.StoreId // Assuming CartItem has a StoreId property
             };
 
             // Add the cart item to the database
@@ -109,6 +118,7 @@ namespace E_Commerce.Controllers
 
             return Ok(new { Message = "Item added to cart successfully.", CartItem = cartItem });
         }
+
 
 
 
@@ -195,9 +205,53 @@ namespace E_Commerce.Controllers
 
 
 
+        [HttpPost]
+        [Route("MoveCartToOrder/{userId}")]
+        public IActionResult MoveCartToOrder(int userId)
+        {
+            // Find the user's active cart
+            var cart = _db.Carts.Include(c => c.CartItems)
+                                 .ThenInclude(ci => ci.Product) // Include product details to access StoreId
+                                 .FirstOrDefault(c => c.UserId == userId && c.Status == "open");
 
+            if (cart == null)
+            {
+                return NotFound(new { Message = "No active cart found for this user." });
+            }
 
+            // Group cart items by StoreId
+            var groupedItems = cart.CartItems
+                .GroupBy(ci => ci.Product.StoreId)
+                .ToList();
 
+            // Create orders for each store
+            foreach (var group in groupedItems)
+            {
+                var order = new Order
+                {
+                    UserId = userId,
+                    Status = "Pending",
+                    Date = DateOnly.FromDateTime(DateTime.UtcNow), // Use this for DateOnly
+                    StoreId = group.Key, // Save StoreId in the Order
+                    OrderItems = group.Select(ci => new OrderItem
+                    {
+                        ProductId = ci.ProductId,
+                        Quantity = ci.Quantity
+                    }).ToList()
+                };
+
+                // Add order to the database
+                _db.Orders.Add(order);
+            }
+
+            // Remove cart items after transferring to orders
+            _db.CartItems.RemoveRange(cart.CartItems);
+
+            // Save changes to the database
+            _db.SaveChanges();
+
+            return Ok(new { Message = "Orders created successfully." });
+        }
 
 
     }
