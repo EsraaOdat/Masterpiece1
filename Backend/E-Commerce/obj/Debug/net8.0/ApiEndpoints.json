@@ -1087,6 +1087,22 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.StoresController",
+    "Method": "GetTopStores",
+    "RelativePath": "api/Stores/top-stores",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "top",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.StoresController",
     "Method": "UpdateSubscription",
     "RelativePath": "api/Stores/UpdateSubscription/{storeId}",
     "HttpMethod": "PUT",
@@ -1470,6 +1486,16 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.UsersController",
+    "Method": "GetUsers",
+    "RelativePath": "api/Users/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

@@ -35,7 +35,14 @@ namespace E_Commerce.Controllers
                     {
                         Name = order.User.Name
                     },
-
+                    Store = new StoreDto
+                    {
+                        StoreId = order.StoreId ?? 0, // If StoreId is nullable, default to 0 or handle accordingly
+                        StoreName = _db.Stores
+                               .Where(store => store.StoreId == order.StoreId) // Match StoreId
+                               .Select(store => store.StoreName) // Select StoreName
+                               .FirstOrDefault() ?? "Unknown Store" // Provide a fallback value if StoreName is null
+                    },
                     // Calculate the total number of items
                     NumberOfItems = order.OrderItems.Sum(oi => oi.Quantity ?? 0),
 
@@ -75,6 +82,16 @@ namespace E_Commerce.Controllers
                     {
                         Name = order.User.Name
                     },
+                    // Safely retrieve StoreId and StoreName with null checks
+                    Store = new StoreDto
+                    {
+                        StoreId = order.StoreId ?? 0, // If StoreId is nullable, default to 0 or handle accordingly
+                        StoreName = _db.Stores
+                               .Where(store => store.StoreId == order.StoreId) // Match StoreId
+                               .Select(store => store.StoreName) // Select StoreName
+                               .FirstOrDefault() ?? "Unknown Store" // Provide a fallback value if StoreName is null
+                    },
+
                     NumberOfItems = order.OrderItems.Sum(oi => oi.Quantity ?? 0),
                     Total = order.OrderItems.Sum(oi => (oi.Quantity ?? 0) * (oi.Product.Price ?? 0)),
                     Status = order.Status,

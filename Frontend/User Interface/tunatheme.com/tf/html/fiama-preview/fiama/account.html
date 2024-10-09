@@ -482,6 +482,7 @@
                                                                 <tr>
                                                                     <th>Order</th>
                                                                     <th>Date</th>
+                                                                    <th>Store Name</th>
                                                                     <th>Status</th>
                                                                     <th>Total</th>
                                                                     <th>Action</th>
@@ -800,6 +801,7 @@
                     <tr>
     <td>${counter++}</td>
     <td>${order.date} </td>
+    <td>${order.store.storeName} </td>
     <td>    <span class="badge ${getPaymentBadgeClass(order.status)}">${order.status}</span>
 </td>
     <td>   $${order.total.toFixed(2)}

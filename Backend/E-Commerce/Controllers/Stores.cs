@@ -206,6 +206,16 @@ namespace E_Commerce.Controllers
 
 
 
+        [HttpGet("top-stores")]
+        public IActionResult GetTopStores(int top = 3)
+        {
+            var topStores = _context.Stores
+                                    .Include(s => s.Orders)  
+                                    .OrderByDescending(s => s.Orders.Count).Where(s => s.Status == "active")  
+                                    .Take(top)  
+                                    .ToList();
 
+            return Ok(topStores);
+        }
     }
 }

@@ -1393,7 +1393,7 @@
                                         <div class="col-xl-4 col-sm-6 col-12">
                                             <div class="ltn__product-item text-center">
                                                 <div class="product-img">
-                                                    <a href="product-details.html"><img
+                                                    <a href="product-details.html"onclick="setProductId(${product.productId}, ${product.storeId})"><img
                                                             style="height: 350px; object-fit: cover;"
                                                             src="../../../../../../../Backend/E-Commerce/Product/${product.image}"
                                                             alt="#"></a>
@@ -1465,7 +1465,7 @@
                                         <div class="col-lg-12">
                                             <div class="ltn__product-item">
                                                 <div class="product-img">
-                                                    <a href="product-details.html"><img  src="../../../../../../../Backend/E-Commerce/Product/${product.image}"
+                                                    <a href="product-details.html"onclick="setProductId(${product.productId}, ${product.storeId})"><img  src="../../../../../../../Backend/E-Commerce/Product/${product.image}"
                                                             alt="#"></a>
                                                     <div class="product-badge">
                                                         <ul>
@@ -1530,6 +1530,17 @@
         }
 
         getData();
+
+
+
+        function setProductId(productId, storeId) {
+    console.log("Setting product ID:", productId);  // Log the ID being set
+    console.log("Setting store ID:", storeId);      // Log the store ID being set
+    localStorage.setItem("SelectedProductId", productId);  // Save productId in localStorage
+    localStorage.setItem("SelectedStoreId", storeId);      // Save storeId in localStorage
+    window.location.href = 'product-details.html';         // Redirect to product-details page
+}
+
     </script>
 <script SRC="js/cart.js"></script>
   

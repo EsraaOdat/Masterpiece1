@@ -931,8 +931,7 @@
         return response.json();
     })
     .then(data => {
-        alert(data.Message); // Handle success message
-        // Optionally, redirect or refresh the page
+        alert("Order placed successfully"); 
         window.location.reload(); // Refresh the page or navigate as needed
     })
     .catch(error => {

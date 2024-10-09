@@ -724,6 +724,7 @@ if (googleLogin) {
 
                 localStorage.setItem('jwtToken', data.token);
                 localStorage.setItem('userID', data.userID);
+                console.log(userID);
                 localStorage.setItem("NameForChat",data.userName);
             
                 clearCartFromLocalStorage(data.userID);

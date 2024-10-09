@@ -751,13 +751,15 @@
     <tr>
         <td><strong>Order Total</strong></td>
         <td><strong>${Number(total.toFixed(2)) + 15}</strong></td>
+        <input type="hidden" id="orderTotal" value=${Number(total.toFixed(2)) + 15}>
+        
     </tr>
 `;
+localStorage.setItem('orderTotal', document.getElementById('orderTotal').value);  
 
 
 
         }
-
 
 
         getData();
@@ -776,8 +778,10 @@
                 method: 'DELETE'
 
             });
+
             alert(' deleted successfully!');
             document.getElementById(`CartItemRow${CartItemId}`).remove();
+
         }
 
 

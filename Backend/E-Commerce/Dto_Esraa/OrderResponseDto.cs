@@ -10,6 +10,7 @@ namespace E_Commerce.Dto
         public string OrderNumber => $"#GK{OrderId:D5}"; // Formatting the order number
 
         public UserDto Customer { get; set; } // Customer info (UserDto contains UserId and Name)
+        public StoreDto Store { get; set; } 
 
         public DateOnly? Date { get; set; }
 
@@ -27,11 +28,20 @@ namespace E_Commerce.Dto
         public string? Name { get; set; } // Customer name
     }
 
+
+    public class StoreDto
+    {
+        public int StoreId { get; set; }
+
+        public string? StoreName { get; set; }
+    }
+
     public class OrderItemDto
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; } // Product name
         public int? Quantity { get; set; }
         public decimal? Price { get; set; } // Product price
+
     }
 }

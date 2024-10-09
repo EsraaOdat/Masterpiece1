@@ -58,6 +58,84 @@
             justify-content: center;
             align-items: center;
         }
+
+
+        /* تصميم الحاوية للكروت لعرضهم جنبًا إلى جنب */
+#TopStores {
+    display: flex;
+    justify-content: space-between;  /* للتباعد بين الكروت */
+    flex-wrap: wrap;  /* للسماح للكروت بالنزول إلى السطر التالي إذا كان العرض صغيرًا */
+    gap: 20px;  /* مسافة بين الكروت */
+}
+
+/* تصميم الكارد */
+.store-card {
+    flex: 1 1 calc(33.333% - 20px); /* عرض الكارد ليشغل 33% من العرض ويترك مسافة صغيرة */
+    max-width: calc(33.333% - 20px); /* لضمان أن الكارد لا يتجاوز العرض المحدد */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    text-align: center;
+}
+
+.store-card:hover {
+    transform: translateY(-5px);
+}
+
+.store-image-container {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.store-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.store-details {
+    padding: 0 15px;
+}
+
+.store-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.store-description {
+    font-size: 16px;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.store-ads-count {
+    font-size: 14px;
+    color: #555;
+}
+
+.store-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.store-link:hover {
+    background-color: #0056b3;
+}
+
     </style>
 
 </head>
@@ -565,81 +643,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="row ltn__product-slider-item-four-active slick-arrow-1" id="Stores">
+                <div class="row ltn__product-slider-item-four-active slick-arrow-1" id="TopStores">
 
 
 
-                    <!-- ltn__product-item -->
-                    <div class="col-12">
-                        <div class="ltn__product-item text-center">
-                            <div class="product-img">
-                                <div class="ltn__banner-img">
-
-                                    <a href="StorePage.html"><img style="height: 350px; object-fit: cover;"
-                                            src="https://mir-s3-cdn-cf.behance.net/projects/404/df68ab36233557.Y3JvcCw0MDQsMzE2LDAsMA.png"
-                                            alt="#"></a>
-                                </div>
-                                <div class="product-hover-action product-hover-action-2">
-                                    <ul>
-
-                                        <li class="add-to-cart">
-                                            <a href="#" title="Add to Cart" data-bs-toggle="modal"
-                                                data-bs-target="#add_to_cart_modal">
-                                                <span class="cart-text d-none d-xl-block">Description
-
-                                                </span>
-                                                <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
-                                            </a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-                            </div>
-                            <h3 class="ltn__blog-title blog-title-line"><a href="StorePage.html">Abu Shakra </a></h3>
-
-
-                        </div>
-                    </div>
-                    <!-- ltn__product-item -->
-                    <div class="col-12">
-                        <div class="ltn__product-item text-center">
-                            <div class="product-img">
-                                <div class="ltn__banner-img">
-
-
-                                    <a href="StorePage.html"><img style="height: 350px; object-fit: cover;"
-                                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRn7UBHSyMLN373Kcg_dlAPwXL6-TF1SS9Gng&s"
-                                            alt="#">
-
-                                    </a>
-                                </div>
-
-                            </div>
-                            <h3 class="ltn__blog-title blog-title-line"><a href="StorePage.html">karamish Silver </a>
-                            </h3>
-
-
-                        </div>
-                    </div>
-                    <!-- ltn__product-item -->
-                    <div class="col-12">
-                        <div class="ltn__product-item text-center">
-                            <div class="product-img">
-                                <div class="ltn__banner-img">
-
-                                    <a href="StorePage.html"><img style="height: 350px; object-fit: cover;"
-                                            src="https://www.cashmerecosmetics.com/wp-content/uploads/2021/04/logo-New.jpg"
-                                            alt="#"></a>
-                                </div>
-
-                            </div>
-                            <h3 class="ltn__blog-title blog-title-line"><a href="StorePage.html">Cashmere Cosmetics </a>
-                            </h3>
-
-
-                        </div>
-                    </div>
-
+                    
+                   
 
 
                 </div>
@@ -1534,7 +1543,7 @@
     <!-- preloader area end -->
 
     <!-- All JS Plugins -->
-    <script src="js/plugins.js"></script>
+<script src="js/plugins.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
     <script>
@@ -1554,7 +1563,7 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                         <div class="ltn__product-item text-center">
                             <div class="product-img">
-                                <a href="product-details.html"><img style="height: 350px; object-fit: cover;"
+                                <a onclick="setProductId(${product.productId}, ${product.storeId})"href="product-details.html"><img style="height: 350px; object-fit: cover;"
                                   src="../../../../../../../Backend/E-Commerce/Product/${product.image}"  alt="#"></a>
                                 <div class="product-badge">
                                     <ul>
@@ -1678,19 +1687,67 @@ function navbarLogedORnot() {
 
 
 
+function setProductId(productId, storeId) {
+    console.log("Setting product ID:", productId);  // Log the ID being set
+    console.log("Setting store ID:", storeId);      // Log the store ID being set
+    localStorage.setItem("SelectedProductId", productId);  // Save productId in localStorage
+    localStorage.setItem("SelectedStoreId", storeId);      // Save storeId in localStorage
+    window.location.href = 'product-details.html';         // Redirect to product-details page
+}
 
 
 
+async function getTopStores() {
+    const url = "https://localhost:7000/api/Stores/top-stores?top=3";
 
+    try {
+        const response = await fetch(url);
+        console.log("response", response);
 
+        if (!response.ok) {
+            throw new Error("Failed to fetch top stores");
+        }
 
+        let data = await response.json();
+        console.log("data", data);
 
+        let cards = document.getElementById("TopStores");
+
+        // تنظيف المحتوى القديم
+        cards.innerHTML = "";
+
+        // إضافة المتاجر الجديدة
+        data.forEach((Store) => {
+            cards.innerHTML += `
+                <div class="store-card" id="TopStore_${Store.storeId}">
+                    <div class="store-image-container">
+                        <img class="store-image" src="../../../../../../../Backend/E-Commerce/StoreImages/${Store.storeLogo || 'https://via.placeholder.com/300x200'}" alt="${Store.storeName}">
+                    </div>
+                    <div class="store-details">
+                        <h3 class="store-name">${Store.storeName}</h3>
+                        <p class="store-description">${Store.storeDescription || 'No description available'}</p>
+                        <a href="StorePage.html" onclick="saveStoreId(${Store.storeId})" class="theme-btn-1 btn btn-effect-1">Visit Store</a>
+                    </div>
+                </div>
+            `;
+        });
+
+    } catch (error) {
+        console.error("Error fetching top stores:", error);
+    }
+}
+
+getTopStores();
+ function saveStoreId(storeId){
+
+    localStorage.setItem('SelectedStoreId', storeId)
+}
 
     </script>
 <script SRC="js/cart.js"></script>
   
 </body>
 
-<!-- Mirrored from tunatheme.com/tf/html/fiama-preview/fiama/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 12:04:12 GMT -->
-
 </html>
+
+

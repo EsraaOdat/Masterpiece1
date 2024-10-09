@@ -30,6 +30,15 @@ namespace E_Commerce.Controllers
 
         }
 
+
+        [HttpGet]
+        [Route("Users")]
+        public IActionResult GetUsers()
+        {
+            var data = _db.Users.ToList();
+            return Ok(data);
+        }
+
         [HttpGet]
         [Route("GetUserById/{id}")]
         public IActionResult GetUserById(int id)
