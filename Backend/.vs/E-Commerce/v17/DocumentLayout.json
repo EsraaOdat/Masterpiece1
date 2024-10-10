@@ -3,12 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\sub_category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\sub_category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\cartitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\cartitemscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\stores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -17,10 +33,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\models\\cartitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|solutionrelative:e-commerce\\controllers\\orderscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{264D65DF-381B-4534-BC04-D33FEAAB1979}|E-Commerce\\E-Commerce.csproj|c:\\users\\orange\\downloads\\masterpiece1\\backend\\e-commerce\\models\\store.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -66,33 +78,73 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "OrdersController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\OrdersController.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Controllers\\OrdersController.cs",
               "ToolTip": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\OrdersController.cs",
               "RelativeToolTip": "E-Commerce\\Controllers\\OrdersController.cs",
-              "ViewState": "AgIAAMoAAAAAAAAAAAAuwCwAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAOYAAAAAAAAAAAAAAF8AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-04T22:06:04.764Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\ProductsController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "E-Commerce\\Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAAsCAAAAAAAAAAAkwE8CAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T22:29:47.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Sub_Category.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\Sub_Category.cs",
+              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\Sub_Category.cs",
+              "ToolTip": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\Sub_Category.cs",
+              "RelativeToolTip": "E-Commerce\\Controllers\\Sub_Category.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAwwCkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T20:24:18.899Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "E-Commerce\\Controllers\\CategoriesController.cs",
+              "ToolTip": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "E-Commerce\\Controllers\\CategoriesController.cs",
+              "ViewState": "AgIAAMYBAAAAAAAAAAA+wNYBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-10-09T18:21:45.755Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Users.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\Users.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Controllers\\Users.cs",
               "ToolTip": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\Users.cs",
               "RelativeToolTip": "E-Commerce\\Controllers\\Users.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAwCUAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAxwCUAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-09T13:38:44.306Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "Order.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Models\\Order.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Models\\Order.cs",
@@ -104,7 +156,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "OrderResponseDto.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Dto_Esraa\\OrderResponseDto.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Dto_Esraa\\OrderResponseDto.cs",
@@ -116,7 +168,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "CartItemsController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\CartItemsController.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Controllers\\CartItemsController.cs",
@@ -129,7 +181,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 13,
               "Title": "OrderItem.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Models\\OrderItem.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Models\\OrderItem.cs",
@@ -141,7 +193,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 14,
               "Title": "AddProduct.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\dto\\AddProduct.cs",
               "RelativeDocumentMoniker": "E-Commerce\\dto\\AddProduct.cs",
@@ -153,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "Stores.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\Stores.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Controllers\\Stores.cs",
@@ -161,12 +213,11 @@
               "RelativeToolTip": "E-Commerce\\Controllers\\Stores.cs",
               "ViewState": "AgIAAMoAAAAAAAAAAAAmwNoAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-04T23:57:54.906Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-04T23:57:54.906Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "CartsController.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Controllers\\CartsController.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Controllers\\CartsController.cs",
@@ -178,7 +229,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "CartItem.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Models\\CartItem.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Models\\CartItem.cs",
@@ -190,7 +241,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Store.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\Models\\Store.cs",
               "RelativeDocumentMoniker": "E-Commerce\\Models\\Store.cs",
@@ -202,7 +253,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "CartItemsResponsive.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\dto\\CartItemsResponsive.cs",
               "RelativeDocumentMoniker": "E-Commerce\\dto\\CartItemsResponsive.cs",
@@ -214,7 +265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 15,
               "Title": "AddCartItemsDto.cs",
               "DocumentMoniker": "C:\\Users\\Orange\\Downloads\\Masterpiece1\\Backend\\E-Commerce\\dto\\AddCartItemsDto.cs",
               "RelativeDocumentMoniker": "E-Commerce\\dto\\AddCartItemsDto.cs",

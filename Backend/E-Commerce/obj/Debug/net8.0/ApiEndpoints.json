@@ -262,6 +262,22 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.CategoriesController",
+    "Method": "DeleteCategory",
+    "RelativePath": "api/Categories/DeleteCategory/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.CategoriesController",
     "Method": "GetCategoryById",
     "RelativePath": "api/Categories/GetCategoryById/{categoryId}",
     "HttpMethod": "GET",
@@ -655,6 +671,22 @@
     "Parameters": [
       {
         "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.OrdersController",
+    "Method": "GetOrdersByStore",
+    "RelativePath": "api/Orders/OrdersByStore/{storeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storeId",
         "Type": "System.Int32",
         "IsRequired": true
       }
@@ -1145,8 +1177,8 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.Sub_Category",
-    "Method": "GetAllCategories",
-    "RelativePath": "api/Sub_Category/AllCategories",
+    "Method": "GetAllSubCategories",
+    "RelativePath": "api/Sub_Category/AllSubCategories",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -1163,6 +1195,22 @@
     "Parameters": [
       {
         "Name": "subCategoryId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.Sub_Category",
+    "Method": "GetSubCategoriesByCategory",
+    "RelativePath": "api/Sub_Category/SubCategoriesByCategory/{categoryId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "categoryId",
         "Type": "System.Int32",
         "IsRequired": true
       }

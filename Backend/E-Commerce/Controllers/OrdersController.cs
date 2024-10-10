@@ -67,6 +67,90 @@ namespace E_Commerce.Controllers
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+        [HttpGet]
+        [Route("OrdersByStore/{storeId}")]
+        public IActionResult GetOrdersByStore(int storeId)
+        {
+            var orders = _db.Orders
+                .Where(order => order.StoreId == storeId) // Filter by StoreId
+                .Select(order => new OrderResponseDto
+                {
+                    OrderId = order.OrderId,
+                    Date = order.Date,
+
+                    // Customer information
+                    Customer = new UserDto
+                    {
+                        Name = order.User.Name
+                    },
+                    Store = new StoreDto
+                    {
+                        StoreId = order.StoreId ?? 0,
+                        StoreName = _db.Stores
+                            .Where(store => store.StoreId == order.StoreId)
+                            .Select(store => store.StoreName)
+                            .FirstOrDefault() ?? "Unknown Store"
+                    },
+                    // Calculate the total number of items
+                    NumberOfItems = order.OrderItems.Sum(oi => oi.Quantity ?? 0),
+
+                    // Calculate the total price of the order
+                    Total = order.OrderItems.Sum(oi => (oi.Quantity ?? 0) * (oi.Product.Price ?? 0)),
+
+                    // Status of the order
+                    Status = order.Status,
+
+                    // Map each order item to OrderItemDto
+                    OrderItem = order.OrderItems.Select(oi => new OrderItemDto
+                    {
+                        ProductId = oi.Product.ProductId,
+                        ProductName = oi.Product.Name,
+                        Quantity = oi.Quantity,
+                        Price = oi.Product.Price
+                    }).ToList()
+                })
+                .ToList();
+
+            if (!orders.Any()) // Check if no orders were found
+            {
+                return NotFound($"No orders found for store ID {storeId}.");
+            }
+
+            return Ok(orders);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpGet]
         [Route("GetOrdersByUser/{userId}")]
         public IActionResult GetOrdersByUserId(int userId)

@@ -869,7 +869,7 @@
           <!-- row -->
           <div class="row justify-content-center">
             <div class="col-lg-8 col-12">
-              <form class="needs-validation" novalidate>
+              <form  id="AddProductForm" class="needs-validation" novalidate>
                 <div class="d-flex flex-column gap-4">
                   <!-- card -->
                   <div class="card">
@@ -879,7 +879,7 @@
                         <!-- input -->
                         <div class="mb-3">
                           <label class="form-label">Product Name</label>
-                          <input type="text" class="form-control" placeholder="Enter Product Name" required />
+                          <input type="text" class="form-control" id="ProductName" placeholder="Enter Product Name" required />
                           <div class="invalid-feedback">Please enter product name</div>
                         </div>
                         <!-- input -->
@@ -907,10 +907,11 @@
                               <p class="mb-0">Add Product main Image.</p>
                             </div>
                             <!-- input -->
-                            <input type="file" class="form-control" required />
+                            <input id="MainImage" type="file" class="form-control" required />
                           </div>
                         </div>
                         <div>
+
                           <!-- heading -->
                           <h5 class="mb-1">Product Gallery</h5>
                           <p>Add Product Gallery Images.</p>
@@ -927,21 +928,26 @@
                     
                       <div>
                         <div class="mb-3">
-                          <label class="form-label" for="productCode">Price</label>
-                          <input type="text" class="form-control" id="productCode" placeholder="Enter Price" required />
+                          <label class="form-label" for="productPrice">Price</label>
+                          <input type="text" class="form-control" id="productPrice" placeholder="Enter Price" required />
                           <div class="invalid-feedback">Please enter Price</div>
                         </div>
                       
-                      
+                        <div class="mb-3">
+                          <label class="form-label" for="productQuantity">Price</label>
+                          <input type="number" class="form-control" id="Quantity" placeholder="Enter Quantity" required />
+                          <div class="invalid-feedback">Please enter Quantity</div>
+                        </div>
+
                         <!-- input -->
                         <div class="mb-3">
                           <div class="d-flex justify-content-between">
                             <label class="form-label" for="category">Category</label>
                           </div>
                           <!-- select menu -->
-                          <select class="form-select" data-choices="" id="category" required>
-                            
+                          <select class="form-select" id="CategoryList" required>
                           </select>
+                                                
                           <div class="invalid-feedback">Please enter product Category</div>
                         </div>
 
@@ -955,12 +961,10 @@
                             <label class="form-label" for="category">Sub Category</label>
                           </div>
                           <!-- select menu -->
-                          <select class="form-select" data-choices="" id="Subcategory" required>
-                            <option selected value=""></option>
-                            <option value="Sunglasses"></option>
-                            <option value="Handbag"></option>
-                            <option value="Slingbag"></option>
+                          <select class="form-select" id="SubCategoryList" required>
+                            <option value="" disabled selected>Select a subcategory</option>
                           </select>
+                        
                           <div class="invalid-feedback">Please enter product Sub Category</div>
                         </div>
                         <!-- tag -->
@@ -998,7 +1002,7 @@
                   </div> -->
              
                   <div>
-                    <button type="submit" class="btn btn-primary">Create Product</button>
+                    <button type="submit" oncli class="btn btn-primary">Create Product</button>
                   </div>
                 </div>
               </form>
@@ -1032,6 +1036,8 @@
 
 
     <script>
+              const StoreId = localStorage.getItem("StoreId");
+
       // document.getElementById('updateProductForm').addEventListener('submit', AddProduct);
   
       // async function AddProduct(event) {
@@ -1068,34 +1074,138 @@
       //     }
       // }
   
-      async function fetchCategories() {
-        const url = `https://localhost:7000/api/Categories/Categories`;  // Correct URL for fetching categories
+ // Function to fetch categories and populate the CategoryList dropdown
+async function fetchCategories() {
+  const url = `https://localhost:7000/api/Categories/AllCategories`;  // Ensure correct URL
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const categories = await response.json();
+    const categorySelect = document.getElementById("CategoryList");
+
+    // Clear the CategoryList dropdown before populating
+    categorySelect.innerHTML = '';
+
+    // Populate the CategoryList dropdown with fetched categories
+    categories.forEach(category => {
+      const option = document.createElement('option');
+      option.value = category.categoryId;  // Assuming categoryId is correct
+      option.textContent = category.name;  // Assuming name is correct
+      categorySelect.appendChild(option);
+    });
+
+    // Optionally: Automatically fetch subcategories for the first category
+    if (categories.length > 0) {
+      fetchSubCategories(categories[0].categoryId);
+    }
+
+    // Add event listener to fetch subcategories when a category is selected
+    categorySelect.addEventListener('change', function () {
+      const selectedCategoryId = this.value;
+      fetchSubCategories(selectedCategoryId);
+    });
+
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+  }
+}
+
+// Function to fetch subcategories based on categoryId and populate the SubCategoryList dropdown
+async function fetchSubCategories(categoryId) {
+  const url = `https://localhost:7000/api/Sub_Category/SubCategoriesByCategory/${categoryId}`;  // Adjust endpoint for subcategories
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const subcategories = await response.json();
+    const subcategorySelect = document.getElementById("SubCategoryList");
+
+    // Clear the SubCategoryList dropdown before populating
+    subcategorySelect.innerHTML = '';
+
+    // Populate the SubCategoryList dropdown with fetched subcategories
+    subcategories.forEach(subcategory => {
+      const option = document.createElement('option');
+      option.value = subcategory.subcategoryId;  // Assuming subcategoryId is correct
+      option.textContent = subcategory.subcategoryName;  // Assuming subcategoryName is correct
+      subcategorySelect.appendChild(option);
+    });
+
+  } catch (error) {
+    console.error('Error fetching subcategories:', error);
+  }
+}
+
+// Call fetchCategories after the DOM content is loaded
+document.addEventListener('DOMContentLoaded', (event) => {
+  fetchCategories();
+});
+
+
+
+
+
+
+
+
+
+
+
+document.getElementById('AddProductForm').addEventListener('submit', AddProduct);
+
+    async function AddProduct(event) {
+        event.preventDefault(); // Prevent form from submitting the default way
+
+        const url = `https://localhost:7000/api/Products/CreateProductWithImages`;
+
+        const formData = new FormData();
+        formData.append("Name", document.getElementById('ProductName').value);
+        formData.append("Price", document.getElementById('productPrice').value);
+        formData.append("Quantity", document.getElementById('Quantity').value);
+        formData.append("Description", document.getElementById('projectdesc-input').value);
+        formData.append("subcategoryId", document.getElementById('SubCategoryList').value);
+        formData.append("StoreId",StoreId);
+
+
+        const imageFile = document.getElementById('MainImage').files[0];
+        if (imageFile) {
+            formData.append("Image", imageFile);
+        }
+
+
+
+    // Add additional images from Dropzone
+    myDropzone.files.forEach(file => {
+        formData.append("AdditionalImages", file);
+    });
 
         try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            const response = await fetch(url, {
+                method: 'POST', // Change to 'POST' if that's what the server expects
+                body: formData, // Content-Type will automatically be set to multipart/form-data
+              });
+
+            if (response.ok) {
+                alert('Product added successfully!');
+            } else {
+                const errorData = await response.json();
+                console.error('Error:', errorData);
+                alert('Failed to add product.');
             }
-            const categories = await response.json();
-            const categorySelect = document.getElementById('category');
-
-            categories.forEach(category => {
-                const option = document.createElement('option');
-                option.value = category.categoryId;
-                option.textContent = category.categoryName;
-                categorySelect.appendChild(option);
-            });
-
         } catch (error) {
-            console.error('Error fetching categories:', error);
+            console.error('Error:', error);
+            alert('Failed to connect to the server.');
         }
     }
 
-    // Call this function to populate the category dropdown when the page loads
-    fetchCategories();
-
-  </script>
-  </body>
-
-<!-- Mirrored from codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 09:44:40 GMT -->
-</html>
+  
+    </script>
+    </body>
+    </html>

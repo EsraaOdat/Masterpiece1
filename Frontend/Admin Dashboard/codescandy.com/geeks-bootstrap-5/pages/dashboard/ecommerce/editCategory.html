@@ -25,6 +25,8 @@
     <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard/add-project.html" />
     <link href="../../../assets/libs/dropzone/dist/dropzone.css" rel="stylesheet" />
     <title>Create Project | Geeks - Academy Admin Template</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body>
@@ -470,7 +472,7 @@
                         <div
                             class="border-bottom pb-3 mb-3 d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between">
                             <div class="d-flex flex-column gap-1">
-                                <h1 class="mb-0 h2 fw-bold">Create New Project</h1>
+                                <h1 class="mb-0 h2 fw-bold">Edit Category</h1>
                                 <!-- Breadcrumb -->
                                 <nav aria-label="breadcrumb">
                                     <ol class="breadcrumb">
@@ -478,15 +480,15 @@
                                             <a href="admin-dashboard.html">Dashboard</a>
                                         </li>
                                         <li class="breadcrumb-item">
-                                            <a href="#">Project</a>
+                                            <a href="#">Category</a>
                                         </li>
-                                        <li class="breadcrumb-item active" aria-current="page">Create Project</li>
+                                        <li class="breadcrumb-item active" aria-current="page">Edit Category</li>
                                     </ol>
                                 </nav>
                             </div>
                             <!-- button -->
                             <div>
-                                <a href="project-grid.html" class="btn btn-primary me-2">Back to Project</a>
+                                <a href="Category.html" class="btn btn-primary me-2">Back to Categories</a>
                             </div>
                         </div>
                     </div>
@@ -580,13 +582,12 @@
 </body>
 
 
-
+<!-- 
 <script>
-    const categoryId = 24; 
-
-    // Fetch category details from the API
+const selectedCategoryId = localStorage.getItem("selectedCategoryId");
+// Fetch category details from the API
     async function loadCategoryData() {
-        const url = `https://localhost:7000/api/Categories/GetCategoryById/24`;
+        const url = `https://localhost:7000/api/Categories/GetCategoryById/${selectedCategoryId}`;
         
 
         try {
@@ -654,8 +655,9 @@
 
     async function updateCategory(event) {
         event.preventDefault(); // Prevent default form submission
+        const selectedCategoryId = localStorage.getItem("selectedCategoryId");
 
-        const url = `https://localhost:7000/api/Categories/UpdateCategory/${categoryId}`;
+        const url = `https://localhost:7000/api/Categories/UpdateCategory/${selectedCategoryId}`;
 
         const formData = new FormData();
         formData.append("name", document.getElementById('categoryName').value);
@@ -694,6 +696,130 @@
 
     // Load category data on page load
     loadCategoryData();
-</script>
+</script> -->
+
+
+
+<script>
+    const selectedCategoryId = localStorage.getItem("selectedCategoryId");
+    
+    // Fetch category details from the API
+    async function loadCategoryData() {
+        const url = `https://localhost:7000/api/Categories/GetCategoryById/${selectedCategoryId}`;
+        
+        try {
+            const response = await fetch(url);
+            if (response.ok) {
+                const data = await response.json();
+                populateFormWithData(data);
+            } else {
+                Swal.fire('Error!', 'Failed to fetch category data.', 'error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire('Error!', 'Failed to connect to the server.', 'error');
+        }
+    }
+    
+    // Fill the form with category data
+    function populateFormWithData(data) {
+        document.getElementById('categoryName').value = data.name;
+        document.getElementById('CategoryDescription').value = data.description;
+        document.getElementById('fileName').textContent = data.image;
+    
+        // Load subcategories
+        const subcategoriesContainer = document.getElementById('subcategoriesContainer');
+        subcategoriesContainer.innerHTML = ''; // Clear previous subcategories if any
+    
+        // Adjusted code to properly handle subcategories
+        data.subCategories.forEach((subcategory) => {
+            const subcategoryInput = `
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control subcategory-input" value="${subcategory.subcategoryName}" placeholder="Enter subcategory name" />
+                    <button class="btn btn-outline-secondary remove-subcategory" type="button">Remove</button>
+                </div>`;
+            subcategoriesContainer.insertAdjacentHTML('beforeend', subcategoryInput);
+        });
+    }
+    
+    // Display selected image filename
+    function displayFileName() {
+        var input = document.getElementById('categoryImage');
+        var fileName = input.files[0].name;
+        document.getElementById('fileName').textContent = fileName;
+    }
+    
+    // Add new subcategory input field dynamically
+    document.getElementById('addSubcategory').addEventListener('click', function () {
+        var subcategoryInput = `
+            <div class="input-group mb-3">
+                <input type="text" class="form-control subcategory-input" placeholder="Enter subcategory name" />
+                <button class="btn btn-outline-secondary remove-subcategory" type="button">Remove</button>
+            </div>`;
+        document.getElementById('subcategoriesContainer').insertAdjacentHTML('beforeend', subcategoryInput);
+    });
+    
+    // Remove a subcategory input field
+    document.getElementById('subcategoriesContainer').addEventListener('click', function (e) {
+        if (e.target.classList.contains('remove-subcategory')) {
+            e.target.parentElement.remove();
+        }
+    });
+    
+    // Submit form and send updated data to the server (PUT request)
+    document.getElementById('updateCategoryForm').addEventListener('submit', updateCategory);
+    
+    async function updateCategory(event) {
+        event.preventDefault(); // Prevent default form submission
+        const selectedCategoryId = localStorage.getItem("selectedCategoryId");
+    
+        const url = `https://localhost:7000/api/Categories/UpdateCategory/${selectedCategoryId}`;
+    
+        const formData = new FormData();
+        formData.append("name", document.getElementById('categoryName').value);
+        formData.append("description", document.getElementById('CategoryDescription').value);
+    
+        const imageFile = document.getElementById('categoryImage').files[0];
+        if (imageFile) {
+            formData.append("image", imageFile);
+        }
+    
+        // Gather subcategories and append each separately to formData
+        document.querySelectorAll('.subcategory-input').forEach((input, index) => {
+            if (input.value.trim() !== '') {
+                formData.append(`Subcategories[${index}]`, input.value.trim());
+            }
+        });
+    
+        try {
+            const response = await fetch(url, {
+                method: 'PUT',
+                body: formData
+            });
+    
+            if (response.ok) {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Category and subcategories updated successfully!',
+                icon: 'success'
+            }).then(() => {
+                // Navigate to the new page after closing the alert
+                window.location.href = 'Category.html'; // Replace with your desired URL
+            });
+            } else {
+                const errorData = await response.json();
+                console.error('Error:', errorData);
+                Swal.fire('Error!', 'Failed to update category.', 'error');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Swal.fire('Error!', 'Failed to connect to the server.', 'error');
+        }
+    }
+    
+    // Load category data on page load
+    loadCategoryData();
+    </script>
+    
 
 </html>

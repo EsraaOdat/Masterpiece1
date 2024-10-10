@@ -448,7 +448,28 @@ namespace E_Commerce.Controllers
             return Ok(result);
         }
 
+        //-------------------------------------------------------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------------------------------------------------------
+        [HttpDelete]
+        [Route("DeleteCategory/{id}")]
+        public IActionResult DeleteCategory(int id)
+        {
+            var category = _db.Categories.Include(c => c.SubCategories)
+                                         .FirstOrDefault(c => c.CategoryId == id);
 
+            if (category == null)
+            {
+                return NotFound(new { message = "Category not found" });
+            }
+
+            _db.SubCategories.RemoveRange(category.SubCategories);
+
+            _db.Categories.Remove(category);
+
+            _db.SaveChanges();
+
+            return Ok(new { message = "Category and related subcategories deleted successfully" });
+        }
 
     }
 }

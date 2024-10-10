@@ -17,12 +17,30 @@ namespace E_Commerce.Controllers
         }
 
         [HttpGet]
-        [Route("AllCategories")]
-        public IActionResult GetAllCategories()
+        [Route("AllSubCategories")]
+        public IActionResult GetAllSubCategories()
         {
-            var data = _db.Categories.ToList();
+            var data = _db.SubCategories.ToList();
             return Ok(data);
         }
+
+
+        [HttpGet]
+        [Route("SubCategoriesByCategory/{categoryId}")]
+        public IActionResult GetSubCategoriesByCategory(int categoryId)
+        {
+            var data = _db.SubCategories.Where(sc => sc.CategoryId == categoryId).ToList();
+
+            // Check if the list is empty using !data.Any()
+            if (data == null || !data.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(data);
+        }
+
+
 
 
 
