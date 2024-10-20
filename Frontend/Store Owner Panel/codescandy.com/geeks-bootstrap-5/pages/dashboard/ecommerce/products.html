@@ -1,0 +1,132 @@
+<!-- Button to add category -->
+<button class="btn btn-add-category" onclick="toggleCategoryForm()">
+  <span class="mdi mdi-plus mdi-24px"></span> <!-- أيقونة + -->
+  <span class="add-category-text">Add Category</span> <!-- نص -->
+</button>
+
+<!-- Form to add category -->
+<div id="categoryForm" style="display: none; margin-top: 20px;">
+  <form (submit)="addCategory()">
+    <div style="margin-bottom: 16px;">
+      <label for="categoryName" style="font-size: 16px;">Category Name</label>
+      <input id="categoryName" name="categoryName" type="text" class="form-control" placeholder="Enter category name" required>
+    </div>
+    <button type="submit" class="btn btn-submit-category">Add Category</button>
+  </form>
+</div>
+
+<!-- Categories Table -->
+<table class="table mb-0 text-nowrap table-hover table-centered table-with-checkbox" style="margin-top: 20px;">
+  <!-- Table Head -->
+  <thead class="table-light">
+    <tr>
+      <th>Category Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let category of allCategoriesArray">
+      <td>
+        <h5 class="mb-0 text-primary-hover">{{ category.name }}</h5>
+      </td>
+      <td>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-edit">
+            <span class="mdi mdi-pencil mdi-24px"></span>
+            <span class="mdi mdi-pencil-outline mdi-24px"></span>
+            <span>Edit</span>
+          </button>
+
+          <button class="btn btn-delete">
+            <span class="mdi mdi-delete mdi-24px"></span>
+            <span class="mdi mdi-delete-empty mdi-24px"></span>
+            <span>Delete</span>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- CSS Styles -->
+<style>
+  /* Form styles */
+  #categoryForm {
+    background-color: #f8f9fa;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  /* Submit button styles */
+  .btn-submit-category {
+    font-size: 16px;
+    color: white;
+    background-color: green; /* لون الزر أخضر */
+    border: 1px solid green;
+    padding: 10px 20px;
+    border-radius: 24px;
+    cursor: pointer;
+  }
+
+  .btn-submit-category:hover {
+    background-color: lighten(green, 20%); /* تفتيح لون الخلفية عند التمرير */
+  }
+
+  /* Add Category button styles */
+  .btn-add-category {
+    font-size: 16px;
+    color: white;
+    background-color: green; /* لون الزر أخضر */
+    border: 1px solid green;
+    margin-bottom: 16px;
+    font-weight: bold;
+    float: right; /* نقل الزر إلى أقصى اليمين */
+  }
+
+  .btn-add-category:hover {
+    background-color: lighten(green, 30%); /* تفتيح لون الخلفية عند التمرير */
+  }
+
+  .btn-add-category:focus {
+    box-shadow: 0 0 0 4px lighten(green, 40%);
+  }
+
+  /* التحكم في نص الزر */
+  .add-category-text {
+    font-weight: bolder; /* خط أسمك */
+    font-size: 18px; /* حجم الخط أكبر */
+  }
+
+</style>
+
+<script>
+  // Show/Hide category form
+  function toggleCategoryForm() {
+    var form = document.getElementById('categoryForm');
+    if (form.style.display === 'none') {
+      form.style.display = 'block';
+    } else {
+      form.style.display = 'none';
+    }
+  }
+
+  // Simulate add category function (to be implemented with backend)
+  function addCategory() {
+    event.preventDefault();
+    var categoryName = document.getElementById('categoryName').value;
+    if (categoryName) {
+      alert('Category "' + categoryName + '" added!');
+      // هنا يمكنك إضافة الكود الخاص بإرسال البيانات إلى الخادم
+    }
+  }
+</script>
