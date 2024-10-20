@@ -13,6 +13,8 @@ namespace E_Commerce.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
+
+
     {
 
 
@@ -370,24 +372,25 @@ namespace E_Commerce.Controllers
 
             return Ok(user);
         }
-        /* [HttpPost("loginAdmin")]
-         public IActionResult LoginAdmin([FromForm] DTOsLogin model)
-         {
+        [HttpPost("loginAdmin2")]
+        public IActionResult Login([FromForm] LoginModel model)
+        {
+            // Retrieve user by email
+            var user = _db.Admins.FirstOrDefault(x => x.Email == model.Email);
+            if (user == null || !PasswordHasher.VerifyPasswordHash(model.Password, user.PasswordHash, user.PasswordSalt))
+            {
+                return new UnauthorizedObjectResult("Invalid username or password.");
+            }
 
-             // Regular email/password login
-             var user = _db.Admins.FirstOrDefault(x => x.Email == model.Email);
-             if (user == null || !PasswordHasher.VerifyPasswordHash(model.Password, user.PasswordHash, user.PasswordSalt))
-             {
-                 return Unauthorized("Invalid username or password.");
-             }
+            // Retrieve roles (example, depends on your actual role retrieval)
+            var roles = new List<string> { "Admin" }; // Modify according to your roles logic
 
-             // Retrieve roles and generate JWT token
-             var token = _tokenGenerator.GenerateToken(user.Name);
+            // Generate JWT token
+            var token = _tokenGenerator.GenerateToken(user.Name, roles);
 
-             return Ok(new { Token = token, userID = user.AdminId });
-         }
-        */
-
+            // Return Ok result with token and user ID
+            return new OkObjectResult(new { Token = token, userID = user.AdminId });
+        }
 
         // Login action
         [HttpPost]

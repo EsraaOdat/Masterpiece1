@@ -850,6 +850,22 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.ProductsController",
+    "Method": "GetRandom3ProductsBySubcategory",
+    "RelativePath": "api/Products/GetRandom3ProductsBySubcategory/{excludeProductId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "excludeProductId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.ProductsController",
     "Method": "GetProductById",
     "RelativePath": "api/Products/Product/{id}",
     "HttpMethod": "GET",
@@ -1399,6 +1415,27 @@
     "ContainingType": "E_Commerce.Controllers.UsersController",
     "Method": "Login",
     "RelativePath": "api/Users/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Password",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.UsersController",
+    "Method": "Login",
+    "RelativePath": "api/Users/loginAdmin2",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

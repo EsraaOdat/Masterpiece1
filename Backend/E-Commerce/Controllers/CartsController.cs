@@ -122,5 +122,46 @@ namespace E_Commerce.Controllers
         {
             return _context.Carts.Any(e => e.CartId == id);
         }
+
+
+
+
+        //[HttpPost("addCartItems/{userId}")]
+        //public IActionResult addCartItems(int userId, [FromBody] addCartItemsDTO ci)
+        //{
+        //    if (userId <= 0) return BadRequest("invalid id");
+
+        //    var userCart = _context.Carts.Where(a => a.UserId == userId).FirstOrDefault();
+
+        //    var existingItem = _context.CartItems
+        //                        .FirstOrDefault(x => x.CartId == userCart.CartId && x.ProductId == ci.ProductId);
+
+        //    if (existingItem != null)
+        //    {
+        //        existingItem.Quantity += ci.Quantity ?? 1;
+
+        //        _context.SaveChanges();
+
+        //        return Ok();
+        //    }
+        //    else
+        //    {
+
+        //        var newItem = new CartItem
+        //        {
+        //            CartId = userCart.CartId,
+        //            ProductId = ci.ProductId,
+        //            Quantity = ci.Quantity ?? 1,
+        //        };
+
+        //        _context.CartItems.Add(newItem);
+
+        //        _context.SaveChanges();
+
+        //        return Ok();
+        //    }
+        //}
+
+
     }
 }

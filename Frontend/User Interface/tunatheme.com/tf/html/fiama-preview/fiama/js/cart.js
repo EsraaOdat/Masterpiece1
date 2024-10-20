@@ -1,5 +1,5 @@
 
-async function getData() {
+async function getCartItem() {
     const userId = localStorage.getItem('userID');
 
     const url = `https://localhost:7000/api/CartItems/AllItems/${userId}`;
@@ -60,7 +60,7 @@ $${Number(total.toFixed(2))}
     `;
 }
 
-getData();
+getCartItem();
     
 
 

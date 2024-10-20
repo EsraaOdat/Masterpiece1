@@ -90,6 +90,41 @@ namespace E_Commerce.Controllers
 
 
 
+        //[HttpPost]
+        //[Route("AddItem")]
+        //public IActionResult AddCartItem([FromBody] AddCartItemsDto newItem)
+        //{
+        //    // Retrieve the product based on the provided ProductId
+        //    var product = _db.Products.SingleOrDefault(p => p.ProductId == newItem.ProductId);
+
+        //    // Check if the product exists
+        //    if (product == null)
+        //    {
+        //        return NotFound(new { Message = "Product not found." });
+        //    }
+
+        //    // Create a new cart item
+        //    var cartItem = new CartItem
+        //    {
+        //        CartId = newItem.CartId,
+        //        ProductId = newItem.ProductId,
+        //        Quantity = newItem.Quantity,
+        //        StoreId = product.StoreId // Assuming CartItem has a StoreId property
+        //    };
+
+        //    // Add the cart item to the database
+        //    _db.CartItems.Add(cartItem);
+        //    _db.SaveChanges();
+
+        //    return Ok(new { Message = "Item added to cart successfully.", CartItem = cartItem });
+        //}
+
+
+
+
+
+
+
         [HttpPost]
         [Route("AddItem")]
         public IActionResult AddCartItem([FromBody] AddCartItemsDto newItem)
@@ -103,20 +138,34 @@ namespace E_Commerce.Controllers
                 return NotFound(new { Message = "Product not found." });
             }
 
-            // Create a new cart item
-            var cartItem = new CartItem
+            // Check if the cart item already exists for the given CartId and ProductId
+            var existingCartItem = _db.CartItems
+                .SingleOrDefault(ci => ci.CartId == newItem.CartId && ci.ProductId == newItem.ProductId);
+
+            if (existingCartItem != null)
             {
-                CartId = newItem.CartId,
-                ProductId = newItem.ProductId,
-                Quantity = newItem.Quantity,
-                StoreId = product.StoreId // Assuming CartItem has a StoreId property
-            };
+                // If the cart item exists, increment the quantity
+                existingCartItem.Quantity += newItem.Quantity;
+                _db.SaveChanges();
+                return Ok(new { Message = "Cart item quantity updated successfully.", CartItem = existingCartItem });
+            }
+            else
+            {
+                // If the cart item doesn't exist, create a new one
+                var cartItem = new CartItem
+                {
+                    CartId = newItem.CartId,
+                    ProductId = newItem.ProductId,
+                    Quantity = newItem.Quantity,
+                    StoreId = product.StoreId // Assuming CartItem has a StoreId property
+                };
 
-            // Add the cart item to the database
-            _db.CartItems.Add(cartItem);
-            _db.SaveChanges();
+                // Add the new cart item to the database
+                _db.CartItems.Add(cartItem);
+                _db.SaveChanges();
 
-            return Ok(new { Message = "Item added to cart successfully.", CartItem = cartItem });
+                return Ok(new { Message = "Item added to cart successfully.", CartItem = cartItem });
+            }
         }
 
 

@@ -1050,7 +1050,7 @@ async function getData() {
                                 </a>
                               </li>
                               <li class="add-to-cart">
-                                <a href="#" title="Add to Cart" data-bs-toggle="modal"
+                                <a href="#" title="Add to Cart" data-bs-toggle="modal" onclick="AddToCart(${product.productId}, 1)"
                                   data-bs-target="#add_to_cart_modal">
                                   <span class="cart-text d-none d-xl-block">Add to Cart</span>
                                   <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
@@ -1134,7 +1134,7 @@ async function getData() {
                                 </a>
                               </li>
                               <li class="add-to-cart">
-                                <a href="#" title="Add to Cart" data-bs-toggle="modal"
+                                <a href="#" title="Add to Cart" data-bs-toggle="modal" onclick="AddToCart(${product.productId}, 1)"
                                   data-bs-target="#add_to_cart_modal">
                                   <span class="cart-text d-none d-xl-block">Add to Cart</span>
                                   <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
@@ -1218,6 +1218,7 @@ StoreInfo(); // Call the StoreInfo function to fetch store details
 
   </script>
 <script SRC="js/cart.js"></script>
+<script src="js/AddToCart.js"></script>
   
 </body>
 

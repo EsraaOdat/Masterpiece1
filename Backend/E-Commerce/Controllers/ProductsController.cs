@@ -596,6 +596,32 @@ namespace E_Commerce.Controllers
 
 
 
+        // Get 3 Random Products by ProductId, excluding the product itself, from the same subcategory
+        [HttpGet("GetRandom3ProductsBySubcategory/{excludeProductId}")]
+        public IActionResult GetRandom3ProductsBySubcategory(int excludeProductId)
+        {
+            // Fetch the product to get its SubcategoryId
+            var product = _db.Products.FirstOrDefault(p => p.ProductId == excludeProductId);
+
+            if (product == null)
+            {
+                return NotFound("Product not found");
+            }
+
+            int? subcategoryId = product.SubcategoryId;
+
+            // Fetch products that match the subcategoryId and exclude the specified product
+            var randomProductsBySubcategory = _db.Products
+                                                 .Where(p => p.SubcategoryId == subcategoryId && p.ProductId != excludeProductId) // Exclude the specified product
+                                                 .OrderBy(p => Guid.NewGuid()) // Order by random GUID to shuffle the products
+                                                 .Take(4) // Get 5 random products
+                                                 .ToList();
+
+            return Ok(randomProductsBySubcategory);
+        }
+
+
+
 
 
         // Delete a product by ID
