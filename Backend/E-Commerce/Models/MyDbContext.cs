@@ -172,20 +172,20 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.CommentId).HasColumnName("comment_id");
             entity.Property(e => e.Comment1).HasColumnName("comment");
             entity.Property(e => e.Date).HasColumnName("date");
+            entity.Property(e => e.Email)
+                .HasMaxLength(255)
+                .HasColumnName("email");
+            entity.Property(e => e.Name)
+                .HasMaxLength(255)
+                .HasColumnName("name");
             entity.Property(e => e.ProductId).HasColumnName("product_id");
             entity.Property(e => e.Rating).HasColumnName("rating");
             entity.Property(e => e.Status).HasColumnName("status");
-            entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.Product).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.ProductId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK__Comment__product__0C85DE4D");
-
-            entity.HasOne(d => d.User).WithMany(p => p.Comments)
-                .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK__Comment__user_id__0B91BA14");
         });
 
         modelBuilder.Entity<Comment1>(entity =>
@@ -326,6 +326,9 @@ public partial class MyDbContext : DbContext
                 .HasColumnType("text")
                 .HasColumnName("description");
             entity.Property(e => e.Image).HasColumnName("image");
+            entity.Property(e => e.IsDeleted)
+                .HasDefaultValue(false)
+                .HasColumnName("is_deleted");
             entity.Property(e => e.Name)
                 .HasMaxLength(255)
                 .HasColumnName("name");
@@ -333,6 +336,10 @@ public partial class MyDbContext : DbContext
                 .HasColumnType("decimal(10, 2)")
                 .HasColumnName("price");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValue("pending");
             entity.Property(e => e.StoreId).HasColumnName("store_id");
             entity.Property(e => e.SubcategoryId).HasColumnName("subcategory_id");
 
@@ -618,6 +625,7 @@ public partial class MyDbContext : DbContext
                 .HasColumnName("email");
             entity.Property(e => e.Image)
                 .HasMaxLength(255)
+                .HasDefaultValue("https://i.pinimg.com/564x/ec/e2/b0/ece2b0f541d47e4078aef33ffd22777e.jpg")
                 .HasColumnName("image");
             entity.Property(e => e.Name)
                 .HasMaxLength(255)

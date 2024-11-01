@@ -7,8 +7,6 @@ public partial class Comment
 {
     public int CommentId { get; set; }
 
-    public int? UserId { get; set; }
-
     public int? ProductId { get; set; }
 
     public string? Comment1 { get; set; }
@@ -19,7 +17,9 @@ public partial class Comment
 
     public int? Rating { get; set; }
 
-    public virtual Product? Product { get; set; }
+    public string? Email { get; set; }
 
-    public virtual User? User { get; set; }
+    public string? Name { get; set; }
+
+    public virtual Product? Product { get; set; }
 }

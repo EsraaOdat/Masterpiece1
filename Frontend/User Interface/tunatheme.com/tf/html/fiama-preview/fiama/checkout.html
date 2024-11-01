@@ -141,7 +141,7 @@
                                             
                                         </li>
 
-                                        <li class="menu-icon"><a href="Categories.html">Categories</a>
+                                        <!-- <li class="menu-icon"><a href="Categories.html">Categories</a> -->
 
 
 
@@ -202,14 +202,9 @@
                                     <!-- user-menu -->
                                     <div class="ltn__drop-menu user-menu">
                                         <ul>
-                                            <li>
+                                            <li id="authLinksContainer">
                                                 <a href="#"><i class="icon-user"></i></a>
-                                                <ul>
-                                                    <li><a href="login.html">Sign in</a></li>
-                                                    <li><a href="register.html">Register</a></li>
-                                                    <li><a href="account.html">My Account</a></li>
-                                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                                </ul>
+                                                
                                             </li>
                                         </ul>
                                     </div>
@@ -540,20 +535,9 @@
                     <div class="ltn__checkout-payment-method mt-50">
                         <h4 class="title-2">Payment Method</h4>
                         <div id="checkout_accordion_1">
-                            <!-- card -->
+                            <!-- Cash on Delivery -->
                             <div class="card">
-                                <h5 class="collapsed ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-1" aria-expanded="false">
-                                    Check payments
-                                </h5>
-                                <div id="faq-item-2-1" class="collapse" data-bs-parent="#checkout_accordion_1">
-                                    <div class="card-body">
-                                        <p>Please send a check to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- card -->
-                            <div class="card">
-                                <h5 class="ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-2" aria-expanded="true"> 
+                                <h5 id="cashOnDelivery" class="ltn__card-title" data-method="CashOnDelivery" data-bs-toggle="collapse" data-bs-target="#faq-item-2-2" aria-expanded="true"> 
                                     Cash on delivery 
                                 </h5>
                                 <div id="faq-item-2-2" class="collapse show" data-bs-parent="#checkout_accordion_1">
@@ -562,9 +546,9 @@
                                     </div>
                                 </div>
                             </div>                          
-                            <!-- card -->
+                            <!-- PayPal -->
                             <div class="card">
-                                <h5 class="collapsed ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-3" aria-expanded="false" >
+                                <h5 id="paypalMethod" class="collapsed ltn__card-title" data-method="PayPal" data-bs-toggle="collapse" data-bs-target="#faq-item-2-3" aria-expanded="false">
                                     PayPal <img src="img/icons/payment-3.png" alt="#">
                                 </h5>
                                 <div id="faq-item-2-3" class="collapse" data-bs-parent="#checkout_accordion_1">
@@ -577,8 +561,10 @@
                         <div class="ltn__payment-note mt-30 mb-30">
                             <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
                         </div>
-                        <button onclick="PlaceOrder()"  class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Place order</button>
+                        <button onclick="handlePaymentMethod()" class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Place order</button>
                     </div>
+                </div>
+                
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping-cart-total mt-50">
@@ -909,7 +895,52 @@
 
 
 
-        function PlaceOrder() {
+//         function PlaceOrder() {
+//     // Retrieve the user ID from local storage
+//     const userId = localStorage.getItem('userID'); // Adjust the key as necessary
+
+//     if (!userId) {
+//         alert("User ID not found. Please log in.");
+//         return;
+//     }
+//     // Make an API call to move cart items to order
+//     fetch(`https://localhost:7000/api/CartItems/MoveCartToOrder/${userId}`, {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         }
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         alert("Order placed successfully"); 
+//         window.location.reload(); // Refresh the page or navigate as needed
+//     })
+//     .catch(error => {
+//         console.error('Error:', error);
+//         alert("Failed to place order: " + error.message); // Handle error
+//     });
+// }
+
+function handlePaymentMethod() {
+    // Check selected payment method
+    const cashOnDelivery = document.getElementById("cashOnDelivery");
+    const paypalMethod = document.getElementById("paypalMethod");
+
+    if (cashOnDelivery.getAttribute("aria-expanded") === "true") {
+        // Cash on Delivery is selected
+        PlaceOrder();
+    } else if (paypalMethod.getAttribute("aria-expanded") === "true") {
+        // PayPal is selected, redirect to PayPal page
+        window.location.href = "PayPal.html";
+    }
+}
+
+function PlaceOrder() {
     // Retrieve the user ID from local storage
     const userId = localStorage.getItem('userID'); // Adjust the key as necessary
 
@@ -917,6 +948,7 @@
         alert("User ID not found. Please log in.");
         return;
     }
+
     // Make an API call to move cart items to order
     fetch(`https://localhost:7000/api/CartItems/MoveCartToOrder/${userId}`, {
         method: 'POST',
@@ -940,7 +972,37 @@
     });
 }
 
+function PlaceOrder() {
+    // Retrieve the user ID from local storage
+    const userId = localStorage.getItem('userID'); // Adjust the key as necessary
 
+    if (!userId) {
+        alert("User ID not found. Please log in.");
+        return;
+    }
+
+    // Make an API call to move cart items to order
+    fetch(`https://localhost:7000/api/CartItems/MoveCartToOrder/${userId}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Order placed successfully"); 
+        window.location.reload(); // Refresh the page or navigate as needed
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Failed to place order: " + error.message); // Handle error
+    });
+}
 
 
     

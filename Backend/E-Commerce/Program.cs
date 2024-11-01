@@ -54,6 +54,7 @@ builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("SmtpS
 
 builder.Services.AddScoped<PasswordHasher<User>>(); // Register PasswordHasher<User>
 builder.Services.AddSingleton<TokenGenerator>(); // or .AddTransient<TokenGenerator>()
+builder.Services.AddScoped<PasswordHasher<StoreOwner>>(); // Register PasswordHasher<StoreOwner>
 
 // Retrieve JWT settings from configuration
 var jwtSettings = builder.Configuration.GetSection("Jwt");

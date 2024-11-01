@@ -81,8 +81,9 @@ async function AddToCart(productId, quantity = 1) { // Default quantity is 1
 
     if (addItemResponse.ok) {
         // alert("Product added to cart successfully");
-        // window.location.reload(); // Refresh the page or navigate as needed
-    } else {
+        setTimeout(function() {
+            window.location.reload(); // Refresh the page
+        }, 2000);    } else {
         console.error("Error adding product to cart");
     }
 }

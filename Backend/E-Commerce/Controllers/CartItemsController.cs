@@ -80,51 +80,6 @@ namespace E_Commerce.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-        //[HttpPost]
-        //[Route("AddItem")]
-        //public IActionResult AddCartItem([FromBody] AddCartItemsDto newItem)
-        //{
-        //    // Retrieve the product based on the provided ProductId
-        //    var product = _db.Products.SingleOrDefault(p => p.ProductId == newItem.ProductId);
-
-        //    // Check if the product exists
-        //    if (product == null)
-        //    {
-        //        return NotFound(new { Message = "Product not found." });
-        //    }
-
-        //    // Create a new cart item
-        //    var cartItem = new CartItem
-        //    {
-        //        CartId = newItem.CartId,
-        //        ProductId = newItem.ProductId,
-        //        Quantity = newItem.Quantity,
-        //        StoreId = product.StoreId // Assuming CartItem has a StoreId property
-        //    };
-
-        //    // Add the cart item to the database
-        //    _db.CartItems.Add(cartItem);
-        //    _db.SaveChanges();
-
-        //    return Ok(new { Message = "Item added to cart successfully.", CartItem = cartItem });
-        //}
-
-
-
-
-
-
-
         [HttpPost]
         [Route("AddItem")]
         public IActionResult AddCartItem([FromBody] AddCartItemsDto newItem)
@@ -176,7 +131,7 @@ namespace E_Commerce.Controllers
 
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCartItem(int id, [FromBody] UpdateCartController cartItem)
+        public IActionResult UpdateCartItem(int id, [FromForm] UpdateCartController cartItem)
         {
             var existingCart = _db.CartItems.Find(id);
             if (existingCart == null)
@@ -184,7 +139,6 @@ namespace E_Commerce.Controllers
                 return NotFound(new { message = "Cart not found" });
             }
 
-            existingCart.CartId = cartItem.CartId ?? existingCart.CartId;
             existingCart.Quantity = cartItem.Quantity;
 
 
@@ -193,7 +147,7 @@ namespace E_Commerce.Controllers
 
             return Ok(new { message = "Cart updated successfully", CartItem = existingCart });
         }
-
+         
 
 
         [HttpDelete("{cartItemId}")]
@@ -214,43 +168,6 @@ namespace E_Commerce.Controllers
         }
         //-------------------------------------------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------
-
-        /*
-                [HttpGet("CheckProduct/{productId}")]
-                public IActionResult CheckProductInCart(int productId)
-                {
-                    var cartItem = _db.CartItems.FirstOrDefault(c => c.ProductId == productId && c.CartId == 1); // Assuming CartId = 1
-                    if (cartItem != null)
-                    {
-                        return Ok(new { exists = true, quantity = cartItem.Quantity });
-                    }
-                    return Ok(new { exists = false });
-                }*/
-
-
-
-
-        //--------------------------------------------------------------------------------------------------------------------------
-        //--------------------------------------------------------------------------------------------------------------------------
-
-        /*
-
-                [HttpGet("CheckProductInCart/{cartId}/{productId}")]
-                public IActionResult CheckProductInCart(int cartId, int productId )
-                {
-                    var existingCartItem = _db.CartItems
-                        .FirstOrDefault(ci => ci.CartId == cartId && ci.ProductId == productId);
-
-                    if (existingCartItem != null)
-                    {
-                        return Ok(new { exists = true, quantity = existingCartItem.Quantity, cartItemId = existingCartItem.CartItemId });
-                    }
-
-                    return Ok(new { exists = false });
-                }
-
-
-        */
 
 
 

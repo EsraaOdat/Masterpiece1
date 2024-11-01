@@ -141,7 +141,7 @@
                                             
                                         </li>
 
-                                        <li class="menu-icon"><a href="Categories.html">Categories</a>
+                                        <!-- <li class="menu-icon"><a href="Categories.html">Categories</a> -->
 
 
 
@@ -200,14 +200,9 @@
                                     <!-- user-menu -->
                                     <div class="ltn__drop-menu user-menu">
                                         <ul>
-                                            <li>
+                                            <li id="authLinksContainer">
                                                 <a href="#"><i class="icon-user"></i></a>
-                                                <ul>
-                                                    <li><a href="login.html">Sign in</a></li>
-                                                    <li><a href="register.html">Register</a></li>
-                                                    <li><a href="account.html">My Account</a></li>
-                                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                                </ul>
+                                                
                                             </li>
                                         </ul>
                                     </div>
@@ -441,7 +436,7 @@
                             </div>
 
                             <div class="go-to-btn mt-20">
-                                <a href="#"><small>FORGOTTEN YOUR PASSWORD?</small></a>
+                                <a href="forgetpassword.html"><small>FORGOTTEN YOUR PASSWORD?</small></a>
                             </div>
                         </form>
                     </div>
@@ -729,7 +724,7 @@ if (googleLogin) {
             
                 clearCartFromLocalStorage(data.userID);
 
-                window.location.href = "../FawarehWork/cart.html"; 
+                window.location.href = "index.html"; 
               }
 
             } else {

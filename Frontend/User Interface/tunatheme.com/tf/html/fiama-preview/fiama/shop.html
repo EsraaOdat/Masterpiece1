@@ -260,7 +260,7 @@
 
                                             </li>
 
-                                            <li class="menu-icon"><a href="Categories.html">Categories</a>
+                                            <!-- <li class="menu-icon"><a href="Categories.html">Categories</a> -->
 
 
 
@@ -319,18 +319,13 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li> 
                                         <!-- user-menu -->
                                         <div class="ltn__drop-menu user-menu">
                                             <ul>
-                                                <li>
+                                                <li id="authLinksContainer">
                                                     <a href="#"><i class="icon-user"></i></a>
-                                                    <ul>
-                                                        <li><a href="login.html">Sign in</a></li>
-                                                        <li><a href="register.html">Register</a></li>
-                                                        <li><a href="account.html">My Account</a></li>
-                                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                                    </ul>
+                                                    
                                                 </li>
                                             </ul>
                                         </div>
@@ -626,79 +621,27 @@
                                 </form>
                             </div>
                             <!-- Price Filter Widget -->
+ 
                             <div class="widget ltn__price-filter-widget">
                                 <h4 class="ltn__widget-title">Price</h4>
                                 <div class="price_filter">
                                     <div class="price_slider_amount">
                                         <input type="submit" value="Your range:" />
-                                        <input type="text" class="amount" name="price" placeholder="Add Your Price" />
+                                        <input type="text" id="amount" class="amount" name="price" placeholder="Add Your Price" />
                                     </div>
-                                    <div class="slider-range"></div>
+                                    <div id="slider-range" class="slider-range"></div>
                                 </div>
                             </div>
 
-
-                            <!--Gift Categories-->
                             <div class="category-filter">
                                 <h4 class="ltn__widget-title">Gift Categories</h4>
-                            
-                                <!-- Jewelry Category -->
-                                <div class="category-item">
-                                    <input type="radio" id="jewelry-toggle" name="main-category" class="toggle-radio" />
-                                    <label for="jewelry-toggle" class="main-category">Jewelry</label>
-                                    <ul class="subcategory">
-                                        <li>
-                                            <input type="radio" id="rings" name="subcategory" />
-                                            <label for="rings">Rings</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="necklaces" name="subcategory" />
-                                            <label for="necklaces">Necklaces</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="bracelets" name="subcategory" />
-                                            <label for="bracelets">Bracelets</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="earrings" name="subcategory" />
-                                            <label for="earrings">Earrings</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            
-                                <!-- Accessories Category -->
-                                <div class="category-item">
-                                    <input type="radio" id="accessories-toggle" name="main-category" class="toggle-radio" />
-                                    <label for="accessories-toggle" class="main-category">Accessories</label>
-                                    <ul class="subcategory">
-                                        <li>
-                                            <input type="radio" id="bags" name="subcategory" />
-                                            <label for="bags">Bags</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="watches" name="subcategory" />
-                                            <label for="watches">Watches</label>
-                                        </li>
-                                    </ul>
-                                </div>
-                            
-                                <!-- Home Gifts Category -->
-                                <div class="category-item">
-                                    <input type="radio" id="home-gifts-toggle" name="main-category" class="toggle-radio" />
-                                    <label for="home-gifts-toggle" class="main-category">Home Gifts</label>
-                                    <ul class="subcategory">
-                                        <li>
-                                            <input type="radio" id="candles" name="subcategory" />
-                                            <label for="candles">Candles</label>
-                                        </li>
-                                        <li>
-                                            <input type="radio" id="decor" name="subcategory" />
-                                            <label for="decor">Decor Items</label>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
-                             <!--Gift Categories-->
+                            
+                            <!-- Container to display filtered products -->
+                            <div id="products-container" class="products-container">
+                                <!-- Dynamic product items will be added here -->
+                            </div>
+                            
 
                             <!-- Tagcloud Widget -->
                            
@@ -1434,6 +1377,393 @@
 }
 
     </script>
+
+
+<script>
+    // Initialize price slider and set up event handlers
+    $(function() {
+        $("#slider-range").slider({
+            range: true,
+            min: 1,
+            max: 500,
+            values: [1, 300], // Default price range
+            slide: function(event, ui) {
+                $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+            },
+            change: function(event, ui) {
+                fetchFilteredProducts(ui.values[0], ui.values[1]);
+            }
+        });
+        $("#amount").val("$" + $("#slider-range").slider("values", 0) +
+            " - $" + $("#slider-range").slider("values", 1));
+    });
+
+    async function fetchFilteredProducts(minPrice, maxPrice) {
+        try {
+            const response = await fetch(`https://localhost:7000/api/Products/ByPriceRange?minPrice=${minPrice}&maxPrice=${maxPrice}`);
+            const products = await response.json();
+
+            // Clear the product item containers
+            const productContainer1 = document.getElementById('product-item');
+            const productContainer2 = document.getElementById('product-item2');
+            productContainer1.innerHTML = ''; 
+            productContainer2.innerHTML = ''; 
+
+            products.forEach(product => {
+                const imageUrl = product.image ? `../../../../../../../Backend/E-Commerce/Product/${product.image}` : 'path/to/default/image.jpg';
+                let priceHtml = `<span>$${product.price}</span>`;
+
+                // Display discounted price if available
+                if (product.priceWithDiscount && product.priceWithDiscount < product.price) {
+                    priceHtml = `<span style="text-decoration: line-through;">$${product.price}</span> <span style="color: red;">$${product.priceWithDiscount}</span>`;
+                }
+
+                // Create product card HTML structure for productContainer1
+                const productCard1 = `
+                   <!-- ltn__product-item -->
+                                        <div class="col-xl-4 col-sm-6 col-12">
+                                            <div class="ltn__product-item text-center">
+                                                <div class="product-img">
+                                                    <a href="product-details.html"onclick="setProductId(${product.productId}, ${product.storeId})"><img
+                                                            style="height: 350px; object-fit: cover;"
+                                                            src="../../../../../../../Backend/E-Commerce/Product/${product.image}"
+                                                            alt="#"></a>
+                                                    <div class="product-badge">
+                                                        <ul>
+                                                            <li class="badge-2">10%</li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="product-hover-action product-hover-action-2">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#" title="Quick View" data-bs-toggle="modal"
+                                                                    data-bs-target="#quick_view_modal">
+                                                                    <i class="icon-magnifier"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li class="add-to-cart">
+                                                                <a href="#" title="Add to Cart" data-bs-toggle="modal"  onclick="AddToCart(${product.productId}, 1)"
+                                                                    data-bs-target="#add_to_cart_modal">
+                                                                    <span class="cart-text d-none d-xl-block">Add to
+                                                                        Cart</span>
+                                                                    <span class="d-block d-xl-none"><i
+                                                                            class="icon-handbag"></i></span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" title="Quick View" data-bs-toggle="modal"
+                                                                    data-bs-target="#quick_view_modal">
+                                                                    <i class="icon-shuffle"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-info">
+                                                    <h2 class="product-title"><a href="product-details.html">${product.name}</a></h2>
+                                                    <div class="product-price">
+                                                        <span>${product.price}</span>
+                                                        <del>$25</del>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                `;
+                productContainer1.innerHTML += productCard1;
+
+                // Create product card HTML structure for productContainer2
+                const productCard2 = `
+                   <!-- ltn__product-item -->
+                                        <div class="col-lg-12">
+                                            <div class="ltn__product-item">
+                                                <div class="product-img">
+                                                    <a href="product-details.html"onclick="setProductId(${product.productId}, ${product.storeId})"><img  src="../../../../../../../Backend/E-Commerce/Product/${product.image}"
+                                                            alt="#"></a>
+                                                    <div class="product-badge">
+                                                        <ul>
+                                                            <li class="badge-1">Hot</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product-info">
+                                                    <h2 class="product-title"><a href="product-details.html">${product.name}</a></h2>
+                                                    <div class="product-price">
+                                                        <span>${product.price}</span>
+                                                    </div>
+                                                    <div class="product-ratting">
+                                                        <ul>
+                                                            <li><a href="#"><i class="icon-star"></i></a></li>
+                                                            <li><a href="#"><i class="icon-star"></i></a></li>
+                                                            <li><a href="#"><i class="icon-star"></i></a></li>
+                                                            <li><a href="#"><i class="icon-star"></i></a></li>
+                                                            <li><a href="#"><i class="icon-star"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="product-brief">
+                                                        <p>${product.description}</p>
+                                                    </div>
+                                                    <div class="product-hover-action product-hover-action-2">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#" title="Quick View" data-bs-toggle="modal"
+                                                                    data-bs-target="#quick_view_modal">
+                                                                    <i class="icon-magnifier"></i>
+                                                                </a>
+                                                            </li>
+                                                            <li class="add-to-cart">
+                                                                <a href="#" title="Add to Cart" data-bs-toggle="modal" onclick="AddToCart(${product.productId}, 1)"
+                                                                    data-bs-target="#add_to_cart_modal">
+                                                                    <span class="cart-text d-none d-xl-block">Add to
+                                                                        Cart</span>
+                                                                    <span class="d-block d-xl-none"><i
+                                                                            class="icon-handbag"></i></span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" title="Quick View" data-bs-toggle="modal"
+                                                                    data-bs-target="#quick_view_modal">
+                                                                    <i class="icon-shuffle"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>               
+
+                `;
+                productContainer2.innerHTML += productCard2;
+            });
+        } catch (error) {
+            console.error('Error fetching filtered products:', error);
+            document.getElementById('productGrid').innerHTML = '<p>Error loading products. Please check console for more details.</p>';
+        }
+    }
+
+    function setProductId(productId, storeId) {
+        console.log("Setting product ID:", productId);
+        console.log("Setting store ID:", storeId);
+        localStorage.setItem("SelectedProductId", productId);
+        localStorage.setItem("SelectedStoreId", storeId);
+        window.location.href = 'product-details.html';
+    }
+</script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fetch categories and subcategories from the API
+        fetch("https://localhost:7000/api/Categories/CategoriesWithSubcategories")
+            .then(response => response.json())
+            .then(categories => renderCategories(categories))
+            .catch(error => console.error("Error fetching categories:", error));
+        
+        // Render categories and subcategories dynamically
+        function renderCategories(categories) {
+            const categoryContainer = document.querySelector(".category-filter");
+            categoryContainer.innerHTML = ''; // Clear existing categories
+
+            categories.forEach(category => {
+                const categoryItem = document.createElement("div");
+                categoryItem.classList.add("category-item");
+                
+                // Category radio button
+                const categoryInput = document.createElement("input");
+                categoryInput.type = "radio";
+                categoryInput.id = `${category.name.toLowerCase()}-toggle`;
+                categoryInput.name = "main-category";
+                categoryInput.classList.add("toggle-radio");
+
+                // Category label
+                const categoryLabel = document.createElement("label");
+                categoryLabel.setAttribute("for", `${category.name.toLowerCase()}-toggle`);
+                categoryLabel.classList.add("main-category");
+                categoryLabel.innerText = category.name;
+
+                // Subcategory list
+                const subcategoryList = document.createElement("ul");
+                subcategoryList.classList.add("subcategory");
+
+                // Render each subcategory as a radio button
+                category.subCategories.forEach(sub => {
+                    const subcategoryItem = document.createElement("li");
+
+                    const subcategoryInput = document.createElement("input");
+                    subcategoryInput.type = "radio";
+                    subcategoryInput.id = `sub-${sub.subCategoryId}`;
+                    subcategoryInput.name = "subcategory";
+                    subcategoryInput.addEventListener("change", () => filterProducts(sub.subCategoryId)); // Call filterProducts on change
+
+                    const subcategoryLabel = document.createElement("label");
+                    subcategoryLabel.setAttribute("for", `sub-${sub.subCategoryId}`);
+                    subcategoryLabel.innerText = sub.subcategoryName;
+
+                    subcategoryItem.appendChild(subcategoryInput);
+                    subcategoryItem.appendChild(subcategoryLabel);
+                    subcategoryList.appendChild(subcategoryItem);
+                });
+
+                // Append category and subcategory elements to the category item
+                categoryItem.appendChild(categoryInput);
+                categoryItem.appendChild(categoryLabel);
+                categoryItem.appendChild(subcategoryList);
+
+                // Add the category item to the main container
+                categoryContainer.appendChild(categoryItem);
+            });
+        }
+
+        // Fetch and display products based on subcategory selection
+        function filterProducts(subcategoryId) {
+            console.log(`Fetching products for subcategory ID: ${subcategoryId}`);
+            fetch(`https://localhost:7000/api/Products/GetProductsBySubcategory/${subcategoryId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch products for subcategory ${subcategoryId}`);
+                    }
+                    return response.json();
+                })
+                .then(products => {
+                    console.log("Filtered products:", products);
+                    renderProducts(products);  // Call function to display products
+                })
+                .catch(error => console.error("Error fetching filtered products:", error));
+        }
+
+        // Render products
+        function renderProducts(products) {
+            const productContainer1 = document.getElementById("product-item");
+            const productContainer2 = document.getElementById("product-item2");
+
+            // Clear previous products
+            productContainer1.innerHTML = ''; 
+            productContainer2.innerHTML = ''; 
+
+            products.forEach(product => {
+                const imageUrl = product.image ? `../../../../../../../Backend/E-Commerce/Product/${product.image}` : 'path/to/default/image.jpg';
+                
+                // Create product card HTML structure for productContainer1
+                const productCard1 = `
+                    <div class="col-xl-4 col-sm-6 col-12">
+                        <div class="ltn__product-item text-center">
+                            <div class="product-img">
+                                <a href="product-details.html" onclick="setProductId(${product.productId}, ${product.storeId})">
+                                    <img style="height: 350px; object-fit: cover;" src="${imageUrl}" alt="${product.name}">
+                                </a>
+                                <div class="product-badge">
+                                    <ul>
+                                        <li class="badge-2">10%</li>
+                                    </ul>
+                                </div>
+                                <div class="product-hover-action product-hover-action-2">
+                                    <ul>
+                                        <li>
+                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                <i class="icon-magnifier"></i>
+                                            </a>
+                                        </li>
+                                        <li class="add-to-cart">
+                                            <a href="#" title="Add to Cart" data-bs-toggle="modal" onclick="AddToCart(${product.productId}, 1)"
+                                                data-bs-target="#add_to_cart_modal">
+                                                <span class="cart-text d-none d-xl-block">Add to Cart</span>
+                                                <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="Quick View" data-bs-toggle="modal" data-bs-target="#quick_view_modal">
+                                                <i class="icon-shuffle"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-title"><a href="product-details.html">${product.name}</a></h2>
+                                <div class="product-price">
+                                    <span>${product.price}</span>
+                                    <del>$25</del>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productContainer1.innerHTML += productCard1;
+
+                // Create product card HTML structure for productContainer2
+                const productCard2 = `
+                    <div class="col-lg-12">
+                        <div class="ltn__product-item">
+                            <div class="product-img">
+                                <a href="product-details.html" onclick="setProductId(${product.productId}, ${product.storeId})">
+                                    <img src="${imageUrl}" alt="${product.name}">
+                                </a>
+                                <div class="product-badge">
+                                    <ul>
+                                        <li class="badge-1">Hot</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-info">
+                                <h2 class="product-title"><a href="product-details.html">${product.name}</a></h2>
+                                <div class="product-price">
+                                    <span>${product.price}</span>
+                                </div>
+                                <div class="product-ratting">
+                                    <ul>
+                                        <li><a href="#"><i class="icon-star"></i></a></li>
+                                        <li><a href="#"><i class="icon-star"></i></a></li>
+                                        <li><a href="#"><i class="icon-star"></i></a></li>
+                                        <li><a href="#"><i class="icon-star"></i></a></li>
+                                        <li><a href="#"><i class="icon-star"></i></a></li>
+                                    </ul>
+                                </div>
+                                <div class="product-brief">
+                                    <p>${product.description}</p>
+                                </div>
+                                <div class="product-hover-action product-hover-action-2">
+                                    <ul>
+                                        <li>
+                                            <a href="#" title="Quick View" data-bs-toggle="modal"
+                                                data-bs-target="#quick_view_modal">
+                                                <i class="icon-magnifier"></i>
+                                            </a>
+                                        </li>
+                                        <li class="add-to-cart">
+                                            <a href="#" title="Add to Cart" data-bs-toggle="modal" onclick="AddToCart(${product.productId}, 1)"
+                                                data-bs-target="#add_to_cart_modal">
+                                                <span class="cart-text d-none d-xl-block">Add to Cart</span>
+                                                <span class="d-block d-xl-none"><i class="icon-handbag"></i></span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" title="Quick View" data-bs-toggle="modal"
+                                                data-bs-target="#quick_view_modal">
+                                                <i class="icon-shuffle"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productContainer2.innerHTML += productCard2;
+            });
+        }
+    });
+
+    // Function to set product ID and redirect to the product details page
+    function setProductId(productId, storeId) {
+        console.log("Setting product ID:", productId);
+        console.log("Setting store ID:", storeId);
+        localStorage.setItem("SelectedProductId", productId);
+        localStorage.setItem("SelectedStoreId", storeId);
+        window.location.href = 'product-details.html';
+    }
+</script>
+
+
 <script SRC="js/cart.js"></script>
   
 </body>

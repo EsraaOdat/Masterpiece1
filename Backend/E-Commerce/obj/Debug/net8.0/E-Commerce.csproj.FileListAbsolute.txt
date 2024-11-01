@@ -1319,3 +1319,5 @@ C:\Users\Orange\Downloads\Masterpiece1\Backend\E-Commerce\obj\Debug\net8.0\refin
 C:\Users\Orange\Downloads\Masterpiece1\Backend\E-Commerce\obj\Debug\net8.0\E-Commerce.pdb
 C:\Users\Orange\Downloads\Masterpiece1\Backend\E-Commerce\obj\Debug\net8.0\E-Commerce.genruntimeconfig.cache
 C:\Users\Orange\Downloads\Masterpiece1\Backend\E-Commerce\obj\Debug\net8.0\ref\E-Commerce.dll
+C:\Users\Orange\Downloads\Masterpiece1\Backend\E-Commerce\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Orange\Downloads\Masterpiece1\Backend\E-Commerce\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll

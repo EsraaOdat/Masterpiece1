@@ -78,5 +78,45 @@ method: 'DELETE'
 });
 alert(' deleted successfully!');
 document.getElementById(`CartItemRow2${CartItemId}`).remove();
+location.reload(); // Refresh the page or navigate as needed
+
 }
 
+
+
+
+
+
+
+
+
+//----------------------------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+    const authLinksContainer = document.getElementById("authLinksContainer");
+    const userID = localStorage.getItem("userID");
+
+    console.log("userID from localStorage:", userID); 
+    if (userID) {
+      authLinksContainer.innerHTML += `
+        <ul>
+          <li><a href="account.html">My Account</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+          <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+      `;
+    } else {
+      authLinksContainer.innerHTML +=`
+        <ul>
+          <li><a href="login.html">Sign in</a></li>
+          <li><a href="register.html">Register</a></li>
+          <li><a href="wishlist.html">Wishlist</a></li>
+        </ul>
+      `;
+    }
+  });
+
+  function logout() {
+    localStorage.removeItem("userID");
+    location.href = "Index.html";
+    location.reload();
+  }

@@ -155,7 +155,7 @@
 
                                             </li>
 
-                                            <li class="menu-icon"><a href="Categories.html">Categories</a>
+                                            <!-- <li class="menu-icon"><a href="Categories.html">Categories</a> -->
 
 
 
@@ -212,18 +212,13 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li> 
                                         <!-- user-menu -->
                                         <div class="ltn__drop-menu user-menu">
                                             <ul>
-                                                <li>
+                                                <li id="authLinksContainer">
                                                     <a href="#"><i class="icon-user"></i></a>
-                                                    <ul>
-                                                        <li><a href="login.html">Sign in</a></li>
-                                                        <li><a href="register.html">Register</a></li>
-                                                        <li><a href="account.html">My Account</a></li>
-                                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                                    </ul>
+                                                    
                                                 </li>
                                             </ul>
                                         </div>
@@ -724,8 +719,7 @@
                                         <td class="cart-product-price">$${Item.product.price}</td>
                                         <td class="cart-product-quantity">
                                             <div class="cart-plus-minus">
-                                                <input type="text" value="${Item.quantity}" name="qtybutton" class="cart-plus-minus-box" id="quantity"  onchange="EditQuantity(${Item.cartItemId})">
-                                            </div>
+                                     <input type="text" value="${Item.quantity}" name="qtybutton" class="cart-plus-minus-box" id="quantity" onchange="EditQuantity(${Item.cartItemId})">                                         </div>
                                         </td>
                                         <td class="cart-product-subtotal">$${(Item.product.price * Item.quantity).toFixed(2)}</td>
                                     </tr>
@@ -770,59 +764,56 @@ localStorage.setItem('orderTotal', document.getElementById('orderTotal').value);
 
 
 
-        async function Delete(CartItemId) {
 
-            const url = `https://localhost:7000/api/CartItems/${CartItemId}`;
+        async function EditQuantity(id) {
+    const url = `https://localhost:7000/api/CartItems/${id}`;
+    const quantityInput = document.getElementById("quantity"); // Ensure the ID matches
+    const quantity = parseInt(quantityInput.value, 10); // Convert to an integer
 
-            const response = await fetch(url, {
-                method: 'DELETE'
+    if (quantity === 0) {
+        await Delete(id);
+        location.reload(); 
+return;
+    }
 
-            });
+    const formData = new FormData();
+    formData.append("Quantity", quantity); 
 
-            alert(' deleted successfully!');
-            document.getElementById(`CartItemRow${CartItemId}`).remove();
+    try {
+        const response = await fetch(url, {
+            method: 'PUT',
+            body: formData
+        });
 
+        if (response.ok) {
+           location.reload(); 
+        } else {
+            const errorData = await response.json();
+            console.error('Error:', errorData);
+            alert('Failed to update quantity.');
         }
+    } catch (error) {
+        console.error('Fetch error:', error);
+        alert('Error occurred while updating quantity.');
+    }
+}
 
 
 
 
+async function Delete(CartItemId) {
 
+const url = `https://localhost:7000/api/CartItems/${CartItemId}`;
 
-    //     async function EditQuantity(id){
-    //         const url = `https://localhost:7000/api/Coupons/Update/${id}`;
-    //   const quantity=document.getElementById(`quantity`).value();
-    //         const updatedData =
-    //         {
-    //             cartId: id,
-    //             quantity: quantity
-    //         };
+const response = await fetch(url, {
+    method: 'DELETE'
 
-    //         const response = await fetch(url, {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(updatedData)
-    //         });
+});
 
-    //         if (response.ok) {
-    //             alert('Coupon activated successfully!');
-    //         } else {
-    //             const errorData = await response.json();
-    //             console.error('Error:', errorData);
-    //             alert('Failed to activate coupon.');
-    //         }
+alert(' deleted successfully!');
+document.getElementById(`CartItemRow${CartItemId}`).remove();
 
-    //     }
-
-
-
-
-
-
-
-
+}
 
 
 

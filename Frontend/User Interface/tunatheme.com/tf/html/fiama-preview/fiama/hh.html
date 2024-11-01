@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء متجر جديد</title>
+    <style>
+        body { font-family: Arial, sans-serif; direction: rtl; }
+        .form-container { max-width: 800px; margin: auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px; }
+        .input-item { margin-bottom: 20px; }
+        .input-item input, .input-item select, .input-item textarea { width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd; }
+        .btn { padding: 10px 20px; border: none; cursor: pointer; }
+        .btn-primary { background-color: #007bff; color: #fff; width: 100%; }
+        .tabs { display: flex; cursor: pointer; }
+        .tab { padding: 10px 20px; border: 1px solid #ddd; border-bottom: none; background-color: #f8f8f8; }
+        .tab.active { background-color: #007bff; color: white; }
+        .tab-content { display: none; padding: 20px; border: 1px solid #ddd; border-top: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>تسجيل متجر جديد</h2>
+
+    <!-- علامات التبويب -->
+    <div class="tabs">
+        <div class="tab active" onclick="openTab(event, 'store-info')">معلومات المتجر</div>
+        <div class="tab" onclick="openTab(event, 'owner-info')">معلومات صاحب المتجر</div>
+    </div>
+
+    <form action="#" method="POST">
+
+        <!-- معلومات المتجر -->
+        <div id="store-info" class="tab-content active">
+            <h3>معلومات المتجر</h3>
+            <div class="input-item">
+                <label for="store_name">اسم المتجر:</label>
+                <input type="text" id="store_name" name="store_name" placeholder="اسم المتجر" required>
+            </div>
+
+            <div class="input-item">
+                <label for="store_email">البريد الإلكتروني للمتجر:</label>
+                <input type="email" id="store_email" name="store_email" placeholder="Email" required>
+            </div>
+
+            <div class="input-item">
+                <label for="store_phone">رقم هاتف المتجر:</label>
+                <input type="text" id="store_phone" name="store_phone" placeholder="Store phone number" required>
+            </div>
+
+            <div class="input-item">
+                <label for="store_address">عنوان المتجر:</label>
+                <input type="text" id="store_address" name="store_address" placeholder="Store address (optional)">
+            </div>
+
+            <!-- خطة الاشتراك -->
+            <div class="input-item">
+                <label for="subscription_plan">اختر خطة الاشتراك:</label>
+                <select id="subscription_plan" name="subscription_plan" required>
+                    <option value="monthly">الخطة الشهرية - $150</option>
+                    <option value="annual">الخطة السنوية - $700</option>
+                    <option value="starter">الخطة الابتدائية - $50</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- معلومات صاحب المتجر -->
+        <div id="owner-info" class="tab-content">
+            <h3>معلومات صاحب المتجر</h3>
+            <div class="input-item">
+                <label for="owner_name">اسم صاحب المتجر:</label>
+                <input type="text" id="owner_name" name="owner_name" placeholder="اسم صاحب المتجر" required>
+            </div>
+
+            <div class="input-item">
+                <label for="owner_email">البريد الإلكتروني:</label>
+                <input type="email" id="owner_email" name="owner_email" placeholder="Email" required>
+            </div>
+
+            <div class="input-item">
+                <label for="password">كلمة المرور:</label>
+                <input type="password" id="password" name="password" placeholder="Password" required>
+            </div>
+
+            <div class="input-item">
+                <label for="confirm_password">تأكيد كلمة المرور:</label>
+                <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            </div>
+        </div>
+
+        <!-- زر التأكيد -->
+        <div class="input-item">
+            <input type="checkbox" name="terms" required> أوافق على <a href="#">الشروط والأحكام</a>
+        </div>
+        <button class="btn btn-primary" type="submit">إنشاء المتجر وتأكيد الاشتراك</button>
+
+    </form>
+</div>
+
+<!-- JavaScript للتبديل بين علامات التبويب -->
+<script>
+    function openTab(event, tabId) {
+        // إخفاء جميع المحتويات
+        var tabContents = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabContents.length; i++) {
+            tabContents[i].style.display = "none";
+        }
+
+        // إزالة التفعيل عن جميع التبويبات
+        var tabs = document.getElementsByClassName("tab");
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].classList.remove("active");
+        }
+
+        // إظهار المحتوى المحدد وتفعيل التبويب
+        document.getElementById(tabId).style.display = "block";
+        event.currentTarget.classList.add("active");
+    }
+
+    // افتراضيا، عرض القسم الأول عند تحميل الصفحة
+    document.getElementById("store-info").style.display = "block";
+</script>
+
+</body>
+</html>

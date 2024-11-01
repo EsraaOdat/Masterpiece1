@@ -13,9 +13,9 @@ namespace E_Commerce.Controllers
     {
         private readonly MyDbContext _context;
 
-        public StoresController(MyDbContext db)
+        public StoresController(MyDbContext context)
         {
-            _context = db;
+            _context = context;
         }
 
         // Method to check for expired subscriptions and update store status
@@ -141,8 +141,25 @@ namespace E_Commerce.Controllers
             _context.Stores.Add(store);
             _context.SaveChanges();
 
-            return Ok(store);
+            return Ok(new { message = "Store created successfully", storeId = store.StoreId });
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         // Return only stores with "active" status
@@ -204,7 +221,7 @@ namespace E_Commerce.Controllers
             return Ok(new { message = "Subscription updated successfully", store });
         }
 
-
+        //last 3 store (home page )
 
         [HttpGet("top-stores")]
         public IActionResult GetTopStores(int top = 3)

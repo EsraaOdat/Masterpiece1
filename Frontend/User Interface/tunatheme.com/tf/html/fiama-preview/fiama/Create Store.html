@@ -138,7 +138,7 @@
                                         
                                     </li>
 
-                                    <li class="menu-icon"><a href="Categories.html">Categories</a>
+                                    <!-- <li class="menu-icon"><a href="Categories.html">Categories</a> -->
 
 
 
@@ -199,14 +199,9 @@
                                 <!-- user-menu -->
                                 <div class="ltn__drop-menu user-menu">
                                     <ul>
-                                        <li>
+                                        <li id="authLinksContainer">
                                             <a href="#"><i class="icon-user"></i></a>
-                                            <ul>
-                                                <li><a href="login.html">Sign in</a></li>
-                                                <li><a href="register.html">Register</a></li>
-                                                <li><a href="account.html">My Account</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                            </ul>
+                                            
                                         </li>
                                     </ul>
                                 </div>
@@ -397,7 +392,7 @@
 
                                     <div class="ltn__myaccount-tab-content-inner mb-50">
 
-                                        <form action="#" method="POST" enctype="multipart/form-data">
+                                        <form action="#" method="POST" enctype="multipart/form-data"  id="storeForm">
                                             <h4>Create Your Store</h4>
                                             <br><br>
                                         
@@ -674,6 +669,60 @@
 
 <script SRC="js/cart.js"></script>
   
+
+
+
+
+<!-- 
+
+<script >
+document.getElementById('form').addEventListener('submit', CreateStore);
+document.getElementById('form').addEventListener('submit', storeOwner);
+    
+async function ADDCategory(event) {
+    event.preventDefault(); // Prevent form from submitting the default way
+
+    const url = `https://localhost:7000/api/Stores`;
+    const url2 = https://localhost:7000/api/StoreOwners/StoreOwnerRegister`;
+
+    const formData = new FormData();
+    formData.append("storeName", document.getElementById('storeName').value);
+
+    const imageFile = document.getElementById('image').files[0];
+    if (imageFile) {
+        formData.append("Image", imageFile);
+    }
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST', // Change to 'POST' if that's what the server expects
+            body: formData
+        });
+
+        if (response.ok) {
+            alert(' added successfully!');
+        } else {
+            const errorData = await response.json();
+            console.error('Error:', errorData);
+            alert('Failed to add category.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to connect to the server.');
+    }
+}
+
+
+
+
+</script> -->
+
+
+
+
+
+
+
 </body>
 
 <!-- Mirrored from tunatheme.com/tf/html/fiama-preview/fiama/account.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 12:04:48 GMT -->

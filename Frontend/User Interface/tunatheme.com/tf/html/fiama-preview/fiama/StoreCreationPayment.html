@@ -202,14 +202,9 @@
                                     <!-- user-menu -->
                                     <div class="ltn__drop-menu user-menu">
                                         <ul>
-                                            <li>
+                                            <li id="authLinksContainer">
                                                 <a href="#"><i class="icon-user"></i></a>
-                                                <ul>
-                                                    <li><a href="login.html">Sign in</a></li>
-                                                    <li><a href="register.html">Register</a></li>
-                                                    <li><a href="account.html">My Account</a></li>
-                                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                                </ul>
+                                                
                                             </li>
                                         </ul>
                                     </div>
@@ -413,352 +408,164 @@
         </div>
     </div>
     <!-- BREADCRUMB AREA END -->
-
-    <!-- WISHLIST AREA START -->
-    <div class="ltn__checkout-area mb-100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="ltn__checkout-inner">
-                       
-                        
-
-
-
-                        <!-- -------------------------------معلومات عن المتجر ------------------------------ -->
-
-
-
-
-
-                        <div class="ltn__checkout-single-content mt-50">
-                            <h4 class="title-2">Create Store</h4>
-                            <div class="ltn__checkout-single-content-info">
-                                <form action="#" >
-                                    <h6>Store Information</h6>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" name="store_name" placeholder="Store name" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-email ltn__custom-icon">
-                                                <input type="email" name="store_email" placeholder="Email address" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-phone ltn__custom-icon">
-                                                <input type="text" name="store_phone" placeholder="Store phone number" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-website ltn__custom-icon">
-                                                <input type="text" name="store_address" placeholder="Store address (optional)">
-                                            </div>
+<!-- WISHLIST AREA START -->
+<!-- WISHLIST AREA START -->
+<div class="ltn__checkout-area mb-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__checkout-inner">
+                    <div class="ltn__checkout-single-content mt-50">
+                        <h4 class="title-2">Create Store</h4>
+                        <div class="ltn__checkout-single-content-info">
+                            <form id="storeForm" action="#">
+                                <!-- Store Information -->
+                                <h6>Store Information</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-name ltn__custom-icon">
+                                            <input type="text" id="store_name" name="store_name" placeholder="Store name" required>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" name="address" placeholder="Address" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-email ltn__custom-icon">
-                                                <input type="text" name="country" placeholder="Country" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-phone ltn__custom-icon">
-                                                <input type="text" name="city" placeholder="City" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6"> 
-                                            <div class="input-item input-item-website ltn__custom-icon">
-                                                <input type="text" name="zip_code" placeholder="Zip code" required>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-email ltn__custom-icon">
+                                            <input type="email" id="contact_email" name="contact_email" placeholder="Email address" required>
                                         </div>
                                     </div>
-                        
-                                    <!-- Plan Selection -->
-                                    <h6>Select Subscription Plan</h6>
-                                    <div class="input-item">
-                                        <select name="subscription_plan" required>
-                                            <option value="monthly">Monthly Plan - $150</option>
-                                            <option value="annual">Annual Plan - $700</option>
-                                            <option value="starter">Starter Plan - $50</option>
-                                        </select>
-                                    </div>
-                        
-                                    <!-- Password and Confirmation -->
-                                    <h6>Create Account</h6>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-password ltn__custom-icon">
-                                                <input type="password" name="password" placeholder="Password" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="input-item input-item-password ltn__custom-icon">
-                                                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-phone ltn__custom-icon">
+                                            <input type="text" id="store_phone" name="store_phone" placeholder="Store phone number" required>
                                         </div>
                                     </div>
-                        
-                                    <!-- Store Logo -->
-                                    <label for="store_logo" style="font-size: 18px; color: #666;">Upload Store Logo:</label>
-                                    <input type="file" id="store_logo" name="store_logo" accept="image/*" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
-                                    <br><br>
-                                    
-                                    <!-- Background Image -->
-                                    <label for="background_image" style="font-size: 18px; color: #666;">Upload Background Image:</label>
-                                    <input type="file" id="background_image" name="background_image" accept="image/*" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
-                                    <br><br>
-                        
-                                    <h6>Description of Store</h6>
-                                    <div class="input-item input-item-textarea ltn__custom-icon">
-                                        <textarea name="store_description" placeholder="Notes about your Store." required></textarea>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-website ltn__custom-icon">
+                                            <input type="text" id="store_address" name="store_address" placeholder="Store address (optional)">
+                                        </div>
                                     </div>
-                        
-                                    <!-- Terms and Conditions -->
-                                    <div class="input-item">
-                                        <input type="checkbox" name="terms" required> I agree to the <a href="#">Terms and Conditions</a>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-name ltn__custom-icon">
+                                            <input type="text" id="address" name="address" placeholder="Address" required>
+                                        </div>
                                     </div>
-                                    <div class="ltn__checkout-payment-method mt-50">
-                                        <h4 class="title-2">Payment Method</h4>
-                                        <div id="checkout_accordion_1">
-                                           
-                                                                  
-                                            <!-- card -->
-                                            <div class="card">
-                                                <h5 class="collapsed ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-3" aria-expanded="false" >
-                                                    PayPal <img src="img/icons/payment-3.png" alt="#">
-                                                </h5>
-                                                <div id="faq-item-2-3" class="collapse" data-bs-parent="#checkout_accordion_1">
-                                                    <div class="card-body">
-                                                        <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-country ltn__custom-icon">
+                                            <input type="text" id="country" name="country" placeholder="Country" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-city ltn__custom-icon">
+                                            <input type="text" id="city" name="city" placeholder="City" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6"> 
+                                        <div class="input-item input-item-zip ltn__custom-icon">
+                                            <input type="text" id="zip_code" name="zip_code" placeholder="Zip code" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Plan Selection -->
+                                <h6>Select Subscription Plan</h6>
+                                <div class="input-item">
+                                    <select id="subscription_plan" name="subscription_plan" required>
+                                        <option value="" disabled selected>Select your plan</option>
+                                        <option value="monthly">Monthly Plan - $150</option>
+                                        <option value="annual">Annual Plan - $700</option>
+                                        <option value="starter">Starter Plan - $50</option>
+                                    </select>
+                                </div>
+
+                                <!-- Merchant Information -->
+                                <h6>Merchant Information</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-name ltn__custom-icon">
+                                            <input type="text" id="merchant_name" name="merchant_name" placeholder="Merchant name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-email ltn__custom-icon">
+                                            <input type="email" id="merchant_email" name="merchant_email" placeholder="Merchant email" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-phone ltn__custom-icon">
+                                            <input type="text" id="merchant_phone" name="merchant_phone" placeholder="Merchant phone number" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-website ltn__custom-icon">
+                                            <input type="text" id="merchant_address" name="merchant_address" placeholder="Merchant address (optional)">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Password and Confirmation -->
+                                <h6>Create Account</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-password ltn__custom-icon">
+                                            <input type="password" id="password" name="password" placeholder="Password" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-item input-item-password ltn__custom-icon">
+                                            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Store Logo -->
+                                <label for="store_logo" style="font-size: 18px; color: #666;">Upload Store Logo:</label>
+                                <input type="file" id="store_logo" name="store_logo" accept="image/*" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                                <br><br>
+                                
+                                <!-- Background Image -->
+                                <label for="background_image" style="font-size: 18px; color: #666;">Upload Background Image:</label>
+                                <input type="file" id="background_image" name="background_image" accept="image/*" required style="width: 100%; padding: 10px; border-radius: 5px; border: 1px solid #ddd;">
+                                <br><br>
+
+                                <h6>Description of Store</h6>
+                                <div class="input-item input-item-textarea ltn__custom-icon">
+                                    <textarea id="store_description" name="store_description" placeholder="Notes about your Store." required></textarea>
+                                </div>
+
+                                <!-- Terms and Conditions -->
+                                <div class="input-item">
+                                    <input type="checkbox" id="terms" name="terms" required> I agree to the <a href="#">Terms and Conditions</a>
+                                </div>
+                                <div class="ltn__checkout-payment-method mt-50">
+                                    <h4 class="title-2">Payment Method</h4>
+                                    <div id="checkout_accordion_1">
+                                        <!-- PayPal -->
+                                        <div class="card">
+                                            <h5 class="collapsed ltn__card-title" data-bs-toggle="collapse" data-bs-target="#faq-item-2-3" aria-expanded="false">
+                                                PayPal <img src="img/icons/payment-3.png" alt="#">
+                                            </h5>
+                                            <div id="faq-item-2-3" class="collapse" data-bs-parent="#checkout_accordion_1">
+                                                <div class="card-body">
+                                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="ltn__payment-note mt-30 mb-30">
-                                            <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
-                                        </div>
-                                        <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Confirm Payment and Create Store </button>
                                     </div>
-                        
-                                </form>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-                
-                
-               
-            </div>
-        </div>
-    </div>
-    <!-- WISHLIST AREA START -->
-
-    <!-- BRAND LOGO AREA START -->
-    <div class="ltn__brand-logo-area  ltn__brand-logo-1 section-bg-1 pt-35 pb-35 plr--5">
-        <div class="container-fluid">
-            <div class="row ltn__brand-logo-active">
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="img/brand-logo/1.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="img/brand-logo/2.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="img/brand-logo/3.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="img/brand-logo/4.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="img/brand-logo/5.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="img/brand-logo/1.png" alt="Brand Logo">
-                    </div>
-                </div>
-                <div class="col-lg-12">
-                    <div class="ltn__brand-logo-item">
-                        <img src="img/brand-logo/2.png" alt="Brand Logo">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- BRAND LOGO AREA END -->
-
-    
-        <a href="https://wa.me/+962797109414" class="whatsapp_float" target="_blank">
-            <i class="fa-brands fa-whatsapp"></i>
-        </a>
-        <!-- FOOTER AREA START -->
-    <footer class="ltn__footer-area ">
-        <div class="footer-top-area  section-bg-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">My Accoout</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="contact.html">Contact us</a></li>
-                                    <li><a href="cart.html">Shopping Cart</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Quick Links</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="locations.html">Store Location</a></li>
-                                    <li><a href="order-tracking.html">Orders Tracking</a></li>
-                                    <li><a href="product-details.html">Size Guide</a></li>
-                                    <li><a href="account.html">My account</a></li>
-                                    <li><a href="faq.html">FAQs</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Information</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="contact.html">Privacy Page</a></li>
-                                    <li><a href="about.html">About us</a></li>
-                                    <li><a href="contact.html">Careers</a></li>
-                                    <li><a href="faq.html">Delivery Inforamtion</a></li>
-                                    <li><a href="contact.html">Term & Conditions</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-menu-widget clearfix">
-                            <h4 class="footer-title">Customer Service</h4>
-                            <div class="footer-menu">
-                                <ul>
-                                    <li><a href="product-details.html">Shipping Policy</a></li>
-                                    <li><a href="contact.html">Help & Contact Us</a></li>
-                                    <li><a href="account.html">Returns & Refunds</a></li>
-                                    <li><a href="shop.html">Online Stores</a></li>
-                                    <li><a href="contact.html">Terms and Conditions</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-6 col-sm-6 col-12">
-                        <div class="footer-widget footer-about-widget">
-                            <h4 class="footer-title">About Our Shop</h4>
-                            <div class="footer-logo d-none">
-                                <div class="site-logo">
-                                    <img src="img/logo.png" alt="Logo">
+                                    <div class="ltn__payment-note mt-30 mb-30">
+                                        <p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
+                                    </div>
+                                    <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Confirm Payment and Create Store </button>
                                 </div>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmo incididunt ut labore et dolore</p>
-                            <div class="footer-address">
-                                <ul>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-location-pin"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p>Brooklyn, New York, United States</p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-phone"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p><a href="tel:+0123-456789">+0123-456789</a></p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="footer-address-icon">
-                                            <i class="icon-envelope"></i>
-                                        </div>
-                                        <div class="footer-address-info">
-                                            <p><a href="mailto:example@example.com">example@example.com</a></p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="ltn__social-media mt-20 d-none">
-                                <ul>
-                                    <li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-                                    <li><a href="#" title="Youtube"><i class="fab fa-youtube"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="footer-payment-img">
-                                <img src="img/icons/payment-6.png" alt="Payment Image">
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="ltn__copyright-area ltn__copyright-2 section-bg-5">
-            <div class="container ltn__border-top-2">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="footer-copyright-left">
-                            <div class="ltn__copyright-design clearfix">
-                                <p>&copy; <span class="current-year"></span> - Just For You</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-12 align-self-center">
-                        <div class="footer-copyright-right text-right">
-                            <div class="ltn__copyright-menu d-none">
-                                <ul>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Claim</a></li>
-                                    <li><a href="#">Privacy & Policy</a></li>
-                                </ul>
-                            </div>
-                            <div class="ltn__social-media ">
-                                <ul>
-                                    <li><a href="#" title="Facebook"><i class="icon-social-facebook"></i></a></li>
-                                    <li><a href="#" title="Twitter"><i class="icon-social-twitter"></i></a></li>
-                                    <li><a href="#" title="Pinterest"><i class="icon-social-pinterest"></i></a></li>
-                                    <li><a href="#" title="Instagram"><i class="icon-social-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- FOOTER AREA END -->
+    </div>
 </div>
+<!-- WISHLIST AREA END -->
+
 <!-- Body main wrapper end -->
 
     <!-- All JS Plugins -->
@@ -769,6 +576,64 @@
 <script SRC="js/cart.js"></script>
   
 </body>
+<script>
+    document.getElementById('storeForm').addEventListener('submit', handleFormSubmit);
+    
+    async function handleFormSubmit(event) {
+        event.preventDefault();
+    
+        const storeData = new FormData();
+        storeData.append("StoreName", document.getElementById('store_name').value);
+        storeData.append("StoreDescription", document.getElementById('store_description').value);
+        storeData.append("StoreLogo", document.getElementById('store_logo').files[0]);
+        storeData.append("BackgroundImage", document.getElementById('background_image').files[0]);
+        storeData.append("Address", document.getElementById('address').value);
+        storeData.append("City", document.getElementById('city').value);
+        storeData.append("ZipCode", document.getElementById('zip_code').value);
+        storeData.append("Country", document.getElementById('country').value);
+        storeData.append("PhoneNumber", document.getElementById('store_phone').value);
+        storeData.append("PlanName", "monthly"); 
+        storeData.append("PlanType", "monthly"); // Modify as needed
+    
+        try {
+            const storeResponse = await fetch("https://localhost:7000/api/Stores", {
+                method: 'POST',
+                body: storeData
+            });
+    
+            if (!storeResponse.ok) {
+                alert("Failed to create store.");
+                return;
+            }
+    
+            const storeResult = await storeResponse.json();
+            const storeId = storeResult.storeId;
+    
+            const ownerData = new FormData();
+            ownerData.append("OwnerName", document.getElementById('merchant_name').value);
+            ownerData.append("Email", document.getElementById('merchant_email').value);
+            ownerData.append("Password", document.getElementById('password').value);
+            ownerData.append("StoreId", storeId); 
+    
+            const ownerResponse = await fetch("https://localhost:7000/api/StoreOwners/StoreOwnerRegister", {
+                method: 'POST',
+                body: ownerData
+            });
+    
+            if (ownerResponse.ok) {
+                alert("Store and owner registered successfully!");
+                // Optionally redirect or clear the form here
+                document.getElementById('storeForm').reset();
+            } else {
+                alert("Failed to register store owner.");
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert("An error occurred. Please try again.");
+        }
+    }
+    </script>
+    
 
 <!-- Mirrored from tunatheme.com/tf/html/fiama-preview/fiama/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 12:05:14 GMT -->
 </html>

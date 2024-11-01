@@ -448,6 +448,42 @@ namespace E_Commerce.Controllers
             return Ok(result);
         }
 
+
+
+
+
+
+
+        [HttpGet]
+        [Route("CategoriesWithSubcategories")]
+        public IActionResult GetCategoriesWithSubcategories()
+        {
+            var categories = _db.Categories
+                .Include(c => c.SubCategories)
+                .Select(category => new
+                {
+                    categoryId = category.CategoryId,
+                    name = category.Name,
+                    image = category.Image,
+                    description = category.Description,
+                    subCategories = category.SubCategories.Select(sub => new
+                    {
+                        subCategoryId = sub.SubcategoryId,
+                        subcategoryName = sub.SubcategoryName
+                    }).ToList()
+                }).ToList();
+
+            return Ok(categories);
+        }
+
+
+
+
+
+
+
+
+
         //-------------------------------------------------------------------------------------------------------------------------------------
         //-------------------------------------------------------------------------------------------------------------------------------------
         [HttpDelete]
@@ -472,4 +508,8 @@ namespace E_Commerce.Controllers
         }
 
     }
+
+
+
+
 }

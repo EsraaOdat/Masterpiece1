@@ -23,6 +23,9 @@
     <!-- Responsive css -->
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- Include SweetAlert CSS and JS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
     <style>
         .whatsapp_float {
@@ -30,10 +33,8 @@
             bottom: 20px;
             right: 20px;
             background-color: #25D366;
-            /* لون خلفية الواتساب */
             color: white;
             border-radius: 50%;
-            /* لجعل الأيقونة دائرية */
             padding: 15px;
             /* مسافة داخلية لتكبير حجم الدائرة */
             z-index: 100;
@@ -57,7 +58,32 @@
             justify-content: center;
             align-items: center;
         }
-    </style>
+    /* Default star color */
+    .product-ratting ul li a i {
+        color: #ccc; /* Light gray for inactive stars */
+    }
+
+    /* Color for selected stars */
+    .product-ratting ul li.selected a i {
+        color: #FFD700; /* Gold color for selected stars */
+    }   
+
+
+    .icon-star {
+    color: #ccc; /* Default color for empty stars */
+}
+
+.icon-star.fas {
+    color: #FFD700; /* Color for filled stars */
+}
+
+.icon-star.fas.fa-star-half-alt {
+    color: #FFD700; /* Color for half-filled stars */
+}
+
+</style>
+
+
 </head>
 
 
@@ -154,7 +180,7 @@
 
                                             </li>
 
-                                            <li class="menu-icon"><a href="Categories.html">Categories</a>
+                                            <!-- <li class="menu-icon"><a href="Categories.html">Categories</a> -->
 
 
 
@@ -211,18 +237,13 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
+                                    <li> 
                                         <!-- user-menu -->
                                         <div class="ltn__drop-menu user-menu">
                                             <ul>
-                                                <li>
+                                                <li id="authLinksContainer">
                                                     <a href="#"><i class="icon-user"></i></a>
-                                                    <ul>
-                                                        <li><a href="login.html">Sign in</a></li>
-                                                        <li><a href="register.html">Register</a></li>
-                                                        <li><a href="account.html">My Account</a></li>
-                                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                                    </ul>
+                                                    
                                                 </li>
                                             </ul>
                                         </div>
@@ -457,16 +478,8 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                                     <div class="ltn__shop-details-tab-content-inner text-center">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nost exercit ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-                                            eu fugiat nulla pariatur Excepte sint occaecat cupidatat non proident, sunt
-                                            in culpa qui officia deserunt mollit anim id est laborum. Sed ut
-                                            perspiciatis unde omnis iste natus error sit volu accusantium doloremque
-                                            laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis
-                                            et quasi architecto beatae vitae dicta sunt explica Nemllo enim ipsam
-                                            voluptatem quia voluptas sit aspernatur aut odit aut fugit,</p>
+                                        <p id="Description2">
+                                            Description Description Description Description Description Description</p>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="liton_tab_details_1_2">
@@ -474,177 +487,71 @@
                                         <div class="customer-reviews-head text-center">
                                             <h4 class="title-2">Customer Reviews</h4>
                                             <div class="product-ratting">
-                                                <ul>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                    <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                    <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                    <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
+                                                <ul id="avgStarRating">
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li><a href="#"><i class="icon-star"></i></a></li>
+                                                    <li class="review-total"> <a href="#" id="avgReviewCount"></a></li>
                                                 </ul>
                                             </div>
+                                            
                                         </div>
                                         <hr>
                                         <div class="row">
                                             <div class="col-lg-7">
                                                 <!-- comment-area -->
-                                                <div class="ltn__comment-area mb-30">
-                                                    <div class="ltn__comment-inner">
-                                                        <ul>
-                                                            <li>
-                                                                <div class="ltn__comment-item clearfix">
-                                                                    <div class="ltn__commenter-img">
-                                                                        <img src="img/testimonial/1.jpg" alt="Image">
-                                                                    </div>
-                                                                    <div class="ltn__commenter-comment">
-                                                                        <h6><a href="#">Adam Smit</a></h6>
-                                                                        <div class="product-ratting">
-                                                                            <ul>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star-half-alt"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="far fa-star"></i></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <p>Lorem ipsum dolor sit amet, consectetur
-                                                                            adipisicing elit. Doloribus, omnis fugit
-                                                                            corporis iste magnam ratione.</p>
-                                                                        <span class="ltn__comment-reply-btn">September
-                                                                            3, 2020</span>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="ltn__comment-item clearfix">
-                                                                    <div class="ltn__commenter-img">
-                                                                        <img src="img/testimonial/3.jpg" alt="Image">
-                                                                    </div>
-                                                                    <div class="ltn__commenter-comment">
-                                                                        <h6><a href="#">Adam Smit</a></h6>
-                                                                        <div class="product-ratting">
-                                                                            <ul>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star-half-alt"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="far fa-star"></i></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <p>Lorem ipsum dolor sit amet, consectetur
-                                                                            adipisicing elit. Doloribus, omnis fugit
-                                                                            corporis iste magnam ratione.</p>
-                                                                        <span class="ltn__comment-reply-btn">September
-                                                                            2, 2020</span>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="ltn__comment-item clearfix">
-                                                                    <div class="ltn__commenter-img">
-                                                                        <img src="img/testimonial/2.jpg" alt="Image">
-                                                                    </div>
-                                                                    <div class="ltn__commenter-comment">
-                                                                        <h6><a href="#">Adam Smit</a></h6>
-                                                                        <div class="product-ratting">
-                                                                            <ul>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="fas fa-star-half-alt"></i></a>
-                                                                                </li>
-                                                                                <li><a href="#"><i
-                                                                                            class="far fa-star"></i></a>
-                                                                                </li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <p>Lorem ipsum dolor sit amet, consectetur
-                                                                            adipisicing elit. Doloribus, omnis fugit
-                                                                            corporis iste magnam ratione.</p>
-                                                                        <span class="ltn__comment-reply-btn">September
-                                                                            2, 2020</span>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                <!-- comment-area -->
+<div class="ltn__comment-area mb-30">
+    <div class="ltn__comment-inner">
+        <ul id="comment-list">
+            <!-- Comments will be inserted here by JavaScript -->
+        </ul>
+    </div>
+</div>
                                             </div>
                                             <div class="col-lg-5">
                                                 <!-- comment-reply -->
                                                 <div class="ltn__comment-reply-area ltn__form-box mb-60">
-                                                    <form action="#">
+                                                    <form id="reviewForm" method="POST">
                                                         <h4 class="title-2">Add a Review</h4>
                                                         <div class="mb-30">
                                                             <div class="add-a-review">
                                                                 <h6>Your Ratings:</h6>
                                                                 <div class="product-ratting">
-                                                                    <ul>
-                                                                        <li><a href="#"><i class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i class="fas fa-star"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i
-                                                                                    class="fas fa-star-half-alt"></i></a>
-                                                                        </li>
-                                                                        <li><a href="#"><i class="far fa-star"></i></a>
-                                                                        </li>
+                                                                    <ul id="starRating">
+                                                                        <li><a href="#" onclick="setRating(1)"><i class="fas fa-star"></i></a></li>
+                                                                        <li><a href="#" onclick="setRating(2)"><i class="fas fa-star"></i></a></li>
+                                                                        <li><a href="#" onclick="setRating(3)"><i class="fas fa-star"></i></a></li>
+                                                                        <li><a href="#" onclick="setRating(4)"><i class="fas fa-star"></i></a></li>
+                                                                        <li><a href="#" onclick="setRating(5)"><i class="fas fa-star"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <input type="hidden" name="Rating" id="rating" value="0">
+                                                        <input type="hidden" name="ProductId" id="productId" value=""> <!-- Assuming a fixed Product ID -->
                                                         <div class="input-item input-item-textarea ltn__custom-icon">
-                                                            <textarea placeholder="Type your comments...."></textarea>
+                                                            <textarea name="CommentText" placeholder="Type your comments...."></textarea>
                                                         </div>
                                                         <div class="input-item input-item-name ltn__custom-icon">
-                                                            <input type="text" placeholder="Type your name....">
+                                                            <input type="text" name="Name" placeholder="Type your name....">
                                                         </div>
                                                         <div class="input-item input-item-email ltn__custom-icon">
-                                                            <input type="email" placeholder="Type your email....">
+                                                            <input type="email" name="Email" placeholder="Type your email....">
                                                         </div>
-                                                        <div class="input-item input-item-website ltn__custom-icon">
-                                                            <input type="text" name="website"
-                                                                placeholder="Type your website....">
-                                                        </div>
-                                                        <label class="mb-0"><input type="checkbox" name="agree"> Save my
-                                                            name, email, and website in this browser for the next time I
-                                                            comment.</label>
+                                                        
+                                                        <label class="mb-0">
+                                                            <input type="checkbox" name="agree"> Save my name, email, and website in this browser for the next time I comment.
+                                                        </label>
                                                         <div class="btn-wrapper">
-                                                            <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                                                type="submit">Submit</button>
+                                                            <button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Submit</button>
                                                         </div>
                                                     </form>
                                                 </div>
                                             </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -1165,6 +1072,7 @@
                                                         </li>
                                                     </ul>
                                                 </div>
+                                                
                                                 <div
                                                     class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">
                                                     <ul>
@@ -1430,18 +1338,17 @@
                                             </li>
                                             <li>
 
-                                                <div class="product-ratting">
-                                                    <ul>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        <li><a href="#"><i class="icon-star"></i></a></li>
-                                                        
-                                                        <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-                                                    </ul>
+                                               <div class="product-ratting" id="avgRatingContainer2">
+                                        <ul id="avgStarRating2">
+        <li><a href="#"><i class="icon-star"></i></a></li>
+        <li><a href="#"><i class="icon-star"></i></a></li>
+        <li><a href="#"><i class="icon-star"></i></a></li>
+        <li><a href="#"><i class="icon-star"></i></a></li>
+        <li><a href="#"><i class="icon-star"></i></a></li>
+        <li class="review-total"> <a href="#" id="avgReviewCount2"></a></li>
+    </ul>
+</div>
 
-                                                </div>
 
                                             </li>
                                         </ul>
@@ -1451,7 +1358,7 @@
                                     <div class="modal-product-brief">
                                         <p>${data.description}</p>
                                     </div>
-                                    <div class="modal-product-meta ltn__product-details-menu-1 mb-20">
+                               <!--     <div class="modal-product-meta ltn__product-details-menu-1 mb-20">
                                         <ul>
                                             <li>
                                                 <div class="ltn__color-widget clearfix">
@@ -1479,7 +1386,7 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div> -->
                                     <div class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">
                                         <ul>
                                             <li>
@@ -1541,6 +1448,13 @@
             </div>
         </div>
                     `;
+
+                      // Update the description in the tab content area
+            const descriptionContainer = document.getElementById("Description2");
+            if (descriptionContainer) {
+                descriptionContainer.innerHTML = `${data.description}`;
+            }
+        
                 }
 
 
@@ -1585,7 +1499,6 @@
                 alert("Please enter a valid quantity.");
                 return;
             }
-            debugger;
 
             carts.forEach(cart => {
                 console.log(`Cart ID: ${cart.cartId}, User ID: ${cart.userId}, Status: ${cart.status}`);
@@ -1640,8 +1553,9 @@
 
             if (addItemResponse.ok) {
              //   alert("Product added to cart successfully");
-         //    window.location.reload(); // Refresh the page or navigate as needed
-
+             setTimeout(function() {
+               window.location.reload(); // Refresh the page
+                      }, 2000);
             } else {
                 console.error("Error adding product to cart");
             }
@@ -1748,12 +1662,197 @@ function setProductId(productId, storeId) {
     </script>
 
 
+
+
+<script>
+    // Define the product ID to fetch comments for
+    const productId = localStorage.getItem("SelectedProductId"); // Example product ID, change as needed
+    
+    // Fetch comments from the server
+    function fetchComments(productId) {
+        const apiUrl = `https://localhost:7000/api/Review/getAllComments/${productId}`;
+    
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(comments => {
+                console.log(comments); // Log the response data to the console
+                displayComments(comments); // Call the function to display comments
+            })
+            .catch(error => {
+                console.error('There has been a problem with your fetch operation:', error);
+            });
+    }
+    
+    // Display comments in HTML
+    function displayComments(comments) {
+        const commentList = document.getElementById('comment-list');
+        commentList.innerHTML = ''; // Clear current comments
+    
+        comments.forEach(comment => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <div class="ltn__comment-item clearfix">
+                    <div class="ltn__commenter-img">
+                        <img src="img/testimonial/${comment.userId}.jpg" alt="Image"> <!-- Adjust as needed -->
+                    </div>
+                    <div class="ltn__commenter-comment">
+                        <h6><a href="#">User ${comment.name}</a></h6>
+                        <div class="product-ratting">
+                            <ul>
+                                ${renderStars(comment.rating)}
+                            </ul>
+                        </div>
+                        <p>${comment.comment1}</p>
+                        <span class="ltn__comment-reply-btn">${new Date(comment.date).toLocaleDateString()}</span>
+                    </div>
+                </div>
+            `;
+            commentList.appendChild(li); // Add comment to the list
+        });
+    }
+    
+    // Function to render stars based on rating
+    function renderStars(rating) {
+        let stars = '';
+        for (let i = 0; i < 5; i++) {
+            stars += '<li><a href="#"><i class="fas fa-star icon-star"></i></a></li>'; // Full star
+        }
+        return stars;
+    }
+    
+    // Fetch and display average rating and number of reviews
+    function fetchAndDisplayAverageRating(productId) {
+        const apiUrl = `https://localhost:7000/api/Review/AverageRatingByProduct/${productId}`;
+    
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json(); // Parse JSON data
+            })
+            .then(data => {
+                displayAverageRating(data.averageRating, data.reviewCount); // Display average rating
+                displayAverageRatingForContainer2(data.averageRating, data.reviewCount); // Display average rating in avgRatingContainer2
+            })
+            .catch(error => {
+                console.error('Error fetching average rating:', error);
+            });
+    }
+    
+    // Display average rating using stars and review count
+    function displayAverageRating(averageRating, reviewCount) {
+        const stars = document.querySelectorAll('#avgStarRating li a i'); // Select star icons
+        const fullStars = Math.floor(averageRating); // Number of filled stars
+        const hasHalfStar = averageRating % 1 >= 0.5; // Check if there should be a half star
+    
+        // Loop through each star and set its color based on rating
+        stars.forEach((star, index) => {
+            star.classList.remove('far', 'fa-star-half-alt', 'fas'); // Remove old classes
+            if (index < fullStars) {
+                star.classList.add('fas', 'fa-star', 'icon-star'); // Full star
+            } else if (index === fullStars && hasHalfStar) {
+                star.classList.add('fas', 'fa-star-half-alt', 'icon-star'); // Half star
+            } else {
+                star.classList.add('far', 'fa-star', 'icon-star'); // Empty star
+            }
+        });
+    
+        // Update review count
+        document.getElementById('avgReviewCount').textContent = `(${reviewCount} Reviews)`;
+    }
+
+    // Display average rating in avgRatingContainer2
+    function displayAverageRatingForContainer2(averageRating, reviewCount) {
+        const stars = document.querySelectorAll('#avgStarRating2 li a i'); // Select star icons in the second container
+        const fullStars = Math.floor(averageRating); // Number of filled stars
+        const hasHalfStar = averageRating % 1 >= 0.5; // Check if there should be a half star
+
+        // Loop through each star and set its color based on rating
+        stars.forEach((star, index) => {
+            star.classList.remove('far', 'fa-star-half-alt', 'fas'); // Remove old classes
+            if (index < fullStars) {
+                star.classList.add('fas', 'fa-star', 'icon-star'); // Full star
+            } else if (index === fullStars && hasHalfStar) {
+                star.classList.add('fas', 'fa-star-half-alt', 'icon-star'); // Half star
+            } else {
+                star.classList.add('far', 'fa-star', 'icon-star'); // Empty star
+            }
+        });
+
+        // Update review count
+        document.getElementById('avgReviewCount2').textContent = `(${reviewCount} Reviews)`;
+    }
+    
+    // Set the rating value and update star colors
+    function setRating(value) {
+        document.getElementById('rating').value = value;
+    
+        // Clear all selected star classes
+        const stars = document.querySelectorAll('#starRating li');
+        stars.forEach((star, index) => {
+            if (index < value) {
+                star.classList.add('selected'); // Add class to selected stars
+            } else {
+                star.classList.remove('selected'); // Remove class from unselected stars
+            }
+        });
+    }
+    
+  // Handle form submission
+document.getElementById('reviewForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const formData = new FormData(this);
+
+    fetch('https://localhost:7000/api/Review/addReview', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            console.error(`Error: ${response.status} ${response.statusText}`);
+            throw new Error('Review submission failed.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Replace alert with SweetAlert
+        swal("Success!", "Review submitted successfully!", "success");
+        console.log(data); // Optionally log server response
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Show an error message with SweetAlert
+        swal("Error!", "There was an error submitting your review.", "error");
+    });
+});
+
+    // Fetch comments and average rating for the selected product
+    fetchComments(productId);
+    fetchAndDisplayAverageRating(productId);
+
+    // Check if the Product ID is stored in localStorage
+    const selectedProductId = localStorage.getItem("SelectedProductId");
+    if (selectedProductId) {
+        // Set the value of the hidden input to the retrieved Product ID
+        document.getElementById("productId").value = selectedProductId;
+    } else {
+        console.error("No Product ID found in localStorage.");
+    }
+</script>
+
+    
+    
 <script SRC="js/cart.js"></script>
   
 </body> SRC="js/cart.js"></script>
-  
+
 </body>
-
-<!-- Mirrored from tunatheme.com/tf/html/fiama-preview/fiama/product-details.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 12:05:06 GMT -->
-
+    
 </html>

@@ -23,6 +23,10 @@ public partial class Product
 
     public int? Quantity { get; set; }
 
+    public string? Status { get; set; }
+
+    public bool? IsDeleted { get; set; }
+
     public virtual ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
 
     public virtual ICollection<Comment1> Comment1s { get; set; } = new List<Comment1>();

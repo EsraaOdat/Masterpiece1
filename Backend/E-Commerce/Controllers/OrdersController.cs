@@ -2,8 +2,8 @@
 using E_Commerce.Dto_Esraa;
 using E_Commerce.DTOs;
 using E_Commerce.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace E_Commerce.Controllers
 {
@@ -16,10 +16,9 @@ namespace E_Commerce.Controllers
         public OrdersController(MyDbContext db)
         {
             _db = db;
-
         }
 
-
+        // 1. الحصول على جميع الطلبات
         [HttpGet]
         [Route("AllOrders")]
         public IActionResult GetAllOrders()
@@ -29,71 +28,7 @@ namespace E_Commerce.Controllers
                 {
                     OrderId = order.OrderId,
                     Date = order.Date,
-
-                    // Customer information
-                    Customer = new UserDto
-                    {
-                        Name = order.User.Name
-                    },
-                    Store = new StoreDto
-                    {
-                        StoreId = order.StoreId ?? 0, // If StoreId is nullable, default to 0 or handle accordingly
-                        StoreName = _db.Stores
-                               .Where(store => store.StoreId == order.StoreId) // Match StoreId
-                               .Select(store => store.StoreName) // Select StoreName
-                               .FirstOrDefault() ?? "Unknown Store" // Provide a fallback value if StoreName is null
-                    },
-                    // Calculate the total number of items
-                    NumberOfItems = order.OrderItems.Sum(oi => oi.Quantity ?? 0),
-
-                    // Calculate the total price of the order
-                    Total = order.OrderItems.Sum(oi => (oi.Quantity ?? 0) * (oi.Product.Price ?? 0)),
-
-                    // Status of the order
-                    Status = order.Status,
-
-                    // Map each order item to OrderItemDto
-                    OrderItem = order.OrderItems.Select(oi => new OrderItemDto
-                    {
-                        ProductId = oi.Product.ProductId,
-                        ProductName = oi.Product.Name,
-                        Quantity = oi.Quantity,
-                        Price = oi.Product.Price
-                    }).ToList()
-                })
-                .ToList();
-
-            return Ok(orders);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        [HttpGet]
-        [Route("OrdersByStore/{storeId}")]
-        public IActionResult GetOrdersByStore(int storeId)
-        {
-            var orders = _db.Orders
-                .Where(order => order.StoreId == storeId) // Filter by StoreId
-                .Select(order => new OrderResponseDto
-                {
-                    OrderId = order.OrderId,
-                    Date = order.Date,
-
-                    // Customer information
-                    Customer = new UserDto
-                    {
-                        Name = order.User.Name
-                    },
+                    Customer = order.User != null ? new UserDto { Name = order.User.Name } : null,
                     Store = new StoreDto
                     {
                         StoreId = order.StoreId ?? 0,
@@ -102,16 +37,9 @@ namespace E_Commerce.Controllers
                             .Select(store => store.StoreName)
                             .FirstOrDefault() ?? "Unknown Store"
                     },
-                    // Calculate the total number of items
                     NumberOfItems = order.OrderItems.Sum(oi => oi.Quantity ?? 0),
-
-                    // Calculate the total price of the order
                     Total = order.OrderItems.Sum(oi => (oi.Quantity ?? 0) * (oi.Product.Price ?? 0)),
-
-                    // Status of the order
                     Status = order.Status,
-
-                    // Map each order item to OrderItemDto
                     OrderItem = order.OrderItems.Select(oi => new OrderItemDto
                     {
                         ProductId = oi.Product.ProductId,
@@ -122,7 +50,43 @@ namespace E_Commerce.Controllers
                 })
                 .ToList();
 
-            if (!orders.Any()) // Check if no orders were found
+            return Ok(orders);
+        }
+
+        // 2. الحصول على الطلبات حسب المتجر
+        [HttpGet]
+        [Route("OrdersByStore/{storeId}")]
+        public IActionResult GetOrdersByStore(int storeId)
+        {
+            var orders = _db.Orders
+                .Where(order => order.StoreId == storeId)
+                .Select(order => new OrderResponseDto
+                {
+                    OrderId = order.OrderId,
+                    Date = order.Date,
+                    Customer = order.User != null ? new UserDto { Name = order.User.Name } : null,
+                    Store = new StoreDto
+                    {
+                        StoreId = order.StoreId ?? 0,
+                        StoreName = _db.Stores
+                            .Where(store => store.StoreId == order.StoreId)
+                            .Select(store => store.StoreName)
+                            .FirstOrDefault() ?? "Unknown Store"
+                    },
+                    NumberOfItems = order.OrderItems.Sum(oi => oi.Quantity ?? 0),
+                    Total = order.OrderItems.Sum(oi => (oi.Quantity ?? 0) * (oi.Product.Price ?? 0)),
+                    Status = order.Status,
+                    OrderItem = order.OrderItems.Select(oi => new OrderItemDto
+                    {
+                        ProductId = oi.Product.ProductId,
+                        ProductName = oi.Product.Name,
+                        Quantity = oi.Quantity,
+                        Price = oi.Product.Price
+                    }).ToList()
+                })
+                .ToList();
+
+            if (!orders.Any())
             {
                 return NotFound($"No orders found for store ID {storeId}.");
             }
@@ -130,52 +94,26 @@ namespace E_Commerce.Controllers
             return Ok(orders);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        // 3. الحصول على الطلبات حسب المستخدم
         [HttpGet]
         [Route("GetOrdersByUser/{userId}")]
         public IActionResult GetOrdersByUserId(int userId)
         {
-            // Retrieve all orders that belong to the specified user
             var orders = _db.Orders
-                .Where(order => order.UserId == userId) // Filter by UserId
+                .Where(order => order.UserId == userId)
                 .Select(order => new OrderResponseDto
                 {
                     OrderId = order.OrderId,
                     Date = order.Date,
-                    Customer = new UserDto
-                    {
-                        Name = order.User.Name
-                    },
-                    // Safely retrieve StoreId and StoreName with null checks
+                    Customer = order.User != null ? new UserDto { Name = order.User.Name } : null,
                     Store = new StoreDto
                     {
-                        StoreId = order.StoreId ?? 0, // If StoreId is nullable, default to 0 or handle accordingly
+                        StoreId = order.StoreId ?? 0,
                         StoreName = _db.Stores
-                               .Where(store => store.StoreId == order.StoreId) // Match StoreId
-                               .Select(store => store.StoreName) // Select StoreName
-                               .FirstOrDefault() ?? "Unknown Store" // Provide a fallback value if StoreName is null
+                            .Where(store => store.StoreId == order.StoreId)
+                            .Select(store => store.StoreName)
+                            .FirstOrDefault() ?? "Unknown Store"
                     },
-
                     NumberOfItems = order.OrderItems.Sum(oi => oi.Quantity ?? 0),
                     Total = order.OrderItems.Sum(oi => (oi.Quantity ?? 0) * (oi.Product.Price ?? 0)),
                     Status = order.Status,
@@ -189,8 +127,7 @@ namespace E_Commerce.Controllers
                 })
                 .ToList();
 
-            // Check if the user has any orders
-            if (orders.Count == 0)
+            if (!orders.Any())
             {
                 return NotFound(new { message = "No orders found for this user." });
             }
@@ -198,31 +135,23 @@ namespace E_Commerce.Controllers
             return Ok(orders);
         }
 
-
-
-
-
-
-
+        // 4. الحصول على عناصر الطلب حسب معرف الطلب
         [HttpGet]
         [Route("GetOrderItemsByOrderId/{orderId}")]
         public IActionResult GetOrderItemsByOrderId(int orderId)
         {
-            // Retrieve all order items that belong to the specified order
             var orderItems = _db.OrderItems
-                .Where(oi => oi.OrderId == orderId) // Filter by OrderId
+                .Where(oi => oi.OrderId == orderId)
                 .Select(oi => new OrderItemDto
                 {
                     ProductId = oi.Product.ProductId,
-
                     ProductName = oi.Product.Name,
                     Quantity = oi.Quantity,
                     Price = oi.Product.Price
                 })
                 .ToList();
 
-            // Check if the order has any items
-            if (orderItems.Count == 0)
+            if (!orderItems.Any())
             {
                 return NotFound(new { message = "No items found for this order." });
             }
@@ -230,6 +159,7 @@ namespace E_Commerce.Controllers
             return Ok(orderItems);
         }
 
+        // 5. الحصول على تفاصيل الطلب حسب معرف الطلب
         [HttpGet]
         [Route("GetOrderDetails/{orderId}")]
         public IActionResult GetOrderDetails(int orderId)
@@ -242,8 +172,6 @@ namespace E_Commerce.Controllers
                     Date = o.Date,
                     Status = o.Status,
                     TotalAmount = o.OrderItems.Sum(oi => (oi.Quantity ?? 0) * (oi.Product.Price ?? 0)),
-
-                    // Products (OrderItems)
                     OrderItems = o.OrderItems.Select(oi => new OrderDetailsDto.OrderItemDto
                     {
                         ProductId = oi.Product.ProductId,
@@ -252,22 +180,17 @@ namespace E_Commerce.Controllers
                         Price = oi.Product.Price ?? 0,
                         ProductImage = oi.Product.Image // Assuming Image field exists in Product
                     }).ToList(),
-
-                    // Customer (User)
                     Customer = new OrderDetailsDto.CustomerDto
                     {
                         Name = o.User.Name,
                         Email = o.User.Email,
                         Image = o.User.Image,
                         PhoneNumber = o.User.PhoneNumber
-
                     },
-
-                    // التحقق من وجود كوبون وجلب معلوماته
                     Coupon = new OrderDetailsDto.CouponDto
                     {
-                        Name = o.Copon.Name ?? "No Copoun Applied",  // Assuming Coupon has Name
-                        Amount = o.Copon.Amount ?? 0// Assuming Coupon has DiscountAmount
+                        Name = o.Copon.Name ?? "No Coupon Applied",
+                        Amount = o.Copon.Amount ?? 0
                     }
                 })
                 .FirstOrDefault();
@@ -280,14 +203,11 @@ namespace E_Commerce.Controllers
             return Ok(order);
         }
 
-
-
-
+        // 6. تحديث حالة الطلب
         [HttpPut]
         [Route("UpdateOrderStatus/{orderId}")]
         public IActionResult UpdateOrderStatus(int orderId, [FromBody] UpdateOrderStatusDto updateOrderStatusDto)
         {
-            // Find the order by ID
             var order = _db.Orders.FirstOrDefault(o => o.OrderId == orderId);
 
             if (order == null)
@@ -295,17 +215,10 @@ namespace E_Commerce.Controllers
                 return NotFound(new { message = "Order not found." });
             }
 
-            // Update the status
             order.Status = updateOrderStatusDto.Status;
-
-            // Save changes to the database
             _db.SaveChanges();
 
             return Ok(new { message = "Order status updated successfully.", orderId = orderId, newStatus = updateOrderStatusDto.Status });
         }
-
-
-
-
     }
 }

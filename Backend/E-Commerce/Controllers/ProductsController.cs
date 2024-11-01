@@ -26,6 +26,8 @@ namespace E_Commerce.Controllers
         public IActionResult GetAllProducts()
         {
             var data = _db.Products
+                                  .Where(p => p.IsDeleted == false) // Filter out deleted products
+
                           .Include(p => p.CartItems)
                           .Include(p => p.Comments)
                           .Include(p => p.Comment1s)
@@ -35,6 +37,7 @@ namespace E_Commerce.Controllers
                           .Include(p => p.Colors)
                           .Include(p => p.Sizes)
                           .Include(p => p.Tags)
+                          .Include(p => p.Store)
                           .OrderByDescending(p => p.ProductId)
                           .ToList();
 
@@ -44,128 +47,101 @@ namespace E_Commerce.Controllers
 
 
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        // Get all products with status pending for admin dashboard
+        [HttpGet("PendingProducts")]
+        public IActionResult GetPendingProducts()
+        {
+            var data = _db.Products
+                                  .Where(p => p.Status == "pending" && p.IsDeleted == false)
+
+                          .Include(p => p.CartItems)
+                          .Include(p => p.Comments)
+                          .Include(p => p.Comment1s)
+                          .Include(p => p.ProductDiscounts)
+                          .Include(p => p.ProductImages)
+                          .Include(p => p.Variants)
+                          .Include(p => p.Colors)
+                          .Include(p => p.Sizes)
+                          .Include(p => p.Tags)
+                          .Include(p => p.Store)
+                          .OrderByDescending(p => p.ProductId)
+                          .ToList();
+
+            return Ok(data);
+        }
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        // Get all products with status rejected for admin dashboard
+        [HttpGet("RejectedProducts")]
+        public IActionResult GetRejectedProducts()
+        {
+            var data = _db.Products
+                          .Include(p => p.CartItems)
+                          .Include(p => p.Comments)
+                          .Include(p => p.Comment1s)
+                          .Include(p => p.ProductDiscounts)
+                          .Include(p => p.ProductImages)
+                          .Include(p => p.Variants)
+                          .Include(p => p.Colors)
+                          .Include(p => p.Sizes)
+                          .Include(p => p.Tags)
+                          .Include(p => p.Store)
+                          .Where(p => p.Status == "rejected" && p.IsDeleted == false) // Filter for products with status "rejected"
+                          .OrderByDescending(p => p.ProductId)
+                          .ToList();
+
+            return Ok(data);
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
 
         //لازم برضو البرودكت يلي محلات فيهم active
+        //shop page +admin (propuct approved)
 
         [HttpGet("Products")]
         public IActionResult GetProducts()
         {
             var data = _db.Products
-                .Where(p => _db.Stores
-                    .Any(s => s.StoreId == p.StoreId && s.Status == "active"))
-                .OrderByDescending(p => p.ProductId)
-                          .ToList();
+                .Include(p => p.ProductImages)   // Include product images
+                .Include(p => p.Comments)         // Include comments related to products
+                .Include(p => p.Tags)             // Include tags associated with products
+                .Include(p => p.Store)             // Include store information
+                      .Where(p => p.Status == "approved" && p.IsDeleted == false && _db.Stores.Any(s => s.StoreId == p.StoreId && s.Status == "active"))
+        .OrderByDescending(p => p.ProductId)
+
+                .ToList();
+
             return Ok(data);
         }
 
-
-        // Get all products for admin dashboard
-        /*  [HttpGet("Products")]
-          public IActionResult GetProducts()
-          {
-              var products = _db.Products.Where(x => x.CategoryId == categoryId).ToList();
-              return Ok(products);
-          }
-
-  */
-        /*
-                [HttpPost("CreateProduct")]
-                public async Task<IActionResult> CreateProduct([FromBody] ProductRequestDTO productDto)
-                {
-                    if (productDto == null)
-                    {
-                        return BadRequest("Product data is required.");
-                    }
-
-                    // Create a new product instance
-                    var newProduct = new Product
-                    {
-                        Name = productDto.Name,
-                        Description = productDto.Description,
-                        Price = productDto.Price,
-                        Quantity = productDto.Quantity,
-                        CreatedAt = DateTime.UtcNow
-                    };
-
-                    // Add the new product to the database
-                    _db.Products.Add(newProduct);
-                    await _db.SaveChangesAsync();
-
-                    // Add product images
-                    foreach (var image in productDto.ProductImages)
-                    {
-                        var productImage = new ProductImage
-                        {
-                            ProductId = newProduct.ProductId,
-                            ImagePath = image
-                        };
-                        _db.ProductImages.Add(productImage);
-                    }
-
-                    // Add colors
-                    foreach (var colorId in productDto.ColorIds)
-                    {
-                        var productColor = new ProductColor
-                        {
-                            ProductId = newProduct.ProductId,
-                            ColorId = colorId
-                        };
-                        _db.ProductColors.Add(productColor);
-                    }
-
-                    // Add sizes
-                    foreach (var sizeId in productDto.SizeIds)
-                    {
-                        var productSize = new ProductSize
-                        {
-                            ProductId = newProduct.ProductId,
-                            SizeId = sizeId
-                        };
-                        _db.ProductSizes.Add(productSize);
-                    }
-
-                    // Add tags
-                    foreach (var tagId in productDto.TagIds)
-                    {
-                        var productTag = new ProductTag
-                        {
-                            ProductId = newProduct.ProductId,
-                            TagId = tagId
-                        };
-                        _db.ProductTags.Add(productTag);
-                    }
-
-                    // Save all changes in one go
-                    await _db.SaveChangesAsync();
-
-                    return CreatedAtAction(nameof(CreateProduct), new { id = newProduct.ProductId }, newProduct);
-                }
-
-
-
-
-
-
-
-        */
-
-
-
-        // Get Last8 INDEX products
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //home page 
         [HttpGet("GetLast8Products")]
         public IActionResult GetLast8Products()
         {
-
             var lastEightProducts = _db.Products
-          .Where(p => _db.Stores.Any(s => s.StoreId == p.StoreId && s.Status == "active"))
-          .OrderByDescending(p => p.CreatedAt) // Order by creation date (or ID, depending on your logic)
-          .Take(8) // Take the last 8 products
-          .ToList();
+                .Where(p => p.Status == "approved" // Product status must be approved
+                  && p.IsDeleted == false && _db.Stores.Any(s => s.StoreId == p.StoreId && s.Status == "active")) // Store status must be active
+                .OrderByDescending(p => p.CreatedAt) // Order by creation date
+                .Take(8) // Take the last 8 products
+                .ToList();
 
             return Ok(lastEightProducts);
-
-
         }
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
 
         // Get products by category ID
         [HttpGet("ProductsByCategoryId/{SubcategoryId}")]
@@ -180,20 +156,23 @@ namespace E_Commerce.Controllers
         public IActionResult GetProductById(int id)
         {
             var data = _db.Products
-                          .Include(p => p.CartItems)
-                          .Include(p => p.Comment1s)
-                          .Include(p => p.Comments)
-                          .Include(p => p.OrderItems)
-                          .Include(p => p.ProductDiscounts)
-                          .Include(p => p.ProductImages)
-                          .Include(p => p.Variants).ThenInclude(s => s.Tag)
-                          .Include(p => p.Store)
-                          .Include(p => p.Wishlists)
-                          .Include(p => p.Colors)
-                          .Include(p => p.Sizes)
-                          .Include(p => p.Tags)
-                          .Include(p => p.Subcategory).ThenInclude(s => s.Category)
-                          .FirstOrDefault(p => p.ProductId == id);
+                .Include(p => p.CartItems)
+                .Include(p => p.Comment1s)
+                .Include(p => p.Comments)
+                .Include(p => p.OrderItems)
+                .Include(p => p.ProductDiscounts)
+                .Include(p => p.ProductImages)
+                .Include(p => p.Variants).ThenInclude(v => v.Tag)
+                .Include(p => p.Store)
+                .Include(p => p.Wishlists)
+                .Include(p => p.Colors)
+                .Include(p => p.Sizes)
+                .Include(p => p.Tags)
+                .Include(p => p.Subcategory).ThenInclude(s => s.Category)
+                .FirstOrDefault(p => p.ProductId == id && p.IsDeleted == false &&
+                                     p.Status == "approved" && // Product must be approved
+                                     p.Store.Status == "active"); // Store must be active
+
             if (data == null)
             {
                 return NotFound();
@@ -205,291 +184,110 @@ namespace E_Commerce.Controllers
 
 
 
-
-        /*
-                        ----------------------------------------------------------------------------------------------------
-                        ----------------------------------------------------------------------------------------------------
-
-                *//*
-                        [HttpPost]
-                [Route("AddProduct")]
-                public IActionResult CreateProduct([FromForm] ProductRequestDTO productDto)
-                {
-                    // Ensure the "Product" directory exists
-                    var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
-                    if (!Directory.Exists(uploadedFolder))
-                    {
-                        Directory.CreateDirectory(uploadedFolder);
-                    }
-
-                    // Save the uploaded image file
-                    var fileImage = Path.Combine(uploadedFolder, productDto.Image.FileName);
-                    using (var stream = new FileStream(fileImage, FileMode.Create))
-                    {
-                        productDto.Image.CopyTo(stream);
-                    }
-
-                    // Prepare the data to be saved in the database as a new Product
-                    var product = new Product
-                    {
-                        ProductName = productDto.ProductName,
-                        Description = productDto.Description,
-                        Price = productDto.Price,
-                        CategoryId = productDto.CategoryId,
-                        Image = productDto.Image.FileName
-                    };
-
-                    // Add the product to the database and save changes
-                    _db.Products.Add(product);
-                    _db.SaveChanges();
-
-                    // Return a success response
-                    return Ok(new { message = "Product added successfully", product });
-                }
-
-
-
-                        ----------------------------------------------------------------------------------------------------
-                ----------------------------------------------------------------------------------------------------
-        */
-
-
-        /* [HttpPut("UpdateProduct/{id}")]
-        public IActionResult UpdateProduct(int id, [FromForm] ProductRequestDTO Product)
-        {
-            // Find the existing product by ID
-            var existingProduct = _db.Products.FirstOrDefault(p => p.ProductId == id);
-            if (existingProduct == null)
-            {
-                return NotFound(new { message = "Product not found" });
-            }
-
-            // Validate the incoming model
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // Ensure the "Product" directory exists
-            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
-            if (!Directory.Exists(uploadedFolder))
-            {
-                Directory.CreateDirectory(uploadedFolder);
-            }
-
-            // Save the uploaded image file if provided
-            if (Product.Image != null)
-            {
-                var fileImage = Path.Combine(uploadedFolder, Product.Image.FileName);
-                using (var stream = new FileStream(fileImage, FileMode.Create))
-                {
-                    Product.Image.CopyTo(stream);
-                }
-
-                // Update the image path
-                existingProduct.Image = Product.Image.FileName;
-            }
-
-            // Update the existing product's properties with the new values
-            existingProduct.Name = Product.ProductName;
-            existingProduct.Description = Product.Description;
-            existingProduct.Price = Product.Price;
-
-            // Save changes to the database
-            _db.Products.Update(existingProduct);
-            _db.SaveChanges();
-
-            // Return a success response with the updated product
-            return Ok(new { message = "Product updated successfully", product = existingProduct });
-        }*/
-
-        /*
-                        ----------------------------------------------------------------------------------------------------
-                        ----------------------------------------------------------------------------------------------------
-
-        */
-
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
         [HttpGet("ProductsByStore/{storeId}")]
         public IActionResult GetProductsByStore(int storeId)
         {
-            // Optionally, check if the store exists and is active
+            // Check if the store exists and is active
             var store = _db.Stores.FirstOrDefault(s => s.StoreId == storeId && s.Status == "active");
 
             if (store == null)
             {
                 return NotFound(new { message = "Store not found or inactive" });
             }
-            // Fetch products by storeId and order by ProductId descending
+
+            // Fetch only approved products by storeId, ordered by ProductId descending
             var products = _db.Products
-                              .Where(p => p.StoreId == storeId)
+                              .Where(p => p.StoreId == storeId && p.Status == "approved" && p.IsDeleted == false) // Filter by approved status
                               .OrderByDescending(p => p.ProductId)
                               .ToList();
 
             return Ok(products);
-
         }
 
 
 
 
 
-        /*
-                // POST: api/products
-                [HttpPost]
-                public async Task<ActionResult> PostProduct([FromForm] AddProductDto productDto)
-                {
-                    // 1. Save the main product image
-                    var productImagePath = await SaveImage(productDto.ProductImage, "products");
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //for store owner 
+        [HttpGet("FetchAllProductsByStore/{storeId}")]
+        public IActionResult FetchAllProductsByStore(int storeId)
+        {
+            // Check if the store exists and is active
+            var store = _db.Stores.FirstOrDefault(s => s.StoreId == storeId && s.Status == "active");
 
-                    // 2. Create the product entity
-                    var product = new E_Commerce.Models.Product
-                    {
-                        Name = productDto.Name,
-                        Description = productDto.Description,
-                        Price = productDto.Price,
-                        Quantity = productDto.Quantity,
-                        Image = productImagePath, // Save the main product image path
-                        CreatedAt = DateTime.Now
-                    };
+            if (store == null)
+            {
+                return NotFound(new { message = "Store not found or inactive" });
+            }
 
-                    // Save the product to the database
-                    _db.Products.Add(product);
-                    await _db.SaveChangesAsync();
+            // Fetch all products by storeId, ordered by ProductId descending
+            var products = _db.Products
+                              .Where(p => p.StoreId == storeId && p.IsDeleted == false) // Remove the status filter
+                              .OrderByDescending(p => p.ProductId)
+                              .ToList();
 
-                    // 3. Handle colors and their images
-                    foreach (var colorDto in productDto.Colors)
-                    {
-                        // Save the color image
-                        var colorImagePath = await SaveImage(colorDto.ColorImage, "colors");
+            return Ok(products);
+        }
 
-                        // Create and save the color-product relationship with its image
-                        var productColorImage = new E_Commerce.Models.ProductImage
-                        {
-                            ProductId = product.ProductId,
-                            ColorId = colorDto.ColorID,
-                            ImagePath = colorImagePath
-                        };
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //for store owner 
 
-                        _db.ProductColorImages.Add(ProductImage);
-                    }
 
-                    // Save changes to the database for the colors
-                    await _db.SaveChangesAsync();
+        [HttpGet("ApprovedProductsByStore/{storeId}")]
+        public IActionResult GetApprovedProductsByStore(int storeId)
+        {
+            // Fetch approved products that belong to the specified store
+            var approvedProducts = _db.Products
 
-                    // 4. Handle sizes
-                    foreach (var sizeId in productDto.Sizes)
-                    {
-                        var productColorSize = new E_Commerce.Models.ProductColorSize
-                        {
-                            ProductId = product.ProductId,
-                            SizeId = sizeId,
-                            Stock = productDto.Quantity // You can customize the stock logic here
-                        };
+                                      .Where(p => p.StoreId == storeId && p.Status == "approved" && p.IsDeleted == false)
+                                      .OrderByDescending(p => p.ProductId)
+                                      .ToList();
 
-                        _db.ProductColorSizes.Add(productColorSize);
-                    }
+            // Check if any approved products were found
+            if (approvedProducts == null || !approvedProducts.Any())
+            {
+                return NotFound(new { message = "No approved products found for this store." });
+            }
 
-                    // Save changes to the database for the sizes
-                    await _db.SaveChangesAsync();
+            return Ok(approvedProducts);
+        }
 
-                    return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
-                }
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //for store owner 
 
-                // Helper method to save the images to the file system
-                private async Task<string> SaveImage(IFormFile imageFile, string folder)
-                {
-                    if (imageFile == null || imageFile.Length == 0)
-                        return null;
+        [HttpGet("RejectedProductsByStore/{storeId}")]
+        public IActionResult GetRejectedProductsByStore(int storeId)
+        {
+            // Fetch rejected products that belong to the specified store
+            var rejectedProducts = _db.Products
+                                      .Where(p => p.StoreId == storeId && p.Status == "rejected" && p.IsDeleted == false)
+                                      .OrderByDescending(p => p.ProductId)
+                                      .ToList();
 
-                    var uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folder);
-                    Directory.CreateDirectory(uploadPath);
+            // Check if any rejected products were found
+            if (rejectedProducts == null || !rejectedProducts.Any())
+            {
+                return NotFound(new { message = "No rejected products found for this store." });
+            }
 
-                    var fileName = $"{Guid.NewGuid()}_{Path.GetFileName(imageFile.FileName)}";
-                    var filePath = Path.Combine(uploadPath, fileName);
+            return Ok(rejectedProducts);
+        }
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await imageFile.CopyToAsync(stream);
-                    }
-
-                    return $"/{folder}/{fileName}";
-                }
-
-                // For demonstration purposes, a simple GetProduct method
-                [HttpGet("{id}")]
-                public async Task<ActionResult<E_Commerce.Models.Product>> GetProduct(int id)
-                {
-                    var product = await _db.Products
-                        .Include(p => p.ProductColorImages)
-                        .Include(p => p.ProductColorSizes)
-                        .FirstOrDefaultAsync(p => p.ProductId == id);
-
-                    if (product == null)
-                    {
-                        return NotFound();
-                    }
-
-                    return Ok(product);
-                }
-        */
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-        /* // POST: api/sort
-         [HttpPost]
-         public IActionResult SortWords([FromForm] int[] words)
-         {
-             if (words == null || words.Length == 0)
-             {
-                 return BadRequest("Please provide a valid array of words.");
-             }
-
-             // Sort the array by word length
-             //  Array.Sort(words, (w1, w2) => w1.Length.CompareTo(w2.Length));
-             int i, j, tep;
-             for (i = 0; i < words.Length; i++)
-             {
-                 for (j = i + 1; j < words.Length; j++)
-                 {
-                     if (words[i] > words[j])
-                     {
-                         tep = words[j];
-                         words[j] = words[i];
-                         words[i] = tep;
-
-
-
-                     }
-
-                 }
-
-
-
-
-             }
-
-
-                 // Return the sorted array
-                 return Ok(words);
-
-         }*/
-
-
+        // Count the total number of elements in the array
 
         [HttpPost]
         public IActionResult CountNumbers([FromBody] int[] numbers)
@@ -510,21 +308,8 @@ namespace E_Commerce.Controllers
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
 
         [HttpPost]
@@ -592,51 +377,396 @@ namespace E_Commerce.Controllers
 
 
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
-
-
-
-        // Get 3 Random Products by ProductId, excluding the product itself, from the same subcategory
-        [HttpGet("GetRandom3ProductsBySubcategory/{excludeProductId}")]
-        public IActionResult GetRandom3ProductsBySubcategory(int excludeProductId)
+        [HttpGet]
+        [Route("TopSellingProducts")]
+        public IActionResult GetTopSellingProducts()
         {
-            // Fetch the product to get its SubcategoryId
-            var product = _db.Products.FirstOrDefault(p => p.ProductId == excludeProductId);
+            var topSellingProducts = _db.OrderItems
+                .GroupBy(oi => oi.ProductId)
+                .Select(g => new
+                {
+                    ProductId = g.Key,
+                    QuantitySold = g.Sum(oi => oi.Quantity ?? 0),
+                    Product = g.FirstOrDefault().Product
+                })
+                .OrderByDescending(p => p.QuantitySold)
+                .Take(3)
+                .ToList();
+
+            if (!topSellingProducts.Any())
+            {
+                return NotFound(new { message = "No products found." }); // إرجاع رسالة في حال عدم وجود منتجات
+            }
+
+            return Ok(topSellingProducts.Select(p => new
+            {
+                p.ProductId,
+                p.QuantitySold,
+                Product = p.Product
+            }));
+        }
+
+
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        [HttpGet]
+        [Route("TopReviewedProducts")]
+        public IActionResult GetTopReviewedProducts()
+        {
+            var topReviewedProducts = _db.Comments
+                .GroupBy(r => r.ProductId) // Group by ProductId
+                .Select(g => new
+                {
+                    ProductId = g.Key,
+                    ReviewCount = g.Count(), // Count of reviews for each product
+                    AverageRating = g.Average(r => r.Rating ?? 0), // Average rating for each product
+                    Product = g.FirstOrDefault().Product // Retrieve product details
+                })
+                .OrderByDescending(p => p.ReviewCount) // Sort by review count
+                .Take(3) // Limit to top 3
+                .ToList();
+
+            if (!topReviewedProducts.Any())
+            {
+                return NotFound(new { message = "No products found." });
+            }
+
+            return Ok(topReviewedProducts.Select(p => new
+            {
+                p.ProductId,
+                p.ReviewCount,
+                p.AverageRating,
+                Product = p.Product // Return the product details
+            }));
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        [HttpPut]
+        [Route("EditProduct/{id}")]
+        public async Task<IActionResult> EditProduct(int id, [FromForm] ProductRequestDTO productDto)
+        {
+            if (productDto == null)
+            {
+                return BadRequest("Invalid product data.");
+            }
+
+            // Retrieve the product to edit
+            var existingProduct = await _db.Products
+                                            .Include(p => p.ProductImages) // Include images if you need to update them
+                                            .FirstOrDefaultAsync(p => p.ProductId == id);
+
+            if (existingProduct == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            // Update product properties
+            existingProduct.Name = productDto.Name;
+            existingProduct.Description = productDto.Description;
+            existingProduct.Price = productDto.Price ?? existingProduct.Price; // Keep existing value if null
+            existingProduct.Quantity = productDto.Quantity ?? existingProduct.Quantity; // Keep existing value if null
+            existingProduct.SubcategoryId = productDto.SubcategoryId ?? existingProduct.SubcategoryId; // Keep existing value if null
+
+            // Set status to pending
+            existingProduct.Status = "pending"; // Update status to pending
+
+            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
+            if (!Directory.Exists(uploadedFolder))
+            {
+                Directory.CreateDirectory(uploadedFolder);
+            }
+
+            // Update main image if a new one is uploaded
+            if (productDto.Image != null)
+            {
+                // Handle old image removal
+                var oldImagePath = Path.Combine(uploadedFolder, existingProduct.Image);
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath); // Delete old image if it exists
+                }
+
+                // Save the new image
+                var mainImagePath = Path.Combine(uploadedFolder, productDto.Image.FileName);
+                using (var stream = new FileStream(mainImagePath, FileMode.Create))
+                {
+                    await productDto.Image.CopyToAsync(stream);
+                }
+
+                existingProduct.Image = productDto.Image.FileName; // Update the product's image reference
+            }
+
+            // Update additional images if provided
+            if (productDto.AdditionalImages != null && productDto.AdditionalImages.Any())
+            {
+                // Delete existing additional images
+                foreach (var existingImage in existingProduct.ProductImages.ToList())
+                {
+                    var oldImagePath = Path.Combine(uploadedFolder, existingImage.ImagePath);
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath); // Delete old additional image
+                    }
+                    _db.ProductImages.Remove(existingImage); // Remove old images from the database
+                }
+
+                // Save new additional images
+                foreach (var image in productDto.AdditionalImages)
+                {
+                    var additionalImagePath = Path.Combine(uploadedFolder, image.FileName);
+                    using (var stream = new FileStream(additionalImagePath, FileMode.Create))
+                    {
+                        await image.CopyToAsync(stream);
+                    }
+
+                    var productImage = new ProductImage
+                    {
+                        ProductId = existingProduct.ProductId,
+                        ImagePath = image.FileName
+                    };
+
+                    _db.ProductImages.Add(productImage);
+                }
+            }
+
+            // Save all changes to the database
+            await _db.SaveChangesAsync();
+
+            return Ok(new { message = "Product updated successfully." });
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        [HttpDelete("Delete/{id}")]
+        public IActionResult Delete(int id)
+        {
+            var product = _db.Products
+                             .Include(p => p.ProductImages) // Include related images
+                             .FirstOrDefault(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+            // Remove related ProductColors
+
+            // Remove related OrderItems
+            _db.OrderItems.RemoveRange(product.OrderItems);
+
+            // Remove related ProductImages
+            _db.ProductImages.RemoveRange(product.ProductImages);
+
+            // Finally, remove the product
+            _db.Products.Remove(product);
+
+            _db.SaveChanges();
+
+            return Ok(product);
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //shop page
+
+
+        [HttpGet("ByPriceRange")]
+        public IActionResult GetProductsByPriceRange(decimal minPrice, decimal maxPrice)
+        {
+            // Validate input values
+            if (minPrice < 0 || maxPrice < 0 || minPrice > maxPrice)
+            {
+                return BadRequest("Invalid price range.");
+            }
+
+            var products = _db.Products
+                .Where(p => p.Price >= minPrice && p.Price <= maxPrice
+                             && p.Status == "approved" // Ensure the product is approved
+                             && p.Store.Status == "active" && p.IsDeleted == false) // Ensure the store is active
+                .Select(p => new
+                {
+                    p.ProductId,
+                    p.Name,
+                    p.Description,
+                    p.Price,
+                    p.StoreId,
+                    p.SubcategoryId,
+                    p.CreatedAt,
+                    p.Image,
+                    p.Quantity,
+                    p.Status,
+                    StoreName = p.Store.StoreName, // Assuming you have a Name property in the Store model
+                    SubcategoryName = p.Subcategory.SubcategoryName, // Assuming you have a Name property in the Subcategory model
+
+                    // Add more properties as needed
+                })
+                .ToList();
+
+            return Ok(products);
+        }
+
+        //--------------------------------------------------------------------------------------------------------
+        //--------------------------------------------------------------------------------------------------------
+        [HttpPut("Delete/{id}")]
+        public IActionResult MarkAsDeleted(int id)
+        {
+            // Find the product by ID
+            var product = _db.Products.FirstOrDefault(p => p.ProductId == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            // Set is_deleted to 1 to mark as deleted
+            product.IsDeleted = true;
+
+            // Save changes to the database
+            _db.SaveChanges();
+
+            return Ok(product);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+
+
+        [HttpGet]
+        [Route("GetProductsBySubcategory/{subcategoryId}")]
+        public IActionResult GetProductsBySubcategory(int subcategoryId)
+        {
+            var products = _db.Products
+                .Where(p => p.SubcategoryId == subcategoryId
+                             && p.Status == "approved" // Ensure the product is approved
+                             && p.Store.Status == "active" && p.IsDeleted == false) // Ensure the store is active
+                .Select(product => new
+                {
+                    productId = product.ProductId,
+                    name = product.Name,
+                    description = product.Description,
+                    price = product.Price,
+                    image = product.Image
+                })
+                .ToList();
+
+            return Ok(products);
+        }
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+
+        // Approve a product by ID
+        [HttpPut("ApproveProduct/{productId}")]
+        public IActionResult ApproveProduct(int productId)
+        {
+            var product = _db.Products.FirstOrDefault(p => p.ProductId == productId);
+            if (product == null)
+            {
+                return NotFound("Product not found");
+            }
+
+            product.Status = "approved"; // Set status to "approved"
+            _db.SaveChanges();
+
+            return Ok("Product approved successfully");
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        // Reject a product by ID
+        [HttpPut("RejectProduct/{productId}")]
+        public IActionResult RejectProduct(int productId)
+        {
+            var product = _db.Products.FirstOrDefault(p => p.ProductId == productId);
+            if (product == null)
+            {
+                return NotFound("Product not found");
+            }
+
+            product.Status = "rejected"; // Set status to "rejected"
+            _db.SaveChanges();
+
+            return Ok("Product rejected successfully");
+        }
+
+
+
+
+
+
+
+
+
+
+        [HttpGet]
+        [Route("GetRandom3ProductsBySubcategory/{productId}")]
+        public IActionResult GetRandom3ProductsBySubcategory(int productId)
+        {
+            // Find the product to get its subcategory
+            var product = _db.Products
+                .FirstOrDefault(p => p.ProductId == productId); // Fetch the specific product by ID
 
             if (product == null)
             {
                 return NotFound("Product not found");
             }
 
-            int? subcategoryId = product.SubcategoryId;
+            var subcategoryId = product.SubcategoryId; // Get the subcategory ID from the found product
 
-            // Fetch products that match the subcategoryId and exclude the specified product
-            var randomProductsBySubcategory = _db.Products
-                                                 .Where(p => p.SubcategoryId == subcategoryId && p.ProductId != excludeProductId) // Exclude the specified product
-                                                 .OrderBy(p => Guid.NewGuid()) // Order by random GUID to shuffle the products
-                                                 .Take(4) // Get 5 random products
-                                                 .ToList();
+            // Get three random approved products from the same subcategory excluding the specified product
+            // Get three random approved products from the same subcategory excluding the specified product
+            var randomProducts = _db.Products
+                .Where(p => p.SubcategoryId == subcategoryId
+                             && p.Status == "approved"
+                             && p.Store.Status == "active"
+                             && p.ProductId != productId // Exclude the specific product
+                             && (p.IsDeleted == false || p.IsDeleted == null)) // Include only products that are not deleted
+                .OrderBy(r => Guid.NewGuid()) // Randomize the results
+                .Take(3)
+                .Select(p => new
+                {
+                    productId = p.ProductId,
+                    name = p.Name,
+                    description = p.Description,
+                    price = p.Price,
+                    image = p.Image
+                })
+                .ToList();
 
-            return Ok(randomProductsBySubcategory);
+
+            return Ok(randomProducts);
         }
 
-
-
-
-
-        // Delete a product by ID
-
-        [HttpDelete("Delete/{id}")]
-        public IActionResult Delete(int id)
-        {
-            var data = _db.Products.Find(id);
-            if (data == null)
-            {
-                return NotFound();
-            }
-            _db.Products.Remove(data);
-            _db.SaveChanges();
-            return Ok(data);
-        }
     }
 }

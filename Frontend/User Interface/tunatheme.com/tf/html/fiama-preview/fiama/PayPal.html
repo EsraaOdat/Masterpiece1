@@ -67,87 +67,102 @@ a:hover {
     </style>
 </head>
 <body>
-    <br><br><br><br>    <div class="product-container">
+
+  <br>
+  <br>
+  <br>
+    <div class="product-container">
         <div class="product-image-container">
             <img src="../fiama/img/logo.png" alt="logo">
         </div>
-        <div >
-          <br><br><br><br>
-            <h1 style="text-align: center;">Gifts Haven</h1><br><br>
-            <!-- <p class="price">$0.99</p> -->
-            <p class="product-description">
-              Thank you for making this order            </p>
-            <!-- <p>*Terms and Conditions Apply</p> -->
-            <div id="paypal-button-container"></div>
-           
+        <div>
+            <h1 style="text-align: center;">Gifts Haven</h1>  <br>  <br>
+            <br>
+
+
+            <p class="product-description">Thank you for making this order</p>  <br>  <br>
+            <br>
+
+
+            <div id="paypal-button-container"></div>  <br>
+            <br>
+
         </div>
     </div>
+
     <script src="https://www.paypal.com/sdk/js?client-id=Adtb6XkpqqndM80PndrUC19_b7NqNe4BDiNI5b3beOJWq1bUyoPk4QQABWoxFInvtrj3PPuvcU0X24p8&currency=USD"></script>
 
-    <!-- <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script> -->
-    <!-- <script src="patpal.js"></script> -->
-
     <script>
-        function initPayPalButton() {
-    paypal.Buttons({
-        style: {
-            shape: 'rect',
-            color: 'gold',
-            layout: 'vertical',
-            label: 'paypal',
-        },
+        function PlaceOrder() {
+            const userId = localStorage.getItem('userID');
 
-        createOrder: function(data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        currency_code: "USD",
-                        // value: "0.99" // Use string format for value
-                        value : localStorage.getItem("orderTotal")
-                    }
-                }]
+            if (!userId) {
+                alert("User ID not found. Please log in.");
+                return;
+            }
+
+            fetch(`https://localhost:7000/api/CartItems/MoveCartToOrder/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert("Order placed successfully"); 
+                window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert("Failed to place order: " + error.message);
             });
-        },
-
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(orderData) {
-                console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                
-                // Show a success message
-                const element = document.getElementById('paypal-button-container');
-                element.innerHTML = '<h3>Thank you for your payment!</h3>';
-                window.location.href = "rating.html";
-            });
-        },
-
-        onError: function(err) {
-            console.error('PayPal Error:', err);
         }
-    }).render('#paypal-button-container');
-}
 
-// Initialize PayPal button
-window.onload = initPayPalButton;
+        function initPayPalButton() {
+            paypal.Buttons({
+                style: {
+                    shape: 'rect',
+                    color: 'gold',
+                    layout: 'vertical',
+                    label: 'paypal',
+                },
 
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                currency_code: "USD",
+                                value: localStorage.getItem("orderTotal")
+                            }
+                        }]
+                    });
+                },
 
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(orderData) {
+                        console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+
+                        // عرض رسالة نجاح
+                        document.getElementById('paypal-button-container').innerHTML = '<h3>Thank you for your payment!</h3>';
+                        
+                        // تطبيق PlaceOrder() بعد الدفع بنجاح
+                        PlaceOrder();
+                    });
+                },
+
+                onError: function(err) {
+                    console.error('PayPal Error:', err);
+                }
+            }).render('#paypal-button-container');
+        }
+
+        // Initialize PayPal button
+        window.onload = initPayPalButton;
     </script>
-  
-  <script src="ATjwqpGdnk6lpACbqDyKDDUBgoZVMsoNjLZKCuvbDukNmHlYyGgqqa7R4QKyoxSOdEFnAvMR-MmnqB5E">
-    </script>
-
-
-<script src="../fiama/js/main.js"></script>
-
-    <!-- All JS Plugins -->
-    <script src="js/plugins.js"></script>
-    <!-- Main JS -->
-    <script src="js/main.js"></script>
-
-
-
-<script SRC="js/cart.js"></script>
-  
-<script SRC="js/cart.js"></script>
-  
 </body>
 </html>
