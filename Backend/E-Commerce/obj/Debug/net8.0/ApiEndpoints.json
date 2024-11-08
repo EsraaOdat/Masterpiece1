@@ -778,6 +778,16 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.ProductsController",
+    "Method": "GetAllTag",
+    "RelativePath": "api/Products/AllTag",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.ProductsController",
     "Method": "GetApprovedProductsByStore",
     "RelativePath": "api/Products/ApprovedProductsByStore/{storeId}",
     "HttpMethod": "GET",
@@ -881,6 +891,11 @@
         "Name": "AdditionalImages",
         "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
         "IsRequired": false
+      },
+      {
+        "Name": "TagIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -973,6 +988,11 @@
       {
         "Name": "AdditionalImages",
         "Type": "System.Collections.Generic.List\u00601[[Microsoft.AspNetCore.Http.IFormFile, Microsoft.AspNetCore.Http.Features, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "TagIds",
+        "Type": "System.Collections.Generic.List\u00601[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],
@@ -1070,6 +1090,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.ProductsController",
+    "Method": "GetProductsByStoreWithoutStatusCheck",
+    "RelativePath": "api/Products/Products/{storeId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "storeId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {
@@ -1554,6 +1590,16 @@
     "ContainingType": "E_Commerce.Controllers.StoresController",
     "Method": "GetActiveStores",
     "RelativePath": "api/Stores/active",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.StoresController",
+    "Method": "GetInactiveStores",
+    "RelativePath": "api/Stores/inactive",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

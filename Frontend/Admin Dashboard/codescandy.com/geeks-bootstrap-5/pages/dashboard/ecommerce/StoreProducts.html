@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+  
+<!-- Mirrored from codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/product-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 09:44:30 GMT -->
+<head>
+    <!-- Required meta tags -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="Codescandy" />
+
+<!-- Favicon icon-->
+<link rel="shortcut icon" type="image/x-icon" href="https://codescandy.com/geeks-bootstrap-5/assets/images/favicon/favicon.ico" />
+
+<!-- darkmode js -->
+<script src="../../../assets/js/vendors/darkMode.js"></script>
+
+<!-- Libs CSS -->
+<link href="../../../assets/fonts/feather/feather.css" rel="stylesheet" />
+<link href="../../../assets/libs/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+<link href="../../../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet" />
+
+<!-- Theme CSS -->
+<link rel="stylesheet" href="../../../assets/css/theme.min.css">
+
+    <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard/ecommerce/product-grid.html" />
+    <title>Product Grid 4 Four Column | Geeks - Academy Admin Template</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>/* Add some margin to navbar items */
+        .navbar-nav .nav-item {
+          margin-bottom: 15px; /* Adjust this value to your preference */
+        }
+        
+        /* Add some space between the icon and the text */
+        .navbar-nav .nav-link i {
+          margin-right: 10px; /* Space between icon and text */
+        }
+        </style>
+        </head>
+      
+        <body>
+          <!-- Wrapper -->
+          <div id="db-wrapper">
+            <!-- navbar vertical -->
+       <!-- Vertical Navbar -->
+      <nav class="navbar-vertical navbar">
+        <div class="vh-100" data-simplebar>
+          <!-- Brand logo -->
+          <a class="navbar-brand" href="https://codescandy.com/geeks-bootstrap-5/index.html">
+            <img src="https://codescandy.com/geeks-bootstrap-5/assets/images/brand/logo/logo-inverse.svg" alt="">
+          </a>
+          <!-- Navbar nav -->
+          <ul class="navbar-nav flex-column" id="sideNavbar">
+      
+            <!-- Nav item User -->
+            <li class="nav-item">
+              <a class="nav-link" href="Users.html">
+                <i class="nav-icon fe fe-user me-2" style="font-size:18px"></i>
+                &nbsp; User
+              </a>
+            </li>
+      
+            <!-- Nav item Stores -->
+            <li class="nav-item">
+              <a class="nav-link active" href="stores.html">
+                <i class="fas fa-store"></i>&nbsp; Stores
+              </a>
+            </li>
+      
+            <!-- Nav item Orders -->
+            <li class="nav-item">
+              <a class="nav-link" href="order.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M4.083 11.894c.439-2.34.658-3.511 1.491-4.203C6.408 7 7.598 7 9.98 7h4.04c2.383 0 3.573 0 4.407.691c.833.692 1.052 1.862 1.491 4.203l.75 4c.617 3.292.926 4.938.026 6.022S18.12 23 14.771 23H9.23c-3.349 0-5.024 0-5.923-1.084c-.9-1.084-.591-2.73.026-6.022z" opacity=".5"></path>
+                  <path fill="currentColor" d="M9.75 5.985a2.25 2.25 0 0 1 4.5 0v1c.566 0 1.062.002 1.5.015V5.985a3.75 3.75 0 1 0-7.5 0V7c.438-.013.934-.015 1.5-.015zm.128 9.765a2.251 2.251 0 0 0 4.245 0a.75.75 0 1 1 1.414.5a3.751 3.751 0 0 1-7.073 0a.75.75 0 0 1 1.414-.5"></path>
+                </svg>&nbsp;
+                Orders
+              </a>
+            </li>
+      
+            <!-- Nav item Category -->
+      <!-- Nav item Category -->
+      <li class="nav-item">
+        <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#navCategory" aria-expanded="false" aria-controls="navCategory">
+          <i class="fas fa-list"></i>&nbsp; Category
+        </a>
+        <div id="navCategory" class="collapse" data-bs-parent="#sideNavbar">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="Category.html">All Categories</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="AddCategories.html">Add Category</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      
+      
+            <!-- Nav item Products -->
+            <li class="nav-item">
+              <a class="nav-link" href="admin-products.html">
+                <i class="fas fa-gift"></i>&nbsp; Products
+              </a>
+            </li>
+      
+            <!-- Nav item Contact Us -->
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">
+                <i class="fa fa-address-book" aria-hidden="true"></i>&nbsp; Contact Us
+              </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="Login.html" onclick="logoutAndClearStorage()">
+                  <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp; Logout
+                </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <!-- Page Content -->
+      <main id="page-content">
+        <div class="header">
+    <!-- navbar -->
+    <nav class="navbar-default navbar navbar-expand-lg">
+        <a id="nav-toggle" href="#">
+            <i class="fe fe-menu"></i>
+        </a>
+        <div class="ms-lg-3 d-none d-md-none d-lg-block">
+            <!-- Form -->
+            <form class="d-flex align-items-center">
+                <span class="position-absolute ps-3 search-icon">
+                    <i class="fe fe-search"></i>
+                </span>
+                <input type="search" class="form-control ps-6" placeholder="Search Entire Dashboard" />
+            </form>
+        </div>
+        <!--Navbar nav -->
+        <div class="ms-auto d-flex">
+            <div class="dropdown">
+                <button class="btn btn-light btn-icon rounded-circle d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                    <i class="bi theme-icon-active"></i>
+                    <span class="visually-hidden bs-theme-text">Toggle theme</span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
+                            <i class="bi theme-icon bi-sun-fill"></i>
+                            <span class="ms-2">Light</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
+                            <i class="bi theme-icon bi-moon-stars-fill"></i>
+                            <span class="ms-2">Dark</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
+                            <i class="bi theme-icon bi-circle-half"></i>
+                            <span class="ms-2">Auto</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
+                <li class="dropdown stopevent">
+                    <a
+                        class="btn btn-light btn-icon rounded-circle indicator indicator-primary"
+                        href="#"
+                        role="button"
+                        id="dropdownNotification"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false">
+                        <i class="fe fe-bell"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg" aria-labelledby="dropdownNotification">
+                        <div>
+                            <div class="border-bottom px-3 pb-3 d-flex justify-content-between align-items-center">
+                                <span class="h4 mb-0">Notifications</span>
+                                <a href="# ">
+                                    <span class="align-middle">
+                                        <i class="fe fe-settings me-1"></i>
+                                    </span>
+                                </a>
+                            </div>
+                            <!-- List group -->
+                            <ul class="list-group list-group-flush" data-simplebar style="max-height: 300px">
+                                <li class="list-group-item bg-light">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="text-body" href="#">
+                                                <div class="d-flex">
+                                                    <img src="../../../assets/images/avatar/avatar-1.jpg" alt="" class="avatar-md rounded-circle" />
+                                                    <div class="ms-3">
+                                                        <h5 class="fw-bold mb-1">Kristin Watson:</h5>
+                                                        <p class="mb-3">Krisitn Watsan like your comment on course Javascript Introduction!</p>
+                                                        <span class="fs-6">
+                                                            <span>
+                                                                <span class="fe fe-thumbs-up text-success me-1"></span>
+                                                                2 hours ago,
+                                                            </span>
+                                                            <span class="ms-1">2:19 PM</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto text-center me-2">
+                                            <a href="#" class="badge-dot bg-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark as read"></a>
+                                            <div>
+                                                <a href="#" class="bg-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove">
+                                                    <i class="fe fe-x"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="text-body" href="#">
+                                                <div class="d-flex">
+                                                    <img src="../../../assets/images/avatar/avatar-2.jpg" alt="" class="avatar-md rounded-circle" />
+                                                    <div class="ms-3">
+                                                        <h5 class="fw-bold mb-1">Brooklyn Simmons</h5>
+                                                        <p class="mb-3">Just launched a new Courses React for Beginner.</p>
+                                                        <span class="fs-6">
+                                                            <span>
+                                                                <span class="fe fe-thumbs-up text-success me-1"></span>
+                                                                Oct 9,
+                                                            </span>
+                                                            <span class="ms-1">1:20 PM</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto text-center me-2">
+                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark as unread"></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="text-body" href="#">
+                                                <div class="d-flex">
+                                                    <img src="../../../assets/images/avatar/avatar-3.jpg" alt="" class="avatar-md rounded-circle" />
+                                                    <div class="ms-3">
+                                                        <h5 class="fw-bold mb-1">Jenny Wilson</h5>
+                                                        <p class="mb-3">Krisitn Watsan like your comment on course Javascript Introduction!</p>
+                                                        <span class="fs-6">
+                                                            <span>
+                                                                <span class="fe fe-thumbs-up text-info me-1"></span>
+                                                                Oct 9,
+                                                            </span>
+                                                            <span class="ms-1">1:56 PM</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto text-center me-2">
+                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark as unread"></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a class="text-body" href="#">
+                                                <div class="d-flex">
+                                                    <img src="../../../assets/images/avatar/avatar-4.jpg" alt="" class="avatar-md rounded-circle" />
+                                                    <div class="ms-3">
+                                                        <h5 class="fw-bold mb-1">Sina Ray</h5>
+                                                        <p class="mb-3">You earn new certificate for complete the Javascript Beginner course.</p>
+                                                        <span class="fs-6">
+                                                            <span>
+                                                                <span class="fe fe-award text-warning me-1"></span>
+                                                                Oct 9,
+                                                            </span>
+                                                            <span class="ms-1">1:56 PM</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col-auto text-center me-2">
+                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark as unread"></a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="border-top px-3 pt-3 pb-0">
+                                <a href="https://codescandy.com/geeks-bootstrap-5/pages/notification-history.html" class="text-link fw-semibold">See all Notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <!-- List -->
+                <li class="dropdown ms-2">
+                    <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="avatar avatar-md avatar-indicators avatar-online">
+                            <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                        <div class="dropdown-item">
+                            <div class="d-flex">
+                                <div class="avatar avatar-md avatar-indicators avatar-online">
+                                    <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                                </div>
+                                <div class="ms-3 lh-1">
+                                    <h5 class="mb-1">Annette Black</h5>
+                                    <p class="mb-0">annette@geeksui.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <ul class="list-unstyled">
+                            <li class="dropdown-submenu dropstart-lg">
+                                <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
+                                    <i class="fe fe-circle me-2"></i>
+                                    Status
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <span class="badge-dot bg-success me-2"></span>
+                                            Online
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <span class="badge-dot bg-secondary me-2"></span>
+                                            Offline
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <span class="badge-dot bg-warning me-2"></span>
+                                            Away
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">
+                                            <span class="badge-dot bg-danger me-2"></span>
+                                            Busy
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="https://codescandy.com/geeks-bootstrap-5/pages/profile-edit.html">
+                                    <i class="fe fe-user me-2"></i>
+                                    Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="https://codescandy.com/geeks-bootstrap-5/pages/student-subscriptions.html">
+                                    <i class="fe fe-star me-2"></i>
+                                    Subscription
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fe fe-settings me-2"></i>
+                                    Settings
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="dropdown-divider"></div>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a class="dropdown-item" href="https://codescandy.com/geeks-bootstrap-5/index.html">
+                                    <i class="fe fe-power me-2"></i>
+                                    Sign Out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+        <!-- Container fluid -->
+        <div class="container-fluid p-4">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <!-- Page header -->
+              <div class="border-bottom pb-3 mb-3">
+                <div class="mb-2 mb-lg-0">
+                  <h1 class="mb-0 h2 fw-bold">Product Grid</h1>
+                  <!-- Breadcrumb -->
+                  <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                      <li class="breadcrumb-item">
+                        <a href="admin-dashboard.html">Dashboard</a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="#">Ecommerce</a>
+                      </li>
+                      <li class="breadcrumb-item active" aria-current="page">Product Grid</li>
+                    </ol>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mb-4">
+            <!-- row -->
+            <div class="row justify-content-md-between flex-md-row flex-column gap-1 gap-md-0 mb-4">
+              <div class="col-xxl-2 col-lg-3 col-md-5 col-12">
+                <!-- input -->
+                <input type="search" class="form-control" placeholder="Search Product" />
+              </div>
+              <div class="col-xxl-6 col-lg-5 col-md-7 col-12">
+                <!-- row -->
+                <div class="row justify-content-md-end">
+                  <!-- input -->
+                  <label class="col-auto col-form-label">Sorting</label>
+                  <div class="col-lg-4">
+                    <!-- form select -->
+                    <select class="form-select" data-choices="" aria-label="Default select example">
+                      <option selected>Featured</option>
+                      <option value="Newest">Newest</option>
+                      <option value="Price: High-Low">Price: High-Low</option>
+                      <option value="Price: Low-High">Price: Low-High</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3 row-cols-xxl-4 gy-4"id="product-item">
+          
+           
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Libs JS -->
+<script src="../../../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+<script src="../../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../../assets/libs/simplebar/dist/simplebar.min.js"></script>
+
+<!-- Theme JS -->
+<script src="../../../assets/js/theme.min.js"></script>
+
+    <script src="../../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <script src="../../../assets/js/vendors/choice.js"></script>
+
+    <script>
+        const SelectedStoreId = localStorage.getItem('SelectedStoreId');
+        
+        async function getData() {
+          // Ensure that SelectedStoreId is a valid ID (not null or undefined)
+          if (!SelectedStoreId) {
+            console.error("No SelectedStoreId found in localStorage.");
+            return;
+          }
+        
+          // Dynamically create the URL using the SelectedStoreId value
+          const url = `https://localhost:7000/api/Products/Products/${SelectedStoreId}`;
+        
+        
+              try {
+                const response = await fetch(url);
+        
+                // Check if the response is successful
+                if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+                }
+        
+                // Parse the JSON data
+                let data = await response.json();
+        
+                // Select the container for product items
+                let cards = document.getElementById("product-item");
+                let cards2 = document.getElementById("product-item2");
+        
+                // Clear any existing content before appending new content
+                cards.innerHTML = '';
+        // Check if data contains products
+        if (data.length === 0 ) {
+            // If no products, show a card indicating that
+  cards.innerHTML = `
+    <div class="col">
+      <!-- card -->
+      <div class="card h-100">
+        <div class="card-body text-center">
+          <h5 class="mb-0">No Products Available</h5>
+        </div>
+      </div>
+    </div>
+  `;
+} else {
+  // Loop through each product and create the card markup
+  data.forEach((product) => {
+    cards.innerHTML += `
+      <div class="col">
+        <!-- card -->
+        <div class="card h-100">
+          <div>
+            <a href="product-single.html">
+              <!-- img -->
+              <img src="../../../../../../../Backend/E-Commerce/Product/${product.image}" alt="${product.name}" class="img-fluid rounded-top-md" />
+            </a>
+          </div>
+          <!-- card body -->
+          <div class="card-body d-flex flex-column gap-4">
+            <div class="d-flex flex-column gap-2">
+              <!-- text -->
+              <h4 class="mb-0"><a href="product-single.html" onclick="setProductId(${product.productId})" class="text-inherit">${product.name}</a></h4>
+            </div>
+            <!-- price -->
+            <div class="d-flex justify-content-between">
+              <h4 class="mb-0">$${product.price.toFixed(2)}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+              } catch (error) {
+                console.error("There was an error fetching the data:", error);
+              }
+            }
+        
+            
+        
+            async function StoreInfo() {
+            const SelectedStoreId = localStorage.getItem('SelectedStoreId');
+            const url = `https://localhost:7000/api/Stores/${SelectedStoreId}`;
+        
+            try {
+                const response = await fetch(url);
+                console.log("response", response);
+        
+                // Check if the response is OK (status code 200-299)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+        
+                let data = await response.json();
+                console.log("data", data);
+        
+                let cards = document.getElementById("storeLogo");
+                let name = document.getElementById("storename");
+                let description = document.getElementById("storedescription");
+        
+                // Ensure that you're selecting the correct element
+                const storeBanner = document.getElementById('storeBanner'); 
+                console.log('API Response:', data); 
+                let store = Array.isArray(data) ? data[0] : data; 
+        
+                if (store) {
+                    // Update store logo
+                    cards.innerHTML = `
+                        <img src="../../../../../../../Backend/E-Commerce/StoreImages/${store.storeLogo}" alt="Store Logo">
+                    `;
+        
+                    // Update store name and description
+                    name.innerHTML = `${store.storeName}`;
+                    description.innerHTML = `${store.storeDescription}`;
+                    storeBanner.style.backgroundImage = `url(../../../../../../../Backend/E-Commerce/StoreImages/${store.backgroundImage})`;
+                    storeBanner.style.backgroundSize = 'cover'; // Optional: to make the background cover the entire area
+                    storeBanner.style.backgroundPosition = 'center'; // Optional: to center the background image
+        
+                }
+            } catch (error) {
+                console.error("Error fetching store information:", error);
+            }
+        }
+        
+        function setProductId(productId) {
+            console.log("Setting product ID:", productId); // Log the ID being set
+            localStorage.setItem("SelectedProductId", productId);
+            window.location.href = 'product-details.html'; // Redirect after storing productId
+        }
+        
+        
+        // Call the function to fetch and display products
+        getData(); // Ensure this function is defined somewhere in your code
+        StoreInfo(); // Call the StoreInfo function to fetch store details
+        
+          </script>
+
+<script>
+    // Apply the stored theme on page load
+    document.addEventListener("DOMContentLoaded", () => {
+      const theme = localStorage.getItem('theme') || 'light'; // Default to 'light'
+      document.body.className = theme;
+    });
+  
+    // Toggle theme between dark and light
+    function toggleTheme() {
+      let theme = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', theme);
+      document.body.className = theme;
+    }
+  
+    // Logout function preserving the theme
+    function logoutAndClearStorage() {
+      const theme = localStorage.getItem('theme'); // Save theme
+  
+      localStorage.clear(); // Clear all items
+      if (theme) localStorage.setItem('theme', theme); // Restore theme
+  
+      window.location.href = 'Login.html'; // Redirect to login
+    }
+  </script>
+
+
+  </body>
+
+<!-- Mirrored from codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/product-grid.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 09:44:32 GMT -->
+</html>

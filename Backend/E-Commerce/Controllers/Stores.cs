@@ -175,6 +175,16 @@ namespace E_Commerce.Controllers
 
 
 
+        // Return only stores with "inactive" status
+        [HttpGet("inactive")]
+        public IActionResult GetInactiveStores()
+        {
+            UpdateStoreStatuses();
+
+            var inactiveStores = _context.Stores.Where(s => s.Status == "inactive").ToList();
+            return Ok(inactiveStores);
+        }
+
 
 
 
@@ -221,7 +231,7 @@ namespace E_Commerce.Controllers
             return Ok(new { message = "Subscription updated successfully", store });
         }
 
-        //last 3 store (home page )
+        //last 3 store (home page ) TOP SELLING 
 
         [HttpGet("top-stores")]
         public IActionResult GetTopStores(int top = 3)

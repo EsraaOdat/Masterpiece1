@@ -114,6 +114,9 @@ namespace E_Commerce.Controllers
                 .Include(p => p.Comments)         // Include comments related to products
                 .Include(p => p.Tags)             // Include tags associated with products
                 .Include(p => p.Store)             // Include store information
+
+
+                      //.Include(p=>p.Comments)
                       .Where(p => p.Status == "approved" && p.IsDeleted == false && _db.Stores.Any(s => s.StoreId == p.StoreId && s.Status == "active"))
         .OrderByDescending(p => p.ProductId)
 
@@ -121,6 +124,14 @@ namespace E_Commerce.Controllers
 
             return Ok(data);
         }
+
+
+
+
+
+
+
+
 
         //----------------------------------------------------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------------------------------------------------
@@ -210,6 +221,28 @@ namespace E_Commerce.Controllers
 
 
 
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        [HttpGet("Products/{storeId}")]
+        public IActionResult GetProductsByStoreWithoutStatusCheck(int storeId)
+
+        {
+            var store = _db.Stores.FirstOrDefault(s => s.StoreId == storeId);
+
+            if (store == null)
+            {
+                return NotFound(new { message = "Store not found or inactive" });
+            }
+
+            var products = _db.Products
+                              .Where(p => p.StoreId == storeId && p.Status == "approved" && p.IsDeleted == false) // Filter by approved status
+                              .OrderByDescending(p => p.ProductId)
+                              .ToList();
+
+            return Ok(products);
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
 
         //----------------------------------------------------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------------------------------------------------
@@ -311,7 +344,6 @@ namespace E_Commerce.Controllers
         //----------------------------------------------------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------------------------------------------------
 
-
         [HttpPost]
         [Route("CreateProductWithImages")]
         public async Task<IActionResult> CreateProductWithImages([FromForm] ProductRequestDTO productDto)
@@ -346,12 +378,12 @@ namespace E_Commerce.Controllers
             };
 
             _db.Products.Add(newProduct);
-            await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync(); // Save the new product to get the ProductId
 
+            // Handle additional images
             foreach (var image in productDto.AdditionalImages)
             {
                 var additionalImagePath = Path.Combine(uploadedFolder, image.FileName);
-
                 using (var stream = new FileStream(additionalImagePath, FileMode.Create))
                 {
                     await image.CopyToAsync(stream);
@@ -366,8 +398,25 @@ namespace E_Commerce.Controllers
                 _db.ProductImages.Add(productImage);
             }
 
+           
 
+          
 
+            // Handle tags
+            if (productDto.TagIds != null)
+            {
+                foreach (var tagId in productDto.TagIds)
+                {
+                    var variant = new Variant
+                    {
+                        ProductId = newProduct.ProductId,
+                        TagId = tagId,
+                        // You can also set ColorId and SizeId here as needed
+                    };
+
+                    _db.Variants.Add(variant);
+                }
+            }
 
             await _db.SaveChangesAsync();  // Save all changes to the database
 
@@ -377,8 +426,34 @@ namespace E_Commerce.Controllers
 
 
 
+
+
+
+
+        // Get all products for admin dashboard
+        [HttpGet("AllTag")]
+        public IActionResult GetAllTag()
+        {
+            var data = _db.Tags
+
+                         
+                          .ToList();
+
+            return Ok(data);
+        }
+
+
+
+
+
+
+
+
+
+
         //----------------------------------------------------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------------------------------------------------
+
 
         [HttpGet]
         [Route("TopSellingProducts")]
@@ -386,6 +461,7 @@ namespace E_Commerce.Controllers
         {
             var topSellingProducts = _db.OrderItems
                 .GroupBy(oi => oi.ProductId)
+                .Where(g => g.All(oi => oi.Product.Status == "approved" && oi.Product.Store.Status == "active" && oi.Product.IsDeleted == false))
                 .Select(g => new
                 {
                     ProductId = g.Key,
@@ -393,7 +469,7 @@ namespace E_Commerce.Controllers
                     Product = g.FirstOrDefault().Product
                 })
                 .OrderByDescending(p => p.QuantitySold)
-                .Take(3)
+                .Take(4)
                 .ToList();
 
             if (!topSellingProducts.Any())
@@ -420,6 +496,8 @@ namespace E_Commerce.Controllers
         {
             var topReviewedProducts = _db.Comments
                 .GroupBy(r => r.ProductId) // Group by ProductId
+                                .Where(g => g.All(oi => oi.Product.Status == "approved" && oi.Product.Store.Status == "active" && oi.Product.IsDeleted == false))
+
                 .Select(g => new
                 {
                     ProductId = g.Key,
@@ -428,7 +506,7 @@ namespace E_Commerce.Controllers
                     Product = g.FirstOrDefault().Product // Retrieve product details
                 })
                 .OrderByDescending(p => p.ReviewCount) // Sort by review count
-                .Take(3) // Limit to top 3
+                .Take(4) 
                 .ToList();
 
             if (!topReviewedProducts.Any())
@@ -753,7 +831,7 @@ namespace E_Commerce.Controllers
                              && p.ProductId != productId // Exclude the specific product
                              && (p.IsDeleted == false || p.IsDeleted == null)) // Include only products that are not deleted
                 .OrderBy(r => Guid.NewGuid()) // Randomize the results
-                .Take(3)
+                .Take(4)
                 .Select(p => new
                 {
                     productId = p.ProductId,

@@ -24,6 +24,7 @@ namespace E_Commerce.Controllers
         public IActionResult GetAllOrders()
         {
             var orders = _db.Orders
+                .OrderByDescending(order => order.Date) 
                 .Select(order => new OrderResponseDto
                 {
                     OrderId = order.OrderId,
@@ -52,6 +53,7 @@ namespace E_Commerce.Controllers
 
             return Ok(orders);
         }
+
 
         // 2. الحصول على الطلبات حسب المتجر
         [HttpGet]

@@ -28,101 +28,87 @@
     <link href="../../../assets/libs/dropzone/dist/dropzone.css" rel="stylesheet" />
     <link href="../../../assets/libs/%40yaireo/tagify/dist/tagify.css" rel="stylesheet" />
     <title>Add Product | Geeks - Academy Admin Template</title>
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-  <body>
-    <!-- Wrapper -->
-    <div id="db-wrapper">
-      <!-- navbar vertical -->
-  <!-- navbar vertical -->
-  <nav class="navbar-vertical navbar">
-    <div class="vh-100" data-simplebar>
+</head>
+<style>
+  /* Add some margin to navbar items */
+  .navbar-nav .nav-item {
+    margin-bottom: 15px;
+    /* Adjust this value to your preference */
+  }
+
+  /* Add some space between the icon and the text */
+  .navbar-nav .nav-link i {
+    margin-right: 10px;
+    /* Space between icon and text */
+  }
+</style>
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <div id="db-wrapper">
+    <!-- navbar vertical -->
+    <!-- Vertical Navbar -->
+    <nav class="navbar-vertical navbar">
+      <div class="vh-100" data-simplebar>
         <!-- Brand logo -->
         <a class="navbar-brand" href="https://codescandy.com/geeks-bootstrap-5/index.html">
-            <img src="https://codescandy.com/geeks-bootstrap-5/assets/images/brand/logo/logo-inverse.svg"
-                alt="">
+          <img src="https://codescandy.com/geeks-bootstrap-5/assets/images/brand/logo/logo-inverse.svg" alt="">
         </a>
         <!-- Navbar nav -->
         <ul class="navbar-nav flex-column" id="sideNavbar">
 
-
-
-
-          
-
-
-            <!-- Nav item Products -->
-
-            <li class="nav-item">
-              <a class="nav-link   collapsed " href="#" data-bs-toggle="collapse"
-                  data-bs-target="#navDashboard" aria-expanded="false" aria-controls="navDashboard">
-                  <i class="fas fa-box" style="font-size:18px"></i>
-                  &nbsp; Products
-              </a>
-              <div id="navDashboard" class="collapse " data-bs-parent="#sideNavbar">
-                  <ul class="nav flex-column">
-                      <li class="nav-item ">
-                          <a class="nav-link " href="add-product.html">
-                              Add Products
-                          </a>
-                      </li>
-                      <!-- Nav item -->
-                      <li class="nav-item ">
-                          <a class="nav-link " href="products.html">
-                              View ALL Products
-
-                          </a>
-                      </li>
-                  </ul>
-              </div>
+          <!-- Nav item Stores -->
+          <li class="nav-item">
+            <a class="nav-link" href="product-grid.html">
+              <i class="fas fa-store"></i>&nbsp; Our Store
+            </a>
           </li>
 
+          <!-- Nav item Orders -->
+          <li class="nav-item">
+            <a class="nav-link" href="order.html">
+              <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M4.083 11.894c.439-2.34.658-3.511 1.491-4.203C6.408 7 7.598 7 9.98 7h4.04c2.383 0 3.573 0 4.407.691c.833.692 1.052 1.862 1.491 4.203l.75 4c.617 3.292.926 4.938.026 6.022S18.12 23 14.771 23H9.23c-3.349 0-5.024 0-5.923-1.084c-.9-1.084-.591-2.73.026-6.022z"
+                  opacity=".5"></path>
+                <path fill="currentColor"
+                  d="M9.75 5.985a2.25 2.25 0 0 1 4.5 0v1c.566 0 1.062.002 1.5.015V5.985a3.75 3.75 0 1 0-7.5 0V7c.438-.013.934-.015 1.5-.015zm.128 9.765a2.251 2.251 0 0 0 4.245 0a.75.75 0 1 1 1.414.5a3.751 3.751 0 0 1-7.073 0a.75.75 0 0 1 1.414-.5">
+                </path>
+              </svg>&nbsp;
+              Orders
+            </a>
+          </li>
 
-
-
-
-
-            <!-- Nav item Orders -->
-            <li class="nav-item">
-                <a class="nav-link " href="order.html">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M4.083 11.894c.439-2.34.658-3.511 1.491-4.203C6.408 7 7.598 7 9.98 7h4.04c2.383 0 3.573 0 4.407.691c.833.692 1.052 1.862 1.491 4.203l.75 4c.617 3.292.926 4.938.026 6.022S18.12 23 14.771 23H9.23c-3.349 0-5.024 0-5.923-1.084c-.9-1.084-.591-2.73.026-6.022z" opacity=".5"></path>
-                        <path fill="currentColor" d="M9.75 5.985a2.25 2.25 0 0 1 4.5 0v1c.566 0 1.062.002 1.5.015V5.985a3.75 3.75 0 1 0-7.5 0V7c.438-.013.934-.015 1.5-.015zm.128 9.765a2.251 2.251 0 0 0 4.245 0a.75.75 0 1 1 1.414.5a3.751 3.751 0 0 1-7.073 0a.75.75 0 0 1 1.414-.5"></path>
-                      </svg>&nbsp;
-                      Orders
-                </a>
-            </li>
-
-
-
-
-
-
-
-          
-
-
-
-            <!-- Nav item Comment -->
-            <!-- <li class="nav-item">
-                <a class="nav-link " href="Comment.html">
-                    <i class="fas fa-comment" style="font-size:18px"></i>
-
-                    </i> &nbsp; &nbsp;Comments
-
-                </a>
-            </li> -->
-       
-
-        
-
-
-
+          <!-- Nav item Category -->
+          <!-- Nav item Category -->
+          <li class="nav-item">
+            <a class="nav-link active" href="#" data-bs-toggle="collapse" data-bs-target="#navCategory"
+              aria-expanded="false" aria-controls="navCategory">
+              <i class="fas fa-list"></i>&nbsp; Products
+            </a>
+            <div id="navCategory" class="collapse" data-bs-parent="#sideNavbar">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active " href="products.html">All Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link " href="add-product.html">Add Product</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="../../../../../../Admin Dashboard/codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/Login.html" onclick="logoutAndClearStorage()">
+              <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp; Logout
+            </a>
+          </li>
         </ul>
-    </div>
+      </div>
+    </nav>
 
-
-</nav>
       <!-- Page Content -->
       <div id="page-content">
         <div class="header">
@@ -484,7 +470,7 @@
                         </div>
                       
                         <div class="mb-3">
-                          <label class="form-label" for="productQuantity">Price</label>
+                          <label class="form-label" for="productQuantity">Quantity</label>
                           <input type="number" class="form-control" id="Quantity" placeholder="Enter Quantity" required />
                           <div class="invalid-feedback">Please enter Quantity</div>
                         </div>
@@ -505,7 +491,6 @@
 
 
 
-
                         <div class="mb-3">
                           <div class="d-flex justify-content-between">
                             <label class="form-label" for="category">Sub Category</label>
@@ -517,39 +502,16 @@
                         
                           <div class="invalid-feedback">Please enter product Sub Category</div>
                         </div>
-                        <!-- tag -->
-                        <!-- <div class="mb-3">
-                          <label class="form-label" for="tags">Tags</label>
-                          <input name="tags" id="tags" value="" class="w-100" required />
-                          <div class="invalid-feedback">Please enter tags</div>
-                        </div> -->
+                       
+                        <div id="tagSelection">
+                          <h3>Select Tags</h3>
+                          <div id="tagsContainer"></div>
+                      </div>
+                      
                       </div>
                     </div>
                   </div>
-                  <!-- card -->
-                  <!-- <div class="card"> -->
-                    <!-- card body -->
-                    <!-- <div class="card-body"> -->
-                      <!-- select -->
-                      <!-- <div class="mb-3">
-                        <label class="form-label" for="status">Status</label>
-                        <select class="form-select" data-choices="" id="status" required>
-                          <option selected value="">Published</option>
-                          <option value="Unpublished">Unpublished</option>
-                          <option value="Draft">Draft</option>
-                        </select>
-                        <div class="invalid-feedback">Please enter product Category</div>
-                      </div> -->
-                      <!-- date -->
-                      <!-- <div class="mb-3">
-                        <label class="form-label">Schedule</label>
-                        <div class="input-group me-3">
-                          <input class="form-control flatpickr" type="text" placeholder="Scheduled Product" aria-describedby="basic-addon2" />
-                          <span class="input-group-text" id="basic-addon2"><i class="fe fe-calendar"></i></span>
-                        </div>
-                      </div> -->
-                    <!-- </div>
-                  </div> -->
+                 
              
                   <div>
                     <button type="submit" oncli class="btn btn-primary">Create Product</button>
@@ -585,177 +547,199 @@
     <script src="../../../assets/js/vendors/choice.js"></script>
 
 
-    <script>
-              const StoreId = localStorage.getItem("StoreId");
-
-      // document.getElementById('updateProductForm').addEventListener('submit', AddProduct);
-  
-      // async function AddProduct(event) {
-      //     event.preventDefault(); // Prevent form from submitting the default way
-  
-      //     const url = `https://localhost:7000/api/Products/CreateProductWithImages`;
-  
-      //     const formData = new FormData();
-      //     formData.append("ProductName", document.getElementById('productName').value);
-      //     formData.append("Price", document.getElementById('price').value);
-      //     formData.append("Description", document.getElementById('description').value);
-  
-      //     const imageFile = document.getElementById('image').files[0];
-      //     if (imageFile) {
-      //         formData.append("Image", imageFile);
-      //     }
-  
-      //     try {
-      //         const response = await fetch(url, {
-      //             method: 'POST', // Change to 'POST' if that's what the server expects
-      //             body: formData
-      //         });
-  
-      //         if (response.ok) {
-      //             alert('Product added successfully!');
-      //         } else {
-      //             const errorData = await response.json();
-      //             console.error('Error:', errorData);
-      //             alert('Failed to add product.');
-      //         }
-      //     } catch (error) {
-      //         console.error('Error:', error);
-      //         alert('Failed to connect to the server.');
-      //     }
-      // }
-  
- // Function to fetch categories and populate the CategoryList dropdown
-async function fetchCategories() {
-  const url = `https://localhost:7000/api/Categories/AllCategories`;  // Ensure correct URL
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const categories = await response.json();
-    const categorySelect = document.getElementById("CategoryList");
-
-    // Clear the CategoryList dropdown before populating
-    categorySelect.innerHTML = '';
-
-    // Populate the CategoryList dropdown with fetched categories
-    categories.forEach(category => {
-      const option = document.createElement('option');
-      option.value = category.categoryId;  // Assuming categoryId is correct
-      option.textContent = category.name;  // Assuming name is correct
-      categorySelect.appendChild(option);
-    });
-
-    // Optionally: Automatically fetch subcategories for the first category
-    if (categories.length > 0) {
-      fetchSubCategories(categories[0].categoryId);
-    }
-
-    // Add event listener to fetch subcategories when a category is selected
-    categorySelect.addEventListener('change', function () {
-      const selectedCategoryId = this.value;
-      fetchSubCategories(selectedCategoryId);
-    });
-
-  } catch (error) {
-    console.error('Error fetching categories:', error);
-  }
-}
-
-// Function to fetch subcategories based on categoryId and populate the SubCategoryList dropdown
-async function fetchSubCategories(categoryId) {
-  const url = `https://localhost:7000/api/Sub_Category/SubCategoriesByCategory/${categoryId}`;  // Adjust endpoint for subcategories
-
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const subcategories = await response.json();
-    const subcategorySelect = document.getElementById("SubCategoryList");
-
-    // Clear the SubCategoryList dropdown before populating
-    subcategorySelect.innerHTML = '';
-
-    // Populate the SubCategoryList dropdown with fetched subcategories
-    subcategories.forEach(subcategory => {
-      const option = document.createElement('option');
-      option.value = subcategory.subcategoryId;  // Assuming subcategoryId is correct
-      option.textContent = subcategory.subcategoryName;  // Assuming subcategoryName is correct
-      subcategorySelect.appendChild(option);
-    });
-
-  } catch (error) {
-    console.error('Error fetching subcategories:', error);
-  }
-}
-
-// Call fetchCategories after the DOM content is loaded
-document.addEventListener('DOMContentLoaded', (event) => {
-  fetchCategories();
-});
-
-
-
-
-
-
-
-
-
-
-
-document.getElementById('AddProductForm').addEventListener('submit', AddProduct);
-
-    async function AddProduct(event) {
-        event.preventDefault(); // Prevent form from submitting the default way
-
-        const url = `https://localhost:7000/api/Products/CreateProductWithImages`;
-
-        const formData = new FormData();
-        formData.append("Name", document.getElementById('ProductName').value);
-        formData.append("Price", document.getElementById('productPrice').value);
-        formData.append("Quantity", document.getElementById('Quantity').value);
-        formData.append("Description", document.getElementById('projectdesc-input').value);
-        formData.append("subcategoryId", document.getElementById('SubCategoryList').value);
-        formData.append("StoreId",StoreId);
-
-
-        const imageFile = document.getElementById('MainImage').files[0];
-        if (imageFile) {
-            formData.append("Image", imageFile);
-        }
-
-
-
-    // Add additional images from Dropzone
-    myDropzone.files.forEach(file => {
-        formData.append("AdditionalImages", file);
-    });
-
-        try {
-            const response = await fetch(url, {
-                method: 'POST', // Change to 'POST' if that's what the server expects
-                body: formData, // Content-Type will automatically be set to multipart/form-data
+    <<script>
+      const StoreId = localStorage.getItem("StoreId");
+      
+      // Function to fetch categories and populate the CategoryList dropdown
+      async function fetchCategories() {
+          const url = `https://localhost:7000/api/Categories/AllCategories`;  // Ensure correct URL
+      
+          try {
+              const response = await fetch(url);
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
+      
+              const categories = await response.json();
+              const categorySelect = document.getElementById("CategoryList");
+      
+              // Clear the CategoryList dropdown before populating
+              categorySelect.innerHTML = '';
+      
+              // Populate the CategoryList dropdown with fetched categories
+              categories.forEach(category => {
+                  const option = document.createElement('option');
+                  option.value = category.categoryId;  // Assuming categoryId is correct
+                  option.textContent = category.name;  // Assuming name is correct
+                  categorySelect.appendChild(option);
               });
-
-            if (response.ok) {
-                alert('Product added successfully!');
-            } else {
-                const errorData = await response.json();
-                console.error('Error:', errorData);
-                alert('Failed to add product.');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert('Failed to connect to the server.');
+      
+              // Automatically fetch subcategories for the first category
+              if (categories.length > 0) {
+                  fetchSubCategories(categories[0].categoryId);
+              }
+      
+              // Add event listener to fetch subcategories when a category is selected
+              categorySelect.addEventListener('change', function () {
+                  const selectedCategoryId = this.value;
+                  fetchSubCategories(selectedCategoryId);
+              });
+      
+          } catch (error) {
+              console.error('Error fetching categories:', error);
+          }
+      }
+      
+      // Function to fetch tags
+      async function fetchTags() {
+          const url = `https://localhost:7000/api/Products/AllTag`; // Your API endpoint for tags
+      
+          try {
+              const response = await fetch(url);
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
+      
+              const tags = await response.json();
+              const tagsContainer = document.getElementById("tagsContainer");
+      
+              // Clear the tags container before populating
+              tagsContainer.innerHTML = '';
+      
+              // Populate the tags container with fetched tags
+              tags.forEach(tag => {
+                  const tagCheckbox = document.createElement('div');
+                  tagCheckbox.innerHTML = `
+                      <input type="checkbox" id="tag-${tag.tagId}" value="${tag.tagId}" />
+                      <label for="tag-${tag.tagId}">${tag.tagName}</label>
+                  `;
+                  tagsContainer.appendChild(tagCheckbox);
+              });
+          } catch (error) {
+              console.error('Error fetching tags:', error);
+          }
+      }
+      
+      // Call fetchTags after the DOM content is loaded
+      document.addEventListener('DOMContentLoaded', (event) => {
+          fetchCategories();
+          fetchTags(); // Fetch tags when the DOM is ready
+      });
+      
+      // Function to fetch subcategories based on categoryId and populate the SubCategoryList dropdown
+      async function fetchSubCategories(categoryId) {
+          const url = `https://localhost:7000/api/Sub_Category/SubCategoriesByCategory/${categoryId}`;  // Adjust endpoint for subcategories
+      
+          try {
+              const response = await fetch(url);
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
+      
+              const subcategories = await response.json();
+              const subcategorySelect = document.getElementById("SubCategoryList");
+      
+              // Clear the SubCategoryList dropdown before populating
+              subcategorySelect.innerHTML = '';
+      
+              // Populate the SubCategoryList dropdown with fetched subcategories
+              subcategories.forEach(subcategory => {
+                  const option = document.createElement('option');
+                  option.value = subcategory.subcategoryId;  // Assuming subcategoryId is correct
+                  option.textContent = subcategory.subcategoryName;  // Assuming subcategoryName is correct
+                  subcategorySelect.appendChild(option);
+              });
+      
+          } catch (error) {
+              console.error('Error fetching subcategories:', error);
+          }
+      }
+      
+      // Form submission for adding a product
+      document.getElementById('AddProductForm').addEventListener('submit', AddProduct);
+      async function AddProduct(event) {
+          event.preventDefault(); // Prevent form from submitting the default way
+      
+          const url = `https://localhost:7000/api/Products/CreateProductWithImages`;
+          const formData = new FormData();
+      
+          // Validate input fields
+          const productName = document.getElementById('ProductName').value;
+          const productPrice = parseFloat(document.getElementById('productPrice').value);
+          const productQuantity = parseInt(document.getElementById('Quantity').value);
+      
+          if (!productName || isNaN(productPrice) || productPrice < 0 || isNaN(productQuantity) || productQuantity < 0) {
+              alert('Please provide valid product details.');
+              return;
+          }
+      
+          formData.append("Name", productName);
+          formData.append("Price", productPrice);
+          formData.append("Quantity", productQuantity);
+          formData.append("Description", document.getElementById('projectdesc-input').value);
+          formData.append("subcategoryId", document.getElementById('SubCategoryList').value);
+          formData.append("StoreId", StoreId);
+      
+          const imageFile = document.getElementById('MainImage').files[0];
+          if (imageFile) {
+              formData.append("Image", imageFile);
+          }
+      
+          // Add additional images from Dropzone
+          myDropzone.files.forEach(file => {
+              formData.append("AdditionalImages", file);
+          });
+      
+          // Collect selected tag IDs
+          const selectedTags = Array.from(document.querySelectorAll('#tagsContainer input[type="checkbox"]:checked'));
+          selectedTags.forEach(tag => {
+              formData.append("TagIds", tag.value);
+          });
+      
+          try {
+              const response = await fetch(url, {
+                  method: 'POST',
+                  body: formData, // Content-Type will automatically be set to multipart/form-data
+              });
+      
+              if (response.ok) {
+                  alert('Product added successfully!');
+              } else {
+                  const errorData = await response.json();
+                  console.error('Error:', errorData);
+                  alert(`Failed to add product: ${errorData.message || errorData}`);
+              }
+          } catch (error) {
+              console.error('Error:', error);
+              alert('Failed to connect to the server.');
+          }
+      }
+      </script>
+      <script>
+        // Apply the stored theme on page load
+        document.addEventListener("DOMContentLoaded", () => {
+          const theme = localStorage.getItem('theme') || 'light'; // Default to 'light'
+          document.body.className = theme;
+        });
+      
+        // Toggle theme between dark and light
+        function toggleTheme() {
+          let theme = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
+          localStorage.setItem('theme', theme);
+          document.body.className = theme;
         }
-    }
-
-  
-    </script>
+      
+        // Logout function preserving the theme
+        function logoutAndClearStorage() {
+          const theme = localStorage.getItem('theme'); // Save theme
+      
+          localStorage.clear(); // Clear all items
+          if (theme) localStorage.setItem('theme', theme); // Restore theme
+      
+          window.location.href = 'Login.html'; // Redirect to login
+        }
+      </script>
+    
+      
     </body>
     </html>

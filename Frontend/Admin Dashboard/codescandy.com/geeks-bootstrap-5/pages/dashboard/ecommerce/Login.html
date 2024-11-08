@@ -204,7 +204,7 @@ async function clearCartFromLocalStorage(userID){
                   localStorage.setItem('jwtTokenSTORE', storeOwnerData.Token);
                   localStorage.setItem('StoreId', storeOwnerData.storeOwnerId);
                   alert('Logged in as Store Owner');
-                  window.location.href = "../../../../../../Store Owner Panel/codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/products.html";
+                  window.location.href = "../../../../../../Store Owner Panel/codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/product-grid.html";
               } else {
                   // Both Admin and Store Owner login failed
                   const errorData = await response.json();

@@ -24,8 +24,10 @@ namespace E_Commerce.dto
         public List<IFormFile> AdditionalImages { get; set; } = new List<IFormFile>();
 
 
-
-    }
+        // New properties for colors, sizes, and tags
+        public List<int> TagIds { get; set; } = new List<int>(); // List of selected tag IDs
+    
+}
 
 
     //public class ProductSizes

@@ -28,144 +28,100 @@
 
         <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard/ecommerce/order.html" >
         <title>Orders | Geeks - Academy Admin Template</title>
-    </head>
-
-    <body>
-        <!-- Wrapper -->
-        <div id="db-wrapper">
-            <!-- navbar vertical -->
-
-    <!-- navbar vertical -->
-    <nav class="navbar-vertical navbar">
-      <div class="vh-100" data-simplebar>
-          <!-- Brand logo -->
-          <a class="navbar-brand" href="https://codescandy.com/geeks-bootstrap-5/index.html">
-              <img src="https://codescandy.com/geeks-bootstrap-5/assets/images/brand/logo/logo-inverse.svg"
-                  alt="">
-          </a>
-          <!-- Navbar nav -->
-          <ul class="navbar-nav flex-column" id="sideNavbar">
-
-
-
-
-              <!-- Nav item User -->
-
-              <li class="nav-item">
-                  <a class="nav-link " href="Users.html">
-                      <i class="nav-icon fe fe-user me-2" style="font-size:18px"></i>
-                      &nbsp; User
+        <style>/* Add some margin to navbar items */
+            .navbar-nav .nav-item {
+              margin-bottom: 15px; /* Adjust this value to your preference */
+            }
+            
+            /* Add some space between the icon and the text */
+            .navbar-nav .nav-link i {
+              margin-right: 10px; /* Space between icon and text */
+            }
+            </style>
+            </head>
+          
+            <body>
+              <!-- Wrapper -->
+              <div id="db-wrapper">
+                <!-- navbar vertical -->
+           <!-- Vertical Navbar -->
+          <nav class="navbar-vertical navbar">
+            <div class="vh-100" data-simplebar>
+              <!-- Brand logo -->
+              <a class="navbar-brand" href="https://codescandy.com/geeks-bootstrap-5/index.html">
+                <img src="https://codescandy.com/geeks-bootstrap-5/assets/images/brand/logo/logo-inverse.svg" alt="">
+              </a>
+              <!-- Navbar nav -->
+              <ul class="navbar-nav flex-column" id="sideNavbar">
+          
+                <!-- Nav item User -->
+                <li class="nav-item">
+                  <a class="nav-link" href="Users.html">
+                    <i class="nav-icon fe fe-user me-2" style="font-size:18px"></i>
+                    &nbsp; User
                   </a>
-
-              </li>
-
-
-
-
-
-              <!-- Nav item Orders -->
-              <li class="nav-item">
-                  <a class="nav-link " href="order.html">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
-                          <path fill="currentColor" d="M4.083 11.894c.439-2.34.658-3.511 1.491-4.203C6.408 7 7.598 7 9.98 7h4.04c2.383 0 3.573 0 4.407.691c.833.692 1.052 1.862 1.491 4.203l.75 4c.617 3.292.926 4.938.026 6.022S18.12 23 14.771 23H9.23c-3.349 0-5.024 0-5.923-1.084c-.9-1.084-.591-2.73.026-6.022z" opacity=".5"></path>
-                          <path fill="currentColor" d="M9.75 5.985a2.25 2.25 0 0 1 4.5 0v1c.566 0 1.062.002 1.5.015V5.985a3.75 3.75 0 1 0-7.5 0V7c.438-.013.934-.015 1.5-.015zm.128 9.765a2.251 2.251 0 0 0 4.245 0a.75.75 0 1 1 1.414.5a3.751 3.751 0 0 1-7.073 0a.75.75 0 0 1 1.414-.5"></path>
-                        </svg>&nbsp;
-                        Orders
-                  </a>
-              </li>
-
-
-
-
-
-
-
-              <li class="nav-item">
-                  <a class="nav-link " href="#" data-bs-toggle="collapse" data-bs-target="#navCategory" aria-expanded="false" aria-controls="navCourses">
-                    <i class="nav-icon fe fe-book me-2"></i>
-                    Category
-                  </a>
-                  <div id="navCategory" class="collapse  show " data-bs-parent="#sideNavbar">
-                    <ul class="nav flex-column">
-                      <li class="nav-item">
-                        <a class="nav-link  active " href="Category.html">All Category</a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link " href="AddCategories.html">Add Category</a>
-                      </li>
-                     
-                    </ul>
-                  </div>
                 </li>
-
-
-
-
-
-              <!-- Nav item Products -->
-
-              <li class="nav-item">
-                  <a class="nav-link   collapsed " href="#" data-bs-toggle="collapse"
-                      data-bs-target="#navDashboard" aria-expanded="false" aria-controls="navDashboard">
-                      <i class="fas fa-box" style="font-size:18px"></i>
-                      &nbsp; Products
+          
+                <!-- Nav item Stores -->
+                <li class="nav-item">
+                  <a class="nav-link" href="stores.html">
+                    <i class="fas fa-store"></i>&nbsp; Stores
                   </a>
-                  <div id="navDashboard" class="collapse " data-bs-parent="#sideNavbar">
-                      <ul class="nav flex-column">
-                          <li class="nav-item ">
-                              <a class="nav-link " href="Categories_Bassam/Add-product.html">
-                                  Add Products
-                              </a>
-                          </li>
-                          <!-- Nav item -->
-                          <li class="nav-item ">
-                              <a class="nav-link " href="admin-products.html">
-                                  View ALL Products
-
-                              </a>
-                          </li>
-                      </ul>
-                  </div>
-              </li>
-
-
-
-              <!-- Nav item Comment -->
-              <!-- <li class="nav-item">
-                  <a class="nav-link " href="Comment.html">
-                      <i class="fas fa-comment" style="font-size:18px"></i>
-
-                      </i> &nbsp; &nbsp;Comments
-
+                </li>
+          
+                <!-- Nav item Orders -->
+                <li class="nav-item">
+                  <a class="nav-link active" href="order.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" height="1.5em" viewBox="0 0 24 24">
+                      <path fill="currentColor" d="M4.083 11.894c.439-2.34.658-3.511 1.491-4.203C6.408 7 7.598 7 9.98 7h4.04c2.383 0 3.573 0 4.407.691c.833.692 1.052 1.862 1.491 4.203l.75 4c.617 3.292.926 4.938.026 6.022S18.12 23 14.771 23H9.23c-3.349 0-5.024 0-5.923-1.084c-.9-1.084-.591-2.73.026-6.022z" opacity=".5"></path>
+                      <path fill="currentColor" d="M9.75 5.985a2.25 2.25 0 0 1 4.5 0v1c.566 0 1.062.002 1.5.015V5.985a3.75 3.75 0 1 0-7.5 0V7c.438-.013.934-.015 1.5-.015zm.128 9.765a2.251 2.251 0 0 0 4.245 0a.75.75 0 1 1 1.414.5a3.751 3.751 0 0 1-7.073 0a.75.75 0 0 1 1.414-.5"></path>
+                    </svg>&nbsp;
+                    Orders
                   </a>
-              </li> -->
-              <!-- Nav item Contact Us -->
-              <li class="nav-item">
-                  <a class="nav-link " href="contact.html">
-                      <i class="fa fa-address-book" aria-hidden="true"></i>
-                       &nbsp; &nbsp;Contact Us
-
+                </li>
+          
+                <!-- Nav item Category -->
+          <!-- Nav item Category -->
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#navCategory" aria-expanded="false" aria-controls="navCategory">
+              <i class="fas fa-list"></i>&nbsp; Category
+            </a>
+            <div id="navCategory" class="collapse" data-bs-parent="#sideNavbar">
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" href="Category.html">All Categories</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="AddCategories.html">Add Category</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          
+          
+                <!-- Nav item Products -->
+                <li class="nav-item">
+                  <a class="nav-link" href="admin-products.html">
+                    <i class="fas fa-gift"></i>&nbsp; Products
                   </a>
-              </li>
-
-
-              <!-- Nav item Coupons -->
-              <li class="nav-item">
-                  <a class="nav-link " href="Coupon Management.html">
-                      <i class="fas fa-tags" style="font-size:18px"></i>
-                      &nbsp; Coupons
-
+                </li>
+          
+                <!-- Nav item Contact Us -->
+                <li class="nav-item">
+                  <a class="nav-link" href="contact.html">
+                    <i class="fa fa-address-book" aria-hidden="true"></i>&nbsp; Contact Us
                   </a>
-              </li>
-
-
-
-
-          </ul>
-      </div>
-
-
-  </nav>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="Login.html" onclick="logoutAndClearStorage()">
+                      <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp; Logout
+                    </a>
+                </li>
+          
+              </ul>
+            </div>
+          </nav>
+          
 
             <!-- Page Content -->
             <main id="page-content">
@@ -1083,6 +1039,30 @@
         </script>
     
     
+<script>
+    // Apply the stored theme on page load
+    document.addEventListener("DOMContentLoaded", () => {
+      const theme = localStorage.getItem('theme') || 'light'; // Default to 'light'
+      document.body.className = theme;
+    });
+  
+    // Toggle theme between dark and light
+    function toggleTheme() {
+      let theme = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
+      localStorage.setItem('theme', theme);
+      document.body.className = theme;
+    }
+  
+    // Logout function preserving the theme
+    function logoutAndClearStorage() {
+      const theme = localStorage.getItem('theme'); // Save theme
+  
+      localStorage.clear(); // Clear all items
+      if (theme) localStorage.setItem('theme', theme); // Restore theme
+  
+      window.location.href = 'Login.html'; // Redirect to login
+    }
+  </script>
     </body>
 <!-- Mirrored from codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/order.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 09:44:42 GMT -->
 </html>

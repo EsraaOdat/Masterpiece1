@@ -116,7 +116,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function logout() {
-    localStorage.removeItem("userID");
+    localStorage.clear(); // Clear all items
+
     location.href = "Index.html";
     location.reload();
   }
