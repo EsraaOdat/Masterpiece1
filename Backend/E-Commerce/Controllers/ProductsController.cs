@@ -198,6 +198,37 @@ namespace E_Commerce.Controllers
         //----------------------------------------------------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------------------------------------------------
 
+           // this for edit product 
+      [HttpGet("AllProduct/{id}")]
+        public IActionResult GetAllProductById(int id)
+        {
+            var data = _db.Products
+                .Include(p => p.CartItems)
+                .Include(p => p.Comment1s)
+                .Include(p => p.Comments)
+                .Include(p => p.OrderItems)
+                .Include(p => p.ProductDiscounts)
+                .Include(p => p.ProductImages)
+                .Include(p => p.Variants).ThenInclude(v => v.Tag)
+                .Include(p => p.Store)
+                .Include(p => p.Wishlists)
+                .Include(p => p.Colors)
+                .Include(p => p.Sizes)
+                .Include(p => p.Tags)
+                .Include(p => p.Subcategory).ThenInclude(s => s.Category)
+                .FirstOrDefault(p => p.ProductId == id && p.IsDeleted == false);
+
+            if (data == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(data);
+        }
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
         [HttpGet("ProductsByStore/{storeId}")]
         public IActionResult GetProductsByStore(int storeId)
         {
@@ -322,6 +353,8 @@ namespace E_Commerce.Controllers
 
         // Count the total number of elements in the array
 
+       // testc not used
+
         [HttpPost]
         public IActionResult CountNumbers([FromBody] int[] numbers)
         {
@@ -428,6 +461,9 @@ namespace E_Commerce.Controllers
 
 
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
 
 
         // Get all products for admin dashboard
@@ -486,6 +522,103 @@ namespace E_Commerce.Controllers
         }
 
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        [HttpPut]
+        [Route("EditProduct/{id}")]
+        public async Task<IActionResult> EditProduct(int id, [FromForm] ProductRequestDTO productDto)
+        {
+            if (productDto == null)
+            {
+                return BadRequest("Invalid product data.");
+            }
+
+            // Retrieve the product to edit
+            var existingProduct = await _db.Products
+                                            .Include(p => p.ProductImages)
+                                            .FirstOrDefaultAsync(p => p.ProductId == id);
+
+            if (existingProduct == null)
+            {
+                return NotFound("Product not found.");
+            }
+
+            // Update product properties if not null
+            existingProduct.Name = !string.IsNullOrWhiteSpace(productDto.Name) ? productDto.Name : existingProduct.Name;
+            existingProduct.Description = !string.IsNullOrWhiteSpace(productDto.Description) ? productDto.Description : existingProduct.Description;
+            existingProduct.Price = productDto.Price ?? existingProduct.Price;
+            existingProduct.Quantity = productDto.Quantity ?? existingProduct.Quantity;
+            existingProduct.SubcategoryId = productDto.SubcategoryId ?? existingProduct.SubcategoryId;
+
+            // Set status to pending
+            existingProduct.Status = "pending";
+
+            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
+            if (!Directory.Exists(uploadedFolder))
+            {
+                Directory.CreateDirectory(uploadedFolder);
+            }
+
+            // Update main image if a new one is uploaded
+            if (productDto.Image != null)
+            {
+                var sanitizedMainImageFileName = Path.GetFileName(productDto.Image.FileName); // sanitize filename
+                var oldImagePath = Path.Combine(uploadedFolder, existingProduct.Image);
+
+                if (System.IO.File.Exists(oldImagePath))
+                {
+                    System.IO.File.Delete(oldImagePath);
+                }
+
+                var mainImagePath = Path.Combine(uploadedFolder, sanitizedMainImageFileName);
+                using (var stream = new FileStream(mainImagePath, FileMode.Create))
+                {
+                    await productDto.Image.CopyToAsync(stream);
+                }
+
+                existingProduct.Image = sanitizedMainImageFileName;
+            }
+
+            // Update additional images if provided
+            if (productDto.AdditionalImages != null && productDto.AdditionalImages.Any())
+            {
+                // Delete existing additional images
+                foreach (var existingImage in existingProduct.ProductImages.ToList())
+                {
+                    var oldImagePath = Path.Combine(uploadedFolder, existingImage.ImagePath);
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                    _db.ProductImages.Remove(existingImage);
+                }
+
+                // Save new additional images
+                foreach (var image in productDto.AdditionalImages)
+                {
+                    var sanitizedAdditionalImageFileName = Path.GetFileName(image.FileName); // sanitize filename
+                    var additionalImagePath = Path.Combine(uploadedFolder, sanitizedAdditionalImageFileName);
+
+                    using (var stream = new FileStream(additionalImagePath, FileMode.Create))
+                    {
+                        await image.CopyToAsync(stream);
+                    }
+
+                    var productImage = new ProductImage
+                    {
+                        ProductId = existingProduct.ProductId,
+                        ImagePath = sanitizedAdditionalImageFileName
+                    };
+
+                    _db.ProductImages.Add(productImage);
+                }
+            }
+
+            // Save all changes to the database
+            await _db.SaveChangesAsync();
+
+            return Ok(new { message = "Product updated successfully." });
+        }
 
 
         //----------------------------------------------------------------------------------------------------------------------------------
@@ -506,7 +639,7 @@ namespace E_Commerce.Controllers
                     Product = g.FirstOrDefault().Product // Retrieve product details
                 })
                 .OrderByDescending(p => p.ReviewCount) // Sort by review count
-                .Take(4) 
+                .Take(4)
                 .ToList();
 
             if (!topReviewedProducts.Any())
@@ -522,103 +655,6 @@ namespace E_Commerce.Controllers
                 Product = p.Product // Return the product details
             }));
         }
-
-        //----------------------------------------------------------------------------------------------------------------------------------
-        //----------------------------------------------------------------------------------------------------------------------------------
-        [HttpPut]
-        [Route("EditProduct/{id}")]
-        public async Task<IActionResult> EditProduct(int id, [FromForm] ProductRequestDTO productDto)
-        {
-            if (productDto == null)
-            {
-                return BadRequest("Invalid product data.");
-            }
-
-            // Retrieve the product to edit
-            var existingProduct = await _db.Products
-                                            .Include(p => p.ProductImages) // Include images if you need to update them
-                                            .FirstOrDefaultAsync(p => p.ProductId == id);
-
-            if (existingProduct == null)
-            {
-                return NotFound("Product not found.");
-            }
-
-            // Update product properties
-            existingProduct.Name = productDto.Name;
-            existingProduct.Description = productDto.Description;
-            existingProduct.Price = productDto.Price ?? existingProduct.Price; // Keep existing value if null
-            existingProduct.Quantity = productDto.Quantity ?? existingProduct.Quantity; // Keep existing value if null
-            existingProduct.SubcategoryId = productDto.SubcategoryId ?? existingProduct.SubcategoryId; // Keep existing value if null
-
-            // Set status to pending
-            existingProduct.Status = "pending"; // Update status to pending
-
-            var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "Product");
-            if (!Directory.Exists(uploadedFolder))
-            {
-                Directory.CreateDirectory(uploadedFolder);
-            }
-
-            // Update main image if a new one is uploaded
-            if (productDto.Image != null)
-            {
-                // Handle old image removal
-                var oldImagePath = Path.Combine(uploadedFolder, existingProduct.Image);
-                if (System.IO.File.Exists(oldImagePath))
-                {
-                    System.IO.File.Delete(oldImagePath); // Delete old image if it exists
-                }
-
-                // Save the new image
-                var mainImagePath = Path.Combine(uploadedFolder, productDto.Image.FileName);
-                using (var stream = new FileStream(mainImagePath, FileMode.Create))
-                {
-                    await productDto.Image.CopyToAsync(stream);
-                }
-
-                existingProduct.Image = productDto.Image.FileName; // Update the product's image reference
-            }
-
-            // Update additional images if provided
-            if (productDto.AdditionalImages != null && productDto.AdditionalImages.Any())
-            {
-                // Delete existing additional images
-                foreach (var existingImage in existingProduct.ProductImages.ToList())
-                {
-                    var oldImagePath = Path.Combine(uploadedFolder, existingImage.ImagePath);
-                    if (System.IO.File.Exists(oldImagePath))
-                    {
-                        System.IO.File.Delete(oldImagePath); // Delete old additional image
-                    }
-                    _db.ProductImages.Remove(existingImage); // Remove old images from the database
-                }
-
-                // Save new additional images
-                foreach (var image in productDto.AdditionalImages)
-                {
-                    var additionalImagePath = Path.Combine(uploadedFolder, image.FileName);
-                    using (var stream = new FileStream(additionalImagePath, FileMode.Create))
-                    {
-                        await image.CopyToAsync(stream);
-                    }
-
-                    var productImage = new ProductImage
-                    {
-                        ProductId = existingProduct.ProductId,
-                        ImagePath = image.FileName
-                    };
-
-                    _db.ProductImages.Add(productImage);
-                }
-            }
-
-            // Save all changes to the database
-            await _db.SaveChangesAsync();
-
-            return Ok(new { message = "Product updated successfully." });
-        }
-
         //----------------------------------------------------------------------------------------------------------------------------------
         //----------------------------------------------------------------------------------------------------------------------------------
 

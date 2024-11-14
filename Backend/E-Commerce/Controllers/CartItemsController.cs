@@ -54,9 +54,8 @@ namespace E_Commerce.Controllers
         [Route("AllItems/{userId}")]
         public IActionResult GetAllCartItems(int userId)
         {
-            // Filter cart items by UserId and where the Cart status is "open"
             var cartItems = _db.CartItems
-                .Where(x => x.Cart.UserId == userId && x.Cart.Status == "open") // Filter by UserId and open status
+                .Where(x => x.Cart.UserId == userId && x.Cart.Status == "open") 
                 .Select(x => new CartItemsResponsive
                 {
                     CartId = x.CartId,
@@ -78,6 +77,8 @@ namespace E_Commerce.Controllers
 
 
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -86,7 +87,6 @@ namespace E_Commerce.Controllers
         [Route("AddItem")]
         public IActionResult AddCartItem([FromBody] AddCartItemsDto newItem)
         {
-            // Retrieve the product based on the provided ProductId
             var product = _db.Products.SingleOrDefault(p => p.ProductId == newItem.ProductId);
 
             // Check if the product exists
@@ -95,29 +95,27 @@ namespace E_Commerce.Controllers
                 return NotFound(new { Message = "Product not found." });
             }
 
-            // Check if the cart item already exists for the given CartId and ProductId
+            // Check if the cart item already exists 
+
             var existingCartItem = _db.CartItems
                 .SingleOrDefault(ci => ci.CartId == newItem.CartId && ci.ProductId == newItem.ProductId);
 
             if (existingCartItem != null)
             {
-                // If the cart item exists, increment the quantity
                 existingCartItem.Quantity += newItem.Quantity;
                 _db.SaveChanges();
                 return Ok(new { Message = "Cart item quantity updated successfully.", CartItem = existingCartItem });
             }
             else
             {
-                // If the cart item doesn't exist, create a new one
                 var cartItem = new CartItem
                 {
                     CartId = newItem.CartId,
                     ProductId = newItem.ProductId,
                     Quantity = newItem.Quantity,
-                    StoreId = product.StoreId // Assuming CartItem has a StoreId property
+                    StoreId = product.StoreId 
                 };
 
-                // Add the new cart item to the database
                 _db.CartItems.Add(cartItem);
                 _db.SaveChanges();
 
@@ -127,6 +125,8 @@ namespace E_Commerce.Controllers
 
 
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -149,13 +149,14 @@ namespace E_Commerce.Controllers
 
             return Ok(new { message = "Cart updated successfully", CartItem = existingCart });
         }
-         
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
 
         [HttpDelete("{cartItemId}")]
         public IActionResult DeleteCartItem(int cartItemId)
         {
-            // Assuming the correct property name is 'CartItemId' in your CartItem entity class
             var cartItemToDelete = _db.CartItems.FirstOrDefault(x => x.CartItemId == cartItemId);
 
             if (cartItemToDelete == null)
@@ -179,7 +180,7 @@ namespace E_Commerce.Controllers
         {
             // Find the user's active cart
             var cart = _db.Carts.Include(c => c.CartItems)
-                                 .ThenInclude(ci => ci.Product) // Include product details to access StoreId
+                                 .ThenInclude(ci => ci.Product) 
                                  .FirstOrDefault(c => c.UserId == userId && c.Status == "open");
 
             if (cart == null)
@@ -192,14 +193,13 @@ namespace E_Commerce.Controllers
                 .GroupBy(ci => ci.Product.StoreId)
                 .ToList();
 
-            // Create orders for each store
             foreach (var group in groupedItems)
             {
                 var order = new Order
                 {
                     UserId = userId,
                     Status = "Pending",
-                    Date = DateOnly.FromDateTime(DateTime.UtcNow), // Use this for DateOnly
+                    Date = DateOnly.FromDateTime(DateTime.UtcNow),
                     StoreId = group.Key, // Save StoreId in the Order
                     OrderItems = group.Select(ci => new OrderItem
                     {
@@ -208,14 +208,12 @@ namespace E_Commerce.Controllers
                     }).ToList()
                 };
 
-                // Add order to the database
                 _db.Orders.Add(order);
             }
 
             // Remove cart items after transferring to orders
             _db.CartItems.RemoveRange(cart.CartItems);
 
-            // Save changes to the database
             _db.SaveChanges();
 
             return Ok(new { Message = "Orders created successfully." });

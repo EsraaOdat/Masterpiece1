@@ -35,13 +35,12 @@ namespace E_Commerce.Controllers
                            .Where(img => img.ProductId == productId) 
                            .ToList();
 
-            // Check if any images were found
             if (data == null || !data.Any())
             {
-                return NotFound(); // Return 404 if no images found
+                return NotFound(); 
             }
 
-            return Ok(data); // Return the list of images
+            return Ok(data); 
         }
 
     }

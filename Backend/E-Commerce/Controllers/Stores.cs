@@ -17,37 +17,42 @@ namespace E_Commerce.Controllers
         {
             _context = context;
         }
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
-        // Method to check for expired subscriptions and update store status
         private void UpdateStoreStatuses()
         {
-            // Find all stores where the end date has passed and are still marked as active
             var expiredStores = _context.Stores
                                         .Where(s => s.EndDate < DateTime.Now && s.Status == "active")
                                         .ToList();
 
             foreach (var store in expiredStores)
             {
-                // Mark the store as inactive
                 store.Status = "inactive";
             }
 
-            // Save changes to the database
             _context.SaveChanges();
         }
 
-        // Return all stores
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+
+        //  all stores active and inactive (Admin dashboard)
         [HttpGet]
         public IActionResult GetAllStores()
         {
-            // Automatically update store statuses based on the end date before fetching all stores
             UpdateStoreStatuses();
 
             var data = _context.Stores.ToList();
             return Ok(data);
         }
 
-        // Return store by ID
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+
+        // Return store by ID (user Interface & Admin dashboard )
         [HttpGet("{id}")]
         public IActionResult GetStoreById(int id)
         {
@@ -60,34 +65,36 @@ namespace E_Commerce.Controllers
 
             return Ok(store);
         }
-
-        // Create Store
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        // Create Store (User interface)
         [HttpPost]
         public IActionResult CreateStore([FromForm] StoreDTO storeDTO)
         {
-            // Automatically set the start date to the current date
             DateTime startDate = DateTime.Now;
 
-            // Calculate the subscription end date based on the plan type
             DateTime endDate;
+            //1month
             if (storeDTO.PlanName.ToLower() == "monthly")
             {
-                endDate = startDate.AddMonths(1);  // Monthly subscription
+                endDate = startDate.AddMonths(1);  
             }
-            else if (storeDTO.PlanName.ToLower() == "quarterly")  // Added quarterly plan
+            //3month
+            else if (storeDTO.PlanName.ToLower() == "quarterly")  //  quarterly plan 3 month
             {
-                endDate = startDate.AddMonths(3);  // 3-month subscription
+                endDate = startDate.AddMonths(3);  
             }
+            //year
             else if (storeDTO.PlanName.ToLower() == "yearly")
             {
-                endDate = startDate.AddYears(1);  // Yearly subscription
+                endDate = startDate.AddYears(1); 
             }
+
             else
             {
                 return BadRequest("Invalid plan type. Must be 'monthly', 'quarterly', or 'yearly'.");
             }
 
-            // Ensure the "StoreImages" directory exists
             var uploadedFolder = Path.Combine(Directory.GetCurrentDirectory(), "StoreImages");
             if (!Directory.Exists(uploadedFolder))
             {
@@ -97,7 +104,6 @@ namespace E_Commerce.Controllers
             string storeLogoPath = null;
             string backgroundImagePath = null;
 
-            // Save the uploaded logo image file if provided
             if (storeDTO.StoreLogo != null)
             {
                 var fileLogo = Path.Combine(uploadedFolder, storeDTO.StoreLogo.FileName);
@@ -106,11 +112,9 @@ namespace E_Commerce.Controllers
                     storeDTO.StoreLogo.CopyTo(stream);
                 }
 
-                // Update the logo image path
                 storeLogoPath = storeDTO.StoreLogo.FileName;
             }
 
-            // Save the uploaded background image file if provided
             if (storeDTO.BackgroundImage != null)
             {
                 var fileBgImage = Path.Combine(uploadedFolder, storeDTO.BackgroundImage.FileName);
@@ -119,27 +123,25 @@ namespace E_Commerce.Controllers
                     storeDTO.BackgroundImage.CopyTo(stream);
                 }
 
-                // Update the background image path
                 backgroundImagePath = storeDTO.BackgroundImage.FileName;
             }
 
-            // Create a new store with all subscription-related details
             var store = new Store
             {
                 StoreName = storeDTO.StoreName,
                 StoreDescription = storeDTO.StoreDescription,
-                StoreLogo = storeLogoPath,              // Assign logo image path
-                BackgroundImage = backgroundImagePath,  // Assign background image path
+                StoreLogo = storeLogoPath,              
+                BackgroundImage = backgroundImagePath,  
                 Address = storeDTO.Address,
                 City = storeDTO.City,
                 ZipCode = storeDTO.ZipCode,
                 Country = storeDTO.Country,
                 PhoneNumber = storeDTO.PhoneNumber,
-                Status = "active",                      // Store is active upon creation
+                Status = "active",                      
                 PlanName = storeDTO.PlanName,
                 PlanType = storeDTO.PlanType,
-                StartDate = startDate,                  // Set start date automatically
-                EndDate = endDate                       // Store the calculated subscription end date
+                StartDate = startDate,                
+                EndDate = endDate                      
             };
 
             _context.Stores.Add(store);
@@ -150,22 +152,25 @@ namespace E_Commerce.Controllers
 
 
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
 
-        // Return only stores with "active" status
+        // Return only stores with "active" status (Admin dashboard , User side)
         [HttpGet("active")]
         public IActionResult GetActiveStores()
         {
-            // Automatically update store statuses before fetching active stores
             UpdateStoreStatuses();
 
             var activeStores = _context.Stores.Where(s => s.Status == "active").ToList();
             return Ok(activeStores);
         }
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
 
-        // Return only stores with "inactive" status
+        // Return only stores with "inactive" status (Admin dashboard)
         [HttpGet("inactive")]
         public IActionResult GetInactiveStores()
         {
@@ -176,6 +181,8 @@ namespace E_Commerce.Controllers
         }
 
 
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -183,45 +190,42 @@ namespace E_Commerce.Controllers
         [HttpPut("UpdateSubscription/{storeId}")]
         public IActionResult UpdateSubscription(int storeId, [FromBody] UpdateSubscriptionDTO updateDto)
         {
-            // Find the existing store by ID
             var store = _context.Stores.FirstOrDefault(s => s.StoreId == storeId);
             if (store == null)
             {
                 return NotFound(new { message = "Store not found" });
             }
 
-            // Set the new start date to the current date and time
             DateTime newStartDate = DateTime.Now;
 
-            // Validate the plan type and calculate the new end date
             DateTime newEndDate;
             if (updateDto.PlanName.ToLower() == "monthly")
             {
-                newEndDate = newStartDate.AddMonths(1);  // Monthly subscription
+                newEndDate = newStartDate.AddMonths(1);  
             }
             else if (updateDto.PlanName.ToLower() == "yearly")
             {
-                newEndDate = newStartDate.AddYears(1);   // Yearly subscription
+                newEndDate = newStartDate.AddYears(1);  
             }
             else
             {
                 return BadRequest("Invalid plan type. Must be 'monthly' or 'yearly'.");
             }
 
-            // Update the subscription details
             store.PlanName = updateDto.PlanName;
             store.PlanType = updateDto.PlanType;
             store.Amount = updateDto.Amount;
-            store.StartDate = newStartDate;  // Update the start date to the current date and time
-            store.EndDate = newEndDate;      // Set the new calculated end date
+            store.StartDate = newStartDate;  
+            store.EndDate = newEndDate;      
 
-            // Save changes to the database
             _context.SaveChanges();
 
             return Ok(new { message = "Subscription updated successfully", store });
         }
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
-        //last 3 store (home page ) TOP SELLING 
+        //last 3 store (home page ) TOP SELLING (Store Most Orders)
 
         [HttpGet("top-stores")]
         public IActionResult GetTopStores(int top = 3)

@@ -233,27 +233,22 @@ namespace E_Commerce.Controllers
                 CreatedAt = DateOnly.FromDateTime(DateTime.Now)
             };
 
-            // إضافة الفئة (Category) إلى قاعدة البيانات أولاً
             _db.Categories.Add(category);
             _db.SaveChanges();
 
-            // إذا كانت هناك Subcategories
             if (categoryDto.Subcategories != null && categoryDto.Subcategories.Count > 0)
             {
                 foreach (var subcategoryName in categoryDto.Subcategories)
                 {
-                    // إنشاء SubCategory وربطها بالـ Category
                     var subcategory = new SubCategory
                     {
                         SubcategoryName = subcategoryName,
-                        CategoryId = category.CategoryId // ربط الـ SubCategory بالـ Category
+                        CategoryId = category.CategoryId 
                     };
 
-                    // إضافة الـ SubCategory إلى قاعدة البيانات
                     _db.SubCategories.Add(subcategory);
                 }
 
-                // حفظ التغييرات النهائية
                 _db.SaveChanges();
             }
 
