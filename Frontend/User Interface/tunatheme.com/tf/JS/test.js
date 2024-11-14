@@ -26,27 +26,25 @@ console.log(bubbleSort([64, 34, 25, 12, 22, 11, 90]));
 
 
 function sortEvenOdd(arr) {
-    let evenArray = []; // مصفوفة لتخزين الأعداد الزوجية
-    let oddArray = []; // مصفوفة لتخزين الأعداد الفردية
+    let evenArray = []; 
+    let oddArray = []; 
   
-    // حلقة للمرور عبر المصفوفة
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] % 2 === 0) {
-        evenArray.push(arr[i]); // إضافة العدد الزوجي
+        evenArray.push(arr[i]); 
       } else {
-        oddArray.push(arr[i]); // إضافة العدد الفردي
+        oddArray.push(arr[i]); 
       }
     }
   
-    let sortedArray = evenArray.concat(oddArray); // إرجاع الأعداد الزوجية أولاً ثم الفردية
+    let sortedArray = evenArray.concat(oddArray);
   
     console.log("Even numbers:", evenArray);
     console.log("Odd numbers:", oddArray);
     console.log("Sorted array:", sortedArray);
     
-    return sortedArray; // إرجاع الأعداد مرتبة
+    return sortedArray; 
   }
   
-  // مثال على الاستخدام
   sortEvenOdd([5, 3, 8, 6, 2, 7, 4, 1]);
   

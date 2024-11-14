@@ -57,6 +57,8 @@ public partial class MyDbContext : DbContext
 
     public virtual DbSet<SubCategory> SubCategories { get; set; }
 
+    public virtual DbSet<Subscription> Subscriptions { get; set; }
+
     public virtual DbSet<Tag> Tags { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -578,6 +580,9 @@ public partial class MyDbContext : DbContext
             entity.Property(e => e.PasswordHash).HasColumnName("passwordHash");
             entity.Property(e => e.PasswordSalt).HasColumnName("passwordSalt");
             entity.Property(e => e.StoreId).HasColumnName("store_id");
+            entity.Property(e => e.UserType)
+                .HasMaxLength(20)
+                .HasDefaultValue("StoreOwner");
 
             entity.HasOne(d => d.Store).WithMany(p => p.StoreOwners)
                 .HasForeignKey(d => d.StoreId)
@@ -601,6 +606,21 @@ public partial class MyDbContext : DbContext
                 .HasConstraintName("FK__SubCatego__categ__4222D4EF");
         });
 
+        modelBuilder.Entity<Subscription>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("PK__Subscrip__3214EC077E9A11A6");
+
+            entity.Property(e => e.AutoRenew).HasDefaultValue(true);
+            entity.Property(e => e.EndDate).HasColumnType("datetime");
+            entity.Property(e => e.StartDate)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .HasDefaultValue("Active");
+            entity.Property(e => e.SubscriptionPlan).HasMaxLength(255);
+        });
+
         modelBuilder.Entity<Tag>(entity =>
         {
             entity.HasKey(e => e.TagId).HasName("PK__Tags__4296A2B6B0283F73");
@@ -614,6 +634,8 @@ public partial class MyDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.UserId).HasName("PK__Users__B9BE370FB3129C30");
+
+            entity.HasIndex(e => e.Email, "UQ_UserEmail").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Address).HasColumnName("address");

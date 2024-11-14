@@ -1,0 +1,955 @@
+2024-11-12 19:41:03.204 +03:00 [INF] User profile is available. Using 'C:\Users\Orange\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2024-11-12 19:41:04.336 +03:00 [INF] Now listening on: https://localhost:7000
+2024-11-12 19:41:04.338 +03:00 [INF] Now listening on: http://localhost:5256
+2024-11-12 19:41:04.565 +03:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-11-12 19:41:04.575 +03:00 [INF] Hosting environment: Development
+2024-11-12 19:41:04.578 +03:00 [INF] Content root path: C:\Users\Orange\Downloads\Masterpiece1\Backend\E-Commerce
+2024-11-12 19:41:04.650 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - null null
+2024-11-12 19:41:04.650 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products - null null
+2024-11-12 19:41:04.650 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - null null
+2024-11-12 19:41:04.704 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - null null
+2024-11-12 19:41:04.704 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products - null null
+2024-11-12 19:41:04.704 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - null null
+2024-11-12 19:41:05.042 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:05.042 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:05.042 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:05.042 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:05.042 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:05.042 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:05.080 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:05.080 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:05.080 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:05.080 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:05.080 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:05.084 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:05.124 +03:00 [INF] Route matched with {action = "GetPendingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetPendingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:05.124 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:05.124 +03:00 [INF] Route matched with {action = "GetRejectedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetRejectedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:05.124 +03:00 [INF] Route matched with {action = "GetPendingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetPendingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:05.124 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:05.124 +03:00 [INF] Route matched with {action = "GetRejectedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetRejectedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:08.615 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-11-12 19:41:08.697 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-11-12 19:41:08.704 +03:00 [WRN] Compiling a query which loads related collections for more than one collection navigation, either via 'Include' or through projection, but no 'QuerySplittingBehavior' has been configured. By default, Entity Framework will use 'QuerySplittingBehavior.SingleQuery', which can potentially result in slow query performance. See https://go.microsoft.com/fwlink/?linkid=2134277 for more information. To identify the query that's triggering this warning call 'ConfigureWarnings(w => w.Throw(RelationalEventId.MultipleCollectionIncludeWarning))'.
+2024-11-12 19:41:09.439 +03:00 [INF] Executed DbCommand (83ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s0].[store_id], [p0].[ImageID], [p0].[ImagePath], [p0].[ProductID], [c].[comment_id], [c].[comment], [c].[date], [c].[email], [c].[name], [c].[product_id], [c].[rating], [c].[status], [t0].[ProductID], [t0].[TagID], [t0].[tag_id], [t0].[tag_name], [s0].[address], [s0].[amount], [s0].[background_image], [s0].[city], [s0].[country], [s0].[created_at], [s0].[end_date], [s0].[phone_number], [s0].[plan_name], [s0].[plan_type], [s0].[start_date], [s0].[status], [s0].[store_description], [s0].[store_logo], [s0].[store_name], [s0].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s0] ON [p].[store_id] = [s0].[store_id]
+LEFT JOIN [ProductImages] AS [p0] ON [p].[product_id] = [p0].[ProductID]
+LEFT JOIN [Comment] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN (
+    SELECT [p1].[ProductID], [p1].[TagID], [t].[tag_id], [t].[tag_name]
+    FROM [ProductTags] AS [p1]
+    INNER JOIN [Tags] AS [t] ON [p1].[TagID] = [t].[tag_id]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[product_id] DESC, [s0].[store_id], [p0].[ImageID], [c].[comment_id], [t0].[ProductID], [t0].[TagID]
+2024-11-12 19:41:09.439 +03:00 [INF] Executed DbCommand (83ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s0].[store_id], [p0].[ImageID], [p0].[ImagePath], [p0].[ProductID], [c].[comment_id], [c].[comment], [c].[date], [c].[email], [c].[name], [c].[product_id], [c].[rating], [c].[status], [t0].[ProductID], [t0].[TagID], [t0].[tag_id], [t0].[tag_name], [s0].[address], [s0].[amount], [s0].[background_image], [s0].[city], [s0].[country], [s0].[created_at], [s0].[end_date], [s0].[phone_number], [s0].[plan_name], [s0].[plan_type], [s0].[start_date], [s0].[status], [s0].[store_description], [s0].[store_logo], [s0].[store_name], [s0].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s0] ON [p].[store_id] = [s0].[store_id]
+LEFT JOIN [ProductImages] AS [p0] ON [p].[product_id] = [p0].[ProductID]
+LEFT JOIN [Comment] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN (
+    SELECT [p1].[ProductID], [p1].[TagID], [t].[tag_id], [t].[tag_name]
+    FROM [ProductTags] AS [p1]
+    INNER JOIN [Tags] AS [t] ON [p1].[TagID] = [t].[tag_id]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[product_id] DESC, [s0].[store_id], [p0].[ImageID], [c].[comment_id], [t0].[ProductID], [t0].[TagID]
+2024-11-12 19:41:09.439 +03:00 [INF] Executed DbCommand (76ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'rejected' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:09.439 +03:00 [INF] Executed DbCommand (83ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'rejected' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:09.455 +03:00 [INF] Executed DbCommand (123ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'pending' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:09.470 +03:00 [INF] Executed DbCommand (138ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'pending' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:09.926 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:09.926 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:09.930 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:09.935 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:09.971 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:09.976 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:10.151 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce) in 4994.0475ms
+2024-11-12 19:41:10.151 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce) in 4991.6115ms
+2024-11-12 19:41:10.154 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce) in 5015.7118ms
+2024-11-12 19:41:10.151 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce) in 4998.9162ms
+2024-11-12 19:41:10.175 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce) in 5033.0875ms
+2024-11-12 19:41:10.205 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce) in 5074.4575ms
+2024-11-12 19:41:10.341 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:10.280 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:10.291 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:10.244 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:10.296 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:10.303 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:10.527 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/swagger/index.html - null null
+2024-11-12 19:41:10.588 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - 499 null application/json; charset=utf-8 5949.4053ms
+2024-11-12 19:41:10.588 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - 499 null application/json; charset=utf-8 5883.6429ms
+2024-11-12 19:41:10.588 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products - 499 null application/json; charset=utf-8 5882.1365ms
+2024-11-12 19:41:10.589 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - 499 null application/json; charset=utf-8 5951.6776ms
+2024-11-12 19:41:10.589 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products - 499 null application/json; charset=utf-8 5951.8236ms
+2024-11-12 19:41:10.590 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - 499 null application/json; charset=utf-8 5886.3356ms
+2024-11-12 19:41:10.679 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - null null
+2024-11-12 19:41:10.680 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - null null
+2024-11-12 19:41:10.681 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products - null null
+2024-11-12 19:41:10.740 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:10.741 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:10.754 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:10.756 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:10.740 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:10.766 +03:00 [INF] Route matched with {action = "GetPendingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetPendingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:10.765 +03:00 [INF] Route matched with {action = "GetRejectedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetRejectedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:10.779 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:10.861 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:11.009 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s0].[store_id], [p0].[ImageID], [p0].[ImagePath], [p0].[ProductID], [c].[comment_id], [c].[comment], [c].[date], [c].[email], [c].[name], [c].[product_id], [c].[rating], [c].[status], [t0].[ProductID], [t0].[TagID], [t0].[tag_id], [t0].[tag_name], [s0].[address], [s0].[amount], [s0].[background_image], [s0].[city], [s0].[country], [s0].[created_at], [s0].[end_date], [s0].[phone_number], [s0].[plan_name], [s0].[plan_type], [s0].[start_date], [s0].[status], [s0].[store_description], [s0].[store_logo], [s0].[store_name], [s0].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s0] ON [p].[store_id] = [s0].[store_id]
+LEFT JOIN [ProductImages] AS [p0] ON [p].[product_id] = [p0].[ProductID]
+LEFT JOIN [Comment] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN (
+    SELECT [p1].[ProductID], [p1].[TagID], [t].[tag_id], [t].[tag_name]
+    FROM [ProductTags] AS [p1]
+    INNER JOIN [Tags] AS [t] ON [p1].[TagID] = [t].[tag_id]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[product_id] DESC, [s0].[store_id], [p0].[ImageID], [c].[comment_id], [t0].[ProductID], [t0].[TagID]
+2024-11-12 19:41:11.013 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'rejected' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:11.013 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'pending' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:11.033 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:11.038 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:11.043 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce) in 247.6922ms
+2024-11-12 19:41:11.044 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce) in 262.674ms
+2024-11-12 19:41:11.045 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:11.047 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:11.049 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - 200 null application/json; charset=utf-8 369.2671ms
+2024-11-12 19:41:11.050 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - 200 null application/json; charset=utf-8 371.0347ms
+2024-11-12 19:41:11.088 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:11.162 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce) in 199.6328ms
+2024-11-12 19:41:11.167 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:11.177 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products - 200 null application/json; charset=utf-8 497.0884ms
+2024-11-12 19:41:11.246 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/swagger/index.html - 200 null text/html;charset=utf-8 719.443ms
+2024-11-12 19:41:11.252 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/_framework/aspnetcore-browser-refresh.js - null null
+2024-11-12 19:41:11.252 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/_vs/browserLink - null null
+2024-11-12 19:41:11.278 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/_framework/aspnetcore-browser-refresh.js - 200 13756 application/javascript; charset=utf-8 26.5936ms
+2024-11-12 19:41:11.378 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products - null null
+2024-11-12 19:41:11.378 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - null null
+2024-11-12 19:41:11.378 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - null null
+2024-11-12 19:41:11.382 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:11.385 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:11.394 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:11.396 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:11.397 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:11.398 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:11.399 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:11.401 +03:00 [INF] Route matched with {action = "GetPendingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetPendingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:11.405 +03:00 [INF] Route matched with {action = "GetRejectedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetRejectedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:11.414 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s0].[store_id], [p0].[ImageID], [p0].[ImagePath], [p0].[ProductID], [c].[comment_id], [c].[comment], [c].[date], [c].[email], [c].[name], [c].[product_id], [c].[rating], [c].[status], [t0].[ProductID], [t0].[TagID], [t0].[tag_id], [t0].[tag_name], [s0].[address], [s0].[amount], [s0].[background_image], [s0].[city], [s0].[country], [s0].[created_at], [s0].[end_date], [s0].[phone_number], [s0].[plan_name], [s0].[plan_type], [s0].[start_date], [s0].[status], [s0].[store_description], [s0].[store_logo], [s0].[store_name], [s0].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s0] ON [p].[store_id] = [s0].[store_id]
+LEFT JOIN [ProductImages] AS [p0] ON [p].[product_id] = [p0].[ProductID]
+LEFT JOIN [Comment] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN (
+    SELECT [p1].[ProductID], [p1].[TagID], [t].[tag_id], [t].[tag_name]
+    FROM [ProductTags] AS [p1]
+    INNER JOIN [Tags] AS [t] ON [p1].[TagID] = [t].[tag_id]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[product_id] DESC, [s0].[store_id], [p0].[ImageID], [c].[comment_id], [t0].[ProductID], [t0].[TagID]
+2024-11-12 19:41:11.425 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'rejected' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:11.429 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'pending' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:11.433 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:11.438 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:11.440 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce) in 24.774ms
+2024-11-12 19:41:11.442 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce) in 30.6036ms
+2024-11-12 19:41:11.442 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:11.445 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:11.447 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:11.451 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - 200 null application/json; charset=utf-8 73.7486ms
+2024-11-12 19:41:11.458 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - 200 null application/json; charset=utf-8 80.5402ms
+2024-11-12 19:41:11.511 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce) in 103.1105ms
+2024-11-12 19:41:11.515 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:11.518 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products - 200 null application/json; charset=utf-8 140.5225ms
+2024-11-12 19:41:11.579 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 326.9395ms
+2024-11-12 19:41:11.648 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/swagger/v1/swagger.json - null null
+2024-11-12 19:41:12.128 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 480.2367ms
+2024-11-12 19:41:12.456 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - null null
+2024-11-12 19:41:12.462 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:12.463 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:12.463 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - null null
+2024-11-12 19:41:12.464 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products - null null
+2024-11-12 19:41:12.466 +03:00 [INF] Route matched with {action = "GetPendingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetPendingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:12.472 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:12.476 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:12.479 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:12.480 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:12.481 +03:00 [INF] Route matched with {action = "GetRejectedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetRejectedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:12.482 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:12.493 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s0].[store_id], [p0].[ImageID], [p0].[ImagePath], [p0].[ProductID], [c].[comment_id], [c].[comment], [c].[date], [c].[email], [c].[name], [c].[product_id], [c].[rating], [c].[status], [t0].[ProductID], [t0].[TagID], [t0].[tag_id], [t0].[tag_name], [s0].[address], [s0].[amount], [s0].[background_image], [s0].[city], [s0].[country], [s0].[created_at], [s0].[end_date], [s0].[phone_number], [s0].[plan_name], [s0].[plan_type], [s0].[start_date], [s0].[status], [s0].[store_description], [s0].[store_logo], [s0].[store_name], [s0].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s0] ON [p].[store_id] = [s0].[store_id]
+LEFT JOIN [ProductImages] AS [p0] ON [p].[product_id] = [p0].[ProductID]
+LEFT JOIN [Comment] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN (
+    SELECT [p1].[ProductID], [p1].[TagID], [t].[tag_id], [t].[tag_name]
+    FROM [ProductTags] AS [p1]
+    INNER JOIN [Tags] AS [t] ON [p1].[TagID] = [t].[tag_id]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[product_id] DESC, [s0].[store_id], [p0].[ImageID], [c].[comment_id], [t0].[ProductID], [t0].[TagID]
+2024-11-12 19:41:12.494 +03:00 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'pending' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:12.495 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'rejected' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:12.505 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:12.511 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:12.511 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce) in 32.7168ms
+2024-11-12 19:41:12.514 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce) in 30.0476ms
+2024-11-12 19:41:12.515 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:12.517 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:12.520 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - 200 null application/json; charset=utf-8 63.743ms
+2024-11-12 19:41:12.522 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - 200 null application/json; charset=utf-8 58.5212ms
+2024-11-12 19:41:12.522 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:12.576 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce) in 87.9013ms
+2024-11-12 19:41:12.580 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:12.582 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products - 200 null application/json; charset=utf-8 119.1991ms
+2024-11-12 19:41:13.456 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - null null
+2024-11-12 19:41:13.456 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products - null null
+2024-11-12 19:41:13.456 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - null null
+2024-11-12 19:41:13.462 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:13.466 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:13.471 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:13.471 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:13.473 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:13.474 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:13.476 +03:00 [INF] Route matched with {action = "GetRejectedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetRejectedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:13.478 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:13.479 +03:00 [INF] Route matched with {action = "GetPendingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetPendingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:13.492 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s0].[store_id], [p0].[ImageID], [p0].[ImagePath], [p0].[ProductID], [c].[comment_id], [c].[comment], [c].[date], [c].[email], [c].[name], [c].[product_id], [c].[rating], [c].[status], [t0].[ProductID], [t0].[TagID], [t0].[tag_id], [t0].[tag_name], [s0].[address], [s0].[amount], [s0].[background_image], [s0].[city], [s0].[country], [s0].[created_at], [s0].[end_date], [s0].[phone_number], [s0].[plan_name], [s0].[plan_type], [s0].[start_date], [s0].[status], [s0].[store_description], [s0].[store_logo], [s0].[store_name], [s0].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s0] ON [p].[store_id] = [s0].[store_id]
+LEFT JOIN [ProductImages] AS [p0] ON [p].[product_id] = [p0].[ProductID]
+LEFT JOIN [Comment] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN (
+    SELECT [p1].[ProductID], [p1].[TagID], [t].[tag_id], [t].[tag_name]
+    FROM [ProductTags] AS [p1]
+    INNER JOIN [Tags] AS [t] ON [p1].[TagID] = [t].[tag_id]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[product_id] DESC, [s0].[store_id], [p0].[ImageID], [c].[comment_id], [t0].[ProductID], [t0].[TagID]
+2024-11-12 19:41:13.493 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'rejected' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:13.501 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'pending' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:13.502 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:13.541 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:13.543 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce) in 61.4222ms
+2024-11-12 19:41:13.545 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce) in 57.0567ms
+2024-11-12 19:41:13.545 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:13.547 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:13.549 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:13.555 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - 200 null application/json; charset=utf-8 99.9289ms
+2024-11-12 19:41:13.558 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - 200 null application/json; charset=utf-8 103.3292ms
+2024-11-12 19:41:13.592 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce) in 108.5812ms
+2024-11-12 19:41:13.596 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:13.598 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products - 200 null application/json; charset=utf-8 142.5438ms
+2024-11-12 19:41:14.477 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - null null
+2024-11-12 19:41:14.477 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - null null
+2024-11-12 19:41:14.477 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products - null null
+2024-11-12 19:41:14.485 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:14.490 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:14.494 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:14.495 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:14.496 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:14.498 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:14.499 +03:00 [INF] Route matched with {action = "GetPendingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetPendingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:14.501 +03:00 [INF] Route matched with {action = "GetRejectedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetRejectedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:14.502 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:14.516 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'rejected' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:14.517 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s0].[store_id], [p0].[ImageID], [p0].[ImagePath], [p0].[ProductID], [c].[comment_id], [c].[comment], [c].[date], [c].[email], [c].[name], [c].[product_id], [c].[rating], [c].[status], [t0].[ProductID], [t0].[TagID], [t0].[tag_id], [t0].[tag_name], [s0].[address], [s0].[amount], [s0].[background_image], [s0].[city], [s0].[country], [s0].[created_at], [s0].[end_date], [s0].[phone_number], [s0].[plan_name], [s0].[plan_type], [s0].[start_date], [s0].[status], [s0].[store_description], [s0].[store_logo], [s0].[store_name], [s0].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s0] ON [p].[store_id] = [s0].[store_id]
+LEFT JOIN [ProductImages] AS [p0] ON [p].[product_id] = [p0].[ProductID]
+LEFT JOIN [Comment] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN (
+    SELECT [p1].[ProductID], [p1].[TagID], [t].[tag_id], [t].[tag_name]
+    FROM [ProductTags] AS [p1]
+    INNER JOIN [Tags] AS [t] ON [p1].[TagID] = [t].[tag_id]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[product_id] DESC, [s0].[store_id], [p0].[ImageID], [c].[comment_id], [t0].[ProductID], [t0].[TagID]
+2024-11-12 19:41:14.525 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'pending' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:14.525 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:14.532 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:14.534 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce) in 24.4481ms
+2024-11-12 19:41:14.537 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce) in 30.5283ms
+2024-11-12 19:41:14.540 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:14.542 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:14.547 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:14.545 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - 200 null application/json; charset=utf-8 67.8708ms
+2024-11-12 19:41:14.547 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - 200 null application/json; charset=utf-8 70.3774ms
+2024-11-12 19:41:14.579 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce) in 67.5612ms
+2024-11-12 19:41:14.582 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:14.585 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products - 200 null application/json; charset=utf-8 108.15ms
+2024-11-12 19:41:15.557 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - null null
+2024-11-12 19:41:15.558 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - null null
+2024-11-12 19:41:15.560 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products - null null
+2024-11-12 19:41:15.564 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:15.567 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:15.571 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:15.572 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:15.574 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:15.575 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:15.580 +03:00 [INF] Route matched with {action = "GetPendingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetPendingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:15.584 +03:00 [INF] Route matched with {action = "GetRejectedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetRejectedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:15.589 +03:00 [INF] Route matched with {action = "GetProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 19:41:15.606 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s0].[store_id], [p0].[ImageID], [p0].[ImagePath], [p0].[ProductID], [c].[comment_id], [c].[comment], [c].[date], [c].[email], [c].[name], [c].[product_id], [c].[rating], [c].[status], [t0].[ProductID], [t0].[TagID], [t0].[tag_id], [t0].[tag_name], [s0].[address], [s0].[amount], [s0].[background_image], [s0].[city], [s0].[country], [s0].[created_at], [s0].[end_date], [s0].[phone_number], [s0].[plan_name], [s0].[plan_type], [s0].[start_date], [s0].[status], [s0].[store_description], [s0].[store_logo], [s0].[store_name], [s0].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s0] ON [p].[store_id] = [s0].[store_id]
+LEFT JOIN [ProductImages] AS [p0] ON [p].[product_id] = [p0].[ProductID]
+LEFT JOIN [Comment] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN (
+    SELECT [p1].[ProductID], [p1].[TagID], [t].[tag_id], [t].[tag_name]
+    FROM [ProductTags] AS [p1]
+    INNER JOIN [Tags] AS [t] ON [p1].[TagID] = [t].[tag_id]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[product_id] DESC, [s0].[store_id], [p0].[ImageID], [c].[comment_id], [t0].[ProductID], [t0].[TagID]
+2024-11-12 19:41:15.610 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'rejected' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:15.617 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id], [s].[store_id], [c].[cart_item_id], [c].[cart_id], [c].[product_id], [c].[quantity], [c].[StoreId], [c0].[comment_id], [c0].[comment], [c0].[date], [c0].[email], [c0].[name], [c0].[product_id], [c0].[rating], [c0].[status], [c1].[comment_id], [c1].[comment], [c1].[comment_date], [c1].[product_id], [c1].[rating], [c1].[user_id], [p0].[discount_id], [p0].[discount_percentage], [p0].[end_date], [p0].[product_id], [p0].[start_date], [p1].[ImageID], [p1].[ImagePath], [p1].[ProductID], [v].[variant_id], [v].[color_id], [v].[image], [v].[product_id], [v].[quantity], [v].[size_id], [v].[tag_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t].[ColorName], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t0].[SizeName], [t1].[ProductID], [t1].[TagID], [t1].[tag_id], [t1].[tag_name], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Products] AS [p]
+LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+LEFT JOIN [Cart_Item] AS [c] ON [p].[product_id] = [c].[product_id]
+LEFT JOIN [Comment] AS [c0] ON [p].[product_id] = [c0].[product_id]
+LEFT JOIN [Comments] AS [c1] ON [p].[product_id] = [c1].[product_id]
+LEFT JOIN [ProductDiscounts] AS [p0] ON [p].[product_id] = [p0].[product_id]
+LEFT JOIN [ProductImages] AS [p1] ON [p].[product_id] = [p1].[ProductID]
+LEFT JOIN [Variant] AS [v] ON [p].[product_id] = [v].[product_id]
+LEFT JOIN (
+    SELECT [p2].[ProductID], [p2].[ColorID], [c2].[ColorID] AS [ColorID0], [c2].[ColorName]
+    FROM [ProductColors] AS [p2]
+    INNER JOIN [Colors] AS [c2] ON [p2].[ColorID] = [c2].[ColorID]
+) AS [t] ON [p].[product_id] = [t].[ProductID]
+LEFT JOIN (
+    SELECT [p3].[ProductID], [p3].[SizeID], [s0].[SizeID] AS [SizeID0], [s0].[SizeName]
+    FROM [ProductSize] AS [p3]
+    INNER JOIN [Sizes] AS [s0] ON [p3].[SizeID] = [s0].[SizeID]
+) AS [t0] ON [p].[product_id] = [t0].[ProductID]
+LEFT JOIN (
+    SELECT [p4].[ProductID], [p4].[TagID], [t2].[tag_id], [t2].[tag_name]
+    FROM [ProductTags] AS [p4]
+    INNER JOIN [Tags] AS [t2] ON [p4].[TagID] = [t2].[tag_id]
+) AS [t1] ON [p].[product_id] = [t1].[ProductID]
+WHERE [p].[Status] = 'pending' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC, [s].[store_id], [c].[cart_item_id], [c0].[comment_id], [c1].[comment_id], [p0].[discount_id], [p1].[ImageID], [v].[variant_id], [t].[ProductID], [t].[ColorID], [t].[ColorID0], [t0].[ProductID], [t0].[SizeID], [t0].[SizeID0], [t1].[ProductID], [t1].[TagID]
+2024-11-12 19:41:15.618 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:15.627 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:15.628 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce) in 32.8509ms
+2024-11-12 19:41:15.630 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce) in 38.377ms
+2024-11-12 19:41:15.631 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetRejectedProducts (E-Commerce)'
+2024-11-12 19:41:15.633 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetPendingProducts (E-Commerce)'
+2024-11-12 19:41:15.635 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/RejectedProducts - 200 null application/json; charset=utf-8 77.1674ms
+2024-11-12 19:41:15.637 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/PendingProducts - 200 null application/json; charset=utf-8 80.5673ms
+2024-11-12 19:41:15.641 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:15.684 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce) in 85.9646ms
+2024-11-12 19:41:15.689 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProducts (E-Commerce)'
+2024-11-12 19:41:15.691 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products - 200 null application/json; charset=utf-8 132.0425ms
+2024-11-12 19:41:24.128 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Orders/AllOrders - null null
+2024-11-12 19:41:24.136 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:24.138 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.OrdersController.GetAllOrders (E-Commerce)'
+2024-11-12 19:41:24.145 +03:00 [INF] Route matched with {action = "GetAllOrders", controller = "Orders"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllOrders() on controller E_Commerce.Controllers.OrdersController (E-Commerce).
+2024-11-12 19:41:24.377 +03:00 [INF] Executed DbCommand (51ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[order_id], [o].[Date], CASE
+    WHEN [u].[user_id] IS NOT NULL THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END, [u].[name], COALESCE([o].[store_id], 0), COALESCE((
+    SELECT TOP(1) [s].[store_name]
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [o].[store_id]), 'Unknown Store'), (
+    SELECT COALESCE(SUM(COALESCE([o0].[quantity], 0)), 0)
+    FROM [OrderItems] AS [o0]
+    WHERE [o].[order_id] = [o0].[order_id]), (
+    SELECT COALESCE(SUM(CAST(COALESCE([o1].[quantity], 0) AS decimal(10,2)) * COALESCE([p].[price], 0.0)), 0.0)
+    FROM [OrderItems] AS [o1]
+    LEFT JOIN [Products] AS [p] ON [o1].[product_id] = [p].[product_id]
+    WHERE [o].[order_id] = [o1].[order_id]), [o].[status], [u].[user_id], [t].[ProductId], [t].[ProductName], [t].[Quantity], [t].[Price], [t].[Order_Item_id]
+FROM [Orders] AS [o]
+LEFT JOIN [Users] AS [u] ON [o].[user_id] = [u].[user_id]
+LEFT JOIN (
+    SELECT [p0].[product_id] AS [ProductId], [p0].[name] AS [ProductName], [o2].[quantity] AS [Quantity], [p0].[price] AS [Price], [o2].[Order_Item_id], [o2].[order_id]
+    FROM [OrderItems] AS [o2]
+    LEFT JOIN [Products] AS [p0] ON [o2].[product_id] = [p0].[product_id]
+) AS [t] ON [o].[order_id] = [t].[order_id]
+ORDER BY [o].[Date] DESC, [o].[order_id], [u].[user_id], [t].[Order_Item_id]
+2024-11-12 19:41:24.388 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Dto.OrderResponseDto, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:24.412 +03:00 [INF] Executed action E_Commerce.Controllers.OrdersController.GetAllOrders (E-Commerce) in 261.3376ms
+2024-11-12 19:41:24.415 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.OrdersController.GetAllOrders (E-Commerce)'
+2024-11-12 19:41:24.418 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Orders/AllOrders - 200 null application/json; charset=utf-8 290.5622ms
+2024-11-12 19:41:27.838 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Orders/GetOrderDetails/73 - null null
+2024-11-12 19:41:27.848 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:27.852 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.OrdersController.GetOrderDetails (E-Commerce)'
+2024-11-12 19:41:27.880 +03:00 [INF] Route matched with {action = "GetOrderDetails", controller = "Orders"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetOrderDetails(Int32) on controller E_Commerce.Controllers.OrdersController (E-Commerce).
+2024-11-12 19:41:28.051 +03:00 [INF] Executed DbCommand (45ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[order_id], [t].[Date], [t].[status], [t].[c], [t].[user_id], [t].[copon_id], [t0].[ProductId], [t0].[ProductName], [t0].[Quantity], [t0].[Price], [t0].[ProductImage], [t0].[Order_Item_id], [t].[name], [t].[email], [t].[image], [t].[phone_number], [t].[c0], [t].[c1]
+FROM (
+    SELECT TOP(1) [o].[order_id], [o].[Date], [o].[status], (
+        SELECT COALESCE(SUM(CAST(COALESCE([o0].[quantity], 0) AS decimal(10,2)) * COALESCE([p].[price], 0.0)), 0.0)
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        WHERE [o].[order_id] = [o0].[order_id]) AS [c], [u].[name], [u].[email], [u].[image], [u].[phone_number], COALESCE([c].[name], N'No Coupon Applied') AS [c0], COALESCE([c].[amount], 0.0) AS [c1], [u].[user_id], [c].[copon_id]
+    FROM [Orders] AS [o]
+    LEFT JOIN [Users] AS [u] ON [o].[user_id] = [u].[user_id]
+    LEFT JOIN [Copons] AS [c] ON [o].[copon_id] = [c].[copon_id]
+    WHERE [o].[order_id] = @__orderId_0
+) AS [t]
+LEFT JOIN (
+    SELECT [p0].[product_id] AS [ProductId], [p0].[name] AS [ProductName], COALESCE([o1].[quantity], 0) AS [Quantity], COALESCE([p0].[price], 0.0) AS [Price], [p0].[image] AS [ProductImage], [o1].[Order_Item_id], [o1].[order_id]
+    FROM [OrderItems] AS [o1]
+    LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+) AS [t0] ON [t].[order_id] = [t0].[order_id]
+ORDER BY [t].[order_id], [t].[user_id], [t].[copon_id], [t0].[Order_Item_id]
+2024-11-12 19:41:28.061 +03:00 [INF] Executing OkObjectResult, writing value of type 'OrderDetailsDto'.
+2024-11-12 19:41:28.074 +03:00 [INF] Executed action E_Commerce.Controllers.OrdersController.GetOrderDetails (E-Commerce) in 188.7951ms
+2024-11-12 19:41:28.075 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.OrdersController.GetOrderDetails (E-Commerce)'
+2024-11-12 19:41:28.076 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Orders/GetOrderDetails/73 - 200 null application/json; charset=utf-8 239.6377ms
+2024-11-12 19:41:30.894 +03:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7000/api/Orders/UpdateOrderStatus/73 - null null
+2024-11-12 19:41:30.902 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:30.908 +03:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7000/api/Orders/UpdateOrderStatus/73 - 204 null null 13.9612ms
+2024-11-12 19:41:30.914 +03:00 [INF] Request starting HTTP/2 PUT https://localhost:7000/api/Orders/UpdateOrderStatus/73 - application/json 20
+2024-11-12 19:41:30.930 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:30.933 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.OrdersController.UpdateOrderStatus (E-Commerce)'
+2024-11-12 19:41:30.939 +03:00 [INF] Route matched with {action = "UpdateOrderStatus", controller = "Orders"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult UpdateOrderStatus(Int32, E_Commerce.Dto_Esraa.UpdateOrderStatusDto) on controller E_Commerce.Controllers.OrdersController (E-Commerce).
+2024-11-12 19:41:31.018 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@__orderId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [o].[order_id], [o].[amount], [o].[copon_id], [o].[Date], [o].[payment_method_id], [o].[status], [o].[store_id], [o].[transaction_id], [o].[user_id]
+FROM [Orders] AS [o]
+WHERE [o].[order_id] = @__orderId_0
+2024-11-12 19:41:31.299 +03:00 [INF] Executed DbCommand (26ms) [Parameters=[@p1='?' (DbType = Int32), @p0='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Orders] SET [status] = @p0
+OUTPUT 1
+WHERE [order_id] = @p1;
+2024-11-12 19:41:31.325 +03:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType12`3[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2024-11-12 19:41:31.333 +03:00 [INF] Executed action E_Commerce.Controllers.OrdersController.UpdateOrderStatus (E-Commerce) in 387.8046ms
+2024-11-12 19:41:31.335 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.OrdersController.UpdateOrderStatus (E-Commerce)'
+2024-11-12 19:41:31.337 +03:00 [INF] Request finished HTTP/2 PUT https://localhost:7000/api/Orders/UpdateOrderStatus/73 - 200 null application/json; charset=utf-8 424.3219ms
+2024-11-12 19:41:34.145 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Orders/AllOrders - null null
+2024-11-12 19:41:34.151 +03:00 [INF] CORS policy execution successful.
+2024-11-12 19:41:34.152 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.OrdersController.GetAllOrders (E-Commerce)'
+2024-11-12 19:41:34.155 +03:00 [INF] Route matched with {action = "GetAllOrders", controller = "Orders"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllOrders() on controller E_Commerce.Controllers.OrdersController (E-Commerce).
+2024-11-12 19:41:34.233 +03:00 [INF] Executed DbCommand (65ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [o].[order_id], [o].[Date], CASE
+    WHEN [u].[user_id] IS NOT NULL THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END, [u].[name], COALESCE([o].[store_id], 0), COALESCE((
+    SELECT TOP(1) [s].[store_name]
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [o].[store_id]), 'Unknown Store'), (
+    SELECT COALESCE(SUM(COALESCE([o0].[quantity], 0)), 0)
+    FROM [OrderItems] AS [o0]
+    WHERE [o].[order_id] = [o0].[order_id]), (
+    SELECT COALESCE(SUM(CAST(COALESCE([o1].[quantity], 0) AS decimal(10,2)) * COALESCE([p].[price], 0.0)), 0.0)
+    FROM [OrderItems] AS [o1]
+    LEFT JOIN [Products] AS [p] ON [o1].[product_id] = [p].[product_id]
+    WHERE [o].[order_id] = [o1].[order_id]), [o].[status], [u].[user_id], [t].[ProductId], [t].[ProductName], [t].[Quantity], [t].[Price], [t].[Order_Item_id]
+FROM [Orders] AS [o]
+LEFT JOIN [Users] AS [u] ON [o].[user_id] = [u].[user_id]
+LEFT JOIN (
+    SELECT [p0].[product_id] AS [ProductId], [p0].[name] AS [ProductName], [o2].[quantity] AS [Quantity], [p0].[price] AS [Price], [o2].[Order_Item_id], [o2].[order_id]
+    FROM [OrderItems] AS [o2]
+    LEFT JOIN [Products] AS [p0] ON [o2].[product_id] = [p0].[product_id]
+) AS [t] ON [o].[order_id] = [t].[order_id]
+ORDER BY [o].[Date] DESC, [o].[order_id], [u].[user_id], [t].[Order_Item_id]
+2024-11-12 19:41:34.238 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Dto.OrderResponseDto, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 19:41:34.243 +03:00 [INF] Executed action E_Commerce.Controllers.OrdersController.GetAllOrders (E-Commerce) in 83.279ms
+2024-11-12 19:41:34.246 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.OrdersController.GetAllOrders (E-Commerce)'
+2024-11-12 19:41:34.248 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Orders/AllOrders - 200 null application/json; charset=utf-8 104.061ms
+2024-11-12 22:53:43.138 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/inactive - null null
+2024-11-12 22:53:43.139 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/active - null null
+2024-11-12 22:53:43.146 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores - null null
+2024-11-12 22:53:43.160 +03:00 [INF] CORS policy execution successful.
+2024-11-12 22:53:43.165 +03:00 [INF] CORS policy execution successful.
+2024-11-12 22:53:43.166 +03:00 [INF] CORS policy execution successful.
+2024-11-12 22:53:43.169 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetInactiveStores (E-Commerce)'
+2024-11-12 22:53:43.170 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetActiveStores (E-Commerce)'
+2024-11-12 22:53:43.172 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetAllStores (E-Commerce)'
+2024-11-12 22:53:43.179 +03:00 [INF] Route matched with {action = "GetActiveStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetActiveStores() on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-12 22:53:43.179 +03:00 [INF] Route matched with {action = "GetInactiveStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetInactiveStores() on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-12 22:53:43.180 +03:00 [INF] Route matched with {action = "GetAllStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllStores() on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-12 22:53:43.259 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[end_date] < GETDATE() AND [s].[status] = N'active'
+2024-11-12 22:53:43.259 +03:00 [INF] Executed DbCommand (25ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[end_date] < GETDATE() AND [s].[status] = N'active'
+2024-11-12 22:53:43.259 +03:00 [INF] Executed DbCommand (19ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[end_date] < GETDATE() AND [s].[status] = N'active'
+2024-11-12 22:53:43.282 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+2024-11-12 22:53:43.284 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[status] = N'active'
+2024-11-12 22:53:43.287 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[status] = N'inactive'
+2024-11-12 22:53:43.289 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 22:53:43.291 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 22:53:43.294 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 22:53:43.305 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetActiveStores (E-Commerce) in 121.4963ms
+2024-11-12 22:53:43.311 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetInactiveStores (E-Commerce) in 124.7177ms
+2024-11-12 22:53:43.307 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetAllStores (E-Commerce) in 115.989ms
+2024-11-12 22:53:43.330 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetActiveStores (E-Commerce)'
+2024-11-12 22:53:43.331 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetInactiveStores (E-Commerce)'
+2024-11-12 22:53:43.332 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetAllStores (E-Commerce)'
+2024-11-12 22:53:43.335 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/active - 200 null application/json; charset=utf-8 197.1438ms
+2024-11-12 22:53:43.336 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/inactive - 200 null application/json; charset=utf-8 198.5349ms
+2024-11-12 22:53:43.339 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores - 200 null application/json; charset=utf-8 193.2203ms
+2024-11-12 22:53:45.517 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products/23 - null null
+2024-11-12 22:53:45.518 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/23 - null null
+2024-11-12 22:53:45.524 +03:00 [INF] CORS policy execution successful.
+2024-11-12 22:53:45.526 +03:00 [INF] CORS policy execution successful.
+2024-11-12 22:53:45.527 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProductsByStoreWithoutStatusCheck (E-Commerce)'
+2024-11-12 22:53:45.528 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetStoreById (E-Commerce)'
+2024-11-12 22:53:45.534 +03:00 [INF] Route matched with {action = "GetProductsByStoreWithoutStatusCheck", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProductsByStoreWithoutStatusCheck(Int32) on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-12 22:53:45.534 +03:00 [INF] Route matched with {action = "GetStoreById", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetStoreById(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-12 22:53:45.557 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__storeId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[store_id] = @__storeId_0
+2024-11-12 22:53:45.588 +03:00 [INF] Executed DbCommand (12ms) [Parameters=[@__storeId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[store_id] = @__storeId_0 AND [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC
+2024-11-12 22:53:45.592 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-12 22:53:45.595 +03:00 [INF] Executed DbCommand (5ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[store_id] = @__p_0
+2024-11-12 22:53:45.601 +03:00 [INF] Executing OkObjectResult, writing value of type 'E_Commerce.Models.Store'.
+2024-11-12 22:53:45.605 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetStoreById (E-Commerce) in 60.9778ms
+2024-11-12 22:53:45.606 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProductsByStoreWithoutStatusCheck (E-Commerce) in 68.7553ms
+2024-11-12 22:53:45.609 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetStoreById (E-Commerce)'
+2024-11-12 22:53:45.611 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProductsByStoreWithoutStatusCheck (E-Commerce)'
+2024-11-12 22:53:45.613 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/23 - 200 null application/json; charset=utf-8 96.1129ms
+2024-11-12 22:53:45.616 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products/23 - 200 null application/json; charset=utf-8 98.5724ms

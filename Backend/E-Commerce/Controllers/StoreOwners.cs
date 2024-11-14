@@ -85,7 +85,7 @@ namespace E_Commerce.Controllers
 
             var token = _tokenGenerator.GenerateToken(user.OwnerName, roles);
 
-            return Ok(new { Token = token, StoreOwnerId = user.StoreId });
+            return Ok(new { Token = token, StoreOwnerId = user.StoreId , UserTayp=user.UserType});
         }
     }
 }

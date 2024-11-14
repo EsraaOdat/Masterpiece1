@@ -674,7 +674,6 @@
     
                     `;
                 } 
-                
 
     // Insert products into the table using a for loop
     let productTable = document.getElementById("productTable");
@@ -683,7 +682,7 @@
                     <tr>
                                         <td class="cart-product-image">
 
-                                            <a href="product-details.html"><img  src="../../../../../../../Backend/E-Commerce/Product/${item.productImage}"  alt="${item.productName}"></a>
+                                            <a href="product-details.html"onclick="setProductId(${item.productId})"><img  src="../../../../../../../Backend/E-Commerce/Product/${item.productImage}"  alt="${item.productName}"></a>
                                         </td>
                                         <td class="cart-product-info">
                                             <h4><a href="product-details.html">${item.productName}</a></h4>
@@ -730,6 +729,18 @@
 
             XLSX.writeFile(wb, 'OrderDetails.xlsx');
         }
+
+
+
+
+
+          // Function to set product ID and redirect to the product details page
+   function setProductId(productId) {
+        console.log("Setting product ID:", productId);
+        localStorage.setItem("SelectedProductId", productId);
+        window.location.href = 'product-details.html';
+    }
+
         </script>
 
 </body>

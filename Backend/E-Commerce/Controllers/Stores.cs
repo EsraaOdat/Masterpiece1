@@ -74,13 +74,17 @@ namespace E_Commerce.Controllers
             {
                 endDate = startDate.AddMonths(1);  // Monthly subscription
             }
+            else if (storeDTO.PlanName.ToLower() == "quarterly")  // Added quarterly plan
+            {
+                endDate = startDate.AddMonths(3);  // 3-month subscription
+            }
             else if (storeDTO.PlanName.ToLower() == "yearly")
             {
                 endDate = startDate.AddYears(1);  // Yearly subscription
             }
             else
             {
-                return BadRequest("Invalid plan type. Must be 'monthly' or 'yearly'.");
+                return BadRequest("Invalid plan type. Must be 'monthly', 'quarterly', or 'yearly'.");
             }
 
             // Ensure the "StoreImages" directory exists
@@ -143,20 +147,6 @@ namespace E_Commerce.Controllers
 
             return Ok(new { message = "Store created successfully", storeId = store.StoreId });
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

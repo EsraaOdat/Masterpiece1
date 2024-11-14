@@ -532,143 +532,246 @@
 <script src="../../../assets/js/theme.min.js"></script>
 
 <script>
-  async function getData() {
+ async function getData() {
     const url = `https://localhost:7000/api/Products/PendingProducts`;
 
-    try { // Add try block here
-      const response = await fetch(url);
-      let data = await response.json();
-      console.log(data);
-      let tableBody = document.getElementById("AllProduct"); // Correctly refer to the table body element
-      let rows = ''; // Initialize a string to store rows
+    try {
+        const response = await fetch(url);
+        let data = await response.json();
+        console.log(data);
 
-      data.forEach((Products) => {
-        rows += `
-        <tr id="ProductRow${Products.productId}">
+        let tableBody = document.getElementById("AllProduct");
+        let rows = '';
 
-                              
-                              <td>
-                                <a href="#" class="text-inherit">
-                                  <div class="d-flex align-items-center flex-row gap-3">
-                                    <div>
-                                      <img src="../../.././../../../../Backend/E-Commerce/Product/${Products.image}" alt="${Products.name}" class="img-4by3-md rounded" />
-                                    </div>
-                                    <div class="">
-                                      <h5 class="mb-0 text-primary-hover">${Products.name}</h5>
-                                    </div>
-                                  </div>
-                                </a>
-                              </td>
-                              <td>${Products.description}</td>
-                              <td>$${Products.price}</td>
-                              <td>${Products.status}</td>
-                              <td>${Products.store.storeName}</td>
+        data.forEach((product) => {
+            // Split the description into lines with around 6 words each
+            const words = product.description.split(' ');
+            const lines = [];
+            for (let i = 0; i < words.length; i += 6) {
+                lines.push(words.slice(i, i + 6).join(' '));
+            }
 
+            const maxLength = 100; // Max character length for short display
+            const isLongDescription = lines.join('<br>').length > maxLength;
 
-                        <!--       <td>
-                                <div class="d-flex align-items-center flex-row gap-2">
-                                  <h5 class="mb-0"></h5>
-                   <a href="UpdateProduct.html"  onclick="saveProductId('${Products.productId}')"><i class="fe fe-edit fs-50"></i>    </a>         
+            // Display first two lines only if the description is long
+            const shortDescription = isLongDescription ? lines.slice(0, 2).join('<br>') + "..." : lines.join('<br>');
 
-                   <a href="#" onclick="deleteProduct('${Products.productId}')"><i class="fe fe-trash-2 fs-50" style="color: red;"></i> </a>
+            rows += `
+                <tr id="ProductRow${product.productId}">
+                    <td>
+                        <a href="#" class="text-inherit">
+                            <div class="d-flex align-items-center flex-row gap-3">
+                                <div>
+                                    <img src="../../../../../../../Backend/E-Commerce/Product/${product.image}" alt="${product.name}" class="img-4by3-md rounded" />
+                                </div>
+                                <div class="">
+                                    <h5 class="mb-0 text-primary-hover">${product.name}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </td>
+                    <td>
+                        <span class="product-description">${shortDescription}</span>
+                        <span class="full-description" style="display: none;">${lines.join('<br>')}</span>
+                        ${isLongDescription ? `<span class="more-link text-primary" onclick="toggleDescription(this)">More</span>` : ''}
+                    </td>
+                    <td>$${product.price}</td>
+                    <td>${product.status}</td>
+                    <td>${product.store.storeName}</td>
+                    <td>
+                        <button onclick="acceptProduct('${product.productId}')" class="btn btn-success btn-sm">Accept</button>
+                        <button onclick="rejectProduct('${product.productId}')" class="btn btn-danger btn-sm">Reject</button>
+                    </td>
+                </tr>
+            `;
+        });
 
-                 </div>
-                              </td> -->
-
-                              <td>
-                                          <button onclick="acceptProduct('${Products.productId}')" class="btn btn-success btn-sm">Accept</button>
-          <button onclick="rejectProduct('${Products.productId}')" class="btn btn-danger btn-sm">Reject</button>
-
-                                </td>
-
-                             </tr>
-  `;
-      });
-
-      tableBody.innerHTML = rows;
-
-      
-
-
-
+        tableBody.innerHTML = rows;
 
     } catch (error) {
-      console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error);
     }
-  }
+}
+
+// Reuse the toggleDescription function for toggling "More" and "Less"
+function toggleDescription(link) {
+    const fullDesc = link.previousElementSibling;
+    const shortDesc = fullDesc.previousElementSibling;
+
+    if (fullDesc.style.display === "none") {
+        shortDesc.style.display = "none";
+        fullDesc.style.display = "inline";
+        link.textContent = "Less";
+    } else {
+        shortDesc.style.display = "inline";
+        fullDesc.style.display = "none";
+        link.textContent = "More";
+    }
+}
+
+getData();
 
 
-  getData();
+async function ActiveProducts() {
+    const url = `https://localhost:7000/api/Products/Products`;
+
+    try {
+        const response = await fetch(url);
+        let data = await response.json();
+        console.log(data);
+
+        let tableBody = document.getElementById("ActiveProducts");
+        let rows = '';
+
+        data.forEach((product) => {
+            // Split the description into lines with around 6 words each
+            const words = product.description.split(' ');
+            const lines = [];
+            for (let i = 0; i < words.length; i += 6) {
+                lines.push(words.slice(i, i + 6).join(' '));
+            }
+
+            const maxLength = 100; // Max character length for short display
+            const isLongDescription = lines.join('<br>').length > maxLength;
+
+            // Display first two lines only if the description is long
+            const shortDescription = isLongDescription ? lines.slice(0, 2).join('<br>') + "..." : lines.join('<br>');
+
+            rows += `
+                <tr id="ProductRow${product.productId}">
+                    <td>
+                        <a href="#" class="text-inherit">
+                            <div class="d-flex align-items-center flex-row gap-3">
+                                <div>
+                                    <img src="../../../../../../../Backend/E-Commerce/Product/${product.image}" alt="${product.name}" class="img-4by3-md rounded" />
+                                </div>
+                                <div class="">
+                                    <h5 class="mb-0 text-primary-hover">${product.name}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </td>
+                    <td>
+                        <span class="product-description">${shortDescription}</span>
+                        <span class="full-description" style="display: none;">${lines.join('<br>')}</span>
+                        ${isLongDescription ? `<span class="more-link text-primary" onclick="toggleDescription(this)">More</span>` : ''}
+                    </td>
+                    <td>$${product.price}</td>
+                    <td>${product.status}</td>
+                    <td>${product.store.storeName}</td>
+                    <td>
+                        <button onclick="rejectProduct('${product.productId}')" class="btn btn-danger btn-sm">Reject</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        tableBody.innerHTML = rows;
+
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+// Reuse the toggleDescription function to handle "More" and "Less" toggling
+function toggleDescription(link) {
+    const fullDesc = link.previousElementSibling;
+    const shortDesc = fullDesc.previousElementSibling;
+
+    if (fullDesc.style.display === "none") {
+        shortDesc.style.display = "none";
+        fullDesc.style.display = "inline";
+        link.textContent = "Less";
+    } else {
+        shortDesc.style.display = "inline";
+        fullDesc.style.display = "none";
+        link.textContent = "More";
+    }
+}
+
+ActiveProducts();
 
 
-  async function rejectedProduct() {
+async function rejectedProduct() {
     const url = `https://localhost:7000/api/Products/RejectedProducts`;
 
-    try { // Add try block here
-      const response = await fetch(url);
-      let data = await response.json();
-      console.log(data);
-      let tableBody = document.getElementById("rejectedProduct"); // Correctly refer to the table body element
-      let rows = ''; // Initialize a string to store rows
+    try {
+        const response = await fetch(url);
+        let data = await response.json();
+        console.log(data);
 
-      data.forEach((Products) => {
-        rows += `
-        <tr id="ProductRow${Products.productId}">
+        let tableBody = document.getElementById("rejectedProduct");
+        let rows = '';
 
-                              
-                              <td>
-                                <a href="#" class="text-inherit">
-                                  <div class="d-flex align-items-center flex-row gap-3">
-                                    <div>
-                                      <img src="../../.././../../../../Backend/E-Commerce/Product/${Products.image}" alt="${Products.name}" class="img-4by3-md rounded" />
-                                    </div>
-                                    <div class="">
-                                      <h5 class="mb-0 text-primary-hover">${Products.name}</h5>
-                                    </div>
-                                  </div>
-                                </a>
-                              </td>
-                              <td>${Products.description}</td>
-                              <td>$${Products.price}</td>
-                              <td>${Products.status}</td>
-                              <td>${Products.store.storeName}</td>
+        data.forEach((product) => {
+            // Split the description into lines with around 6 words each
+            const words = product.description.split(' ');
+            const lines = [];
+            for (let i = 0; i < words.length; i += 6) {
+                lines.push(words.slice(i, i + 6).join(' '));
+            }
 
+            const maxLength = 100; // Max character length for short display
+            const isLongDescription = lines.join('<br>').length > maxLength;
 
-                        <!--       <td>
-                                <div class="d-flex align-items-center flex-row gap-2">
-                                  <h5 class="mb-0"></h5>
-                   <a href="UpdateProduct.html"  onclick="saveProductId('${Products.productId}')"><i class="fe fe-edit fs-50"></i>    </a>         
+            // Display first two lines only if the description is long
+            const shortDescription = isLongDescription ? lines.slice(0, 2).join('<br>') + "..." : lines.join('<br>');
 
-                   <a href="#" onclick="deleteProduct('${Products.productId}')"><i class="fe fe-trash-2 fs-50" style="color: red;"></i> </a>
+            rows += `
+                <tr id="ProductRow${product.productId}">
+                    <td>
+                        <a href="#" class="text-inherit">
+                            <div class="d-flex align-items-center flex-row gap-3">
+                                <div>
+                                    <img src="../../../../../../../Backend/E-Commerce/Product/${product.image}" alt="${product.name}" class="img-4by3-md rounded" />
+                                </div>
+                                <div class="">
+                                    <h5 class="mb-0 text-primary-hover">${product.name}</h5>
+                                </div>
+                            </div>
+                        </a>
+                    </td>
+                    <td>
+                        <span class="product-description">${shortDescription}</span>
+                        <span class="full-description" style="display: none;">${lines.join('<br>')}</span>
+                        ${isLongDescription ? `<span class="more-link text-primary" onclick="toggleDescription(this)">More</span>` : ''}
+                    </td>
+                    <td>$${product.price}</td>
+                    <td>${product.status}</td>
+                    <td>${product.store.storeName}</td>
+                    <td>
+                        <button onclick="acceptProduct('${product.productId}')" class="btn btn-success btn-sm">Accept</button>
+                        <button onclick="deleteProduct('${product.productId}')" class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                </tr>
+            `;
+        });
 
-                 </div>
-                              </td> -->
-
-                              <td>
-                                          <button onclick="acceptProduct('${Products.productId}')" class="btn btn-success btn-sm">Accept</button>
-          <button onclick="deleteProduct('${Products.productId}')" class="btn btn-danger btn-sm">delete</button>
-
-                                </td>
-
-                             </tr>
-  `;
-      });
-
-      tableBody.innerHTML = rows;
-
-      
-
-
-
+        tableBody.innerHTML = rows;
 
     } catch (error) {
-      console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error);
     }
-  }
+}
 
+// Reuse the toggleDescription function to handle "More" and "Less" toggling
+function toggleDescription(link) {
+    const fullDesc = link.previousElementSibling;
+    const shortDesc = fullDesc.previousElementSibling;
 
-  rejectedProduct();
+    if (fullDesc.style.display === "none") {
+        shortDesc.style.display = "none";
+        fullDesc.style.display = "inline";
+        link.textContent = "Less";
+    } else {
+        shortDesc.style.display = "inline";
+        fullDesc.style.display = "none";
+        link.textContent = "More";
+    }
+}
 
+rejectedProduct();
 
 
 
@@ -723,64 +826,6 @@
     });
 }
 
-
-  async function ActiveProducts() {
-    const url = `https://localhost:7000/api/Products/Products`;
-
-    try { // Add try block here
-      const response = await fetch(url);
-      let data = await response.json();
-      console.log(data);
-      let tableBody = document.getElementById("ActiveProducts"); // Correctly refer to the table body element
-      let rows = ''; // Initialize a string to store rows
-
-      data.forEach((Products) => {
-        rows += `
-        <tr id="ProductRow${Products.productId}">
-
-                              
-                              <td>
-                                <a href="#" class="text-inherit">
-                                  <div class="d-flex align-items-center flex-row gap-3">
-                                    <div>
-                                      <img src="../../.././../../../../Backend/E-Commerce/Product/${Products.image}" alt="${Products.name}" class="img-4by3-md rounded" />
-                                    </div>
-                                    <div class="">
-                                      <h5 class="mb-0 text-primary-hover">${Products.name}</h5>
-                                    </div>
-                                  </div>
-                                </a>
-                              </td>
-                              <td>${Products.description}</td>
-                              <td>$${Products.price}</td>
-                              <td>${Products.store.status}</td>
-                              <td>${Products.store.storeName}</td>
-
-
-                               <td>
-                                        <button onclick="rejectProduct('${Products.productId}')" class="btn btn-danger btn-sm">Reject</button>
-
-                              </td>
-
-                             </tr>
-  `;
-      });
-
-      tableBody.innerHTML = rows;
-
-      
-
-
-
-
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
-
-
-
-  ActiveProducts();
 
  
   async function acceptProduct(productId) {

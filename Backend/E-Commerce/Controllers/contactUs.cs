@@ -80,7 +80,7 @@ namespace E_Commerce.Controllers
             try
             {
                 string fromEmail = data.Email;
-                string fromName = "test";
+                string fromName = "Gifts Haven";
                 string subjectText = "subject";
                 string messageText = $@"
                     <html>
@@ -88,7 +88,7 @@ namespace E_Commerce.Controllers
                         <h2>Hello</h2>
                         <p>{form.AdminResponse}</p>
                         <p>If you have any more questions, feel free to reach out to us.</p>
-                        <p>With best regards,<br>Admin</p>
+                        <p>With best regards,<br>Esraa Odat</p>
                     </body>
                     </html>";
                 string toEmail = data.Email;

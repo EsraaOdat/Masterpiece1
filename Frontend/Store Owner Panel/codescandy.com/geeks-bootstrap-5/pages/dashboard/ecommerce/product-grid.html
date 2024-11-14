@@ -98,6 +98,13 @@
                 </ul>
               </div>
             </li>
+              <!-- Add Employee link (dynamically added) -->
+          <li class="nav-item" id="addEmployeeLink" style="display:none;">
+            <a class="nav-link" href="AddEmployee.html">
+              <i class="fas fa-user-plus"></i>&nbsp; Add Employee
+            </a>
+          </li>
+
             <li class="nav-item">
               <a class="nav-link active" href="../../../../../../Admin Dashboard/codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/Login.html" onclick="logoutAndClearStorage()">
                 <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp; Logout
@@ -585,30 +592,7 @@
         
           </script>
 
-<script>
-  // Apply the stored theme on page load
-  document.addEventListener("DOMContentLoaded", () => {
-    const theme = localStorage.getItem('theme') || 'light'; // Default to 'light'
-    document.body.className = theme;
-  });
-
-  // Toggle theme between dark and light
-  function toggleTheme() {
-    let theme = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
-    localStorage.setItem('theme', theme);
-    document.body.className = theme;
-  }
-
-  // Logout function preserving the theme
-  function logoutAndClearStorage() {
-    const theme = localStorage.getItem('theme'); // Save theme
-
-    localStorage.clear(); // Clear all items
-    if (theme) localStorage.setItem('theme', theme); // Restore theme
-
-    window.location.href = 'Login.html'; // Redirect to login
-  }
-</script>
+<script src="../../../assets/js/allPages.js"></script>
 
 
   </body>

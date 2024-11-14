@@ -519,95 +519,86 @@
       </div>
     </div>
     <!-- BREADCRUMB AREA END -->
-
     <section id="pricing" class="pricing-content section-padding">
       <div class="container">
         <div class="row text-center">
-          <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s"
-            data-wow-offset="0" style="
-                visibility: visible;
-                animation-duration: 1s;
-                animation-delay: 0.1s;
-                animation-name: fadeInUp;
-              ">
+          
+          <!-- Monthly Plan -->
+          <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s">
             <div class="pricing_design">
               <div class="single-pricing">
                 <div class="price-head">
-                  <h2>Business (Monthly)</h2>
-                  <h1>150$</h1>
+                  <h2>Basic (Monthly)</h2>
+                  <h1>$100</h1>
                   <span>/Monthly</span>
                 </div>
                 <ul>
-                  <li><b>100</b> Products</li>
-                  <li><b>Premium</b> Support</li>
-                  <li><b>Advanced</b> SEO Tools</li>
-                  <li><b>Custom</b> Domain</li>
-                </ul>
-                <div class="pricing-price"></div>
-                <a href="StoreCreationPayment.html" class="theme-btn-1 btn btn-effect-1">Start Now</a>
-              </div>
-            </div>
-          </div>
-          <!--- END COL -->
-          <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s"
-            data-wow-offset="0" style="
-                visibility: visible;
-                animation-duration: 1s;
-                animation-delay: 0.2s;
-                animation-name: fadeInUp;
-              ">
-            <div class="pricing_design">
-              <div class="single-pricing">
-                <div class="price-head">
-                  <h2>Business (Annual)</h2>
-                  <h1 class="price">$700</h1>
-                  <span>/Yearly</span>
-                </div>
-                <ul>
-                  <li><b>Up to 500</b> Products</li>
-                  <li><b>Premium</b> Support</li>
-                  <li><b>Advanced</b> SEO Tools</li>
-                  <li><b>Custom</b> Domain</li>
-                  <li><b>Save 2 Months</b> with Annual Plan</li>
-                </ul>
-                <div class="pricing-price"></div>
-
-                <a href="StoreCreationPayment.html" class="theme-btn-1 btn btn-effect-1">Start Now</a>
-              </div>
-            </div>
-          </div>
-          <!--- END COL -->
-          <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s"
-            data-wow-offset="0" style="
-                visibility: visible;
-                animation-duration: 1s;
-                animation-delay: 0.3s;
-                animation-name: fadeInUp;
-              ">
-            <div class="pricing_design">
-              <div class="single-pricing">
-                <div class="price-head">
-                  <h2>Starter (Monthly)</h2>
-                  <h1 class="price">$50</h1>
-                  <span>/Monthly</span>
-                </div>
-                <ul>
-                  <li><b> 30</b> Products</li>
-                  <li><b>Basic</b> Support</li>
+                  <li><b>Unlimited</b> Product Listings</li> <!-- تحديث الوصف -->
+                  <li><b>Standard</b> Support</li>
                   <li><b>Basic</b> SEO Tools</li>
                   <li><b>Custom</b> Domain</li>
                 </ul>
-                <div class="pricing-price"></div>
-                <a href="StoreCreationPayment.html" class="theme-btn-1 btn btn-effect-1">Start Now</a>
+
+
+                <!-- Save the plan name and price in localStorage when clicked -->
+                <a href="StoreCreationPayment.html" class="theme-btn-1 btn btn-effect-1" 
+                   onclick="savePlanName('monthly', 100)">Start Now</a>
               </div>
             </div>
           </div>
-          <!--- END COL -->
+          
+          <!-- Quarterly Plan -->
+          <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s">
+            <div class="pricing_design">
+              <div class="single-pricing">
+                <div class="price-head">
+                  <h2>Premium (Quarterly)</h2>
+                  <h1>$270</h1>
+                  <span>/Quarterly</span>
+                </div>
+                <ul>
+                  <li><b>Unlimited</b> Product Listings</li> <!-- تحديث الوصف -->
+                  <li><b>Premium</b> Support</li>
+                  <li><b>Advanced</b> SEO Tools</li>
+                  <li><b>Custom</b> Domain</li>
+                  <li><b>Save 10%</b> with Quarterly Plan</li>
+                </ul>
+                <!-- Save the plan name and price in localStorage when clicked -->
+                <a href="StoreCreationPayment.html" class="theme-btn-1 btn btn-effect-1" 
+                   onclick="savePlanName('quarterly', 270)">Start Now</a>
+              </div>
+            </div>
+          </div>
+        
+          <!-- Yearly Plan -->
+          <div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s">
+            <div class="pricing_design">
+              <div class="single-pricing">
+                <div class="price-head">
+                  <h2>Business (Yearly)</h2>
+                  <h1>$700</h1>
+                  <span>/Yearly</span>
+                </div>
+                <ul>
+                  <li><b>Unlimited</b> Product Listings</li> <!-- تحديث الوصف -->
+                  <li><b>Premium</b> Support</li>
+                  <li><b>Advanced</b> SEO Tools</li>
+                  <li><b>Custom</b> Domain</li>
+                  <li><b>Save 40%</b> with Annual Plan</li>
+                </ul>
+                <!-- Save the plan name and price in localStorage when clicked -->
+                <a href="StoreCreationPayment.html" class="theme-btn-1 btn btn-effect-1" 
+                   onclick="savePlanName('yearly', 700)">Start Now</a>
+              </div>
+            </div>
+          </div>
+        
         </div>
-        <!--- END ROW -->
       </div>
-      <!--- END CONTAINER -->
     </section>
+    
+   
+    
 
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 
@@ -1070,7 +1061,21 @@
     <!-- Main JS -->
     <script src="js/main.js"></script>
 <script SRC="js/cart.js"></script>
-  
+<script>
+  // Function to save the plan name in localStorage
+  function savePlanName(planName, planPrice) {
+  // Save the plan name and price to localStorage
+  localStorage.setItem('selectedPlan', planName);   // Save the plan type (e.g., 'monthly', 'quarterly', 'yearly')
+  localStorage.setItem('planPrice', planPrice);     // Save the price (e.g., 100, 270, 700)
+
+  // Optional: You can also log them for debugging purposes
+  console.log("Plan Name:", planName);
+  console.log("Plan Price:", planPrice);
+}
+
+
+</script>
+
 </body>
 
 <!-- Mirrored from tunatheme.com/tf/html/fiama-preview/fiama/about.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 12:05:00 GMT -->

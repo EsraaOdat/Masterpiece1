@@ -928,69 +928,103 @@
 <script src="../../../assets/js/theme.min.js"></script>
 
 <script>
-    async function getData() {
+async function getData() {
         const url = "https://localhost:7000/api/Categories/AllCategories";
 
-        const response = await fetch(url);
-        console.log("response",response);
+        try {
+            const response = await fetch(url);
+            console.log("response", response);
 
             let data = await response.json();
-            console.log("data",data);
+            console.log("data", data);
 
             let cards = document.getElementById("contentContainer");
             data.forEach((category) => {
-                cards.innerHTML +=`
-                                    <tr id="CategoryRow${category.categoryId}">
-                              <td>
-                                <a href="#" class="text-inherit">
-                                  <div class="d-flex align-items-center gap-3">
+                // Split the description into manageable chunks
+                const words = category.description.split(' ');
+                const lines = [];
+                for (let i = 0; i < words.length; i += 6) {
+                    lines.push(words.slice(i, i + 6).join(' '));
+                }
+
+                const maxLength = 100; // Maximum character length for short display
+                const isLongDescription = lines.join('<br>').length > maxLength;
+
+                // Display only the first two lines if the description is long
+                const shortDescription = isLongDescription ? lines.slice(0, 2).join('<br>') + "..." : lines.join('<br>');
+
+                cards.innerHTML += `
+                    <tr id="CategoryRow${category.categoryId}">
+                        <td>
+                            <a href="#" class="text-inherit">
+                                <div class="d-flex align-items-center gap-3">
                                     <div>
-                                      <img src="../../../../../../../Backend/E-Commerce/Categories/${category.image}" alt="" class="img-4by3-lg rounded" />
+                                        <img src="../../../../../../../Backend/E-Commerce/Categories/${category.image}" alt="${category.name}" class="img-4by3-lg rounded" />
                                     </div>
                                     <div class="d-flex flex-column gap-1">
-                                      <h4 class="mb-0 text-primary-hover">${category.name}</h4>
+                                        <h4 class="mb-0 text-primary-hover">${category.name}</h4>
                                     </div>
-                                  </div>
+                                </div>
+                            </a>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center flex-row gap-2">
+                                <h5 class="mb-0"><span>Added on 7 July, 2023</span></h5>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="category-description">${shortDescription}</span>
+                            <span class="full-description" style="display: none;">${lines.join('<br>')}</span>
+                            ${isLongDescription ? `<span class="more-link text-primary" onclick="toggleDescription(this)">More</span>` : ''}
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center flex-row gap-2">
+                                <h5 class="mb-0"></h5>
+                                <a href="editCategory.html" onclick="saveCategoryId('${category.categoryId}')">
+                                    <i class="fe fe-edit fs-50"></i>
                                 </a>
-                              </td>
-                              <td>
-                                <div class="d-flex align-items-center flex-row gap-2">
-                                  <h5 class="mb-0">  <span>Added on 7 July, 2023</span></h5>
-                                </div>
-                              </td>
-
-                              <td>
-                                <div class="d-flex align-items-center flex-row gap-2">
-                                  <h5 class="mb-0">${category.description}</h5>
-                                </div>
-                              </td>
-                           
-                              <td>
-                                <div class="d-flex align-items-center flex-row gap-2">
-                                  <h5 class="mb-0"></h5>
-                   <a href="editCategory.html"  onclick="saveCategoryId('${category.categoryId}')"><i class="fe fe-edit fs-50"></i>    </a>         
-
-                   <a href="#" onclick="deleteCategory('${category.categoryId}')"><i class="fe fe-trash-2 fs-50" style="color: red;"></i>
-</a>
-
-                 </div>
-                              </td>
-
-                              </tr>
-        
-        `;
+                                <a href="#" onclick="deleteCategory('${category.categoryId}')">
+                                    <i class="fe fe-trash-2 fs-50" style="color: red;"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                `;
             });
-        
+
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
     }
 
-    function saveCategoryId(categoryId) {
-        localStorage.setItem('selectedCategoryId', categoryId);
+   
+
+    // Toggle description visibility for "More" and "Less" functionality
+    function toggleDescription(link) {
+        const fullDesc = link.previousElementSibling;
+        const shortDesc = fullDesc.previousElementSibling;
+
+        if (fullDesc.style.display === "none") {
+            shortDesc.style.display = "none";
+            fullDesc.style.display = "inline";
+            link.textContent = "Less";
+        } else {
+            shortDesc.style.display = "inline";
+            fullDesc.style.display = "none";
+            link.textContent = "More";
+        }
     }
 
     getData();
 
 
+ // Save category ID to local storage
+ function saveCategoryId(categoryId) {
+        localStorage.setItem('selectedCategoryId', categoryId);
+    }
 
+
+    
     // async function deleteCategory(categoryId) {
     //     if (confirm("Are you sure you want to delete this category?")) {
     //         const url = `https://localhost:7000/api/Categories/DeleteCategory/${categoryId}`;

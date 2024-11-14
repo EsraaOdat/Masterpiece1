@@ -1,49 +1,50 @@
 <!doctype html>
 <html lang="en">
-  
+
 <!-- Mirrored from codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 20 Sep 2024 09:44:37 GMT -->
+
 <head>
-    <link rel="stylesheet" href="../../../assets/libs/quill/dist/quill.snow.css" />
-    <link rel="stylesheet" href="../../../assets/libs/flatpickr/dist/flatpickr.min.css" />
-    <!-- Required meta tags -->
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="author" content="Codescandy" />
+  <link rel="stylesheet" href="../../../assets/libs/quill/dist/quill.snow.css" />
+  <link rel="stylesheet" href="../../../assets/libs/flatpickr/dist/flatpickr.min.css" />
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Codescandy" />
 
-<!-- Favicon icon-->
-<link rel="shortcut icon" type="image/x-icon" href="https://codescandy.com/geeks-bootstrap-5/assets/images/favicon/favicon.ico" />
+  <!-- Favicon icon-->
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://codescandy.com/geeks-bootstrap-5/assets/images/favicon/favicon.ico" />
 
-<!-- darkmode js -->
-<script src="../../../assets/js/vendors/darkMode.js"></script>
+  <!-- darkmode js -->
+  <script src="../../../assets/js/vendors/darkMode.js"></script>
 
-<!-- Libs CSS -->
-<link href="../../../assets/fonts/feather/feather.css" rel="stylesheet" />
-<link href="../../../assets/libs/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
-<link href="../../../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet" />
+  <!-- Libs CSS -->
+  <link href="../../../assets/fonts/feather/feather.css" rel="stylesheet" />
+  <link href="../../../assets/libs/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="../../../assets/libs/simplebar/dist/simplebar.min.css" rel="stylesheet" />
 
-<!-- Theme CSS -->
-<link rel="stylesheet" href="../../../assets/css/theme.min.css">
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="../../../assets/css/theme.min.css">
 
-    <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard/ecommerce/add-product.html" />
-    <link href="../../../assets/libs/dropzone/dist/dropzone.css" rel="stylesheet" />
-    <link href="../../../assets/libs/%40yaireo/tagify/dist/tagify.css" rel="stylesheet" />
-    <title>Add Product | Geeks - Academy Admin Template</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="canonical" href="https://geeksui.codescandy.com/geeks/pages/dashboard/ecommerce/add-product.html" />
+  <link href="../../../assets/libs/dropzone/dist/dropzone.css" rel="stylesheet" />
+  <link href="../../../assets/libs/%40yaireo/tagify/dist/tagify.css" rel="stylesheet" />
+  <title>Add Product | Geeks - Academy Admin Template</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-</head>
-<style>
-  /* Add some margin to navbar items */
-  .navbar-nav .nav-item {
-    margin-bottom: 15px;
-    /* Adjust this value to your preference */
-  }
+  <style>
+    /* Add some margin to navbar items */
+    .navbar-nav .nav-item {
+      margin-bottom: 15px;
+      /* Adjust this value to your preference */
+    }
 
-  /* Add some space between the icon and the text */
-  .navbar-nav .nav-link i {
-    margin-right: 10px;
-    /* Space between icon and text */
-  }
-</style>
+    /* Add some space between the icon and the text */
+    .navbar-nav .nav-link i {
+      margin-right: 10px;
+      /* Space between icon and text */
+    }
+  </style>
 </head>
 
 <body>
@@ -100,8 +101,18 @@
               </ul>
             </div>
           </li>
+
+          <!-- Add Employee link (dynamically added) -->
+          <li class="nav-item" id="addEmployeeLink" style="display:none;">
+            <a class="nav-link" href="AddEmployee.html">
+              <i class="fas fa-user-plus"></i>&nbsp; Add Employee
+            </a>
+          </li>
+
           <li class="nav-item">
-            <a class="nav-link active" href="../../../../../../Admin Dashboard/codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/Login.html" onclick="logoutAndClearStorage()">
+            <a class="nav-link active"
+              href="../../../../../../Admin Dashboard/codescandy.com/geeks-bootstrap-5/pages/dashboard/ecommerce/Login.html"
+              onclick="logoutAndClearStorage()">
               <i class="fas fa-sign-out-alt" aria-hidden="true"></i>&nbsp; Logout
             </a>
           </li>
@@ -109,637 +120,631 @@
       </div>
     </nav>
 
-      <!-- Page Content -->
-      <div id="page-content">
-        <div class="header">
-    <!-- navbar -->
-    <nav class="navbar-default navbar navbar-expand-lg">
-        <a id="nav-toggle" href="#">
+    <!-- Page Content -->
+    <div id="page-content">
+      <div class="header">
+        <!-- navbar -->
+        <nav class="navbar-default navbar navbar-expand-lg">
+          <a id="nav-toggle" href="#">
             <i class="fe fe-menu"></i>
-        </a>
-        <div class="ms-lg-3 d-none d-md-none d-lg-block">
+          </a>
+          <div class="ms-lg-3 d-none d-md-none d-lg-block">
             <!-- Form -->
             <form class="d-flex align-items-center">
-                <span class="position-absolute ps-3 search-icon">
-                    <i class="fe fe-search"></i>
-                </span>
-                <input type="search" class="form-control ps-6" placeholder="Search Entire Dashboard" />
+              <span class="position-absolute ps-3 search-icon">
+                <i class="fe fe-search"></i>
+              </span>
+              <input type="search" class="form-control ps-6" placeholder="Search Entire Dashboard" />
             </form>
-        </div>
-        <!--Navbar nav -->
-        <div class="ms-auto d-flex">
+          </div>
+          <!--Navbar nav -->
+          <div class="ms-auto d-flex">
             <div class="dropdown">
-                <button class="btn btn-light btn-icon rounded-circle d-flex align-items-center" type="button" aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
-                    <i class="bi theme-icon-active"></i>
-                    <span class="visually-hidden bs-theme-text">Toggle theme</span>
-                </button>
-                <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
-                    <li>
-                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
-                            <i class="bi theme-icon bi-sun-fill"></i>
-                            <span class="ms-2">Light</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
-                            <i class="bi theme-icon bi-moon-stars-fill"></i>
-                            <span class="ms-2">Dark</span>
-                        </button>
-                    </li>
-                    <li>
-                        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
-                            <i class="bi theme-icon bi-circle-half"></i>
-                            <span class="ms-2">Auto</span>
-                        </button>
-                    </li>
-                </ul>
+              <button class="btn btn-light btn-icon rounded-circle d-flex align-items-center" type="button"
+                aria-expanded="false" data-bs-toggle="dropdown" aria-label="Toggle theme (auto)">
+                <i class="bi theme-icon-active"></i>
+                <span class="visually-hidden bs-theme-text">Toggle theme</span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bs-theme-text">
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light"
+                    aria-pressed="false">
+                    <i class="bi theme-icon bi-sun-fill"></i>
+                    <span class="ms-2">Light</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark"
+                    aria-pressed="false">
+                    <i class="bi theme-icon bi-moon-stars-fill"></i>
+                    <span class="ms-2">Dark</span>
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item d-flex align-items-center active"
+                    data-bs-theme-value="auto" aria-pressed="true">
+                    <i class="bi theme-icon bi-circle-half"></i>
+                    <span class="ms-2">Auto</span>
+                  </button>
+                </li>
+              </ul>
             </div>
             <ul class="navbar-nav navbar-right-wrap ms-2 d-flex nav-top-wrap">
-                <li class="dropdown stopevent">
-                    <a
-                        class="btn btn-light btn-icon rounded-circle indicator indicator-primary"
-                        href="#"
-                        role="button"
-                        id="dropdownNotification"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fe fe-bell"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg" aria-labelledby="dropdownNotification">
-                        <div>
-                            <div class="border-bottom px-3 pb-3 d-flex justify-content-between align-items-center">
-                                <span class="h4 mb-0">Notifications</span>
-                                <a href="# ">
-                                    <span class="align-middle">
-                                        <i class="fe fe-settings me-1"></i>
+              <li class="dropdown stopevent">
+                <a class="btn btn-light btn-icon rounded-circle indicator indicator-primary" href="#" role="button"
+                  id="dropdownNotification" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fe fe-bell"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-lg" aria-labelledby="dropdownNotification">
+                  <div>
+                    <div class="border-bottom px-3 pb-3 d-flex justify-content-between align-items-center">
+                      <span class="h4 mb-0">Notifications</span>
+                      <a href="# ">
+                        <span class="align-middle">
+                          <i class="fe fe-settings me-1"></i>
+                        </span>
+                      </a>
+                    </div>
+                    <!-- List group -->
+                    <ul class="list-group list-group-flush" data-simplebar style="max-height: 300px">
+                      <li class="list-group-item bg-light">
+                        <div class="row">
+                          <div class="col">
+                            <a class="text-body" href="#">
+                              <div class="d-flex">
+                                <img src="../../../assets/images/avatar/avatar-1.jpg" alt=""
+                                  class="avatar-md rounded-circle" />
+                                <div class="ms-3">
+                                  <h5 class="fw-bold mb-1">Kristin Watson:</h5>
+                                  <p class="mb-3">Krisitn Watsan like your comment on course Javascript Introduction!
+                                  </p>
+                                  <span class="fs-6">
+                                    <span>
+                                      <span class="fe fe-thumbs-up text-success me-1"></span>
+                                      2 hours ago,
                                     </span>
-                                </a>
-                            </div>
-                            <!-- List group -->
-                            <ul class="list-group list-group-flush" data-simplebar style="max-height: 300px">
-                                <li class="list-group-item bg-light">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img src="../../../assets/images/avatar/avatar-1.jpg" alt="" class="avatar-md rounded-circle" />
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Kristin Watson:</h5>
-                                                        <p class="mb-3">Krisitn Watsan like your comment on course Javascript Introduction!</p>
-                                                        <span class="fs-6">
-                                                            <span>
-                                                                <span class="fe fe-thumbs-up text-success me-1"></span>
-                                                                2 hours ago,
-                                                            </span>
-                                                            <span class="ms-1">2:19 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-auto text-center me-2">
-                                            <a href="#" class="badge-dot bg-info" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark as read"></a>
-                                            <div>
-                                                <a href="#" class="bg-transparent" data-bs-toggle="tooltip" data-bs-placement="top" title="Remove">
-                                                    <i class="fe fe-x"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img src="../../../assets/images/avatar/avatar-2.jpg" alt="" class="avatar-md rounded-circle" />
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Brooklyn Simmons</h5>
-                                                        <p class="mb-3">Just launched a new Courses React for Beginner.</p>
-                                                        <span class="fs-6">
-                                                            <span>
-                                                                <span class="fe fe-thumbs-up text-success me-1"></span>
-                                                                Oct 9,
-                                                            </span>
-                                                            <span class="ms-1">1:20 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-auto text-center me-2">
-                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark as unread"></a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img src="../../../assets/images/avatar/avatar-3.jpg" alt="" class="avatar-md rounded-circle" />
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Jenny Wilson</h5>
-                                                        <p class="mb-3">Krisitn Watsan like your comment on course Javascript Introduction!</p>
-                                                        <span class="fs-6">
-                                                            <span>
-                                                                <span class="fe fe-thumbs-up text-info me-1"></span>
-                                                                Oct 9,
-                                                            </span>
-                                                            <span class="ms-1">1:56 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-auto text-center me-2">
-                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark as unread"></a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <div class="col">
-                                            <a class="text-body" href="#">
-                                                <div class="d-flex">
-                                                    <img src="../../../assets/images/avatar/avatar-4.jpg" alt="" class="avatar-md rounded-circle" />
-                                                    <div class="ms-3">
-                                                        <h5 class="fw-bold mb-1">Sina Ray</h5>
-                                                        <p class="mb-3">You earn new certificate for complete the Javascript Beginner course.</p>
-                                                        <span class="fs-6">
-                                                            <span>
-                                                                <span class="fe fe-award text-warning me-1"></span>
-                                                                Oct 9,
-                                                            </span>
-                                                            <span class="ms-1">1:56 PM</span>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="col-auto text-center me-2">
-                                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Mark as unread"></a>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="border-top px-3 pt-3 pb-0">
-                                <a href="https://codescandy.com/geeks-bootstrap-5/pages/notification-history.html" class="text-link fw-semibold">See all Notifications</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <!-- List -->
-                <li class="dropdown ms-2">
-                    <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                        <div class="avatar avatar-md avatar-indicators avatar-online">
-                            <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
-                        </div>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
-                        <div class="dropdown-item">
-                            <div class="d-flex">
-                                <div class="avatar avatar-md avatar-indicators avatar-online">
-                                    <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                                    <span class="ms-1">2:19 PM</span>
+                                  </span>
                                 </div>
-                                <div class="ms-3 lh-1">
-                                    <h5 class="mb-1">Annette Black</h5>
-                                    <p class="mb-0">annette@geeksui.com</p>
-                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="col-auto text-center me-2">
+                            <a href="#" class="badge-dot bg-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                              title="Mark as read"></a>
+                            <div>
+                              <a href="#" class="bg-transparent" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="Remove">
+                                <i class="fe fe-x"></i>
+                              </a>
                             </div>
+                          </div>
                         </div>
-                        <div class="dropdown-divider"></div>
-                        <ul class="list-unstyled">
-                            <li class="dropdown-submenu dropstart-lg">
-                                <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
-                                    <i class="fe fe-circle me-2"></i>
-                                    Status
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="badge-dot bg-success me-2"></span>
-                                            Online
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="badge-dot bg-secondary me-2"></span>
-                                            Offline
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="badge-dot bg-warning me-2"></span>
-                                            Away
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">
-                                            <span class="badge-dot bg-danger me-2"></span>
-                                            Busy
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="https://codescandy.com/geeks-bootstrap-5/pages/profile-edit.html">
-                                    <i class="fe fe-user me-2"></i>
-                                    Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="https://codescandy.com/geeks-bootstrap-5/pages/student-subscriptions.html">
-                                    <i class="fe fe-star me-2"></i>
-                                    Subscription
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fe fe-settings me-2"></i>
-                                    Settings
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="dropdown-divider"></div>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a class="dropdown-item" href="https://codescandy.com/geeks-bootstrap-5/index.html">
-                                    <i class="fe fe-power me-2"></i>
-                                    Sign Out
-                                </a>
-                            </li>
-                        </ul>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="row">
+                          <div class="col">
+                            <a class="text-body" href="#">
+                              <div class="d-flex">
+                                <img src="../../../assets/images/avatar/avatar-2.jpg" alt=""
+                                  class="avatar-md rounded-circle" />
+                                <div class="ms-3">
+                                  <h5 class="fw-bold mb-1">Brooklyn Simmons</h5>
+                                  <p class="mb-3">Just launched a new Courses React for Beginner.</p>
+                                  <span class="fs-6">
+                                    <span>
+                                      <span class="fe fe-thumbs-up text-success me-1"></span>
+                                      Oct 9,
+                                    </span>
+                                    <span class="ms-1">1:20 PM</span>
+                                  </span>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="col-auto text-center me-2">
+                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
+                              title="Mark as unread"></a>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="row">
+                          <div class="col">
+                            <a class="text-body" href="#">
+                              <div class="d-flex">
+                                <img src="../../../assets/images/avatar/avatar-3.jpg" alt=""
+                                  class="avatar-md rounded-circle" />
+                                <div class="ms-3">
+                                  <h5 class="fw-bold mb-1">Jenny Wilson</h5>
+                                  <p class="mb-3">Krisitn Watsan like your comment on course Javascript Introduction!
+                                  </p>
+                                  <span class="fs-6">
+                                    <span>
+                                      <span class="fe fe-thumbs-up text-info me-1"></span>
+                                      Oct 9,
+                                    </span>
+                                    <span class="ms-1">1:56 PM</span>
+                                  </span>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="col-auto text-center me-2">
+                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
+                              title="Mark as unread"></a>
+                          </div>
+                        </div>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="row">
+                          <div class="col">
+                            <a class="text-body" href="#">
+                              <div class="d-flex">
+                                <img src="../../../assets/images/avatar/avatar-4.jpg" alt=""
+                                  class="avatar-md rounded-circle" />
+                                <div class="ms-3">
+                                  <h5 class="fw-bold mb-1">Sina Ray</h5>
+                                  <p class="mb-3">You earn new certificate for complete the Javascript Beginner course.
+                                  </p>
+                                  <span class="fs-6">
+                                    <span>
+                                      <span class="fe fe-award text-warning me-1"></span>
+                                      Oct 9,
+                                    </span>
+                                    <span class="ms-1">1:56 PM</span>
+                                  </span>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="col-auto text-center me-2">
+                            <a href="#" class="badge-dot bg-secondary" data-bs-toggle="tooltip" data-bs-placement="top"
+                              title="Mark as unread"></a>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                    <div class="border-top px-3 pt-3 pb-0">
+                      <a href="https://codescandy.com/geeks-bootstrap-5/pages/notification-history.html"
+                        class="text-link fw-semibold">See all Notifications</a>
                     </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</div>
-
-        <!-- Container fluid -->
-        <div class="container-fluid p-4">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-12">
-              <!-- Page header -->
-              <div class="border-bottom pb-3 mb-3">
-                <div class="mb-2 mb-lg-0">
-                  <h1 class="mb-0 h2 fw-bold">Add Product</h1>
-                  <!-- Breadcrumb -->
-                  <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                      <li class="breadcrumb-item">
-                        <a href="admin-dashboard.html">Dashboard</a>
-                      </li>
-                      <li class="breadcrumb-item">
-                        <a href="#">Ecommerce</a>
-                      </li>
-                      <li class="breadcrumb-item active" aria-current="page">Add Product</li>
-                    </ol>
-                  </nav>
+                  </div>
                 </div>
+              </li>
+              <!-- List -->
+              <li class="dropdown ms-2">
+                <a class="rounded-circle" href="#" role="button" id="dropdownUser" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <div class="avatar avatar-md avatar-indicators avatar-online">
+                    <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                  <div class="dropdown-item">
+                    <div class="d-flex">
+                      <div class="avatar avatar-md avatar-indicators avatar-online">
+                        <img alt="avatar" src="../../../assets/images/avatar/avatar-1.jpg" class="rounded-circle" />
+                      </div>
+                      <div class="ms-3 lh-1">
+                        <h5 class="mb-1">Annette Black</h5>
+                        <p class="mb-0">annette@geeksui.com</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <ul class="list-unstyled">
+                    <li class="dropdown-submenu dropstart-lg">
+                      <a class="dropdown-item dropdown-list-group-item dropdown-toggle" href="#">
+                        <i class="fe fe-circle me-2"></i>
+                        Status
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            <span class="badge-dot bg-success me-2"></span>
+                            Online
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            <span class="badge-dot bg-secondary me-2"></span>
+                            Offline
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            <span class="badge-dot bg-warning me-2"></span>
+                            Away
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="#">
+                            <span class="badge-dot bg-danger me-2"></span>
+                            Busy
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="https://codescandy.com/geeks-bootstrap-5/pages/profile-edit.html">
+                        <i class="fe fe-user me-2"></i>
+                        Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item"
+                        href="https://codescandy.com/geeks-bootstrap-5/pages/student-subscriptions.html">
+                        <i class="fe fe-star me-2"></i>
+                        Subscription
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="fe fe-settings me-2"></i>
+                        Settings
+                      </a>
+                    </li>
+                  </ul>
+                  <div class="dropdown-divider"></div>
+                  <ul class="list-unstyled">
+                    <li>
+                      <a class="dropdown-item" href="https://codescandy.com/geeks-bootstrap-5/index.html">
+                        <i class="fe fe-power me-2"></i>
+                        Sign Out
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+      <!-- Container fluid -->
+      <div class="container-fluid p-4">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-12">
+            <!-- Page header -->
+            <div class="border-bottom pb-3 mb-3">
+              <div class="mb-2 mb-lg-0">
+                <h1 class="mb-0 h2 fw-bold">Add Product</h1>
+                <!-- Breadcrumb -->
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                      <a href="admin-dashboard.html">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                      <a href="#">Ecommerce</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Product</li>
+                  </ol>
+                </nav>
               </div>
             </div>
           </div>
-          <!-- row -->
-          <div class="row justify-content-center">
-            <div class="col-lg-8 col-12">
-              <form  id="AddProductForm" class="needs-validation" novalidate>
-                <div class="d-flex flex-column gap-4">
-                  <!-- card -->
-                  <div class="card">
-                    <!-- card body -->
-                    <div class="card-body">
-                      <div>
-                        <!-- input -->
-                        <div class="mb-3">
-                          <label class="form-label">Product Name</label>
-                          <input type="text" class="form-control" id="ProductName" placeholder="Enter Product Name" required />
-                          <div class="invalid-feedback">Please enter product name</div>
-                        </div>
-                        <!-- input -->
-                        <div>
-                          <label class="form-label">Product Description</label>
-                          <textarea class="form-control" id="projectdesc-input" rows="3" placeholder="Enter project description..." required></textarea>
-                          <div class="invalid-feedback">Please enter a Product description.</div>
+        </div>
+        <!-- row -->
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-12">
+            <form id="AddProductForm" class="needs-validation" novalidate>
+              <div class="d-flex flex-column gap-4">
+                <!-- card -->
+                <div class="card">
+                  <!-- card body -->
+                  <div class="card-body">
+                    <div>
+                      <!-- input -->
+                      <div class="mb-3">
+                        <label class="form-label">Product Name</label>
+                        <input type="text" class="form-control" id="ProductName" placeholder="Enter Product Name"
+                          required />
+                        <div class="invalid-feedback">Please enter product name</div>
                       </div>
+                      <!-- input -->
+                      <div>
+                        <label class="form-label">Product Description</label>
+                        <textarea class="form-control" id="projectdesc-input" rows="3"
+                          placeholder="Enter project description..." required></textarea>
+                        <div class="invalid-feedback">Please enter a Product description.</div>
                       </div>
                     </div>
-                  </div>
-                  <!-- card -->
-                  <div class="card">
-                    <!-- card body -->
-                    <div class="card-body">
-                      <div>
-                        <div class="mb-4 d-flex flex-column gap-4">
-                          <!-- heading -->
-                          <div>
-                            <h4 class="mb-0">Product Gallery</h4>
-                          </div>
-                          <div class="d-flex flex-column gap-3">
-                            <div class="d-flex flex-column gap-1">
-                              <h5 class="mb-0">Product Image</h5>
-                              <p class="mb-0">Add Product main Image.</p>
-                            </div>
-                            <!-- input -->
-                            <input id="MainImage" type="file" class="form-control" required />
-                          </div>
-                        </div>
-                        <div>
-
-                          <!-- heading -->
-                          <h5 class="mb-1">Product Gallery</h5>
-                          <p>Add Product Gallery Images.</p>
-                          <!-- input -->
-                          <div id="my-dropzone" class="dropzone mt-4 border-dashed rounded-2 min-h-0"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- card -->
-                  <div class="card">
-                    <!-- card body -->
-                    <div class="card-body">
-                    
-                      <div>
-                        <div class="mb-3">
-                          <label class="form-label" for="productPrice">Price</label>
-                          <input type="text" class="form-control" id="productPrice" placeholder="Enter Price" required />
-                          <div class="invalid-feedback">Please enter Price</div>
-                        </div>
-                      
-                        <div class="mb-3">
-                          <label class="form-label" for="productQuantity">Quantity</label>
-                          <input type="number" class="form-control" id="Quantity" placeholder="Enter Quantity" required />
-                          <div class="invalid-feedback">Please enter Quantity</div>
-                        </div>
-
-                        <!-- input -->
-                        <div class="mb-3">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="category">Category</label>
-                          </div>
-                          <!-- select menu -->
-                          <select class="form-select" id="CategoryList" required>
-                          </select>
-                                                
-                          <div class="invalid-feedback">Please enter product Category</div>
-                        </div>
-
-
-
-
-
-                        <div class="mb-3">
-                          <div class="d-flex justify-content-between">
-                            <label class="form-label" for="category">Sub Category</label>
-                          </div>
-                          <!-- select menu -->
-                          <select class="form-select" id="SubCategoryList" required>
-                            <option value="" disabled selected>Select a subcategory</option>
-                          </select>
-                        
-                          <div class="invalid-feedback">Please enter product Sub Category</div>
-                        </div>
-                       
-                        <div id="tagSelection">
-                          <h3>Select Tags</h3>
-                          <div id="tagsContainer"></div>
-                      </div>
-                      
-                      </div>
-                    </div>
-                  </div>
-                 
-             
-                  <div>
-                    <button type="submit" oncli class="btn btn-primary">Create Product</button>
                   </div>
                 </div>
-              </form>
-            </div>
+                <!-- card -->
+                <div class="card">
+                  <!-- card body -->
+                  <div class="card-body">
+                    <div>
+                      <div class="mb-4 d-flex flex-column gap-4">
+                        <!-- heading -->
+                        <div>
+                          <h4 class="mb-0">Product Gallery</h4>
+                        </div>
+                        <div class="d-flex flex-column gap-3">
+                          <div class="d-flex flex-column gap-1">
+                            <h5 class="mb-0">Product Image</h5>
+                            <p class="mb-0">Add Product main Image.</p>
+                          </div>
+                          <!-- input -->
+                          <input id="MainImage" type="file" class="form-control" required />
+                        </div>
+                      </div>
+                      <div>
+
+                        <!-- heading -->
+                        <h5 class="mb-1">Product Gallery</h5>
+                        <p>Add Product Gallery Images.</p>
+                        <!-- input -->
+                        <div id="my-dropzone" class="dropzone mt-4 border-dashed rounded-2 min-h-0"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- card -->
+                <div class="card">
+                  <!-- card body -->
+                  <div class="card-body">
+
+                    <div>
+                      <div class="mb-3">
+                        <label class="form-label" for="productPrice">Price</label>
+                        <input type="text" class="form-control" id="productPrice" placeholder="Enter Price" required />
+                        <div class="invalid-feedback">Please enter Price</div>
+                      </div>
+
+                      <div class="mb-3">
+                        <label class="form-label" for="productQuantity">Quantity</label>
+                        <input type="number" class="form-control" id="Quantity" placeholder="Enter Quantity" required />
+                        <div class="invalid-feedback">Please enter Quantity</div>
+                      </div>
+
+                      <!-- input -->
+                      <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                          <label class="form-label" for="category">Category</label>
+                        </div>
+                        <!-- select menu -->
+                        <select class="form-select" id="CategoryList" required>
+                        </select>
+
+                        <div class="invalid-feedback">Please enter product Category</div>
+                      </div>
+
+
+
+
+
+                      <div class="mb-3">
+                        <div class="d-flex justify-content-between">
+                          <label class="form-label" for="category">Sub Category</label>
+                        </div>
+                        <!-- select menu -->
+                        <select class="form-select" id="SubCategoryList" required>
+                          <option value="" disabled selected>Select a subcategory</option>
+                        </select>
+
+                        <div class="invalid-feedback">Please enter product Sub Category</div>
+                      </div>
+
+                      <div id="tagSelection">
+                        <h3>Select Tags</h3>
+                        <div id="tagsContainer"></div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+                <div>
+                  <button type="submit" oncli class="btn btn-primary">Create Product</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Scripts -->
-    <script src="../../../assets/libs/%40yaireo/tagify/dist/tagify.min.js"></script>
-    <!-- Libs JS -->
-<script src="../../../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
-<script src="../../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="../../../assets/libs/simplebar/dist/simplebar.min.js"></script>
+  <!-- Scripts -->
+  <script src="../../../assets/libs/%40yaireo/tagify/dist/tagify.min.js"></script>
+  <!-- Libs JS -->
+  <script src="../../../assets/libs/%40popperjs/core/dist/umd/popper.min.js"></script>
+  <script src="../../../assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../../../assets/libs/simplebar/dist/simplebar.min.js"></script>
 
-<!-- Theme JS -->
-<script src="../../../assets/js/theme.min.js"></script>
+  <!-- Theme JS -->
+  <script src="../../../assets/js/theme.min.js"></script>
 
-    <script src="../../../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
-    <script src="../../../assets/libs/quill/dist/quill.min.js"></script>
-    <script src="../../../assets/js/vendors/editor.js"></script>
+  <script src="../../../assets/libs/dropzone/dist/min/dropzone.min.js"></script>
+  <script src="../../../assets/libs/quill/dist/quill.min.js"></script>
+  <script src="../../../assets/js/vendors/editor.js"></script>
 
-    <script src="../../../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
-    <script src="../../../assets/js/vendors/flatpickr.js"></script>
-    <script src="../../../assets/js/vendors/dropzone.js"></script>
-    <script src="../../../assets/js/vendors/validation.js"></script>
-    <script src="../../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+  <script src="../../../assets/libs/flatpickr/dist/flatpickr.min.js"></script>
+  <script src="../../../assets/js/vendors/flatpickr.js"></script>
+  <script src="../../../assets/js/vendors/dropzone.js"></script>
+  <script src="../../../assets/js/vendors/validation.js"></script>
+  <script src="../../../assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
 
-    <script src="../../../assets/js/vendors/choice.js"></script>
+  <script src="../../../assets/js/vendors/choice.js"></script>
 
 
-    <<script>
-      const StoreId = localStorage.getItem("StoreId");
-      
-      // Function to fetch categories and populate the CategoryList dropdown
-      async function fetchCategories() {
-          const url = `https://localhost:7000/api/Categories/AllCategories`;  // Ensure correct URL
-      
-          try {
-              const response = await fetch(url);
-              if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-              }
-      
-              const categories = await response.json();
-              const categorySelect = document.getElementById("CategoryList");
-      
-              // Clear the CategoryList dropdown before populating
-              categorySelect.innerHTML = '';
-      
-              // Populate the CategoryList dropdown with fetched categories
-              categories.forEach(category => {
-                  const option = document.createElement('option');
-                  option.value = category.categoryId;  // Assuming categoryId is correct
-                  option.textContent = category.name;  // Assuming name is correct
-                  categorySelect.appendChild(option);
-              });
-      
-              // Automatically fetch subcategories for the first category
-              if (categories.length > 0) {
-                  fetchSubCategories(categories[0].categoryId);
-              }
-      
-              // Add event listener to fetch subcategories when a category is selected
-              categorySelect.addEventListener('change', function () {
-                  const selectedCategoryId = this.value;
-                  fetchSubCategories(selectedCategoryId);
-              });
-      
-          } catch (error) {
-              console.error('Error fetching categories:', error);
-          }
+  <script>
+    const StoreId = localStorage.getItem("StoreId");
+
+    // Function to fetch categories and populate the CategoryList dropdown
+    async function fetchCategories() {
+      const url = `https://localhost:7000/api/Categories/AllCategories`;  // Ensure correct URL
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const categories = await response.json();
+        const categorySelect = document.getElementById("CategoryList");
+
+        // Clear the CategoryList dropdown before populating
+        categorySelect.innerHTML = '';
+
+        // Populate the CategoryList dropdown with fetched categories
+        categories.forEach(category => {
+          const option = document.createElement('option');
+          option.value = category.categoryId;  // Assuming categoryId is correct
+          option.textContent = category.name;  // Assuming name is correct
+          categorySelect.appendChild(option);
+        });
+
+        // Automatically fetch subcategories for the first category
+        if (categories.length > 0) {
+          fetchSubCategories(categories[0].categoryId);
+        }
+
+        // Add event listener to fetch subcategories when a category is selected
+        categorySelect.addEventListener('change', function () {
+          const selectedCategoryId = this.value;
+          fetchSubCategories(selectedCategoryId);
+        });
+
+      } catch (error) {
+        console.error('Error fetching categories:', error);
       }
-      
-      // Function to fetch tags
-      async function fetchTags() {
-          const url = `https://localhost:7000/api/Products/AllTag`; // Your API endpoint for tags
-      
-          try {
-              const response = await fetch(url);
-              if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-              }
-      
-              const tags = await response.json();
-              const tagsContainer = document.getElementById("tagsContainer");
-      
-              // Clear the tags container before populating
-              tagsContainer.innerHTML = '';
-      
-              // Populate the tags container with fetched tags
-              tags.forEach(tag => {
-                  const tagCheckbox = document.createElement('div');
-                  tagCheckbox.innerHTML = `
+    }
+
+    // Function to fetch tags
+    async function fetchTags() {
+      const url = `https://localhost:7000/api/Products/AllTag`; // Your API endpoint for tags
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const tags = await response.json();
+        const tagsContainer = document.getElementById("tagsContainer");
+
+        // Clear the tags container before populating
+        tagsContainer.innerHTML = '';
+
+        // Populate the tags container with fetched tags
+        tags.forEach(tag => {
+          const tagCheckbox = document.createElement('div');
+          tagCheckbox.innerHTML = `
                       <input type="checkbox" id="tag-${tag.tagId}" value="${tag.tagId}" />
                       <label for="tag-${tag.tagId}">${tag.tagName}</label>
                   `;
-                  tagsContainer.appendChild(tagCheckbox);
-              });
-          } catch (error) {
-              console.error('Error fetching tags:', error);
-          }
-      }
-      
-      // Call fetchTags after the DOM content is loaded
-      document.addEventListener('DOMContentLoaded', (event) => {
-          fetchCategories();
-          fetchTags(); // Fetch tags when the DOM is ready
-      });
-      
-      // Function to fetch subcategories based on categoryId and populate the SubCategoryList dropdown
-      async function fetchSubCategories(categoryId) {
-          const url = `https://localhost:7000/api/Sub_Category/SubCategoriesByCategory/${categoryId}`;  // Adjust endpoint for subcategories
-      
-          try {
-              const response = await fetch(url);
-              if (!response.ok) {
-                  throw new Error(`HTTP error! status: ${response.status}`);
-              }
-      
-              const subcategories = await response.json();
-              const subcategorySelect = document.getElementById("SubCategoryList");
-      
-              // Clear the SubCategoryList dropdown before populating
-              subcategorySelect.innerHTML = '';
-      
-              // Populate the SubCategoryList dropdown with fetched subcategories
-              subcategories.forEach(subcategory => {
-                  const option = document.createElement('option');
-                  option.value = subcategory.subcategoryId;  // Assuming subcategoryId is correct
-                  option.textContent = subcategory.subcategoryName;  // Assuming subcategoryName is correct
-                  subcategorySelect.appendChild(option);
-              });
-      
-          } catch (error) {
-              console.error('Error fetching subcategories:', error);
-          }
-      }
-      
-      // Form submission for adding a product
-      document.getElementById('AddProductForm').addEventListener('submit', AddProduct);
-      async function AddProduct(event) {
-          event.preventDefault(); // Prevent form from submitting the default way
-      
-          const url = `https://localhost:7000/api/Products/CreateProductWithImages`;
-          const formData = new FormData();
-      
-          // Validate input fields
-          const productName = document.getElementById('ProductName').value;
-          const productPrice = parseFloat(document.getElementById('productPrice').value);
-          const productQuantity = parseInt(document.getElementById('Quantity').value);
-      
-          if (!productName || isNaN(productPrice) || productPrice < 0 || isNaN(productQuantity) || productQuantity < 0) {
-              alert('Please provide valid product details.');
-              return;
-          }
-      
-          formData.append("Name", productName);
-          formData.append("Price", productPrice);
-          formData.append("Quantity", productQuantity);
-          formData.append("Description", document.getElementById('projectdesc-input').value);
-          formData.append("subcategoryId", document.getElementById('SubCategoryList').value);
-          formData.append("StoreId", StoreId);
-      
-          const imageFile = document.getElementById('MainImage').files[0];
-          if (imageFile) {
-              formData.append("Image", imageFile);
-          }
-      
-          // Add additional images from Dropzone
-          myDropzone.files.forEach(file => {
-              formData.append("AdditionalImages", file);
-          });
-      
-          // Collect selected tag IDs
-          const selectedTags = Array.from(document.querySelectorAll('#tagsContainer input[type="checkbox"]:checked'));
-          selectedTags.forEach(tag => {
-              formData.append("TagIds", tag.value);
-          });
-      
-          try {
-              const response = await fetch(url, {
-                  method: 'POST',
-                  body: formData, // Content-Type will automatically be set to multipart/form-data
-              });
-      
-              if (response.ok) {
-                  alert('Product added successfully!');
-              } else {
-                  const errorData = await response.json();
-                  console.error('Error:', errorData);
-                  alert(`Failed to add product: ${errorData.message || errorData}`);
-              }
-          } catch (error) {
-              console.error('Error:', error);
-              alert('Failed to connect to the server.');
-          }
-      }
-      </script>
-      <script>
-        // Apply the stored theme on page load
-        document.addEventListener("DOMContentLoaded", () => {
-          const theme = localStorage.getItem('theme') || 'light'; // Default to 'light'
-          document.body.className = theme;
+          tagsContainer.appendChild(tagCheckbox);
         });
-      
-        // Toggle theme between dark and light
-        function toggleTheme() {
-          let theme = localStorage.getItem('theme') === 'dark' ? 'light' : 'dark';
-          localStorage.setItem('theme', theme);
-          document.body.className = theme;
+      } catch (error) {
+        console.error('Error fetching tags:', error);
+      }
+    }
+
+    // Call fetchTags after the DOM content is loaded
+    document.addEventListener('DOMContentLoaded', (event) => {
+      fetchCategories();
+      fetchTags(); // Fetch tags when the DOM is ready
+    });
+
+    // Function to fetch subcategories based on categoryId and populate the SubCategoryList dropdown
+    async function fetchSubCategories(categoryId) {
+      const url = `https://localhost:7000/api/Sub_Category/SubCategoriesByCategory/${categoryId}`;  // Adjust endpoint for subcategories
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      
-        // Logout function preserving the theme
-        function logoutAndClearStorage() {
-          const theme = localStorage.getItem('theme'); // Save theme
-      
-          localStorage.clear(); // Clear all items
-          if (theme) localStorage.setItem('theme', theme); // Restore theme
-      
-          window.location.href = 'Login.html'; // Redirect to login
+
+        const subcategories = await response.json();
+        const subcategorySelect = document.getElementById("SubCategoryList");
+
+        // Clear the SubCategoryList dropdown before populating
+        subcategorySelect.innerHTML = '';
+
+        // Populate the SubCategoryList dropdown with fetched subcategories
+        subcategories.forEach(subcategory => {
+          const option = document.createElement('option');
+          option.value = subcategory.subcategoryId;  // Assuming subcategoryId is correct
+          option.textContent = subcategory.subcategoryName;  // Assuming subcategoryName is correct
+          subcategorySelect.appendChild(option);
+        });
+
+      } catch (error) {
+        console.error('Error fetching subcategories:', error);
+      }
+    }
+
+    // Form submission for adding a product
+    document.getElementById('AddProductForm').addEventListener('submit', AddProduct);
+    async function AddProduct(event) {
+      event.preventDefault(); // Prevent form from submitting the default way
+
+      const url = `https://localhost:7000/api/Products/CreateProductWithImages`;
+      const formData = new FormData();
+
+      // Validate input fields
+      const productName = document.getElementById('ProductName').value;
+      const productPrice = parseFloat(document.getElementById('productPrice').value);
+      const productQuantity = parseInt(document.getElementById('Quantity').value);
+
+      if (!productName || isNaN(productPrice) || productPrice < 0 || isNaN(productQuantity) || productQuantity < 0) {
+        alert('Please provide valid product details.');
+        return;
+      }
+
+      formData.append("Name", productName);
+      formData.append("Price", productPrice);
+      formData.append("Quantity", productQuantity);
+      formData.append("Description", document.getElementById('projectdesc-input').value);
+      formData.append("subcategoryId", document.getElementById('SubCategoryList').value);
+      formData.append("StoreId", StoreId);
+
+      const imageFile = document.getElementById('MainImage').files[0];
+      if (imageFile) {
+        formData.append("Image", imageFile);
+      }
+
+      // Add additional images from Dropzone
+      myDropzone.files.forEach(file => {
+        formData.append("AdditionalImages", file);
+      });
+
+      // Collect selected tag IDs
+      const selectedTags = Array.from(document.querySelectorAll('#tagsContainer input[type="checkbox"]:checked'));
+      selectedTags.forEach(tag => {
+        formData.append("TagIds", tag.value);
+      });
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: formData, // Content-Type will automatically be set to multipart/form-data
+        });
+
+        if (response.ok) {
+          alert('Product added successfully!');
+        } else {
+          const errorData = await response.json();
+          console.error('Error:', errorData);
+          alert(`Failed to add product: ${errorData.message || errorData}`);
         }
-      </script>
-    
-      
-    </body>
-    </html>
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to connect to the server.');
+      }
+    }
+  </script>
+  <script src="../../../assets/js/allPages.js">
+  </script>
+
+
+</body>
+
+</html>

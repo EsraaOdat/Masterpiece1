@@ -19,5 +19,7 @@ public partial class StoreOwner
 
     public byte[]? PasswordSalt { get; set; }
 
+    public string UserType { get; set; } = null!;
+
     public virtual Store? Store { get; set; }
 }

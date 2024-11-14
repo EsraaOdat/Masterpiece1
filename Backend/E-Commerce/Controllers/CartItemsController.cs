@@ -66,7 +66,9 @@ namespace E_Commerce.Controllers
                     {
                         Name = x.Product.Name,
                         Price = x.Product.Price,
-                        Image = x.Product.Image
+                        Image = x.Product.Image,
+                        ProductId = x.ProductId,
+                        StoreId=x.StoreId
                     }
                 }).ToList();
 
