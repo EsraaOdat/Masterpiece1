@@ -425,8 +425,11 @@
                 <div class="col-lg-6">
                     <div class="account-login-inner">
                         <form id="form1" action="#" class="ltn__form-box contact-form-box"  onsubmit="login(event)">
-                            <input type="text" name="Email" placeholder="Email Address*" required>
-                            <input type="password" name="password" placeholder="Password*" required>
+                            <input type="text" id="email"  name="Email" placeholder="Email Address*" required>
+
+                            <div id="email-error" class="error-message"></div>
+                            <input type="password" id="password" name="password" placeholder="Password*" required>
+                            <div id="password-error" class="error-message"></div>
                             <div class="btn-wrapper mt-0">
                                 <button class="theme-btn-1 btn btn-block" type="submit">SIGN IN</button>
                             </div>
@@ -699,7 +702,6 @@ if (googleLogin) {
         
         var url = 'https://localhost:7000/api/Users/Google';
         
-        // Create FormData object and append user details
         var formData = new FormData();
         formData.append('displayName', user.displayName);
         formData.append('email', user.email);
@@ -726,7 +728,33 @@ if (googleLogin) {
             
                 clearCartFromLocalStorage(data.userID);
 
-                window.location.href = "index.html"; 
+                // window.location.href = "index.html"; 
+                function login(event) {
+        event.preventDefault(); 
+    
+        document.getElementById('email-error').innerHTML = '';
+        document.getElementById('password-error').innerHTML = '';
+    
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+    
+        var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    
+        var passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d!@#$%^&*()_+={}\[\]:;"'<>,.?/\\|`~\-]{8,}$/;
+    
+        if (!emailPattern.test(email)) {
+            document.getElementById('email-error').innerHTML = 'Please enter a valid email address.';
+            document.getElementById('email-error').style.color = 'red';
+            return; // Stop form submission if invalid
+        }
+    
+        // Password validation
+        if (!passwordPattern.test(password)) {
+            document.getElementById('password-error').innerHTML = 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, and one digit.';
+            document.getElementById('password-error').style.color = 'red';
+            return; // Stop form submission if invalid
+        }
+                }
               }
 
             } else {
@@ -779,15 +807,26 @@ async function clearCartFromLocalStorage(userID){
       
   });
 
-  localStorage.removeItem('cart');
+ localStorage.removeItem('cart');
 
 
 }
-  </script>
+
+
+
+
+
+</script>
+
+<script>
+ 
+
+   
+    </script>
+
 <script SRC="js/cart.js"></script>
   
 </body>
 
-<!-- Mirrored from tunatheme.com/tf/html/fiama-preview/fiama/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 12:04:45 GMT -->
 </html>
 

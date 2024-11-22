@@ -1,0 +1,1453 @@
+2024-11-18 18:15:03.257 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:03.257 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:03.257 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:03.257 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:03.262 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:03.284 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.285 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.289 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.292 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.295 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:03.295 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.296 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.296 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:03.297 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:03.298 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.299 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:03.305 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:03.299 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:03.300 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.301 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.314 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:03.317 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 4.0758ms
+2024-11-18 18:15:03.317 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.317 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 60.7186ms
+2024-11-18 18:15:03.356 +03:00 [INF] Executed DbCommand (16ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:03.358 +03:00 [INF] Executed DbCommand (14ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:03.358 +03:00 [INF] Executed DbCommand (21ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:03.359 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.360 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.360 +03:00 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:03.361 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.362 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 47.9982ms
+2024-11-18 18:15:03.362 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 47.344ms
+2024-11-18 18:15:03.363 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.364 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 62.194ms
+2024-11-18 18:15:03.364 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:03.365 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:03.365 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 53.2513ms
+2024-11-18 18:15:03.366 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:03.366 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 109.3108ms
+2024-11-18 18:15:03.367 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 110.32ms
+2024-11-18 18:15:03.367 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:03.368 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 111.5581ms
+2024-11-18 18:15:03.371 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 109.6767ms
+2024-11-18 18:15:03.588 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:03.590 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.591 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.591 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:03.593 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:03.594 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 2.154ms
+2024-11-18 18:15:03.595 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.596 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 8.1718ms
+2024-11-18 18:15:03.613 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:03.614 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:03.614 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:03.614 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:03.614 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:03.626 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.627 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:03.621 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.623 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.615 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.619 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.628 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.629 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:03.630 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.630 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:03.631 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:03.632 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.633 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:03.633 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.635 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:03.640 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:03.640 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:03.643 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:03.643 +03:00 [INF] Executed DbCommand (10ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:03.649 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.649 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:03.650 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 10.1819ms
+2024-11-18 18:15:03.651 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.664 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.678 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 37.4383ms
+2024-11-18 18:15:03.675 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.675 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.668 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 32.2667ms
+2024-11-18 18:15:03.679 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 47.5851ms
+2024-11-18 18:15:03.681 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:03.681 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 35.7053ms
+2024-11-18 18:15:03.682 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 67.9521ms
+2024-11-18 18:15:03.683 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:03.685 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:03.700 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 86.3724ms
+2024-11-18 18:15:03.693 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:03.700 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 86.0764ms
+2024-11-18 18:15:03.691 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 77.8215ms
+2024-11-18 18:15:03.705 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 92.0183ms
+2024-11-18 18:15:03.873 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:03.876 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.878 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.878 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:03.878 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:03.878 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:03.878 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:03.879 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:03.880 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.881 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.888 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:03.889 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.888 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:03.888 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:03.892 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.892 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 7.4046ms
+2024-11-18 18:15:03.884 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.894 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:03.883 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.896 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.896 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:03.897 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:03.897 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:03.898 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 25.0707ms
+2024-11-18 18:15:03.898 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:03.898 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:03.899 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.899 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:03.901 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:03.903 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.904 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:03.906 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:03.908 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 12.7509ms
+2024-11-18 18:15:03.907 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.908 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:03.910 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.910 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:03.910 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:03.911 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 20.0862ms
+2024-11-18 18:15:03.914 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:03.916 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 12.5118ms
+2024-11-18 18:15:03.916 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 7.9899ms
+2024-11-18 18:15:03.917 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 38.8408ms
+2024-11-18 18:15:03.918 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:03.919 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 14.1012ms
+2024-11-18 18:15:03.922 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:03.924 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:03.927 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 48.1907ms
+2024-11-18 18:15:03.927 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:03.928 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 49.358ms
+2024-11-18 18:15:03.930 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 36.1714ms
+2024-11-18 18:15:03.932 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 53.63ms
+2024-11-18 18:15:04.226 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:04.227 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:04.228 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:04.229 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:04.230 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:04.231 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 1.5463ms
+2024-11-18 18:15:04.232 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:04.233 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 7.0704ms
+2024-11-18 18:15:04.239 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:04.239 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:04.239 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:04.239 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:04.239 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:04.240 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:04.241 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:04.242 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:04.243 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:04.245 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:04.245 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:04.246 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:04.246 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:04.247 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:04.247 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:04.248 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:04.248 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:04.249 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:04.250 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:04.251 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:04.256 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:04.257 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:04.257 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:04.258 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 2.482ms
+2024-11-18 18:15:04.259 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:04.260 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:04.261 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:04.261 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:04.262 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:04.263 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 7.9404ms
+2024-11-18 18:15:04.267 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 9.4189ms
+2024-11-18 18:15:04.264 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 25.0231ms
+2024-11-18 18:15:04.263 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 9.7472ms
+2024-11-18 18:15:04.265 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:04.267 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:04.268 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:04.270 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:04.273 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:04.273 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 34.7315ms
+2024-11-18 18:15:04.274 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 35.3493ms
+2024-11-18 18:15:04.274 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 35.739ms
+2024-11-18 18:15:04.275 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 18.6734ms
+2024-11-18 18:15:04.284 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:04.288 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 48.7472ms
+2024-11-18 18:15:07.773 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:07.776 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:07.777 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:07.778 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:07.781 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:07.782 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 2.0097ms
+2024-11-18 18:15:07.783 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:07.784 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:07.785 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:07.785 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:07.785 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 12.0177ms
+2024-11-18 18:15:07.784 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:07.784 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:07.792 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:07.793 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:07.795 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:07.798 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:07.803 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:07.800 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:07.801 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:07.802 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:07.800 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:07.803 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:07.803 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:07.804 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:07.806 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:07.806 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:07.811 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:07.811 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:07.811 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:07.811 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:07.812 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:07.813 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 2.5249ms
+2024-11-18 18:15:07.816 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:07.817 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 7.8549ms
+2024-11-18 18:15:07.817 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:07.818 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:07.819 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:07.819 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 11.8143ms
+2024-11-18 18:15:07.821 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:07.822 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:07.823 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 37.6495ms
+2024-11-18 18:15:07.825 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:07.829 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 15.1319ms
+2024-11-18 18:15:07.827 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 43.3666ms
+2024-11-18 18:15:07.826 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:07.835 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 25.929ms
+2024-11-18 18:15:07.835 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:07.838 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 54.0178ms
+2024-11-18 18:15:07.839 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:07.839 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 55.8312ms
+2024-11-18 18:15:07.841 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 55.7488ms
+2024-11-18 18:15:08.807 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:08.810 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:08.812 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:08.814 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:08.816 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:08.820 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:08.821 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 6.034ms
+2024-11-18 18:15:08.820 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:08.823 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:08.820 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:08.820 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:08.823 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:08.824 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:08.826 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:08.826 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:08.828 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:08.830 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:08.833 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:08.838 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:08.834 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:08.836 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:08.837 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:08.838 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:08.833 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 26.2728ms
+2024-11-18 18:15:08.839 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:08.840 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:08.844 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:08.841 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:08.842 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:08.846 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:08.847 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:08.848 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:08.850 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 5.5088ms
+2024-11-18 18:15:08.852 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:08.853 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 11.8683ms
+2024-11-18 18:15:08.854 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:08.855 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:08.858 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:08.858 +03:00 [INF] Executed DbCommand (9ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:08.857 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:08.860 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 36.6317ms
+2024-11-18 18:15:08.860 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 13.9059ms
+2024-11-18 18:15:08.861 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 41.3166ms
+2024-11-18 18:15:08.864 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:08.864 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 15.0474ms
+2024-11-18 18:15:08.866 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:08.869 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 21.1537ms
+2024-11-18 18:15:08.870 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:08.870 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 50.9005ms
+2024-11-18 18:15:08.871 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:08.871 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 51.6003ms
+2024-11-18 18:15:08.873 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 53.4601ms
+2024-11-18 18:15:09.868 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:09.871 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:09.872 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:09.874 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:09.876 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:09.877 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 2.6893ms
+2024-11-18 18:15:09.878 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:09.879 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:09.879 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:09.879 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:09.879 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:09.880 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:09.881 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 13.2695ms
+2024-11-18 18:15:09.883 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:09.885 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:09.888 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:09.888 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:09.890 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:09.893 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:09.893 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:09.894 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:09.894 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:09.895 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:09.895 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:09.896 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:09.897 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:09.898 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:09.899 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:09.904 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:09.906 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:09.908 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:09.908 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:09.908 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:09.910 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:09.911 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:09.912 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 5.1479ms
+2024-11-18 18:15:09.911 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:09.915 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 13.8072ms
+2024-11-18 18:15:09.917 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 12.2455ms
+2024-11-18 18:15:09.920 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:09.921 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:09.922 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 16.4794ms
+2024-11-18 18:15:09.923 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:09.923 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:09.924 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 21.636ms
+2024-11-18 18:15:09.925 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 45.5391ms
+2024-11-18 18:15:09.926 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:09.926 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 47.789ms
+2024-11-18 18:15:09.927 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 48.3624ms
+2024-11-18 18:15:09.928 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:09.929 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 50.8508ms
+2024-11-18 18:15:09.933 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 53.9281ms
+2024-11-18 18:15:10.912 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:10.916 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:10.917 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:10.919 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:10.921 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:10.922 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 1.5613ms
+2024-11-18 18:15:10.923 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:10.924 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 12.0055ms
+2024-11-18 18:15:10.925 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:10.926 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:10.926 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:10.926 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:10.926 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:10.928 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:10.930 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:10.932 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:10.935 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:10.936 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:10.937 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:10.938 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:10.938 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:10.939 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:10.940 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:10.940 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:10.941 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:10.941 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:10.942 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:10.942 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:10.944 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:10.948 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:10.948 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 4.5995ms
+2024-11-18 18:15:10.948 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:10.949 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:10.950 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:10.950 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:10.952 +03:00 [INF] Executed DbCommand (7ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:10.952 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:10.954 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:10.955 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 8.8108ms
+2024-11-18 18:15:10.963 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 15.6371ms
+2024-11-18 18:15:10.958 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 12.6471ms
+2024-11-18 18:15:10.955 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 30.0141ms
+2024-11-18 18:15:10.957 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:10.963 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:10.963 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:10.964 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:10.967 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 22.5896ms
+2024-11-18 18:15:10.967 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 42.2183ms
+2024-11-18 18:15:10.968 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 42.6945ms
+2024-11-18 18:15:10.968 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 42.9859ms
+2024-11-18 18:15:10.969 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:10.975 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 49.688ms
+2024-11-18 18:15:18.030 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:18.031 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:18.030 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:18.032 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:18.032 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:18.034 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:18.035 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:18.037 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:18.038 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:18.039 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:18.040 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:18.040 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:18.040 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:18.041 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:18.041 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:18.041 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:18.042 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:18.043 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:18.043 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:18.044 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:18.047 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:18.049 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:18.049 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:18.049 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:18.052 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:18.053 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 4.3083ms
+2024-11-18 18:15:18.051 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:18.054 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:18.056 +03:00 [INF] Executed DbCommand (6ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:18.055 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 9.1789ms
+2024-11-18 18:15:18.055 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:18.056 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 11.5685ms
+2024-11-18 18:15:18.057 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 10.5701ms
+2024-11-18 18:15:18.058 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:18.059 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:18.059 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 27.384ms
+2024-11-18 18:15:18.060 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:18.060 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:18.061 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 11.4455ms
+2024-11-18 18:15:18.062 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 30.3312ms
+2024-11-18 18:15:18.066 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 36.0174ms
+2024-11-18 18:15:18.066 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 36.6668ms
+2024-11-18 18:15:18.067 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:18.072 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 40.2013ms
+2024-11-18 18:15:26.321 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/30 - null null
+2024-11-18 18:15:26.321 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/Products/30 - null null
+2024-11-18 18:15:26.323 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:26.324 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:26.324 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetStoreById (E-Commerce)'
+2024-11-18 18:15:26.325 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetProductsByStoreWithoutStatusCheck (E-Commerce)'
+2024-11-18 18:15:26.325 +03:00 [INF] Route matched with {action = "GetStoreById", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetStoreById(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:26.326 +03:00 [INF] Route matched with {action = "GetProductsByStoreWithoutStatusCheck", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetProductsByStoreWithoutStatusCheck(Int32) on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:26.330 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[store_id] = @__p_0
+2024-11-18 18:15:26.331 +03:00 [INF] Executed DbCommand (2ms) [Parameters=[@__storeId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code]
+FROM [Stores] AS [s]
+WHERE [s].[store_id] = @__storeId_0
+2024-11-18 18:15:26.332 +03:00 [INF] Executing OkObjectResult, writing value of type 'E_Commerce.Models.Store'.
+2024-11-18 18:15:26.334 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetStoreById (E-Commerce) in 7.5139ms
+2024-11-18 18:15:26.335 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetStoreById (E-Commerce)'
+2024-11-18 18:15:26.336 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/30 - 200 null application/json; charset=utf-8 14.4054ms
+2024-11-18 18:15:26.337 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__storeId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[store_id] = @__storeId_0 AND [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit)
+ORDER BY [p].[product_id] DESC
+2024-11-18 18:15:26.338 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:26.340 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetProductsByStoreWithoutStatusCheck (E-Commerce) in 13.2789ms
+2024-11-18 18:15:26.342 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetProductsByStoreWithoutStatusCheck (E-Commerce)'
+2024-11-18 18:15:26.342 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/Products/30 - 200 null application/json; charset=utf-8 21.1456ms
+2024-11-18 18:15:28.745 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:28.745 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:28.745 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:28.745 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:28.745 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:28.749 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:28.750 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:28.752 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:28.753 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:28.754 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:28.754 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:28.755 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:28.755 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:28.755 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:28.756 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:28.757 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:28.757 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:28.758 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:28.758 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:28.758 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:28.761 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:28.762 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:28.764 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:28.764 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 3.5433ms
+2024-11-18 18:15:28.765 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:28.766 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:28.767 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:28.767 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:28.768 +03:00 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:28.768 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:28.769 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 9.3853ms
+2024-11-18 18:15:28.773 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 9.4304ms
+2024-11-18 18:15:28.771 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:28.769 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 7.3973ms
+2024-11-18 18:15:28.774 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:28.770 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 24.6924ms
+2024-11-18 18:15:28.775 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:28.776 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 12.9444ms
+2024-11-18 18:15:28.776 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:28.777 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 31.7219ms
+2024-11-18 18:15:28.780 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 34.6949ms
+2024-11-18 18:15:28.780 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:28.781 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 35.74ms
+2024-11-18 18:15:28.787 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 41.5614ms
+2024-11-18 18:15:30.113 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:30.117 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:30.118 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:30.118 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:30.120 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:30.121 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 1.2049ms
+2024-11-18 18:15:30.122 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:30.123 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 10.0106ms
+2024-11-18 18:15:33.885 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:33.888 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:33.890 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:33.890 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:33.894 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:33.896 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 2.4758ms
+2024-11-18 18:15:33.900 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:33.901 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 16.2419ms
+2024-11-18 18:15:38.128 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:38.128 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:38.128 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:38.128 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:38.129 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:38.131 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:38.132 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:38.133 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:38.135 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:38.139 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:38.138 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:38.139 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:38.139 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:38.138 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:38.144 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:38.145 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:38.143 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:38.143 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:38.140 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:38.141 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:38.147 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:38.150 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:38.151 +03:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:38.158 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:38.155 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:38.158 +03:00 [INF] Executed DbCommand (3ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:38.153 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 7.2503ms
+2024-11-18 18:15:38.159 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 9.2357ms
+2024-11-18 18:15:38.160 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 12.3059ms
+2024-11-18 18:15:38.161 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:38.162 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:38.164 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:38.162 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:38.163 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:38.166 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 15.4915ms
+2024-11-18 18:15:38.167 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 37.3664ms
+2024-11-18 18:15:38.168 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 39.4198ms
+2024-11-18 18:15:38.171 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:38.171 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 42.7864ms
+2024-11-18 18:15:38.171 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:38.175 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 27.2914ms
+2024-11-18 18:15:38.178 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 49.7141ms
+2024-11-18 18:15:38.178 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:38.180 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 51.4976ms
+2024-11-18 18:15:50.781 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - null null
+2024-11-18 18:15:50.781 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - null null
+2024-11-18 18:15:50.781 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:15:50.781 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - null null
+2024-11-18 18:15:50.781 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - null null
+2024-11-18 18:15:50.783 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:50.784 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:50.785 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:50.787 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:50.788 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:15:50.789 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:50.789 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:50.790 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:50.790 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:50.791 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:50.791 +03:00 [INF] Route matched with {action = "GetLast8Products", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetLast8Products() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:50.791 +03:00 [INF] Route matched with {action = "GetTopSellingProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopSellingProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:50.792 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:15:50.792 +03:00 [INF] Route matched with {action = "GetTopReviewedProducts", controller = "Products"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopReviewedProducts() on controller E_Commerce.Controllers.ProductsController (E-Commerce).
+2024-11-18 18:15:50.793 +03:00 [INF] Route matched with {action = "GetTopStores", controller = "Stores"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetTopStores(Int32) on controller E_Commerce.Controllers.StoresController (E-Commerce).
+2024-11-18 18:15:50.795 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:15:50.797 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 2.1632ms
+2024-11-18 18:15:50.798 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:15:50.799 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 17.6926ms
+2024-11-18 18:15:50.808 +03:00 [INF] Executed DbCommand (13ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [o].[product_id], COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) AS [c]
+    FROM [OrderItems] AS [o]
+    GROUP BY [o].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [OrderItems] AS [o0]
+        LEFT JOIN [Products] AS [p] ON [o0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([o].[product_id] = [o0].[product_id] OR ([o].[product_id] IS NULL AND [o0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COALESCE(SUM(COALESCE([o].[quantity], 0)), 0) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [o1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [o1].[product_id] ORDER BY [o1].[Order_Item_id], [p0].[product_id]) AS [row]
+        FROM [OrderItems] AS [o1]
+        LEFT JOIN [Products] AS [p0] ON [o1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:50.813 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType14`3[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:50.814 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [p].[product_id], [p].[created_at], [p].[description], [p].[image], [p].[is_deleted], [p].[name], [p].[price], [p].[quantity], [p].[Status], [p].[store_id], [p].[subcategory_id]
+FROM [Products] AS [p]
+WHERE [p].[Status] = 'approved' AND [p].[is_deleted] = CAST(0 AS bit) AND EXISTS (
+    SELECT 1
+    FROM [Stores] AS [s]
+    WHERE [s].[store_id] = [p].[store_id] AND [s].[status] = N'active')
+ORDER BY [p].[created_at] DESC
+2024-11-18 18:15:50.814 +03:00 [INF] Executed DbCommand (18ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[product_id], [t].[c], [t].[c0], [t0].[product_id], [t0].[created_at], [t0].[description], [t0].[image], [t0].[is_deleted], [t0].[name], [t0].[price], [t0].[quantity], [t0].[Status], [t0].[store_id], [t0].[subcategory_id]
+FROM (
+    SELECT TOP(@__p_0) [c].[product_id], COUNT(*) AS [c], AVG(CAST(COALESCE([c].[rating], 0) AS float)) AS [c0]
+    FROM [Comment] AS [c]
+    GROUP BY [c].[product_id]
+    HAVING NOT EXISTS (
+        SELECT 1
+        FROM [Comment] AS [c0]
+        LEFT JOIN [Products] AS [p] ON [c0].[product_id] = [p].[product_id]
+        LEFT JOIN [Stores] AS [s] ON [p].[store_id] = [s].[store_id]
+        WHERE ([c].[product_id] = [c0].[product_id] OR ([c].[product_id] IS NULL AND [c0].[product_id] IS NULL)) AND ([p].[Status] <> 'approved' OR [p].[Status] IS NULL OR [s].[status] <> N'active' OR [s].[status] IS NULL OR [p].[is_deleted] = CAST(1 AS bit) OR [p].[is_deleted] IS NULL))
+    ORDER BY COUNT(*) DESC
+) AS [t]
+LEFT JOIN (
+    SELECT [t1].[product_id], [t1].[created_at], [t1].[description], [t1].[image], [t1].[is_deleted], [t1].[name], [t1].[price], [t1].[quantity], [t1].[Status], [t1].[store_id], [t1].[subcategory_id], [t1].[product_id0]
+    FROM (
+        SELECT [p0].[product_id], [p0].[created_at], [p0].[description], [p0].[image], [p0].[is_deleted], [p0].[name], [p0].[price], [p0].[quantity], [p0].[Status], [p0].[store_id], [p0].[subcategory_id], [c1].[product_id] AS [product_id0], ROW_NUMBER() OVER(PARTITION BY [c1].[product_id] ORDER BY [c1].[comment_id], [p0].[product_id]) AS [row]
+        FROM [Comment] AS [c1]
+        LEFT JOIN [Products] AS [p0] ON [c1].[product_id] = [p0].[product_id]
+    ) AS [t1]
+    WHERE [t1].[row] <= 1
+) AS [t0] ON [t].[product_id] = [t0].[product_id0]
+ORDER BY [t].[c] DESC
+2024-11-18 18:15:50.815 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce) in 20.298ms
+2024-11-18 18:15:50.816 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:50.817 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+SelectListIterator`2[[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType15`4[[System.Nullable`1[[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Double, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[E_Commerce.Models.Product, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:50.819 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce) in 25.0469ms
+2024-11-18 18:15:50.818 +03:00 [INF] Executed DbCommand (20ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[store_id], [t].[address], [t].[amount], [t].[background_image], [t].[city], [t].[country], [t].[created_at], [t].[end_date], [t].[phone_number], [t].[plan_name], [t].[plan_type], [t].[start_date], [t].[status], [t].[store_description], [t].[store_logo], [t].[store_name], [t].[zip_code], [o0].[order_id], [o0].[amount], [o0].[copon_id], [o0].[Date], [o0].[payment_method_id], [o0].[status], [o0].[store_id], [o0].[transaction_id], [o0].[user_id]
+FROM (
+    SELECT TOP(@__p_0) [s].[store_id], [s].[address], [s].[amount], [s].[background_image], [s].[city], [s].[country], [s].[created_at], [s].[end_date], [s].[phone_number], [s].[plan_name], [s].[plan_type], [s].[start_date], [s].[status], [s].[store_description], [s].[store_logo], [s].[store_name], [s].[zip_code], (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) AS [c]
+    FROM [Stores] AS [s]
+    WHERE [s].[status] = N'active'
+    ORDER BY (
+        SELECT COUNT(*)
+        FROM [Orders] AS [o]
+        WHERE [s].[store_id] = [o].[store_id]) DESC
+) AS [t]
+LEFT JOIN [Orders] AS [o0] ON [t].[store_id] = [o0].[store_id]
+ORDER BY [t].[c] DESC, [t].[store_id]
+2024-11-18 18:15:50.817 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopSellingProducts (E-Commerce)'
+2024-11-18 18:15:50.820 +03:00 [INF] Executed action E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce) in 23.8878ms
+2024-11-18 18:15:50.821 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetLast8Products (E-Commerce)'
+2024-11-18 18:15:50.824 +03:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[E_Commerce.Models.Store, E-Commerce, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2024-11-18 18:15:50.824 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopSellingProducts - 200 null application/json; charset=utf-8 42.7426ms
+2024-11-18 18:15:50.824 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.ProductsController.GetTopReviewedProducts (E-Commerce)'
+2024-11-18 18:15:50.825 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/GetLast8Products - 200 null application/json; charset=utf-8 43.6862ms
+2024-11-18 18:15:50.825 +03:00 [INF] Executed action E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce) in 28.8979ms
+2024-11-18 18:15:50.827 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Products/TopReviewedProducts - 200 null application/json; charset=utf-8 45.6665ms
+2024-11-18 18:15:50.829 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.StoresController.GetTopStores (E-Commerce)'
+2024-11-18 18:15:50.831 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/Stores/top-stores?top=3 - 200 null application/json; charset=utf-8 49.2775ms
+2024-11-18 18:16:12.880 +03:00 [INF] Request starting HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - null null
+2024-11-18 18:16:12.887 +03:00 [INF] CORS policy execution successful.
+2024-11-18 18:16:12.887 +03:00 [INF] Executing endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:16:12.888 +03:00 [INF] Route matched with {action = "GetAllCartItems", controller = "CartItems"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult GetAllCartItems(Int32) on controller E_Commerce.Controllers.CartItemsController (E-Commerce).
+2024-11-18 18:16:12.891 +03:00 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2024-11-18 18:16:12.892 +03:00 [INF] Executed action E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce) in 1.5628ms
+2024-11-18 18:16:12.897 +03:00 [INF] Executed endpoint 'E_Commerce.Controllers.CartItemsController.GetAllCartItems (E-Commerce)'
+2024-11-18 18:16:12.899 +03:00 [INF] Request finished HTTP/2 GET https://localhost:7000/api/CartItems/AllItems/null - 400 null application/problem+json; charset=utf-8 19.5783ms

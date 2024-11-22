@@ -3,6 +3,7 @@ using E_Commerce.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PayPal.Api;
 using System.Linq;
 
 namespace E_Commerce.Controllers
@@ -141,7 +142,8 @@ namespace E_Commerce.Controllers
                 PlanName = storeDTO.PlanName,
                 PlanType = storeDTO.PlanType,
                 StartDate = startDate,                
-                EndDate = endDate                      
+                EndDate = endDate,
+                Amount=storeDTO.Amount
             };
 
             _context.Stores.Add(store);

@@ -161,6 +161,8 @@ namespace E_Commerce.Controllers
             var products = _db.Products.Where(x => x.SubcategoryId == SubcategoryId).ToList();
             return Ok(products);
         }
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
 
         // Get a single product by ID
         [HttpGet("Product/{id}")]
@@ -459,6 +461,66 @@ namespace E_Commerce.Controllers
 
 
 
+
+
+        //----------------------------------------------------------------------------------------------------------------------------------
+        //----------------------------------------------------------------------------------------------------------------------------------
+        [HttpGet]
+        [Route("SearchProducts")]
+        public async Task<IActionResult> SearchProducts([FromQuery] string? searchQuery)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(searchQuery))
+                {
+                    return BadRequest("Search query cannot be empty.");
+                }
+
+                var products = await _db.Products
+                    .Include(p => p.Subcategory)
+                    .Include(p => p.Variants)
+
+                        .ThenInclude(v => v.Tag)
+                    .Where(p =>
+                        p.IsDeleted == false && // Product is not deleted
+                        p.Status == "approved" && // Product must be approved
+                        p.Store.Status == "active" && // Store status must be active
+                        (p.Name.ToLower().Contains(searchQuery.ToLower()) || // Case-insensitive check
+                        (p.Subcategory != null &&
+                         p.Subcategory.SubcategoryName.ToLower().Contains(searchQuery.ToLower())) ||
+                        (p.Variants != null &&
+                         p.Variants.Any(v => v.Tag != null &&
+                                             v.Tag.TagName.ToLower().Contains(searchQuery.ToLower())))))
+                    .Select(p => new
+                    {
+                        p.ProductId,
+                        p.Name,
+                        p.Description,
+                        p.Price,
+                        p.Quantity,
+                        p.Image,
+                        p.StoreId,
+                        SubcategoryName = p.Subcategory != null ? p.Subcategory.SubcategoryName : null,
+                        Tags = p.Variants != null
+                            ? p.Variants.Where(v => v.Tag != null).Select(v => v.Tag.TagName).ToList()
+                            : new List<string>()
+                    })
+                    .ToListAsync();
+
+                if (products == null || products.Count == 0)
+                {
+                    return NotFound("No products found matching the search criteria.");
+                }
+
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging
+                Console.WriteLine($"Error: {ex.Message}");
+                return StatusCode(500, "An unexpected error occurred. Please try again later.");
+            }
+        }
 
 
         //----------------------------------------------------------------------------------------------------------------------------------

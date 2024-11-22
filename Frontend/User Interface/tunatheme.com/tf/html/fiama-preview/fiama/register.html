@@ -28,20 +28,19 @@
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #25D366; /* لون خلفية الواتساب */
+    background-color: #25D366; 
     color: white;
-    border-radius: 50%; /* لجعل الأيقونة دائرية */
-    padding: 15px; /* مسافة داخلية لتكبير حجم الدائرة */
+    border-radius: 50%; 
+    padding: 15px; 
     z-index: 100;
-    font-size: 30px; /* حجم أيقونة الواتساب */
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* إضافة ظل للأيقونة */
-}
+    font-size: 30px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); }
 
 
 .whatsapp_float:hover {
-    background-color: #128C7E; /* لون الخلفية عند التمرير */
+    background-color: #128C7E; 
      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); 
-    color: white; /* زيادة الظل عند التمرير */
+    color: white; 
 }
 
 .whatsapp_float i {
@@ -425,11 +424,18 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="account-login-inner">
                         <form id="form" action="#" onsubmit="Register(event)" class="ltn__form-box contact-form-box">
-                            <input type="text" name="Name" placeholder=" User Name">
-                            <input type="text" name="Email" placeholder="Email*">
-                            <input type="password" name="Password" placeholder="Password*">
-                            <input type="password" name="repeatpassword" placeholder="Confirm Password*">
-                          
+                            <input type="text"  id="name"  name="Name" placeholder=" User Name">
+                            <div id="name-error" class="error-message"></div> 
+
+                            <input type="text" id="email" name="Email" placeholder="Email*">
+                            <div id="email-error" class="error-message"></div> 
+
+                            <input type="password" id="password" name="Password" placeholder="Password*">
+                            <div id="password-error" class="error-message"></div>
+
+                            <input type="password" id="repeatpassword" name="repeatpassword" placeholder="Confirm Password*">
+                            <div id="repeatpassword-error" class="error-message"></div>
+
                             <div class="btn-wrapper">
                                 <button class="theme-btn-1 btn reverse-color btn-block" type="submit">CREATE ACCOUNT</button>
                             </div>
@@ -654,11 +660,7 @@
     <script src="./../../../JS/register.js"></script>
   
 <script SRC="js/cart.js"></script>
-  
-</body> SRC="js/cart.js"></script>
-  
-</body> SRC="js/cart.js"></script>
-  
+
 </body>
 
 <!-- Mirrored from tunatheme.com/tf/html/fiama-preview/fiama/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 06 Sep 2024 12:04:45 GMT -->

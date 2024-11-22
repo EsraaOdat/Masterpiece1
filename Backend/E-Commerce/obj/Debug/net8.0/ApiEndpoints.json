@@ -1200,6 +1200,22 @@
   },
   {
     "ContainingType": "E_Commerce.Controllers.ProductsController",
+    "Method": "SearchProducts",
+    "RelativePath": "api/Products/SearchProducts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "searchQuery",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "E_Commerce.Controllers.ProductsController",
     "Method": "GetTopReviewedProducts",
     "RelativePath": "api/Products/TopReviewedProducts",
     "HttpMethod": "GET",
@@ -1581,6 +1597,11 @@
       {
         "Name": "PlanType",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Amount",
+        "Type": "System.Nullable\u00601[[System.Decimal, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       }
     ],

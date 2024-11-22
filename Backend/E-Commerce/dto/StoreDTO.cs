@@ -24,6 +24,8 @@
         public string? PlanName { get; set; }
 
         public string? PlanType { get; set; }
+        public decimal? Amount { get; set; }
+
 
 
     }
